@@ -19,6 +19,9 @@ export default {
         newState.userIsValidated = true;
         newState.userEmail = action.email;
         break;
+      case ActionTypes.LOGOUT_USER:
+        newState.userIsValidated = false;
+        break;
       case ActionTypes.CLOSE_SIDE_DRAWER:
         newState.sideDrawerIsOpen = false;
         break;
@@ -33,9 +36,6 @@ export default {
         break;
       case ActionTypes.USER_CLICKED_OPEN_DRAWER:
         newState.userClickedCloseDrawer = false;
-        break;
-      case ActionTypes.LOGOUT_USER:
-        newState.userIsValidated = false;
         break;
       default:
         newState = state;
