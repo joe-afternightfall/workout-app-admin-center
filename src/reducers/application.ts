@@ -53,6 +53,31 @@ export default {
       case ActionTypes.LOAD_CIRCUIT_TYPES:
         newState.workoutConfigurations.circuitTypes = action.circuitTypes;
         break;
+      case ActionTypes.TOGGLE_MUSCLE_GROUP: {
+        const foundId = newState.selectedMuscleGroupIds.find(
+          (id: string) => id === action.muscleGroupId
+        );
+        if (foundId) {
+          const foundIndex = newState.selectedMuscleGroupIds.indexOf(foundId);
+          newState.selectedMuscleGroupIds.splice(foundIndex, 1);
+          return {
+            ...newState,
+            selectedMuscleGroupIds: [...newState.selectedMuscleGroupIds],
+          };
+        } else {
+          newState.selectedMuscleGroupIds = [
+            ...newState.selectedMuscleGroupIds,
+            action.muscleGroupId,
+          ];
+        }
+        break;
+      }
+      case ActionTypes.APPLY_HOVER_STYLES_TO_MUSCLE_GROUP:
+        newState.applyHoverStylesToMuscleGroup = action.groupId;
+        break;
+      case ActionTypes.CLEAR_HOVER_STYLES_FOR_MUSCLE_GROUP:
+        newState.applyHoverStylesToMuscleGroup = '';
+        break;
       default:
         newState = state;
     }
@@ -76,4 +101,6 @@ export interface ApplicationState {
     exerciseTypes: ExerciseTypeVO[];
     circuitTypes: CircuitTypeVO[];
   };
+  selectedMuscleGroupIds: string[];
+  applyHoverStylesToMuscleGroup: string;
 }
