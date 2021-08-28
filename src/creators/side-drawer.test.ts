@@ -1,9 +1,10 @@
 import {
-  closeSideDrawer, logoutUser,
+  closeSideDrawer,
+  logoutUser,
   openSideDrawer,
   setDrawerSize,
   userClickedCloseDrawer,
-  userClickedOpenDrawer
+  userClickedOpenDrawer,
 } from './side-drawer';
 import { ActionTypes } from './actions';
 import { chance } from 'jest-chance';
