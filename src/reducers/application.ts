@@ -2,6 +2,7 @@ import { RouteProp } from '../configs/constants/routes';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
+import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
 
 export default {
   reducer: (
@@ -37,6 +38,9 @@ export default {
       case ActionTypes.USER_CLICKED_OPEN_DRAWER:
         newState.userClickedCloseDrawer = false;
         break;
+      case ActionTypes.LOAD_CIRCUIT_TEMPLATES:
+        newState.circuitTemplates = action.templates;
+        break;
       default:
         newState = state;
     }
@@ -54,4 +58,5 @@ export interface ApplicationState {
   userClickedCloseDrawer: boolean;
   sideDrawerIsOpen: boolean;
   sideDrawerIsClosed: boolean;
+  circuitTemplates: CircuitTemplateVO[];
 }
