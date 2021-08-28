@@ -22,7 +22,16 @@ export const createStore = (history: History): Store => {
     });
 
   return createStoreFunc(allReducers, {
-    applicationState: {} as unknown as ApplicationState,
+    applicationState: {
+      workoutConfigurations: {
+        exerciseTypes: [],
+        categoryTypes: [],
+        circuitTypes: [],
+      },
+      selectedMuscleGroupIds: [],
+      applyHoverStylesToMuscleGroup: '',
+      circuitTemplates: [],
+    } as unknown as ApplicationState,
   });
 };
 
