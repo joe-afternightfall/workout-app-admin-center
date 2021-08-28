@@ -1,17 +1,17 @@
 import {
-  WORKOUT_SCREEN_PATH,
+  // WORKOUT_SCREEN_PATH,
   DASHBOARD_SCREEN_PATH,
-  USER_PROFILE_SCREEN_PATH,
-  CIRCUIT_TYPES_SCREEN_PATH,
-  EXERCISE_TYPES_SCREEN_PATH,
-  CIRCUIT_BUILDER_SCREEN_PATH,
+  // USER_PROFILE_SCREEN_PATH,
+  // CIRCUIT_TYPES_SCREEN_PATH,
+  // EXERCISE_TYPES_SCREEN_PATH,
+  // CIRCUIT_BUILDER_SCREEN_PATH,
 } from './app';
 import {
-  Settings,
-  AccountCircle as AccountIcon,
+  // Settings,
+  // AccountCircle as AccountIcon,
   DashboardRounded as DashboardIcon,
-  FitnessCenter as FitnessCenterIcon,
-  Build as BuilderIcon,
+  // FitnessCenter as FitnessCenterIcon,
+  // Build as BuilderIcon,
 } from '@material-ui/icons';
 import { ComponentType } from 'react';
 import { SvgIconTypeMap } from '@material-ui/core';

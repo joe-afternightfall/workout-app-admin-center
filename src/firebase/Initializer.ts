@@ -1,11 +1,11 @@
 import { Store } from 'redux';
 import firebase from 'firebase';
-import {
-  EXERCISE_TYPES_ROUTE,
-  CIRCUIT_TYPES_ROUTE,
-  WORKOUTS_ROUTE,
-  CIRCUIT_TEMPLATES_ROUTE,
-} from '../configs/constants/firebase-routes';
+// import {
+//   EXERCISE_TYPES_ROUTE,
+//   CIRCUIT_TYPES_ROUTE,
+//   WORKOUTS_ROUTE,
+//   CIRCUIT_TEMPLATES_ROUTE,
+// } from '../configs/constants/firebase-routes';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxpOEet-ONYFVLUNdagd7o0McN3F2fFRc',
@@ -29,9 +29,9 @@ export class Initializer {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-    const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
-    const circuitTypes = firebase.database().ref(CIRCUIT_TYPES_ROUTE);
-    const workouts = firebase.database().ref(WORKOUTS_ROUTE);
-    const circuitTemplates = firebase.database().ref(CIRCUIT_TEMPLATES_ROUTE);
+    // const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
+    // const circuitTypes = firebase.database().ref(CIRCUIT_TYPES_ROUTE);
+    // const workouts = firebase.database().ref(WORKOUTS_ROUTE);
+    // const circuitTemplates = firebase.database().ref(CIRCUIT_TEMPLATES_ROUTE);
   }
 }
