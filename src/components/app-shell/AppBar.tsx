@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import AppTooltip from './AppTooltip';
+import AppTooltip from '../shared/AppTooltip';
 import MenuIcon from '@material-ui/icons/Menu';
 import { State } from '../../configs/redux/store';
 import icon from '../../configs/icons/rainbow-shades.svg';
