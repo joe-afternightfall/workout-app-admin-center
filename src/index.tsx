@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import AppRouter from './AppRouter';
+import { Provider } from 'react-redux';
+import { createHashHistory } from 'history';
+import { createStore } from './configs/redux/store';
+import { Initializer } from './firebase/Initializer';
+import { ConnectedRouter } from 'connected-react-router';
+import reportWebVitals from './configs/test-utils/report-web-vitals';
+
+const history = createHashHistory(),
+  store = createStore(history);
+
+const initializer = new Initializer(store);
+initializer.initializeFirebase();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <AppRouter />
+      </ConnectedRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
