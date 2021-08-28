@@ -15,7 +15,7 @@ class DashboardScreen extends Component<DashboardScreenProps> {
 
     return (
       <div>
-        <span>dashboard</span>
+        <span>admin dashboard</span>
       </div>
     );
   }
