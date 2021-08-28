@@ -3,6 +3,9 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
 import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
+import { WorkoutVO } from '../configs/models/WorkoutVO';
+import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { CircuitTypeVO } from '../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
 
 export default {
   reducer: (
@@ -41,6 +44,15 @@ export default {
       case ActionTypes.LOAD_CIRCUIT_TEMPLATES:
         newState.circuitTemplates = action.templates;
         break;
+      case ActionTypes.LOAD_USER_WORKOUTS:
+        newState.userWorkouts = action.workouts;
+        break;
+      case ActionTypes.LOAD_EXERCISE_TYPES:
+        newState.workoutConfigurations.exerciseTypes = action.exerciseTypes;
+        break;
+      case ActionTypes.LOAD_CIRCUIT_TYPES:
+        newState.workoutConfigurations.circuitTypes = action.circuitTypes;
+        break;
       default:
         newState = state;
     }
@@ -59,4 +71,9 @@ export interface ApplicationState {
   sideDrawerIsOpen: boolean;
   sideDrawerIsClosed: boolean;
   circuitTemplates: CircuitTemplateVO[];
+  userWorkouts: WorkoutVO[];
+  workoutConfigurations: {
+    exerciseTypes: ExerciseTypeVO[];
+    circuitTypes: CircuitTypeVO[];
+  };
 }
