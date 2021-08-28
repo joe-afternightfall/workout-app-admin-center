@@ -1,11 +1,17 @@
 import { Store } from 'redux';
 import firebase from 'firebase';
-// import {
-//   EXERCISE_TYPES_ROUTE,
-//   CIRCUIT_TYPES_ROUTE,
-//   WORKOUTS_ROUTE,
-//   CIRCUIT_TEMPLATES_ROUTE,
-// } from '../configs/constants/firebase-routes';
+import {
+  WORKOUTS_ROUTE,
+  CIRCUIT_TYPES_ROUTE,
+  EXERCISE_TYPES_ROUTE,
+  CIRCUIT_TEMPLATES_ROUTE,
+} from '../configs/constants/firebase-routes';
+import {
+  updateCircuitTemplates,
+  updateCircuitTypes,
+  updateExerciseTypes,
+  updateUserWorkouts,
+} from './update-methods';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxpOEet-ONYFVLUNdagd7o0McN3F2fFRc',
@@ -29,9 +35,57 @@ export class Initializer {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-    // const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
-    // const circuitTypes = firebase.database().ref(CIRCUIT_TYPES_ROUTE);
-    // const workouts = firebase.database().ref(WORKOUTS_ROUTE);
-    // const circuitTemplates = firebase.database().ref(CIRCUIT_TEMPLATES_ROUTE);
+    const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
+    const circuitTypes = firebase.database().ref(CIRCUIT_TYPES_ROUTE);
+    const workouts = firebase.database().ref(WORKOUTS_ROUTE);
+    const circuitTemplates = firebase.database().ref(CIRCUIT_TEMPLATES_ROUTE);
+
+    exerciseTypes.on('child_added', async () => {
+      await updateExerciseTypes(this.store);
+    });
+
+    exerciseTypes.on('child_changed', async () => {
+      await updateExerciseTypes(this.store);
+    });
+
+    exerciseTypes.on('child_removed', async () => {
+      await updateExerciseTypes(this.store);
+    });
+
+    circuitTypes.on('child_added', async () => {
+      await updateCircuitTypes(this.store);
+    });
+
+    circuitTypes.on('child_changed', async () => {
+      await updateCircuitTypes(this.store);
+    });
+
+    circuitTypes.on('child_removed', async () => {
+      await updateCircuitTypes(this.store);
+    });
+
+    workouts.on('child_added', async () => {
+      await updateUserWorkouts(this.store);
+    });
+
+    workouts.on('child_changed', async () => {
+      await updateUserWorkouts(this.store);
+    });
+
+    workouts.on('child_removed', async () => {
+      await updateUserWorkouts(this.store);
+    });
+
+    circuitTemplates.on('child_added', async () => {
+      await updateCircuitTemplates(this.store);
+    });
+
+    circuitTemplates.on('child_changed', async () => {
+      await updateCircuitTemplates(this.store);
+    });
+
+    circuitTemplates.on('child_removed', async () => {
+      await updateCircuitTemplates(this.store);
+    });
   }
 }
