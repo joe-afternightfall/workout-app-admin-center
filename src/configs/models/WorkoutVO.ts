@@ -1,5 +1,4 @@
-import { Timer, WorkoutDAO } from './WorkoutDAO';
-import { WorkoutCircuitProps } from '../../components/top-level-components/workout-screen/WorkoutScreen';
+import { Timer, WorkoutCircuitProps, WorkoutDAO } from './WorkoutDAO';
 
 export class WorkoutVO extends WorkoutDAO {
   firebaseId: string;
