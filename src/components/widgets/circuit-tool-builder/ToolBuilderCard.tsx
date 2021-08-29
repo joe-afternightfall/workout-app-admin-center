@@ -14,7 +14,7 @@ import TabPanel from '../../shared/SwipeableViewTabPanel';
 import BottomExerciseDialog from './components/BottomExerciseDialog';
 import ManikinFlippableSides from '../muscle-selector/ManikinFlippableSides';
 import { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
-import { SetTemplate } from 'workout-app-common-core/core/index';
+import { SetTemplate } from 'workout-app-common-core/core/src';
 
 const useStyles = makeStyles(() =>
   createStyles({

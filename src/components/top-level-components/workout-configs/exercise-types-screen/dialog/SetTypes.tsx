@@ -8,7 +8,7 @@ import {
   ListSubheader,
 } from '@material-ui/core';
 import { capitalizeSetType } from '../../../../../utils/formatter';
-import { SetType } from 'workout-app-common-core/core/index';
+import { SetType } from 'workout-app-common-core/core/src';
 
 export default function SetTypes(props: SetTypesProps): JSX.Element {
   return (

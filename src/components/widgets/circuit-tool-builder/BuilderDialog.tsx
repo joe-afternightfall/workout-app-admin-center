@@ -21,7 +21,7 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { createNewCircuitTemplate } from '../../../services/circuit-template';
 import DraggableSetTemplate from './components/DraggableSetTemplate';
-import { SetTemplate } from 'workout-app-common-core/core/index';
+import { SetTemplate } from 'workout-app-common-core/core/src';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { workoutsSnapToVO } from '../utils/vo-builder';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
+import { WorkoutVO } from 'workout-app-common-core/core/src';
 import { WORKOUTS_ROUTE } from '../configs/constants/firebase-routes';
 
 export const getWorkoutsForUser = async (

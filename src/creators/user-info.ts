@@ -1,5 +1,5 @@
 import { ActionTypes } from './actions';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
+import { WorkoutVO } from 'workout-app-common-core/core/src';
 
 export interface ValidatedUserAction {
   type: ActionTypes.VALIDATED_USER;

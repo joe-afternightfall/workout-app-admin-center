@@ -7,7 +7,7 @@ import {
   CircuitTypeVO,
   ExerciseTypeVO,
   WorkoutVO,
-} from 'workout-app-common-core';
+} from 'workout-app-common-core/core/src';
 
 export default {
   reducer: (

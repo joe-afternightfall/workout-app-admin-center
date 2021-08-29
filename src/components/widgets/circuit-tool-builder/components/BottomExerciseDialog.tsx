@@ -13,8 +13,7 @@ import { State } from '../../../../configs/redux/store';
 import muscleGroups, {
   MuscleGroup,
 } from '../../../../configs/models/workout-configurations/MuscleGroups';
-import { ExerciseTypeVO } from 'workout-app-common-core';
-import { SetTemplate } from 'workout-app-common-core/core/index';
+import { ExerciseTypeVO, SetTemplate } from 'workout-app-common-core/core/src';
 
 const BottomExerciseDialog = (
   props: BottomExerciseDialogProps & PassedInProps

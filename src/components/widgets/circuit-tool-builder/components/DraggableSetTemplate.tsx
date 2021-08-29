@@ -15,6 +15,7 @@ import SetIncrementer from './SetIncrementer';
 import { State } from '../../../../configs/redux/store';
 import DeleteIcon from '@material-ui/icons/HighlightOff';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
+import { SetTemplate, ExerciseTypeVO } from 'workout-app-common-core/core/src';
 
 const DraggableSetTemplate = (
   props: SetTemplateProps & PassedInProps

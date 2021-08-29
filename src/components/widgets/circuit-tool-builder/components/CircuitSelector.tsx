@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
-import { CircuitTypeVO } from 'workout-app-common-core';
+import { CircuitTypeVO } from 'workout-app-common-core/core/src';
 
 const useStyles = makeStyles(() =>
   createStyles({

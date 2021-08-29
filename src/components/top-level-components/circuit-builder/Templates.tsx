@@ -11,8 +11,11 @@ import {
   Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { SetTemplate } from 'workout-app-common-core/core/index';
-import { CircuitTemplateVO, ExerciseTypeVO } from 'workout-app-common-core';
+import {
+  SetTemplate,
+  CircuitTemplateVO,
+  ExerciseTypeVO,
+} from 'workout-app-common-core/core/src';
 
 const Templates = (props: TemplatesProps): JSX.Element => {
   const [openPanel, setOpenPanel] = useState('');

@@ -9,7 +9,7 @@ import {
   deleteCircuitType,
   updateCircuitType,
 } from '../../../../services/workout-configurations/circuit-types-service';
-import { CircuitTypeVO } from 'workout-app-common-core';
+import { CircuitTypeVO } from 'workout-app-common-core/core/src';
 
 const editField = (props: {
   value: string;

@@ -2,7 +2,10 @@ import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { circuitTypeSnapToVO } from '../../utils/vo-builder';
 import { CIRCUIT_TYPES_ROUTE } from '../../configs/constants/firebase-routes';
-import { CircuitTypeDAO, CircuitTypeVO } from 'workout-app-common-core';
+import {
+  CircuitTypeDAO,
+  CircuitTypeVO,
+} from 'workout-app-common-core/core/src';
 
 export const createNewCircuitType = async (name: string): Promise<void> => {
   const ref = firebase.database().ref(CIRCUIT_TYPES_ROUTE);

@@ -13,7 +13,7 @@ import {
   CircuitTemplateVO,
   CircuitTypeVO,
   ExerciseTypeVO,
-} from 'workout-app-common-core';
+} from 'workout-app-common-core/core/src';
 
 export const updateCircuitTypes = async (store: Store): Promise<void> => {
   const circuits: CircuitTypeVO[] = await getAllCircuitTypes();

@@ -9,7 +9,7 @@ import { deleteExerciseType } from '../../../../services/workout-configurations/
 import muscleGroups, {
   MuscleGroup,
 } from '../../../../configs/models/workout-configurations/MuscleGroups';
-import { ExerciseTypeVO } from 'workout-app-common-core';
+import { ExerciseTypeVO } from 'workout-app-common-core/core/src';
 
 const editField = (props: {
   value: string;

@@ -1,5 +1,8 @@
 import { ActionTypes } from './actions';
-import { CircuitTypeVO, ExerciseTypeVO } from 'workout-app-common-core';
+import {
+  CircuitTypeVO,
+  ExerciseTypeVO,
+} from 'workout-app-common-core/core/src';
 
 export interface LoadExerciseTypesAction {
   type: ActionTypes.LOAD_EXERCISE_TYPES;
