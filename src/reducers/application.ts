@@ -2,10 +2,12 @@ import { RouteProp } from '../configs/constants/routes';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
-import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import { CircuitTypeVO } from '../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
+import {
+  CircuitTemplateVO,
+  CircuitTypeVO,
+  ExerciseTypeVO,
+  WorkoutVO,
+} from 'workout-app-common-core';
 
 export default {
   reducer: (

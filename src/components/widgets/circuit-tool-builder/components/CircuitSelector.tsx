@@ -2,8 +2,8 @@ import React, { ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import { CircuitTypeVO } from '../../../../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
 import { State } from '../../../../configs/redux/store';
+import { CircuitTypeVO } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import PageTitle from '../../../shared/PageTitle';
 import { State } from '../../../../configs/redux/store';
-import { CircuitTypeVO } from '../../../../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
 import { TextField } from '@material-ui/core';
 import NewCircuitDialog from './NewCircuitDialog';
 import {

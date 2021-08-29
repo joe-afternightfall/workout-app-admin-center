@@ -2,11 +2,9 @@ import firebase from 'firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { exerciseTypeSnapToVO } from '../../utils/vo-builder';
 import { EXERCISE_TYPES_ROUTE } from '../../configs/constants/firebase-routes';
-import {
-  SetType,
-  ExerciseTypeDAO,
-} from '../../configs/models/workout-configurations/exercise-type/ExerciseTypeDAO';
-import { ExerciseTypeVO } from '../../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+// todo: come back and fix import
+import { SetType } from 'workout-app-common-core/core/src/models/workout-configurations/exercise-type/ExerciseTypeDAO';
+import { ExerciseTypeDAO, ExerciseTypeVO } from 'workout-app-common-core';
 
 export const createNewExerciseType = async (
   name: string,

@@ -13,8 +13,9 @@ import { State } from '../../../../configs/redux/store';
 import muscleGroups, {
   MuscleGroup,
 } from '../../../../configs/models/workout-configurations/MuscleGroups';
-import { SetTemplate } from '../../../../configs/models/CircuitTemplateDAO';
-import { ExerciseTypeVO } from '../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { ExerciseTypeVO } from 'workout-app-common-core';
+// todo: fix import
+import { SetTemplate } from 'workout-app-common-core/core/src/models/CircuitTemplateDAO';
 
 const BottomExerciseDialog = (
   props: BottomExerciseDialogProps & PassedInProps
