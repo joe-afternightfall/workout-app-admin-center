@@ -6,9 +6,10 @@ import PageTitle from '../../../shared/PageTitle';
 import NewExerciseDialog from './NewExerciseDialog';
 import { State } from '../../../../configs/redux/store';
 import { deleteExerciseType } from '../../../../services/workout-configurations/exercise-types-service';
-import muscleGroups, {
+import {
+  muscleGroups,
   MuscleGroup,
-} from '../../../../configs/models/workout-configurations/MuscleGroups';
+} from 'workout-app-common-core/core/src/models/workout-configurations/MuscleGroups';
 import { ExerciseTypeVO } from 'workout-app-common-core/core/src';
 
 const editField = (props: {

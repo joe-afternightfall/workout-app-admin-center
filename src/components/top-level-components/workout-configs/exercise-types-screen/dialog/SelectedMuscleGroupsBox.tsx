@@ -6,9 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { capitalizeFirstLetter } from '../../../../../utils/formatter';
 import { toggleMuscleGroup } from '../../../../../creators/muscle-selector';
-import muscleGroups, {
+import {
+  muscleGroups,
   MuscleGroup,
-} from '../../../../../configs/models/workout-configurations/MuscleGroups';
+} from 'workout-app-common-core/core/src/models/workout-configurations/MuscleGroups';
 
 const useStyles = makeStyles(() =>
   createStyles({

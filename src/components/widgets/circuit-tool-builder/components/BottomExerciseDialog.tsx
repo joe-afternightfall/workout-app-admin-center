@@ -10,9 +10,10 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { State } from '../../../../configs/redux/store';
-import muscleGroups, {
+import {
+  muscleGroups,
   MuscleGroup,
-} from '../../../../configs/models/workout-configurations/MuscleGroups';
+} from 'workout-app-common-core/core/src/models/workout-configurations/MuscleGroups';
 import { ExerciseTypeVO, SetTemplate } from 'workout-app-common-core/core/src';
 
 const BottomExerciseDialog = (

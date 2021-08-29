@@ -10,9 +10,10 @@ import {
   toggleMuscleGroup,
 } from '../../../../../creators/muscle-selector';
 import { State } from '../../../../../configs/redux/store';
-import muscleGroups, {
+import {
+  muscleGroups,
   MuscleGroup,
-} from '../../../../../configs/models/workout-configurations/MuscleGroups';
+} from 'workout-app-common-core/core/src/models/workout-configurations/MuscleGroups';
 
 const useStyles = makeStyles(() =>
   createStyles({
