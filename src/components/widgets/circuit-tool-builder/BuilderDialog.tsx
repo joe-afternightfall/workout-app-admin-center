@@ -18,10 +18,10 @@ import ToolBuilderCard from './ToolBuilderCard';
 import CloseIcon from '@material-ui/icons/Close';
 import CircuitSelector from './components/CircuitSelector';
 import { TransitionProps } from '@material-ui/core/transitions';
-import { SetTemplate } from '../../../configs/models/CircuitTemplateDAO';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { createNewCircuitTemplate } from '../../../services/circuit-template';
 import DraggableSetTemplate from './components/DraggableSetTemplate';
+import { SetTemplate } from 'workout-app-common-core/core/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

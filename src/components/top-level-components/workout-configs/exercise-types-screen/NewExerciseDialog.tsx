@@ -15,8 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import SelectedMuscleGroupsBox from './dialog/SelectedMuscleGroupsBox';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ManikinFlippableSides from '../../../widgets/muscle-selector/ManikinFlippableSides';
-import { SetType } from '../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeDAO';
 import { createNewExerciseType } from '../../../../services/workout-configurations/exercise-types-service';
+import { SetType } from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

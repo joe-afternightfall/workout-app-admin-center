@@ -14,8 +14,7 @@ import muscleGroups, {
   MuscleGroup,
 } from '../../../../configs/models/workout-configurations/MuscleGroups';
 import { ExerciseTypeVO } from 'workout-app-common-core';
-// todo: fix import
-import { SetTemplate } from 'workout-app-common-core/core/src/models/CircuitTemplateDAO';
+import { SetTemplate } from 'workout-app-common-core/core/index';
 
 const BottomExerciseDialog = (
   props: BottomExerciseDialogProps & PassedInProps

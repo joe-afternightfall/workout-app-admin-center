@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../../configs/redux/store';
-import { CircuitTemplateVO } from '../../../configs/models/CircuitTemplateVO';
 import {
   Accordion,
   AccordionActions,
@@ -12,8 +11,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { SetTemplate } from '../../../configs/models/CircuitTemplateDAO';
-import { ExerciseTypeVO } from '../../../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { SetTemplate } from 'workout-app-common-core/core/index';
+import { CircuitTemplateVO, ExerciseTypeVO } from 'workout-app-common-core';
 
 const Templates = (props: TemplatesProps): JSX.Element => {
   const [openPanel, setOpenPanel] = useState('');

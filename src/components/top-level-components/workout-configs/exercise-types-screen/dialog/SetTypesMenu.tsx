@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-import { SetType } from '../../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeDAO';
 import { capitalizeSetType } from '../../../../../utils/formatter';
+import { SetType } from 'workout-app-common-core/core/src/models/workout-configurations/exercise-type/ExerciseTypeDAO';
 
 const useStyles = makeStyles(() =>
   createStyles({
