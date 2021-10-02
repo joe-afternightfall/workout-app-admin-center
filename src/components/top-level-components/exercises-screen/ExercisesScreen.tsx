@@ -8,17 +8,42 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import ExerciseListTable from './ExerciseListTable';
+import SwipeableViews from 'react-swipeable-views';
+import FormView from './form-view/FormView';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ExercisesScreen extends Component<ExercisesScreenProps> {
+  state = {
+    activeTab: 0,
+  };
+
   render(): JSX.Element {
     const { classes } = this.props;
+
+    const handleChange = (tab: number) => {
+      this.setState({
+        activeTab: tab,
+      });
+    };
 
     return (
       <Grid container>
         <Grid item xs={12}>
-          <ExerciseListTable />
+          <SwipeableViews
+            index={this.state.activeTab}
+            onChangeIndex={handleChange}
+            containerStyle={{
+              transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
+            }}
+          >
+            <ExerciseListTable
+              actionClickHandler={() => {
+                handleChange(1);
+              }}
+            />
+            <FormView />
+          </SwipeableViews>
         </Grid>
       </Grid>
     );

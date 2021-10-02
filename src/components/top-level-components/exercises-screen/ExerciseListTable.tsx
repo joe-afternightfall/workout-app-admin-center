@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ExerciseListTable = ({
   exercises,
-}: ExerciseListTableProps): JSX.Element => {
+  actionClickHandler,
+}: ExerciseListTableProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
   const dummyData = [
@@ -170,16 +171,18 @@ const ExerciseListTable = ({
           icon: 'add',
           tooltip: 'Add New Exercise',
           isFreeAction: true,
-          onClick: () => {
-            alert('new exercise clicked');
-          },
+          onClick: actionClickHandler,
         },
       ]}
     />
   );
 };
 
-export interface ExerciseListTableProps {
+interface PassedInProps {
+  actionClickHandler: () => void;
+}
+
+interface ExerciseListTableProps {
   exercises: ExerciseVO[];
 }
 
