@@ -6,6 +6,7 @@ import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
 import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 import { CircuitTypeVO } from '../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
+import { ExerciseVO } from 'workout-app-common-core';
 
 export default {
   reducer: (
@@ -49,6 +50,9 @@ export default {
         break;
       case ActionTypes.LOAD_EXERCISE_TYPES:
         newState.workoutConfigurations.exerciseTypes = action.exerciseTypes;
+        break;
+      case ActionTypes.LOAD_EXERCISES:
+        newState.workoutConfigurations.exercises = action.exercises;
         break;
       case ActionTypes.LOAD_CIRCUIT_TYPES:
         newState.workoutConfigurations.circuitTypes = action.circuitTypes;
@@ -100,6 +104,7 @@ export interface ApplicationState {
   workoutConfigurations: {
     exerciseTypes: ExerciseTypeVO[];
     circuitTypes: CircuitTypeVO[];
+    exercises: ExerciseVO[];
   };
   selectedMuscleGroupIds: string[];
   applyHoverStylesToMuscleGroup: string;

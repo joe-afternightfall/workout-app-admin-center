@@ -11,6 +11,7 @@ import {
 import { LoadCircuitTemplatesAction } from './circuit-template';
 import {
   LoadCircuitTypesAction,
+  LoadExercisesAction,
   LoadExerciseTypesAction,
 } from './workout-configurations';
 import {
@@ -29,6 +30,9 @@ export enum ActionTypes {
   LOAD_CIRCUIT_TYPES = 'LOAD_CIRCUIT_TYPES',
   LOAD_CIRCUIT_TEMPLATES = 'LOAD_CIRCUIT_TEMPLATES',
   LOAD_USER_WORKOUTS = 'LOAD_USER_WORKOUTS',
+
+  // New Workout Configs
+  LOAD_EXERCISES = 'LOAD_EXERCISES',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -59,4 +63,5 @@ export type ApplicationActions =
   | LoadCircuitTypesAction
   | ToggleMuscleGroupAction
   | ApplyHoverStylesToMuscleGroupAction
-  | ClearHoverStylesForMuscleGroupAction;
+  | ClearHoverStylesForMuscleGroupAction
+  | LoadExercisesAction;
