@@ -27,6 +27,7 @@ export const createStore = (history: History): Store => {
         exerciseTypes: [],
         categoryTypes: [],
         circuitTypes: [],
+        exercises: [],
       },
       selectedMuscleGroupIds: [],
       applyHoverStylesToMuscleGroup: '',
