@@ -1,6 +1,7 @@
 import { Store } from 'redux';
 import {
   loadCircuitTypes,
+  loadExercises,
   loadExerciseTypes,
 } from '../creators/workout-configurations';
 import { loadUsersWorkouts } from '../creators/user-info';
@@ -12,6 +13,7 @@ import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercis
 import { getCircuitTemplates } from '../services/circuit-template';
 import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
 import { loadCircuitTemplates } from '../creators/circuit-template';
+import { getAllExercises } from '../services/workout-configurations/exercises';
 
 export const updateCircuitTypes = async (store: Store): Promise<void> => {
   const circuits: CircuitTypeVO[] = await getAllCircuitTypes();
@@ -40,4 +42,9 @@ export const updateUserWorkouts = async (store: Store): Promise<void> => {
 export const updateCircuitTemplates = async (store: Store): Promise<void> => {
   const templates: CircuitTemplateVO[] = await getCircuitTemplates();
   store.dispatch(loadCircuitTemplates(templates));
+};
+
+export const updateExercises = async (store: Store): Promise<void> => {
+  const exercises = await getAllExercises();
+  store.dispatch(loadExercises(exercises));
 };
