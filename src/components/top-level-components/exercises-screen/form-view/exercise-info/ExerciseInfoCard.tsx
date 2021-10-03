@@ -20,7 +20,9 @@ import OptionalParams from './components/OptionalParams';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {},
+    root: {
+      width: '100%',
+    },
   })
 );
 
@@ -35,14 +37,16 @@ export default function ExerciseInfoCard({
   //   }
   // }, [selectedExercise]);
 
-  // todo: handle name change
-  // todo: handle muscle selection
-  // todo: handle optional param selections
-
   const [paramType, setParamType] = React.useState<ParameterType | null>(null);
+  const [muscleId, setMuscleId] = React.useState<string | undefined>(undefined);
+  const [gripWidthId, setGripWidthId] = React.useState('');
+  const [equipmentId, setEquipmentId] = React.useState('');
+  const [gripTypeId, setGripTypeId] = React.useState('');
+  const [name, setName] = React.useState('');
   const [shouldAlternate, setShouldAlternate] = React.useState<boolean | null>(
     null
   );
+
   const selectParamType = (
     event: React.MouseEvent<HTMLElement>,
     paramType: ParameterType | null
@@ -54,21 +58,51 @@ export default function ExerciseInfoCard({
     setShouldAlternate(value);
   };
 
+  const selectMuscleId = (value: string) => {
+    setMuscleId(value);
+  };
+
+  const selectOptionalParam = (
+    param: 'gripWidth' | 'gripType' | 'equipment',
+    id: string
+  ) => {
+    switch (param) {
+      case 'equipment':
+        setEquipmentId(id);
+        break;
+      case 'gripType':
+        setGripTypeId(id);
+        break;
+      case 'gripWidth':
+        setGripWidthId(id);
+        break;
+    }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
   return (
-    <Card style={{ width: '100%' }}>
+    <Card className={classes.root}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={12} container spacing={2}>
             <Grid item xs={8}>
               <TextField
                 fullWidth
+                value={name}
                 id="exercise-name"
                 variant={'outlined'}
                 label={'Exercise Name'}
+                onChange={handleNameChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <MuscleSelector />
+              <MuscleSelector
+                selectedMuscleId={muscleId}
+                changeHandler={selectMuscleId}
+              />
             </Grid>
           </Grid>
 
@@ -87,7 +121,14 @@ export default function ExerciseInfoCard({
               />
             </Grid>
             <Grid item xs={6}>
-              <OptionalParams />
+              <OptionalParams
+                params={{
+                  gripWidthId: gripWidthId,
+                  equipmentId: equipmentId,
+                  gripTypeId: gripTypeId,
+                }}
+                selectOptionalParam={selectOptionalParam}
+              />
             </Grid>
           </Grid>
         </Grid>

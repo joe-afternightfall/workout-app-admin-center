@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import muscleGroups, {
   MuscleGroup,
 } from '../../../../../../configs/models/workout-configurations/MuscleGroups';
 
-export default function MuscleSelector(): JSX.Element {
+export default function MuscleSelector({
+  selectedMuscleId,
+  changeHandler,
+}: MuscleSelectorProps): JSX.Element {
   const options = muscleGroups.map((group: MuscleGroup) => {
     const firstLetter = group.name[0].toUpperCase();
     return {
@@ -26,6 +29,15 @@ export default function MuscleSelector(): JSX.Element {
       renderInput={(params) => (
         <TextField {...params} label={'Target Muscle'} variant={'outlined'} />
       )}
+      inputValue={selectedMuscleId}
+      onChange={(e: ChangeEvent<Record<string, never>>, newValue) => {
+        newValue && changeHandler(newValue.id);
+      }}
     />
   );
+}
+
+interface MuscleSelectorProps {
+  selectedMuscleId: string | undefined;
+  changeHandler: (value: string) => void;
 }

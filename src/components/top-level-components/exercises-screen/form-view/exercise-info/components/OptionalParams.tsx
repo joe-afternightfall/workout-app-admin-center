@@ -27,20 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function OptionalParams(): JSX.Element {
+export default function OptionalParams({
+  params,
+  selectOptionalParam,
+}: OptionalParamsProps): JSX.Element {
   const classes = useStyles();
-  const [gripWidthId, setGripWidthId] = React.useState('');
-  const [equipmentId, setEquipmentId] = React.useState('');
-  const [gripTypeId, setGripTypeId] = React.useState('');
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const { gripWidthId, equipmentId, gripTypeId } = params;
 
   return (
     <Grid container alignItems={'center'}>
@@ -56,7 +48,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setGripWidthId(gripWidths[0].id);
+                  selectOptionalParam('gripWidth', gripWidths[0].id);
                 }}
               >
                 <AddIcon />
@@ -73,7 +65,10 @@ export default function OptionalParams(): JSX.Element {
                   id={'grip-width-select'}
                   value={gripWidthId}
                   onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                    setGripWidthId(event.target.value as string);
+                    selectOptionalParam(
+                      'gripWidth',
+                      event.target.value as string
+                    );
                   }}
                 >
                   {gripWidths.map((width: GripWidth, index: number) => (
@@ -87,7 +82,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setGripWidthId('');
+                  selectOptionalParam('gripWidth', '');
                 }}
               >
                 <Close />
@@ -105,7 +100,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setGripTypeId(gripTypes[0].id);
+                  selectOptionalParam('gripType', gripTypes[0].id);
                 }}
               >
                 <AddIcon />
@@ -122,7 +117,10 @@ export default function OptionalParams(): JSX.Element {
                   id={'grip-type-select'}
                   value={gripTypeId}
                   onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                    setGripTypeId(event.target.value as string);
+                    selectOptionalParam(
+                      'gripType',
+                      event.target.value as string
+                    );
                   }}
                 >
                   {gripTypes.map((type: GripType, index: number) => (
@@ -136,7 +134,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setGripTypeId('');
+                  selectOptionalParam('gripType', '');
                 }}
               >
                 <Close />
@@ -154,7 +152,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setEquipmentId(equipmentList[0].id);
+                  selectOptionalParam('equipment', equipmentList[0].id);
                 }}
               >
                 <AddIcon />
@@ -171,7 +169,10 @@ export default function OptionalParams(): JSX.Element {
                   id={'equipment-select'}
                   value={equipmentId}
                   onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                    setEquipmentId(event.target.value as string);
+                    selectOptionalParam(
+                      'equipment',
+                      event.target.value as string
+                    );
                   }}
                 >
                   {equipmentList.map(
@@ -187,7 +188,7 @@ export default function OptionalParams(): JSX.Element {
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  setEquipmentId('');
+                  selectOptionalParam('equipment', '');
                 }}
               >
                 <Close />
@@ -198,4 +199,16 @@ export default function OptionalParams(): JSX.Element {
       </Grid>
     </Grid>
   );
+}
+
+export interface OptionalParamsProps {
+  params: {
+    gripWidthId: string;
+    equipmentId: string;
+    gripTypeId: string;
+  };
+  selectOptionalParam: (
+    param: 'gripWidth' | 'gripType' | 'equipment',
+    id: string
+  ) => void;
 }
