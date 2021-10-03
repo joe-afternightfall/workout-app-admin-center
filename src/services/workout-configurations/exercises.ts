@@ -28,7 +28,7 @@ export const saveNewExercise =
     info: InfoProps,
     successCallback: () => void
   ): ThunkAction<void, State, void, AnyAction> =>
-  async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  async (dispatch: Dispatch): Promise<void> => {
     const ref = firebase.database().ref(EXERCISES_DB_ROUTE);
     const newRef = ref.push();
 
