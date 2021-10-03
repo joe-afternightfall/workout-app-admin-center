@@ -11,16 +11,21 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function TitleCard(props: TitleCardProps): JSX.Element {
+export default function TitleCard({
+  newExercise,
+}: TitleCardProps): JSX.Element {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={'New Exercise'} action={<ActionMenu />} />
+      <CardHeader
+        title={newExercise ? 'New Exercise' : 'Edit Exercise'}
+        action={<ActionMenu />}
+      />
     </Card>
   );
 }
 
 export interface TitleCardProps {
-  DELETE_ME?: undefined;
+  newExercise: boolean;
 }
