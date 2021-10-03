@@ -12,6 +12,7 @@ import { getLightTheme } from './configs/theme/light-theme';
 import { DocumentFullScreen } from '@chiragrupani/fullscreen-react';
 import AppBar from './components/app-shell/AppBar';
 import ResponsiveSideDrawer from './components/app-shell/side-drawer/ResponsiveSideDrawer';
+import AppSnackbar from './components/app-shell/AppSnackbar';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
@@ -53,7 +54,7 @@ class App extends Component<AppProps> {
               isFullScreen={this.state.isFullScreen}
               fullScreenClickHandler={handleFullScreenClick}
             />
-
+            <AppSnackbar />
             <ResponsiveSideDrawer />
 
             <main className={classes.content}>

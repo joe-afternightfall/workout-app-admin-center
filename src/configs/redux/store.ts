@@ -23,6 +23,15 @@ export const createStore = (history: History): Store => {
 
   return createStoreFunc(allReducers, {
     applicationState: {
+      displayAppSnackbar: false,
+      snackbarProps: {
+        text: '',
+        severity: '',
+        position: {
+          vertical: '',
+          horizontal: '',
+        },
+      },
       workoutConfigurations: {
         exerciseTypes: [],
         categoryTypes: [],

@@ -7,6 +7,7 @@ import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 import { CircuitTypeVO } from '../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
 import { ExerciseVO } from 'workout-app-common-core';
+import { SnackbarCreatorProps } from '../creators/app-snackbar';
 
 export default {
   reducer: (
@@ -19,6 +20,13 @@ export default {
       case LOCATION_CHANGE:
         newState.currentLocation = action.payload.location.pathname;
         newState.activePage = getPageInfo(newState.currentLocation);
+        break;
+      case ActionTypes.DISPLAY_APP_SNACKBAR:
+        newState.displayAppSnackbar = true;
+        newState.snackbarProps = action.snackbarProps;
+        break;
+      case ActionTypes.HIDE_APP_SNACKBAR:
+        newState.displayAppSnackbar = false;
         break;
       case ActionTypes.VALIDATED_USER:
         newState.userIsValidated = true;
@@ -93,6 +101,8 @@ export default {
 export interface ApplicationState {
   currentLocation: string;
   activePage: RouteProp | undefined;
+  displayAppSnackbar: boolean;
+  snackbarProps: SnackbarCreatorProps;
   userIsValidated: boolean;
   userEmail: string;
   drawerSize: string;

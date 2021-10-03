@@ -19,11 +19,17 @@ import {
   ClearHoverStylesForMuscleGroupAction,
   ToggleMuscleGroupAction,
 } from './muscle-selector';
+import {
+  DisplayAppSnackbarAction,
+  HideAppSnackbarAction,
+} from './app-snackbar';
 
 export enum ActionTypes {
   // Application Actions
   INITIALIZE = 'INITIALIZE',
   VALIDATED_USER = 'VALIDATED_USER',
+  DISPLAY_APP_SNACKBAR = 'DISPLAY_APP_SNACKBAR',
+  HIDE_APP_SNACKBAR = 'HIDE_APP_SNACKBAR',
 
   // Workout configurations
   LOAD_EXERCISE_TYPES = 'LOAD_EXERCISE_TYPES',
@@ -64,4 +70,6 @@ export type ApplicationActions =
   | ToggleMuscleGroupAction
   | ApplyHoverStylesToMuscleGroupAction
   | ClearHoverStylesForMuscleGroupAction
-  | LoadExercisesAction;
+  | LoadExercisesAction
+  | HideAppSnackbarAction
+  | DisplayAppSnackbarAction;
