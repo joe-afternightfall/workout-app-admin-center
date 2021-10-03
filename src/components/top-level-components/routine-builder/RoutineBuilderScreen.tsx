@@ -8,65 +8,32 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
   Grid,
-  Card,
-  CardHeader,
-  IconButton,
-  Typography,
-  CardContent,
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SwipeableViews from 'react-swipeable-views';
+import RoutineFormView from './form-view/RoutineFormView';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class RoutineBuilderScreen extends Component<RoutineBuilderScreenProps> {
+  state = {
+    activeTab: 0,
+  };
+
   render(): JSX.Element {
     const { classes } = this.props;
 
     return (
-      <Grid xs={12} item container>
-        <Grid item xs={5} container spacing={2}>
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader
-                disableTypography
-                title={<Typography>{'Phase Title'}</Typography>}
-                action={
-                  <IconButton aria-label={'phase-settings'}>
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-              />
-            </Card>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Card>
-              <CardHeader
-                disableTypography
-                title={<Typography>{'Set Type'}</Typography>}
-                action={
-                  <IconButton aria-label={'phase-settings'}>
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-              />
-              <CardContent>
-                <Card>
-                  <CardHeader
-                    disableTypography
-                    title={<Typography>{'Exercise #1'}</Typography>}
-                    action={
-                      <IconButton aria-label={'phase-settings'}>
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  />
-                </Card>
-              </CardContent>
-            </Card>
-          </Grid>
+      <SwipeableViews
+        index={this.state.activeTab}
+        containerStyle={{
+          transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
+          height: '85vh',
+        }}
+      >
+        <Grid xs={12} item container>
+          <RoutineFormView />
         </Grid>
-      </Grid>
+      </SwipeableViews>
     );
   }
 }
