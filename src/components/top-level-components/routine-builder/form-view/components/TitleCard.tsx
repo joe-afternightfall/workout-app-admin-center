@@ -25,6 +25,9 @@ const useStyles = makeStyles(() =>
     activeBorder: {
       borderLeft: '5px solid #4285f4',
     },
+    formControl: {
+      minWidth: 200,
+    },
   })
 );
 
@@ -73,7 +76,7 @@ export default function TitleCard({
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl>
+                <FormControl className={classes.formControl}>
                   <InputLabel id={'category-select-label'}>
                     {'Category'}
                   </InputLabel>

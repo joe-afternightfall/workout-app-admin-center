@@ -6,9 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import {
-  Grid,
-} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import RoutineFormView from './form-view/RoutineFormView';
 
