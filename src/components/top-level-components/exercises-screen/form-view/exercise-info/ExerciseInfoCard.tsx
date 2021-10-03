@@ -1,4 +1,6 @@
 import React from 'react';
+import { AnyAction, Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   Button,
@@ -17,6 +19,9 @@ import MuscleSelector from './components/MuscleSelector';
 import AlternateCheckboxes from './components/AlternateCheckboxes';
 import AlternateRadioGroup from './components/AlternateRadioGroup';
 import OptionalParams from './components/OptionalParams';
+import { saveNewExercise } from '../../../../../services/workout-configurations/exercises';
+import { State } from '../../../../../configs/redux/store';
+import { ThunkDispatch } from 'redux-thunk';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -26,16 +31,23 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function ExerciseInfoCard({
-  selectedExercise,
-}: ExerciseInfoCardProps): JSX.Element {
-  const classes = useStyles();
+export interface InfoProps {
+  name: string;
+  // todo: implement description param
+  // description: string;
+  equipmentId: string;
+  muscleGroupIds: string[];
+  // iconId: string;
+  gripTypeId: string;
+  gripWidthId: string;
+  parameterTypeId: string;
+  alternateSides: boolean;
+}
 
-  // React.useEffect(() => {
-  //   if (selectedExercise !== null) {
-  //     setLocalExercise(selectedExercise);
-  //   }
-  // }, [selectedExercise]);
+const ExerciseInfoCard = ({
+  saveClickHandler,
+}: ExerciseInfoCardProps & PassedInProps): JSX.Element => {
+  const classes = useStyles();
 
   const [paramType, setParamType] = React.useState<ParameterType | null>(null);
   const [muscleId, setMuscleId] = React.useState<string | undefined>(undefined);
@@ -81,6 +93,20 @@ export default function ExerciseInfoCard({
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+  };
+
+  const saveExerciseInfo = () => {
+    if (muscleId && paramType && shouldAlternate !== null) {
+      saveClickHandler({
+        name: name,
+        equipmentId: equipmentId,
+        muscleGroupIds: [muscleId],
+        gripTypeId: gripTypeId,
+        gripWidthId: gripWidthId,
+        parameterTypeId: paramType.id,
+        alternateSides: shouldAlternate,
+      });
+    }
   };
 
   return (
@@ -145,6 +171,7 @@ export default function ExerciseInfoCard({
               // size="large"
               // className={classes.button}
               startIcon={<SaveIcon />}
+              onClick={saveExerciseInfo}
             >
               {'Save'}
             </Button>
@@ -153,8 +180,32 @@ export default function ExerciseInfoCard({
       </CardActions>
     </Card>
   );
+};
+
+interface PassedInProps {
+  newExercise: boolean;
+  successCallback: () => void;
+}
+export interface ExerciseInfoCardProps {
+  saveClickHandler: (exerciseInfo: InfoProps) => void;
 }
 
-export interface ExerciseInfoCardProps {
-  selectedExercise?: ExerciseVO | null;
-}
+const mapStateToProps = (state: any): ExerciseInfoCardProps => {
+  return {} as unknown as ExerciseInfoCardProps;
+};
+
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: PassedInProps
+): ExerciseInfoCardProps =>
+  ({
+    saveClickHandler: (exerciseInfo: InfoProps) => {
+      if (ownProps.newExercise) {
+        (dispatch as ThunkDispatch<State, void, AnyAction>)(
+          saveNewExercise(exerciseInfo, ownProps.successCallback)
+        );
+      }
+    },
+  } as unknown as ExerciseInfoCardProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseInfoCard);

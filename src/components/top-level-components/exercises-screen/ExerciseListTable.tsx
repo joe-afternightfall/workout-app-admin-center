@@ -171,7 +171,9 @@ const ExerciseListTable = ({
           icon: 'add',
           tooltip: 'Add New Exercise',
           isFreeAction: true,
-          onClick: actionClickHandler,
+          onClick: () => {
+            actionClickHandler(true);
+          },
         },
       ]}
     />
@@ -179,7 +181,7 @@ const ExerciseListTable = ({
 };
 
 interface PassedInProps {
-  actionClickHandler: () => void;
+  actionClickHandler: (newExercise: boolean) => void;
 }
 
 interface ExerciseListTableProps {

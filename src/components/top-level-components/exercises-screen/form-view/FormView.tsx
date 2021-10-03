@@ -25,7 +25,10 @@ interface EditExerciseProps {
   alternateSides: boolean;
 }
 
-export default function FormView(props: FormViewProps): JSX.Element {
+export default function FormView({
+  newExercise,
+  successCallback,
+}: FormViewProps): JSX.Element {
   const classes = useStyles();
   const [exercise, setExercise] = React.useState<ExerciseVO | null>(null);
 
@@ -36,7 +39,10 @@ export default function FormView(props: FormViewProps): JSX.Element {
           <TitleCard />
         </Grid>
         <Grid item xs={12} sm={12}>
-          <ExerciseInfo />
+          <ExerciseInfo
+            newExercise={newExercise}
+            successCallback={successCallback}
+          />
         </Grid>
         {/*<Grid item xs={2} sm={1}>*/}
         {/*  <VerticalMenu />*/}
@@ -47,5 +53,6 @@ export default function FormView(props: FormViewProps): JSX.Element {
 }
 
 export interface FormViewProps {
-  DELETE_ME?: undefined;
+  newExercise: boolean;
+  successCallback: () => void;
 }

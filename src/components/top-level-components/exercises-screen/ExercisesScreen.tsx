@@ -16,14 +16,23 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 class ExercisesScreen extends Component<ExercisesScreenProps> {
   state = {
     activeTab: 0,
+    newExercise: false,
   };
 
   render(): JSX.Element {
     const { classes } = this.props;
 
-    const handleChange = (tab: number) => {
+    const handleChange = (tab: number, newExercise: boolean) => {
       this.setState({
         activeTab: tab,
+        newExercise: newExercise,
+      });
+    };
+
+    const backToListHandler = () => {
+      this.setState({
+        activeTab: 0,
+        newExercise: false,
       });
     };
 
@@ -32,17 +41,20 @@ class ExercisesScreen extends Component<ExercisesScreenProps> {
         <Grid item xs={12}>
           <SwipeableViews
             index={this.state.activeTab}
-            onChangeIndex={handleChange}
+            // onChangeIndex={handleChange}
             containerStyle={{
               transition: 'transform 0.35s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
             }}
           >
             <ExerciseListTable
-              actionClickHandler={() => {
-                handleChange(1);
+              actionClickHandler={(newExercise: boolean) => {
+                handleChange(1, newExercise);
               }}
             />
-            <FormView />
+            <FormView
+              newExercise={this.state.newExercise}
+              successCallback={backToListHandler}
+            />
           </SwipeableViews>
         </Grid>
       </Grid>
