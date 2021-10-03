@@ -2,25 +2,33 @@ import React from 'react';
 import Radio from '@material-ui/core/Radio';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const useStyles = makeStyles((theme) => ({}));
-
-export default function AlternateRadioGroup(): JSX.Element {
-  const classes = useStyles();
-  const [value, setValue] = React.useState('');
-
+export default function AlternateRadioGroup({
+  changeHandler,
+  selectedOption,
+}: AlternateRadioGroupProps): JSX.Element {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
+    const value = (event.target as HTMLInputElement).value;
+    if (value === 'yes') {
+      changeHandler(true);
+    } else {
+      changeHandler(false);
+    }
   };
+  let radioValue = '';
+  if (selectedOption === true) {
+    radioValue = 'yes';
+  } else if (selectedOption === false) {
+    radioValue = 'no';
+  }
 
   return (
     <FormControl component={'fieldset'}>
       <FormLabel component={'legend'}>{'Alternate Sides'}</FormLabel>
       <RadioGroup
-        value={value}
+        value={radioValue}
         name={'alternate-sides-group'}
         onChange={handleRadioChange}
       >
@@ -29,4 +37,9 @@ export default function AlternateRadioGroup(): JSX.Element {
       </RadioGroup>
     </FormControl>
   );
+}
+
+interface AlternateRadioGroupProps {
+  selectedOption: boolean | null;
+  changeHandler: (value: boolean) => void;
 }
