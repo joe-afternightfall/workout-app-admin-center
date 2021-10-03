@@ -6,12 +6,13 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Divider,
   Grid,
   TextField,
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import ParamTypeButtonGroup from './components/ParamTypeButtonGroup';
-import { ParameterType } from 'workout-app-common-core';
+import { ExerciseVO, ParameterType } from 'workout-app-common-core';
 import MuscleSelector from './components/MuscleSelector';
 import AlternateCheckboxes from './components/AlternateCheckboxes';
 import AlternateRadioGroup from './components/AlternateRadioGroup';
@@ -23,18 +24,34 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function ExerciseInfoCard(
-  props: ExerciseInfoCardProps
-): JSX.Element {
+export default function ExerciseInfoCard({
+  selectedExercise,
+}: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
 
-  const [paramType, setParamType] = React.useState<ParameterType | null>(null);
+  // React.useEffect(() => {
+  //   if (selectedExercise !== null) {
+  //     setLocalExercise(selectedExercise);
+  //   }
+  // }, [selectedExercise]);
 
+  // todo: handle name change
+  // todo: handle muscle selection
+  // todo: handle optional param selections
+
+  const [paramType, setParamType] = React.useState<ParameterType | null>(null);
+  const [shouldAlternate, setShouldAlternate] = React.useState<boolean | null>(
+    null
+  );
   const selectParamType = (
     event: React.MouseEvent<HTMLElement>,
     paramType: ParameterType | null
   ) => {
     setParamType(paramType);
+  };
+
+  const selectAlternateSidesOption = (value: boolean) => {
+    setShouldAlternate(value);
   };
 
   return (
@@ -64,7 +81,10 @@ export default function ExerciseInfoCard(
 
           <Grid item xs={12} container style={{ marginTop: 24 }}>
             <Grid item xs={6}>
-              <AlternateRadioGroup />
+              <AlternateRadioGroup
+                selectedOption={shouldAlternate}
+                changeHandler={selectAlternateSidesOption}
+              />
             </Grid>
             <Grid item xs={6}>
               <OptionalParams />
@@ -73,16 +93,21 @@ export default function ExerciseInfoCard(
         </Grid>
       </CardContent>
       <CardActions>
-        <Grid container justify={'flex-end'}>
-          <Button
-            // variant="contained"
-            color={'primary'}
-            // size="large"
-            // className={classes.button}
-            startIcon={<SaveIcon />}
-          >
-            {'Save'}
-          </Button>
+        <Grid container>
+          <Grid item xs={12}>
+            <Divider variant={'middle'} />
+          </Grid>
+          <Grid item container justify={'flex-end'}>
+            <Button
+              // variant="contained"
+              color={'primary'}
+              // size="large"
+              // className={classes.button}
+              startIcon={<SaveIcon />}
+            >
+              {'Save'}
+            </Button>
+          </Grid>
         </Grid>
       </CardActions>
     </Card>
@@ -90,5 +115,5 @@ export default function ExerciseInfoCard(
 }
 
 export interface ExerciseInfoCardProps {
-  DELETE_ME?: undefined;
+  selectedExercise?: ExerciseVO | null;
 }
