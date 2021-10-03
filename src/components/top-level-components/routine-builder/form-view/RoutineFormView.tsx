@@ -1,15 +1,8 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  Typography,
-} from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Grid } from '@material-ui/core';
+import InfoCard from './components/InfoCard';
 import TitleCard from './components/TitleCard';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -22,6 +15,7 @@ export default function RoutineFormView(
 ): JSX.Element {
   const classes = useStyles();
   const [activeCardId, setActiveCardId] = React.useState('');
+  const [phaseId, setPhaseId] = React.useState<string | undefined>(undefined);
   const [routineTitle, setRoutineTitle] = React.useState<string | undefined>(
     undefined
   );
@@ -41,6 +35,10 @@ export default function RoutineFormView(
     setWorkoutCategoryId(id);
   };
 
+  const handlePhaseChange = (id: string) => {
+    setPhaseId(id);
+  };
+
   return (
     <Grid item xs={7} container spacing={2}>
       <Grid item xs={12}>
@@ -55,35 +53,12 @@ export default function RoutineFormView(
       </Grid>
 
       <Grid item xs={12}>
-        <Card
-          onClick={() => {
-            selectCard('set-type-card');
-          }}
-          raised={activeCardId === 'set-type-card'}
-        >
-          <CardHeader
-            disableTypography
-            title={<Typography>{'Set Type'}</Typography>}
-            action={
-              <IconButton aria-label={'phase-settings'}>
-                <MoreVertIcon />
-              </IconButton>
-            }
-          />
-          <CardContent>
-            <Card>
-              <CardHeader
-                disableTypography
-                title={<Typography>{'Exercise #1'}</Typography>}
-                action={
-                  <IconButton aria-label={'phase-settings'}>
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-              />
-            </Card>
-          </CardContent>
-        </Card>
+        <InfoCard
+          phaseId={phaseId}
+          activeCardId={activeCardId}
+          selectCardHandler={selectCard}
+          phaseChangeHandler={handlePhaseChange}
+        />
       </Grid>
     </Grid>
   );
