@@ -10,13 +10,21 @@ import { Grid } from '@material-ui/core';
 import ExerciseListTable from './ExerciseListTable';
 import SwipeableViews from 'react-swipeable-views';
 import FormView from './form-view/FormView';
+import { ExerciseVO } from 'workout-app-common-core';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class ExercisesScreen extends Component<ExercisesScreenProps> {
+interface LocalState {
+  activeTab: number;
+  newExercise: boolean;
+  exercise: ExerciseVO | undefined;
+}
+
+class ExercisesScreen extends Component<ExercisesScreenProps, LocalState> {
   state = {
     activeTab: 0,
     newExercise: false,
+    exercise: undefined,
   };
 
   render(): JSX.Element {
@@ -26,6 +34,14 @@ class ExercisesScreen extends Component<ExercisesScreenProps> {
       this.setState({
         activeTab: tab,
         newExercise: newExercise,
+      });
+    };
+
+    const handleEditClick = (exercise: ExerciseVO) => {
+      this.setState({
+        activeTab: 1,
+        newExercise: false,
+        exercise: exercise,
       });
     };
 
@@ -50,10 +66,12 @@ class ExercisesScreen extends Component<ExercisesScreenProps> {
               actionClickHandler={(newExercise: boolean) => {
                 handleChange(1, newExercise);
               }}
+              editClickHandler={handleEditClick}
             />
             <FormView
               newExercise={this.state.newExercise}
               successCallback={backToListHandler}
+              exercise={this.state.exercise}
             />
           </SwipeableViews>
         </Grid>

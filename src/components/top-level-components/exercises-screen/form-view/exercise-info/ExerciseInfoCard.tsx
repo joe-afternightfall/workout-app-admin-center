@@ -14,7 +14,11 @@ import {
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import ParamTypeButtonGroup from './components/ParamTypeButtonGroup';
-import { ExerciseVO, ParameterType } from 'workout-app-common-core';
+import {
+  ExerciseVO,
+  ParameterType,
+  parameterTypes,
+} from 'workout-app-common-core';
 import MuscleSelector from './components/MuscleSelector';
 import AlternateCheckboxes from './components/AlternateCheckboxes';
 import AlternateRadioGroup from './components/AlternateRadioGroup';
@@ -45,12 +49,33 @@ export interface InfoProps {
 }
 
 const ExerciseInfoCard = ({
+  selectedExercise,
   saveClickHandler,
+  successCallback,
 }: ExerciseInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
+  React.useEffect(() => {
+    if (selectedExercise) {
+      console.log(
+        'selectedExercise.muscleGroupIds[0]: ' +
+          JSON.stringify(selectedExercise.muscleGroupIds[0])
+      );
+      const foundType = parameterTypes.find(
+        (type) => type.id === selectedExercise.parameterTypeId
+      );
+      setParamType(foundType ? foundType : null);
+      setName(selectedExercise.name);
+      setMuscleId(selectedExercise.muscleGroupIds[0]);
+      setGripTypeId(selectedExercise.gripTypeId);
+      setGripWidthId(selectedExercise.gripWidthId);
+      setEquipmentId(selectedExercise.equipmentId);
+      setShouldAlternate(selectedExercise.alternateSides);
+    }
+  }, [selectedExercise]);
+
   const [paramType, setParamType] = React.useState<ParameterType | null>(null);
-  const [muscleId, setMuscleId] = React.useState<string | undefined>(undefined);
+  const [muscleId, setMuscleId] = React.useState<string | null>(null);
   const [gripWidthId, setGripWidthId] = React.useState('');
   const [equipmentId, setEquipmentId] = React.useState('');
   const [gripTypeId, setGripTypeId] = React.useState('');
@@ -97,16 +122,32 @@ const ExerciseInfoCard = ({
 
   const saveExerciseInfo = () => {
     if (muscleId && paramType && shouldAlternate !== null) {
-      saveClickHandler({
-        name: name,
-        equipmentId: equipmentId,
-        muscleGroupIds: [muscleId],
-        gripTypeId: gripTypeId,
-        gripWidthId: gripWidthId,
-        parameterTypeId: paramType.id,
-        alternateSides: shouldAlternate,
-      });
+      saveClickHandler(
+        {
+          name: name,
+          equipmentId: equipmentId,
+          muscleGroupIds: [muscleId],
+          gripTypeId: gripTypeId,
+          gripWidthId: gripWidthId,
+          parameterTypeId: paramType.id,
+          alternateSides: shouldAlternate,
+        },
+        () => {
+          successCallback();
+          clearInfo();
+        }
+      );
     }
+  };
+
+  const clearInfo = () => {
+    setName('');
+    setMuscleId(null);
+    setParamType(null);
+    setGripTypeId('');
+    setGripWidthId('');
+    setEquipmentId('');
+    setShouldAlternate(null);
   };
 
   return (
@@ -185,9 +226,13 @@ const ExerciseInfoCard = ({
 interface PassedInProps {
   newExercise: boolean;
   successCallback: () => void;
+  selectedExercise: ExerciseVO | undefined;
 }
 export interface ExerciseInfoCardProps {
-  saveClickHandler: (exerciseInfo: InfoProps) => void;
+  saveClickHandler: (
+    exerciseInfo: InfoProps,
+    successCallback: () => void
+  ) => void;
 }
 
 const mapStateToProps = (state: any): ExerciseInfoCardProps => {
@@ -199,10 +244,13 @@ const mapDispatchToProps = (
   ownProps: PassedInProps
 ): ExerciseInfoCardProps =>
   ({
-    saveClickHandler: (exerciseInfo: InfoProps) => {
+    saveClickHandler: (
+      exerciseInfo: InfoProps,
+      successCallback: () => void
+    ) => {
       if (ownProps.newExercise) {
         (dispatch as ThunkDispatch<State, void, AnyAction>)(
-          saveNewExercise(exerciseInfo, ownProps.successCallback)
+          saveNewExercise(exerciseInfo, successCallback)
         );
       }
     },

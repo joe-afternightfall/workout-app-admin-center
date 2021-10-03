@@ -26,20 +26,21 @@ interface EditExerciseProps {
 }
 
 export default function FormView({
+  exercise,
   newExercise,
   successCallback,
 }: FormViewProps): JSX.Element {
   const classes = useStyles();
-  const [exercise, setExercise] = React.useState<ExerciseVO | null>(null);
 
   return (
     <Grid container>
       <Grid item xs={7} container>
         <Grid item xs={12} style={{ marginBottom: 16 }}>
-          <TitleCard />
+          <TitleCard newExercise={newExercise} />
         </Grid>
         <Grid item xs={12} sm={12}>
           <ExerciseInfo
+            selectedExercise={exercise}
             newExercise={newExercise}
             successCallback={successCallback}
           />
@@ -55,4 +56,5 @@ export default function FormView({
 export interface FormViewProps {
   newExercise: boolean;
   successCallback: () => void;
+  exercise: ExerciseVO | undefined;
 }

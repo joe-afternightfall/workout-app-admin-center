@@ -20,67 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const ExerciseListTable = ({
   exercises,
   actionClickHandler,
+  editClickHandler,
 }: ExerciseListTableProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
-
-  const dummyData = [
-    {
-      number: 1,
-      name: 'First Exercise',
-      firebaseId: 'asdf',
-      muscle: 'Blah',
-      actions: (
-        <Grid container>
-          <Grid item xs={6}>
-            <Button
-              onClick={() => {
-                alert('edit clicked for first exercise');
-              }}
-            >
-              {'edit'}
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              onClick={() => {
-                alert('delete clicked for first exercise');
-              }}
-            >
-              {'delete'}
-            </Button>
-          </Grid>
-        </Grid>
-      ),
-    },
-    {
-      number: 2,
-      name: 'Second Exercise',
-      firebaseId: 'asdflkjasdflkj',
-      muscle: 'Blah #2',
-      actions: (
-        <Grid container>
-          <Grid item xs={6}>
-            <Button
-              onClick={() => {
-                alert('edit clicked for second exercise');
-              }}
-            >
-              {'edit'}
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              onClick={() => {
-                alert('delete clicked for second exercise');
-              }}
-            >
-              {'delete'}
-            </Button>
-          </Grid>
-        </Grid>
-      ),
-    },
-  ];
 
   const data = exercises.map((exercise: ExerciseVO, index: number) => {
     index += 1;
@@ -99,7 +41,7 @@ const ExerciseListTable = ({
           <Grid item xs={6}>
             <Button
               onClick={() => {
-                alert('edit clicked for ' + exercise.name);
+                editClickHandler(exercise);
               }}
             >
               {'edit'}
@@ -120,7 +62,7 @@ const ExerciseListTable = ({
   });
   return (
     <MaterialTable
-      data={dummyData}
+      data={data}
       data-testid={'exercise-list-table'}
       title={<PageTitle title={'Exercises'} />}
       options={{
@@ -182,6 +124,7 @@ const ExerciseListTable = ({
 
 interface PassedInProps {
   actionClickHandler: (newExercise: boolean) => void;
+  editClickHandler: (exercise: ExerciseVO) => void;
 }
 
 interface ExerciseListTableProps {
