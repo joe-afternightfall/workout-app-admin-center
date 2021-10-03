@@ -4,6 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ExerciseInfo from './exercise-info/ExerciseInfoCard';
 import { ExerciseVO } from 'workout-app-common-core';
 import TitleCard from './title/TitleCard';
+import VerticalMenu from './vertical-menu/VerticalMenu';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,11 +31,16 @@ export default function FormView(props: FormViewProps): JSX.Element {
 
   return (
     <Grid container>
-      <Grid item xs={12} style={{ marginBottom: 16 }}>
-        <TitleCard />
-      </Grid>
-      <Grid item xs={12}>
-        <ExerciseInfo />
+      <Grid item xs={7} container>
+        <Grid item xs={12} style={{ marginBottom: 16 }}>
+          <TitleCard />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <ExerciseInfo />
+        </Grid>
+        {/*<Grid item xs={2} sm={1}>*/}
+        {/*  <VerticalMenu />*/}
+        {/*</Grid>*/}
       </Grid>
     </Grid>
   );

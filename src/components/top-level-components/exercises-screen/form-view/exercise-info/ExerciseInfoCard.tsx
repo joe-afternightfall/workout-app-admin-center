@@ -14,6 +14,8 @@ import ParamTypeButtonGroup from './components/ParamTypeButtonGroup';
 import { ParameterType } from 'workout-app-common-core';
 import MuscleSelector from './components/MuscleSelector';
 import AlternateCheckboxes from './components/AlternateCheckboxes';
+import AlternateRadioGroup from './components/AlternateRadioGroup';
+import OptionalParams from './components/OptionalParams';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -39,15 +41,18 @@ export default function ExerciseInfoCard(
     <Card style={{ width: '100%' }}>
       <CardContent>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              id="exercise-name"
-              label="Exercise Name"
-              variant="filled"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <MuscleSelector />
+          <Grid item xs={12} container spacing={2}>
+            <Grid item xs={8}>
+              <TextField
+                fullWidth
+                id="exercise-name"
+                variant={'outlined'}
+                label={'Exercise Name'}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <MuscleSelector />
+            </Grid>
           </Grid>
 
           <Grid item xs={12}>
@@ -57,8 +62,13 @@ export default function ExerciseInfoCard(
             />
           </Grid>
 
-          <Grid item xs={12}>
-            <AlternateCheckboxes />
+          <Grid item xs={12} container style={{ marginTop: 24 }}>
+            <Grid item xs={6}>
+              <AlternateRadioGroup />
+            </Grid>
+            <Grid item xs={6}>
+              <OptionalParams />
+            </Grid>
           </Grid>
         </Grid>
       </CardContent>

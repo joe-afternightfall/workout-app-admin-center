@@ -1,10 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import {
   Grid,
-  Typography,
   Checkbox,
   FormGroup,
+  Typography,
   FormControlLabel,
 } from '@material-ui/core';
 
