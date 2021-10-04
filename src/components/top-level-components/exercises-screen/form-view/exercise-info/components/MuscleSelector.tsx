@@ -2,10 +2,10 @@ import React, { ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import muscleGroups, {
-  BodySection,
-  MuscleGroup,
   Muscles,
   SideOfBody,
+  BodySection,
+  MuscleGroup,
 } from '../../../../../../configs/models/workout-configurations/MuscleGroups';
 
 function buildOptions(group: MuscleGroup): {
@@ -43,16 +43,15 @@ export default function MuscleSelector({
   return (
     <Autocomplete
       fullWidth
+      value={defaultValue}
       id={'grouped-muscles'}
       options={options.sort(
         (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
       )}
-      // groupBy={(option) => option.bodySection}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
         <TextField {...params} label={'Target Muscle'} variant={'outlined'} />
       )}
-      value={defaultValue}
       onChange={(e: ChangeEvent<Record<string, never>>, newValue) => {
         newValue && changeHandler(newValue.id);
       }}

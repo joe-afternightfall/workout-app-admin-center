@@ -1,8 +1,12 @@
 import React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import InfoCard from './components/InfoCard';
 import TitleCard from './components/TitleCard';
+import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { ExerciseVO } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -10,9 +14,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function RoutineFormView(
-  props: RoutineFormViewProps
-): JSX.Element {
+const RoutineFormView = ({ exercises }: RoutineFormViewProps): JSX.Element => {
   const classes = useStyles();
   const [activeCardId, setActiveCardId] = React.useState('');
   const [selectedPhaseId, setSelectedPhaseId] = React.useState<
@@ -21,6 +23,10 @@ export default function RoutineFormView(
   const [selectedSetId, setSelectedSetId] = React.useState<string | undefined>(
     undefined
   );
+  const [selectedExerciseId, setSelectedExerciseId] = React.useState<
+    string | undefined
+  >(undefined);
+
   const [routineTitle, setRoutineTitle] = React.useState<string | undefined>(
     undefined
   );
@@ -48,6 +54,10 @@ export default function RoutineFormView(
     setSelectedSetId(id);
   };
 
+  const handleSelectExercise = (id: string) => {
+    setSelectedExerciseId(id);
+  };
+
   return (
     <Grid item xs={7} container spacing={2}>
       <Grid item xs={12}>
@@ -63,6 +73,9 @@ export default function RoutineFormView(
 
       <Grid item xs={12}>
         <InfoCard
+          exercises={exercises}
+          selectedExerciseId={selectedExerciseId}
+          selectExerciseHandler={handleSelectExercise}
           selectedPhaseId={selectedPhaseId}
           selectedSetId={selectedSetId}
           activeCardId={activeCardId}
@@ -73,8 +86,19 @@ export default function RoutineFormView(
       </Grid>
     </Grid>
   );
-}
+};
 
 export interface RoutineFormViewProps {
-  DELETE_ME?: undefined;
+  exercises: ExerciseVO[];
 }
+
+const mapStateToProps = (state: State): RoutineFormViewProps => {
+  return {
+    exercises: state.applicationState.workoutConfigurations.exercises,
+  } as unknown as RoutineFormViewProps;
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): RoutineFormViewProps =>
+  ({} as unknown as RoutineFormViewProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineFormView);
