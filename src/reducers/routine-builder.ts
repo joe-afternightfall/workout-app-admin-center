@@ -1,5 +1,7 @@
 import { ActionTypes, ApplicationActions } from '../creators/actions';
 import { RoutineTemplateVO } from 'workout-app-common-core';
+import { v4 as uuidv4 } from 'uuid';
+import * as ramda from 'ramda';
 
 export default {
   reducer: (
@@ -21,6 +23,18 @@ export default {
       case ActionTypes.UPDATE_ROUTINE_TITLE:
         newState.selectedRoutine.name = action.value;
         break;
+      case ActionTypes.ADD_PHASE_TO_ROUTINE: {
+        const order = newState.selectedRoutine.phases.length + 1;
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.push({
+          id: uuidv4(),
+          phaseId: '',
+          order: order,
+          segments: [],
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
       default:
         newState = state;
     }
