@@ -26,6 +26,7 @@ import {
 import {
   AddPhaseToRoutineAction,
   BuildNewRoutineAction,
+  SelectPhaseAction,
   SetActiveCardAction,
   UpdateRoutineTitleAction,
   UpdateSelectedCategoryIdAction,
@@ -53,6 +54,7 @@ export enum ActionTypes {
   UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
   ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
+  SELECT_PHASE = 'SELECT_PHASE',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -91,4 +93,5 @@ export type ApplicationActions =
   | SetActiveCardAction
   | UpdateRoutineTitleAction
   | UpdateSelectedCategoryIdAction
-  | AddPhaseToRoutineAction;
+  | AddPhaseToRoutineAction
+  | SelectPhaseAction;
