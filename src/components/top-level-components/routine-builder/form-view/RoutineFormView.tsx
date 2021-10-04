@@ -12,7 +12,10 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import CalendarViewDayIcon from '@material-ui/icons/CalendarViewDay';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
-import { addPhaseToRoutine } from '../../../../creators/routine-builder/builder';
+import {
+  addPhaseToRoutine,
+  setActiveCard,
+} from '../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,26 +27,16 @@ const RoutineFormView = ({
   exercises,
   phases,
   addPhaseHandler,
+  selectCardHandler,
+  activeCardId,
 }: RoutineFormViewProps): JSX.Element => {
   const classes = useStyles();
-  const [activeCardId, setActiveCardId] = React.useState('');
-  const [selectedPhaseId, setSelectedPhaseId] = React.useState<
-    string | undefined
-  >(undefined);
   const [selectedSetId, setSelectedSetId] = React.useState<string | undefined>(
     undefined
   );
   const [selectedExerciseId, setSelectedExerciseId] = React.useState<
     string | undefined
   >(undefined);
-
-  const selectCard = (cardId: string) => {
-    setActiveCardId(cardId);
-  };
-
-  const handlePhaseChange = (id: string) => {
-    setSelectedPhaseId(id);
-  };
 
   const handleSetChange = (id: string) => {
     setSelectedSetId(id);
@@ -64,15 +57,14 @@ const RoutineFormView = ({
           return (
             <Grid item xs={12} key={index}>
               <InfoCard
+                phase={phase}
                 exercises={exercises}
                 selectedExerciseId={selectedExerciseId}
                 selectExerciseHandler={handleSelectExercise}
-                selectedPhaseId={selectedPhaseId}
                 selectedSetId={selectedSetId}
                 activeCardId={activeCardId}
-                selectCardHandler={selectCard}
+                selectCardHandler={selectCardHandler}
                 setChangeHandler={handleSetChange}
-                phaseChangeHandler={handlePhaseChange}
               />
             </Grid>
           );
@@ -110,14 +102,17 @@ const RoutineFormView = ({
 
 export interface RoutineFormViewProps {
   phases: Phase[];
+  activeCardId: string;
   exercises: ExerciseVO[];
   addPhaseHandler: () => void;
+  selectCardHandler: (id: string) => void;
 }
 
 const mapStateToProps = (state: State): RoutineFormViewProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
     phases: state.routineBuilderState.selectedRoutine.phases,
+    activeCardId: state.routineBuilderState.activeCardId,
   } as unknown as RoutineFormViewProps;
 };
 
@@ -125,6 +120,9 @@ const mapDispatchToProps = (dispatch: Dispatch): RoutineFormViewProps =>
   ({
     addPhaseHandler: () => {
       dispatch(addPhaseToRoutine());
+    },
+    selectCardHandler: (id: string) => {
+      dispatch(setActiveCard(id));
     },
   } as unknown as RoutineFormViewProps);
 

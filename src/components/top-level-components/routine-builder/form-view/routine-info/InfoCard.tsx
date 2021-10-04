@@ -1,24 +1,16 @@
 import {
+  Phase,
   phases,
-  PhaseVO,
   ExerciseVO,
   TrainingSetType,
   trainingSetTypes,
 } from 'workout-app-common-core';
-import BaseCard from '../base-components/BaseCard';
 import React, { ChangeEvent } from 'react';
-import BaseSelectDropdown from '../base-components/BaseSelectDropdown';
+import BaseCard from '../base-components/BaseCard';
+import PhaseDropdown from './components/PhaseDropdown';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Grid, Box, TextField, Paper } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    formControl: {
-      minWidth: 200,
-    },
-  })
-);
+import BaseSelectDropdown from '../base-components/BaseSelectDropdown';
 
 function buildOptions(exercise: ExerciseVO) {
   const firstLetter = exercise.name[0].toUpperCase();
@@ -29,27 +21,30 @@ function buildOptions(exercise: ExerciseVO) {
 }
 
 export default function InfoCard({
+  phase,
   exercises,
   selectedSetId,
-  selectedPhaseId,
   activeCardId,
   selectCardHandler,
-  phaseChangeHandler,
   setChangeHandler,
   selectedExerciseId,
   selectExerciseHandler,
 }: InfoCardProps): JSX.Element {
-  const classes = useStyles();
   const cardId = 'info-card';
   const isActive = activeCardId === cardId;
-  let phaseTitle = '';
   const options = exercises.map((exercise) => {
     return buildOptions(exercise);
   });
   let defaultValue = null;
+  let phaseTitle = 'Untitled Phase';
   exercises.find((exercise) => {
     if (exercise.id === selectedExerciseId) {
       return (defaultValue = buildOptions(exercise));
+    }
+  });
+  phases.find((phaseVO) => {
+    if (phaseVO.id === phase.phaseId) {
+      phaseTitle = phaseVO.name;
     }
   });
 
@@ -59,28 +54,15 @@ export default function InfoCard({
       activeTitleComponent={
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <BaseSelectDropdown
-              value={selectedPhaseId}
-              label={'Phase'}
-              changeHandler={phaseChangeHandler}
-              data={phases.map((phase: PhaseVO) => {
-                if (phase.id === selectedPhaseId) {
-                  phaseTitle = phase.name;
-                }
-                return {
-                  id: phase.id,
-                  name: phase.name,
-                };
-              })}
-            />
+            <PhaseDropdown phase={phase} />
           </Grid>
         </Grid>
       }
       cardId={cardId}
       selectCardHandler={selectCardHandler}
-      baseTitleText={selectedPhaseId ? phaseTitle : 'Untitled Phase'}
+      baseTitleText={phaseTitle}
       cardContent={
-        selectedPhaseId ? (
+        phase.phaseId ? (
           <Box
             style={{
               borderRadius: 4,
@@ -142,12 +124,11 @@ export default function InfoCard({
 
 export interface InfoCardProps {
   activeCardId: string;
+  phase: Phase;
   exercises: ExerciseVO[];
   selectedExerciseId: string | undefined;
   selectedSetId: string | undefined;
-  selectedPhaseId: string | undefined;
   setChangeHandler: (id: string) => void;
   selectCardHandler: (id: string) => void;
-  phaseChangeHandler: (id: string) => void;
   selectExerciseHandler: (id: string) => void;
 }

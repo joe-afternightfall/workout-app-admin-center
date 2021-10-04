@@ -35,6 +35,16 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
+      case ActionTypes.SELECT_PHASE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          if (phase.id === action.workoutPhaseId) {
+            phase.phaseId = action.phaseId;
+          }
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
       default:
         newState = state;
     }
