@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   FormControl,
   Grid,
@@ -42,8 +42,6 @@ const RoutineTitleCard = ({
   const cardId = 'routine-title-card';
   const isActive = activeCardId === cardId;
   let subheader = 'Category';
-
-  console.log('USING_NEW_CONNECTED_TITLE');
 
   workoutCategories.find((category) => {
     if (category.id === selectedWorkoutCategoryId) {
