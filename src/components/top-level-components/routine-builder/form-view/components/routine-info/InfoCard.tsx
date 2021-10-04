@@ -5,9 +5,9 @@ import {
   TrainingSetType,
   trainingSetTypes,
 } from 'workout-app-common-core';
-import BaseCard from './BaseCard';
+import BaseCard from '../BaseCard';
 import React, { ChangeEvent } from 'react';
-import BaseSelectDropdown from './BaseSelectDropdown';
+import BaseSelectDropdown from '../BaseSelectDropdown';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Grid, Box, TextField, Paper } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
