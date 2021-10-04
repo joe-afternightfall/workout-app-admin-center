@@ -9,6 +9,7 @@ import thunkMiddleware from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import application, { ApplicationState } from '../../reducers/application';
+import builder, { RoutineBuilderState } from '../../reducers/routine-builder';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -17,6 +18,7 @@ export const createStore = (history: History): Store => {
     )(originalCreateStore),
     allReducers = combineReducers({
       applicationState: application.reducer,
+      routineBuilderState: builder.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -42,9 +44,19 @@ export const createStore = (history: History): Store => {
       applyHoverStylesToMuscleGroup: '',
       circuitTemplates: [],
     } as unknown as ApplicationState,
+    routineBuilderState: {
+      selectedRoutine: {
+        id: '',
+        firebaseId: '',
+        name: '',
+        workoutCategoryId: '',
+        phases: [],
+      },
+    } as unknown as RoutineBuilderState,
   });
 };
 
 export interface State {
   applicationState: ApplicationState;
+  routineBuilderState: RoutineBuilderState;
 }
