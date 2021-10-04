@@ -2,10 +2,10 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import InfoCard from './routine-info/InfoCard';
 import { ExerciseVO } from 'workout-app-common-core';
 import { State } from '../../../../configs/redux/store';
-import InfoCard from './components/routine-info/InfoCard';
-import RoutineTitleCard from './components/RoutineTitleCard';
+import RoutineTitleCard from './title/RoutineTitleCard';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>

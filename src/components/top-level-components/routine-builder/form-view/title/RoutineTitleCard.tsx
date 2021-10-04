@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { workoutCategories, WorkoutCategoryVO } from 'workout-app-common-core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import BaseCard from './BaseCard';
+import BaseCard from '../base-components/BaseCard';
 import { State } from '../../../../../configs/redux/store';
 import {
   setActiveCard,
@@ -21,7 +21,7 @@ import {
   updateSelectedCategoryId,
 } from '../../../../../creators/routine-builder/builder';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {},
     formControl: {
