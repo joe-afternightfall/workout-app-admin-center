@@ -24,6 +24,7 @@ import {
   HideAppSnackbarAction,
 } from './app-snackbar';
 import {
+  AddPhaseToRoutineAction,
   BuildNewRoutineAction,
   SetActiveCardAction,
   UpdateRoutineTitleAction,
@@ -51,6 +52,7 @@ export enum ActionTypes {
   SELECT_ACTIVE_CARD = 'SELECT_ACTIVE_CARD',
   UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
+  ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -88,4 +90,5 @@ export type ApplicationActions =
   | BuildNewRoutineAction
   | SetActiveCardAction
   | UpdateRoutineTitleAction
-  | UpdateSelectedCategoryIdAction;
+  | UpdateSelectedCategoryIdAction
+  | AddPhaseToRoutineAction;

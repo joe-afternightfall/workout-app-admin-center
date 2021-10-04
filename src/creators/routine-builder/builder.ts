@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes } from '../actions';
 import { RoutineTemplateVO } from 'workout-app-common-core';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
@@ -55,5 +55,15 @@ export const updateSelectedCategoryId = (
   return {
     type: ActionTypes.UPDATE_SELECTED_CATEGORY_ID,
     id: id,
+  };
+};
+
+export interface AddPhaseToRoutineAction {
+  type: ActionTypes.ADD_PHASE_TO_ROUTINE;
+}
+
+export const addPhaseToRoutine = (): AddPhaseToRoutineAction => {
+  return {
+    type: ActionTypes.ADD_PHASE_TO_ROUTINE,
   };
 };
