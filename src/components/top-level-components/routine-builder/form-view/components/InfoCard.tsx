@@ -1,14 +1,14 @@
 import React from 'react';
-import {
-  Grid,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-} from '@material-ui/core';
+import { Grid, Box, TextField, Paper } from '@material-ui/core';
 import BaseCard from './BaseCard';
-import { phases, PhaseVO } from 'workout-app-common-core';
+import {
+  phases,
+  PhaseVO,
+  TrainingSetType,
+  trainingSetTypes,
+} from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import BaseSelectDropdown from './BaseSelectDropdown';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -19,10 +19,12 @@ const useStyles = makeStyles(() =>
 );
 
 export default function InfoCard({
-  phaseId,
+  selectedSetId,
+  selectedPhaseId,
   activeCardId,
   selectCardHandler,
   phaseChangeHandler,
+  setChangeHandler,
 }: InfoCardProps): JSX.Element {
   const classes = useStyles();
   const cardId = 'info-card';
@@ -35,46 +37,68 @@ export default function InfoCard({
       activeTitleComponent={
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id={'phase-select-label'}>{'Phase'}</InputLabel>
-              <Select
-                labelId={'phase-select-label'}
-                id={'phase-select'}
-                value={phaseId}
-                onChange={(
-                  e: React.ChangeEvent<{
-                    name?: string | undefined;
-                    value: unknown;
-                  }>
-                ) => {
-                  phaseChangeHandler(e.target.value as string);
-                }}
-              >
-                {phases.map((phase: PhaseVO, index: number) => {
-                  if (phase.id === phaseId) {
-                    phaseTitle = phase.name;
-                  }
-                  return (
-                    <MenuItem key={index} value={phase.id}>
-                      {phase.name}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+            <BaseSelectDropdown
+              value={selectedPhaseId}
+              label={'Phase'}
+              changeHandler={phaseChangeHandler}
+              data={phases.map((phase: PhaseVO) => {
+                if (phase.id === selectedPhaseId) {
+                  phaseTitle = phase.name;
+                }
+                return {
+                  id: phase.id,
+                  name: phase.name,
+                };
+              })}
+            />
           </Grid>
         </Grid>
       }
       cardId={cardId}
       selectCardHandler={selectCardHandler}
-      baseTitleText={phaseId ? phaseTitle : 'Untitled Phase'}
+      baseTitleText={selectedPhaseId ? phaseTitle : 'Untitled Phase'}
+      cardContent={
+        selectedPhaseId ? (
+          <Box
+            style={{
+              borderRadius: 4,
+              backgroundColor: '#EDEDED',
+              minHeight: 300,
+              padding: 24,
+            }}
+          >
+            <Paper style={{ padding: 16 }} elevation={0}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <BaseSelectDropdown
+                    value={selectedSetId}
+                    label={'Set Type'}
+                    changeHandler={setChangeHandler}
+                    data={trainingSetTypes.map((set: TrainingSetType) => {
+                      return {
+                        id: set.id,
+                        name: set.name,
+                      };
+                    })}
+                  />
+                </Grid>
+                {/*<Grid item xs={12}>*/}
+                {/*  <TextField placeholder={'Set Type'} />*/}
+                {/*</Grid>*/}
+              </Grid>
+            </Paper>
+          </Box>
+        ) : undefined
+      }
     />
   );
 }
 
 export interface InfoCardProps {
   activeCardId: string;
-  phaseId: string | undefined;
+  selectedSetId: string | undefined;
+  selectedPhaseId: string | undefined;
+  setChangeHandler: (id: string) => void;
   selectCardHandler: (id: string) => void;
   phaseChangeHandler: (id: string) => void;
 }

@@ -15,7 +15,12 @@ export default function RoutineFormView(
 ): JSX.Element {
   const classes = useStyles();
   const [activeCardId, setActiveCardId] = React.useState('');
-  const [phaseId, setPhaseId] = React.useState<string | undefined>(undefined);
+  const [selectedPhaseId, setSelectedPhaseId] = React.useState<
+    string | undefined
+  >(undefined);
+  const [selectedSetId, setSelectedSetId] = React.useState<string | undefined>(
+    undefined
+  );
   const [routineTitle, setRoutineTitle] = React.useState<string | undefined>(
     undefined
   );
@@ -36,7 +41,11 @@ export default function RoutineFormView(
   };
 
   const handlePhaseChange = (id: string) => {
-    setPhaseId(id);
+    setSelectedPhaseId(id);
+  };
+
+  const handleSetChange = (id: string) => {
+    setSelectedSetId(id);
   };
 
   return (
@@ -54,9 +63,11 @@ export default function RoutineFormView(
 
       <Grid item xs={12}>
         <InfoCard
-          phaseId={phaseId}
+          selectedPhaseId={selectedPhaseId}
+          selectedSetId={selectedSetId}
           activeCardId={activeCardId}
           selectCardHandler={selectCard}
+          setChangeHandler={handleSetChange}
           phaseChangeHandler={handlePhaseChange}
         />
       </Grid>

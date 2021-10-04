@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Card, CardHeader } from '@material-ui/core';
+import { Card, CardContent, CardHeader } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -18,6 +18,7 @@ export default function BaseCard({
   baseSubheader,
   cardId,
   actionButton,
+  cardContent,
   selectCardHandler,
   activeTitleComponent,
 }: BaseCardProps): JSX.Element {
@@ -40,6 +41,7 @@ export default function BaseCard({
         })}
         action={actionButton}
       />
+      {cardContent && <CardContent>{cardContent}</CardContent>}
     </Card>
   );
 }
@@ -52,4 +54,5 @@ export interface BaseCardProps {
   selectCardHandler: (id: string) => void;
   baseSubheader?: string;
   actionButton?: JSX.Element;
+  cardContent?: JSX.Element;
 }
