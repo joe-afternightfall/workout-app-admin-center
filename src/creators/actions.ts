@@ -23,6 +23,12 @@ import {
   DisplayAppSnackbarAction,
   HideAppSnackbarAction,
 } from './app-snackbar';
+import {
+  BuildNewRoutineAction,
+  SetActiveCardAction,
+  UpdateRoutineTitleAction,
+  UpdateSelectedCategoryIdAction,
+} from './routine-builder/builder';
 
 export enum ActionTypes {
   // Application Actions
@@ -39,6 +45,12 @@ export enum ActionTypes {
 
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
+
+  // Routine Builder Actions
+  BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
+  SELECT_ACTIVE_CARD = 'SELECT_ACTIVE_CARD',
+  UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
+  UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -72,4 +84,8 @@ export type ApplicationActions =
   | ClearHoverStylesForMuscleGroupAction
   | LoadExercisesAction
   | HideAppSnackbarAction
-  | DisplayAppSnackbarAction;
+  | DisplayAppSnackbarAction
+  | BuildNewRoutineAction
+  | SetActiveCardAction
+  | UpdateRoutineTitleAction
+  | UpdateSelectedCategoryIdAction;
