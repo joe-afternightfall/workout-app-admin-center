@@ -67,3 +67,20 @@ export const addPhaseToRoutine = (): AddPhaseToRoutineAction => {
     type: ActionTypes.ADD_PHASE_TO_ROUTINE,
   };
 };
+
+export interface SelectPhaseAction {
+  type: ActionTypes.SELECT_PHASE;
+  workoutPhaseId: string;
+  phaseId: string;
+}
+
+export const selectPhase = (
+  workoutPhaseId: string,
+  phaseId: string
+): SelectPhaseAction => {
+  return {
+    type: ActionTypes.SELECT_PHASE,
+    workoutPhaseId: workoutPhaseId,
+    phaseId: phaseId,
+  };
+};
