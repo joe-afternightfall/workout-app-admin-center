@@ -33,6 +33,7 @@ import {
   SetActiveCardAction,
   UpdateRoutineTitleAction,
   UpdateSelectedCategoryIdAction,
+  AddSetToExerciseAction,
 } from './routine-builder/builder';
 
 export enum ActionTypes {
@@ -104,4 +105,5 @@ export type ApplicationActions =
   | SelectPhaseAction
   | SelectSetTypeAction
   | AddSegmentToPhaseAction
-  | UpdateSegmentExerciseAction;
+  | UpdateSegmentExerciseAction
+  | AddSetToExerciseAction;

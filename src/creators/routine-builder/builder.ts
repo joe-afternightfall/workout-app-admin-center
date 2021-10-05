@@ -130,3 +130,15 @@ export const updateSegmentExercise = (
     exerciseId: exerciseId,
   };
 };
+
+export interface AddSetToExerciseAction {
+  type: ActionTypes.ADD_SET_TO_EXERCISE;
+  id: string;
+}
+
+export const addSetToExercise = (id: string): AddSetToExerciseAction => {
+  return {
+    type: ActionTypes.ADD_SET_TO_EXERCISE,
+    id: id,
+  };
+};
