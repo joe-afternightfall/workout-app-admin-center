@@ -16,7 +16,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import BaseCard from '../base-components/BaseCard';
 import { State } from '../../../../../configs/redux/store';
 import {
-  setActiveCard,
   updateRoutineTitle,
   updateSelectedCategoryId,
 } from '../../../../../creators/routine-builder/builder';
@@ -33,7 +32,6 @@ const useStyles = makeStyles(() =>
 const RoutineTitleCard = ({
   routineTitle,
   activeCardId,
-  selectCardHandler,
   titleChangeHandler,
   selectedWorkoutCategoryId,
   categoryChangeHandler,
@@ -53,7 +51,6 @@ const RoutineTitleCard = ({
     <BaseCard
       isActive={isActive}
       cardId={cardId}
-      selectCardHandler={selectCardHandler}
       activeTitleComponent={
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -111,7 +108,6 @@ export interface RoutineTitleCardProps {
   routineTitle: string;
   activeCardId: string;
   selectedWorkoutCategoryId: string;
-  selectCardHandler: (id: string) => void;
   titleChangeHandler: (value: string) => void;
   categoryChangeHandler: (id: string) => void;
 }
@@ -127,9 +123,6 @@ const mapStateToProps = (state: State): RoutineTitleCardProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): RoutineTitleCardProps =>
   ({
-    selectCardHandler: (id: string) => {
-      dispatch(setActiveCard(id));
-    },
     titleChangeHandler: (value: string) => {
       dispatch(updateRoutineTitle(value));
     },

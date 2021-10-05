@@ -45,6 +45,36 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
+      case ActionTypes.SELECT_SET_TYPE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              segment.trainingSetTypeId = action.setTypeId;
+            }
+          });
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
+      case ActionTypes.ADD_SEGMENT_TO_PHASE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          if (phase.id === action.id) {
+            const order = phase.segments.length + 1;
+            phase.segments.push({
+              id: uuidv4(),
+              order: order,
+              trainingSetTypeId: '',
+              secondsRestBetweenSets: 30,
+              secondsRestBetweenNextSegment: 60,
+              exercises: [],
+            });
+          }
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
       default:
         newState = state;
     }
