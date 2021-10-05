@@ -3,17 +3,11 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import {
-  Grid,
-  List,
-  ListItemText,
-  Typography,
-  Link,
-  TextField,
-} from '@material-ui/core';
+import { Grid, List, ListItemText, TextField } from '@material-ui/core';
 import { ExerciseVO, Segment, WorkoutExercise } from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
-import { addExerciseAndSetToSegment } from '../../../../../../../creators/routine-builder/builder';
+import { updateSegmentExercise } from '../../../../../../../creators/routine-builder/builder';
+import SetField from '../SetField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,45 +15,52 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function buildOptions(exercise: ExerciseVO) {
-  const firstLetter = exercise.name[0].toUpperCase();
-  return {
-    firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-    ...exercise,
-  };
-}
-
 const ExerciseCard = ({
   exercises,
   segment,
   selectExerciseHandler,
 }: ExerciseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
-  let defaultValue = null;
-  const options = exercises.map((exercise) => {
-    return buildOptions(exercise);
-  });
+  let selectedExercise: ExerciseVO | undefined = undefined;
   let selectedExerciseId = '';
 
   exercises.map((exercise) => {
     segment.exercises.find((workoutExercise) => {
       if (workoutExercise.exerciseId === exercise.id) {
         selectedExerciseId = exercise.id;
-        return (defaultValue = buildOptions(exercise));
+        // foundExercise = exercise;
+        return (selectedExercise = exercise);
       }
     });
   });
+
+  // <Grid container alignItems={'center'}>
+  //   <Grid item>
+  //     <Typography>{'1.'}</Typography>
+  //   </Grid>
+  //   <Grid item>
+  //     {/*<TextField placeholder={'click to add set'} />*/}
+  //     <Link
+  //       component={'button'}
+  //       variant={'body2'}
+  //       color={'textSecondary'}
+  //       onClick={() => {
+  //         console.info("I'm a button.");
+  //       }}
+  //     >
+  //       {'Add set'}
+  //     </Link>
+  //   </Grid>
+  // </Grid>
 
   return (
     <Grid item xs={12} container>
       <Grid item xs={12}>
         <Autocomplete
           fullWidth
-          value={defaultValue}
-          id={'set-exercise'}
-          options={options.sort(
-            (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-          )}
+          // value={defaultValue}
+          id={`${segment.id}-exercise-menu`}
+          options={exercises}
           getOptionLabel={(option) => option.name}
           renderInput={(params) => (
             <TextField {...params} label={'Exercise'} variant={'outlined'} />
@@ -70,7 +71,7 @@ const ExerciseCard = ({
           getOptionSelected={(option, value) => option.id === value.id}
         />
       </Grid>
-      {defaultValue &&
+      {selectedExercise &&
         segment.exercises.map((workoutExercise) => {
           if (workoutExercise.exerciseId === selectedExerciseId) {
             return (
@@ -82,24 +83,14 @@ const ExerciseCard = ({
                         key={index}
                         disableTypography
                         primary={
-                          <Grid container alignItems={'center'}>
-                            <Grid item>
-                              <Typography>{'1.'}</Typography>
-                            </Grid>
-                            <Grid item>
-                              {/*<TextField placeholder={'click to add set'} />*/}
-                              <Link
-                                component={'button'}
-                                variant={'body2'}
-                                color={'textSecondary'}
-                                onClick={() => {
-                                  console.info("I'm a button.");
-                                }}
-                              >
-                                {'Add set'}
-                              </Link>
-                            </Grid>
-                          </Grid>
+                          <SetField
+                            paramTypeId={
+                              selectedExercise &&
+                              selectedExercise.parameterTypeId
+                                ? selectedExercise.parameterTypeId
+                                : ''
+                            }
+                          />
                         }
                       />
                     );
@@ -134,7 +125,7 @@ const mapDispatchToProps = (
 ): ExerciseCardProps =>
   ({
     selectExerciseHandler: (exerciseId: string) => {
-      dispatch(addExerciseAndSetToSegment(ownProps.segment.id, exerciseId));
+      dispatch(updateSegmentExercise(ownProps.segment.id, exerciseId));
       // dispatch(addSetToExercise(ownProps.segment.id, exerciseId));
     },
   } as unknown as ExerciseCardProps);
