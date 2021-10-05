@@ -7,9 +7,9 @@ import {
   Grid,
   List,
   ListItemText,
-  Typography,
-  Link,
+  ListItem,
   TextField,
+  Divider,
 } from '@material-ui/core';
 import { ExerciseVO, Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
@@ -17,7 +17,8 @@ import {
   addSetToExercise,
   updateSegmentExercise,
 } from '../../../../../../../creators/routine-builder/builder';
-import SetField from '../SetField';
+import SetIncrementer from '../inputs/SetIncrementer';
+import RestBetweenDropdown from '../inputs/RestBetweenDropdown';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,46 +70,44 @@ const ExerciseCard = ({
             return (
               <Grid item xs={12}>
                 <List>
-                  {workoutExercise.sets.map((set, index) => {
-                    return (
-                      <ListItemText
-                        key={index}
-                        disableTypography
-                        primary={
-                          <SetField
-                            paramTypeId={
-                              selectedExercise &&
-                              selectedExercise.parameterTypeId
-                                ? selectedExercise.parameterTypeId
-                                : ''
-                            }
-                          />
-                        }
-                      />
-                    );
-                  })}
-                  {workoutExercise.sets.length === 4 ? undefined : (
-                    <Grid container alignItems={'center'}>
-                      <Grid item>
-                        <Typography>{`${
-                          workoutExercise.sets.length + 1
-                        }. `}</Typography>
-                      </Grid>
-                      <Grid item>
-                        {/*<TextField placeholder={'click to add set'} />*/}
-                        <Link
-                          component={'button'}
-                          variant={'body2'}
-                          color={'textSecondary'}
-                          onClick={() => {
-                            addSetHandler(workoutExercise.id);
-                          }}
-                        >
-                          {'click to add another set'}
-                        </Link>
-                      </Grid>
-                    </Grid>
-                  )}
+                  <ListItem>
+                    <ListItemText
+                      disableTypography
+                      primary={<SetIncrementer />}
+                    />
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      disableTypography
+                      primary={<Divider variant={'middle'} />}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      disableTypography
+                      primary={
+                        <RestBetweenDropdown
+                          value={String(segment.secondsRestBetweenSets)}
+                          segmentId={segment.id}
+                          type={'Sets'}
+                        />
+                      }
+                    />
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemText
+                      disableTypography
+                      primary={
+                        <RestBetweenDropdown
+                          value={String(segment.secondsRestBetweenNextSegment)}
+                          segmentId={segment.id}
+                          type={'Segment'}
+                        />
+                      }
+                    />
+                  </ListItem>
                 </List>
               </Grid>
             );
@@ -141,7 +140,6 @@ const mapDispatchToProps = (
   ({
     selectExerciseHandler: (exerciseId: string) => {
       dispatch(updateSegmentExercise(ownProps.segment.id, exerciseId));
-      // dispatch(addSetToExercise(ownProps.segment.id, exerciseId));
     },
     addSetHandler: (exerciseId: string) => {
       dispatch(addSetToExercise(exerciseId));

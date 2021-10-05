@@ -7,6 +7,9 @@ const useStyles = makeStyles(() =>
     formControl: {
       minWidth: 200,
     },
+    fullWidth: {
+      width: '100%',
+    },
   })
 );
 
@@ -14,6 +17,7 @@ export default function BaseSelectDropdown({
   data,
   label,
   value,
+  fullWidth,
   changeHandler,
 }: BaseSelectDropdownProps): JSX.Element {
   const classes = useStyles();
@@ -22,7 +26,9 @@ export default function BaseSelectDropdown({
   const labelId = `${id}-label`;
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl
+      className={fullWidth ? classes.fullWidth : classes.formControl}
+    >
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         labelId={labelId}
@@ -52,6 +58,7 @@ export default function BaseSelectDropdown({
 export interface BaseSelectDropdownProps {
   value: string | undefined;
   label: string;
+  fullWidth?: boolean;
   changeHandler: (value: string) => void;
   data: {
     id: string;

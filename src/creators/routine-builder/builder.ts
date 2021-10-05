@@ -142,3 +142,23 @@ export const addSetToExercise = (id: string): AddSetToExerciseAction => {
     id: id,
   };
 };
+
+export interface UpdateRestBetweenAction {
+  type: ActionTypes.UPDATE_REST_BETWEEN;
+  restType: 'Sets' | 'Segment';
+  segmentId: string;
+  option: number;
+}
+
+export const updateRestBetween = (
+  restType: 'Sets' | 'Segment',
+  segmentId: string,
+  option: string
+): UpdateRestBetweenAction => {
+  return {
+    type: ActionTypes.UPDATE_REST_BETWEEN,
+    restType: restType,
+    segmentId: segmentId,
+    option: Number(option),
+  };
+};

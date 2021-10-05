@@ -114,6 +114,22 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
+      case ActionTypes.UPDATE_REST_BETWEEN: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              if (action.restType === 'Sets') {
+                segment.secondsRestBetweenSets = action.option;
+              } else {
+                segment.secondsRestBetweenNextSegment = action.option;
+              }
+            }
+          });
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
       default:
         newState = state;
     }

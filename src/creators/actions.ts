@@ -34,6 +34,7 @@ import {
   UpdateRoutineTitleAction,
   UpdateSelectedCategoryIdAction,
   AddSetToExerciseAction,
+  UpdateRestBetweenAction,
 } from './routine-builder/builder';
 
 export enum ActionTypes {
@@ -63,6 +64,7 @@ export enum ActionTypes {
   ADD_SEGMENT_TO_PHASE = 'ADD_SEGMENT_TO_PHASE',
   UPDATE_SEGMENT_EXERCISE = 'UPDATE_SEGMENT_EXERCISE',
   ADD_SET_TO_EXERCISE = 'ADD_SET_TO_EXERCISE',
+  UPDATE_REST_BETWEEN = 'UPDATE_REST_BETWEEN',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -106,4 +108,5 @@ export type ApplicationActions =
   | SelectSetTypeAction
   | AddSegmentToPhaseAction
   | UpdateSegmentExerciseAction
-  | AddSetToExerciseAction;
+  | AddSetToExerciseAction
+  | UpdateRestBetweenAction;
