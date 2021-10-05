@@ -113,3 +113,20 @@ export const addSegmentToPhase = (id: string): AddSegmentToPhaseAction => {
     id: id,
   };
 };
+
+export interface AddExerciseAndSetToSegmentAction {
+  type: ActionTypes.ADD_EXERCISE_AND_SET_TO_SEGMENT;
+  segmentId: string;
+  exerciseId: string;
+}
+
+export const addExerciseAndSetToSegment = (
+  segmentId: string,
+  exerciseId: string
+): AddExerciseAndSetToSegmentAction => {
+  return {
+    type: ActionTypes.ADD_EXERCISE_AND_SET_TO_SEGMENT,
+    segmentId: segmentId,
+    exerciseId: exerciseId,
+  };
+};

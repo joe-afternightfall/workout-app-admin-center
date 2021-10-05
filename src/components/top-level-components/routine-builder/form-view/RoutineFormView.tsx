@@ -25,21 +25,6 @@ const RoutineFormView = ({
   addPhaseHandler,
 }: RoutineFormViewProps): JSX.Element => {
   const classes = useStyles();
-  const [selectedSetId, setSelectedSetId] = React.useState<string | undefined>(
-    undefined
-  );
-  const [selectedExerciseId, setSelectedExerciseId] = React.useState<
-    string | undefined
-  >(undefined);
-
-  const handleSetChange = (id: string) => {
-    setSelectedSetId(id);
-  };
-
-  const handleSelectExercise = (id: string) => {
-    setSelectedExerciseId(id);
-  };
-
   return (
     <Grid container>
       <Grid item xs={7} container spacing={2}>
@@ -50,13 +35,7 @@ const RoutineFormView = ({
         {phases.map((phase: Phase, index: number) => {
           return (
             <Grid item xs={12} key={index}>
-              <InfoCard
-                phase={phase}
-                selectedExerciseId={selectedExerciseId}
-                selectExerciseHandler={handleSelectExercise}
-                selectedSetId={selectedSetId}
-                setChangeHandler={handleSetChange}
-              />
+              <InfoCard phase={phase} />
             </Grid>
           );
         })}

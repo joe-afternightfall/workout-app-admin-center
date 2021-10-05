@@ -1,13 +1,13 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Grid, Paper, TextField } from '@material-ui/core';
-import { Segment } from 'workout-app-common-core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import SetTypeDropdown from './SetTypeDropdown';
+import ExerciseCard from './sections/ExerciseCard';
+import { Box, Grid, Paper } from '@material-ui/core';
+import { isStraightSet, Segment } from 'workout-app-common-core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       borderRadius: 4,
@@ -30,28 +30,9 @@ const SegmentCard = ({
           <Grid item xs={12}>
             <SetTypeDropdown segment={segment} />
           </Grid>
-          {/*<Grid item xs={12}>*/}
-          {/*  <Autocomplete*/}
-          {/*    fullWidth*/}
-          {/*    value={defaultValue}*/}
-          {/*    id={'set-exercise'}*/}
-          {/*    options={options.sort(*/}
-          {/*      (a, b) => -b.firstLetter.localeCompare(a.firstLetter)*/}
-          {/*    )}*/}
-          {/*    getOptionLabel={(option) => option.name}*/}
-          {/*    renderInput={(params) => (*/}
-          {/*      <TextField*/}
-          {/*        {...params}*/}
-          {/*        label={'Exercise'}*/}
-          {/*        variant={'outlined'}*/}
-          {/*      />*/}
-          {/*    )}*/}
-          {/*    onChange={(e: ChangeEvent<Record<string, never>>, newValue) => {*/}
-          {/*      newValue && selectExerciseHandler(newValue.id);*/}
-          {/*    }}*/}
-          {/*    getOptionSelected={(option, value) => option.id === value.id}*/}
-          {/*  />*/}
-          {/*</Grid>*/}
+          {isStraightSet(segment.trainingSetTypeId) ? (
+            <ExerciseCard segment={segment} />
+          ) : undefined}
         </Grid>
       </Paper>
     </Box>
