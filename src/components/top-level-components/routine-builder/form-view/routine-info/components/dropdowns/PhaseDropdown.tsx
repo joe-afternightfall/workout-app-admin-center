@@ -2,8 +2,8 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Phase, phases, PhaseVO } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../base-components/BaseSelectDropdown';
-import { selectPhase } from '../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../base-components/BaseSelectDropdown';
+import { selectPhase } from '../../../../../../../creators/routine-builder/builder';
 
 const PhaseDropdown = ({
   changeHandler,

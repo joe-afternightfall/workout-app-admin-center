@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import SetTypeDropdown from './SetTypeDropdown';
-import ExerciseCard from './sections/ExerciseCard';
+import ExerciseCard from './ExerciseCard';
 import { Box, Grid, Paper } from '@material-ui/core';
+import SetTypeDropdown from '../dropdowns/SetTypeDropdown';
 import { isStraightSet, Segment } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 

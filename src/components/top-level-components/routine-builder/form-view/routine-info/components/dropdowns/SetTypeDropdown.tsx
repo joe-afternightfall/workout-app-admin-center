@@ -7,8 +7,8 @@ import {
   TrainingSetType,
   trainingSetTypes,
 } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../base-components/BaseSelectDropdown';
-import { selectSetType } from '../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../base-components/BaseSelectDropdown';
+import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
