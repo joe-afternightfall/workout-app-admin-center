@@ -75,7 +75,7 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
-      case ActionTypes.ADD_EXERCISE_AND_SET_TO_SEGMENT: {
+      case ActionTypes.UPDATE_SEGMENT_EXERCISE: {
         const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
         clonedPhases.map((phase) => {
           phase.segments.map((segment) => {
@@ -85,15 +85,7 @@ export default {
                 id: uuidv4(),
                 order: order,
                 exerciseId: action.exerciseId,
-                sets: [
-                  {
-                    id: uuidv4(),
-                    markedDone: false,
-                    setNumber: 1,
-                    weight: 0,
-                    reps: 0,
-                  },
-                ],
+                sets: [],
               });
             }
           });
