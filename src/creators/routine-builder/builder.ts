@@ -84,3 +84,32 @@ export const selectPhase = (
     phaseId: phaseId,
   };
 };
+
+export interface SelectSetTypeAction {
+  type: ActionTypes.SELECT_SET_TYPE;
+  segmentId: string;
+  setTypeId: string;
+}
+
+export const selectSetType = (
+  segmentId: string,
+  setTypeId: string
+): SelectSetTypeAction => {
+  return {
+    type: ActionTypes.SELECT_SET_TYPE,
+    segmentId: segmentId,
+    setTypeId: setTypeId,
+  };
+};
+
+export interface AddSegmentToPhaseAction {
+  type: ActionTypes.ADD_SEGMENT_TO_PHASE;
+  id: string;
+}
+
+export const addSegmentToPhase = (id: string): AddSegmentToPhaseAction => {
+  return {
+    type: ActionTypes.ADD_SEGMENT_TO_PHASE,
+    id: id,
+  };
+};
