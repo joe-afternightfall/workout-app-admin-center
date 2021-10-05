@@ -2,6 +2,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { setActiveCard } from '../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -12,7 +15,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function BaseCard({
+const BaseCard = ({
   isActive,
   baseTitleText,
   baseSubheader,
@@ -21,7 +24,7 @@ export default function BaseCard({
   cardContent,
   selectCardHandler,
   activeTitleComponent,
-}: BaseCardProps): JSX.Element {
+}: BaseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -44,15 +47,27 @@ export default function BaseCard({
       {cardContent && <CardContent>{cardContent}</CardContent>}
     </Card>
   );
-}
+};
 
-export interface BaseCardProps {
+interface PassedInProps {
   isActive: boolean;
   activeTitleComponent: JSX.Element;
   baseTitleText: string;
   cardId: string;
-  selectCardHandler: (id: string) => void;
   baseSubheader?: string;
   actionButton?: JSX.Element;
   cardContent?: JSX.Element;
 }
+
+export interface BaseCardProps {
+  selectCardHandler: (id: string) => void;
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): BaseCardProps =>
+  ({
+    selectCardHandler: (id: string) => {
+      dispatch(setActiveCard(id));
+    },
+  } as unknown as BaseCardProps);
+
+export default connect(null, mapDispatchToProps)(BaseCard);
