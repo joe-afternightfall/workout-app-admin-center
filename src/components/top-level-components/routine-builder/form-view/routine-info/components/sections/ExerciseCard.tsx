@@ -3,10 +3,20 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Grid, List, ListItemText, TextField } from '@material-ui/core';
-import { ExerciseVO, Segment, WorkoutExercise } from 'workout-app-common-core';
+import {
+  Grid,
+  List,
+  ListItemText,
+  Typography,
+  Link,
+  TextField,
+} from '@material-ui/core';
+import { ExerciseVO, Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
-import { updateSegmentExercise } from '../../../../../../../creators/routine-builder/builder';
+import {
+  addSetToExercise,
+  updateSegmentExercise,
+} from '../../../../../../../creators/routine-builder/builder';
 import SetField from '../SetField';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -18,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ExerciseCard = ({
   exercises,
   segment,
+  addSetHandler,
   selectExerciseHandler,
 }: ExerciseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
@@ -33,25 +44,6 @@ const ExerciseCard = ({
       }
     });
   });
-
-  // <Grid container alignItems={'center'}>
-  //   <Grid item>
-  //     <Typography>{'1.'}</Typography>
-  //   </Grid>
-  //   <Grid item>
-  //     {/*<TextField placeholder={'click to add set'} />*/}
-  //     <Link
-  //       component={'button'}
-  //       variant={'body2'}
-  //       color={'textSecondary'}
-  //       onClick={() => {
-  //         console.info("I'm a button.");
-  //       }}
-  //     >
-  //       {'Add set'}
-  //     </Link>
-  //   </Grid>
-  // </Grid>
 
   return (
     <Grid item xs={12} container>
@@ -95,6 +87,28 @@ const ExerciseCard = ({
                       />
                     );
                   })}
+                  {workoutExercise.sets.length === 4 ? undefined : (
+                    <Grid container alignItems={'center'}>
+                      <Grid item>
+                        <Typography>{`${
+                          workoutExercise.sets.length + 1
+                        }. `}</Typography>
+                      </Grid>
+                      <Grid item>
+                        {/*<TextField placeholder={'click to add set'} />*/}
+                        <Link
+                          component={'button'}
+                          variant={'body2'}
+                          color={'textSecondary'}
+                          onClick={() => {
+                            addSetHandler(workoutExercise.id);
+                          }}
+                        >
+                          {'click to add another set'}
+                        </Link>
+                      </Grid>
+                    </Grid>
+                  )}
                 </List>
               </Grid>
             );
@@ -108,8 +122,9 @@ interface PassedInProps {
   segment: Segment;
 }
 
-export interface ExerciseCardProps {
+interface ExerciseCardProps {
   exercises: ExerciseVO[];
+  addSetHandler: (workoutExerciseId: string) => void;
   selectExerciseHandler: (exerciseId: string) => void;
 }
 
@@ -127,6 +142,9 @@ const mapDispatchToProps = (
     selectExerciseHandler: (exerciseId: string) => {
       dispatch(updateSegmentExercise(ownProps.segment.id, exerciseId));
       // dispatch(addSetToExercise(ownProps.segment.id, exerciseId));
+    },
+    addSetHandler: (exerciseId: string) => {
+      dispatch(addSetToExercise(exerciseId));
     },
   } as unknown as ExerciseCardProps);
 

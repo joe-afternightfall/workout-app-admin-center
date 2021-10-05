@@ -93,6 +93,27 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
+      case ActionTypes.ADD_SET_TO_EXERCISE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            segment.exercises.map((workoutExercise) => {
+              if (workoutExercise.id === action.id) {
+                const setNumber = workoutExercise.sets.length + 1;
+                workoutExercise.sets.push({
+                  id: uuidv4(),
+                  markedDone: false,
+                  setNumber: setNumber,
+                  weight: 0,
+                  reps: 0,
+                });
+              }
+            });
+          });
+        });
+        newState.selectedRoutine.phases = clonedPhases;
+        break;
+      }
       default:
         newState = state;
     }
