@@ -10,6 +10,7 @@ import muscleGroups, {
 import MaterialTable from 'material-table';
 import PageTitle from '../../shared/PageTitle';
 import { Button, Grid } from '@material-ui/core';
+import { getParameterTypeName } from '../../../utils/name-finder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,6 +37,7 @@ const ExerciseListTable = ({
       name: exercise.name,
       firebaseId: exercise.firebaseId,
       muscle: foundMuscles[0] && foundMuscles[0].name,
+      paramName: getParameterTypeName(exercise.parameterTypeId),
       actions: (
         <Grid container>
           <Grid item xs={6}>
@@ -96,13 +98,20 @@ const ExerciseListTable = ({
           },
         },
         {
+          title: 'Param Type',
+          field: 'paramName',
+          cellStyle: {
+            width: '20%',
+          },
+        },
+        {
           title: 'Actions',
           field: 'actions',
           headerStyle: {
             textAlign: 'center',
           },
           cellStyle: {
-            width: '40%',
+            width: '20%',
             textAlign: 'center',
           },
           sorting: false,
