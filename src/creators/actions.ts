@@ -25,8 +25,10 @@ import {
 } from './app-snackbar';
 import {
   AddPhaseToRoutineAction,
+  AddSegmentToPhaseAction,
   BuildNewRoutineAction,
   SelectPhaseAction,
+  SelectSetTypeAction,
   SetActiveCardAction,
   UpdateRoutineTitleAction,
   UpdateSelectedCategoryIdAction,
@@ -55,6 +57,8 @@ export enum ActionTypes {
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
   ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
   SELECT_PHASE = 'SELECT_PHASE',
+  SELECT_SET_TYPE = 'SELECT_SET_TYPE',
+  ADD_SEGMENT_TO_PHASE = 'ADD_SEGMENT_TO_PHASE',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -94,4 +98,6 @@ export type ApplicationActions =
   | UpdateRoutineTitleAction
   | UpdateSelectedCategoryIdAction
   | AddPhaseToRoutineAction
-  | SelectPhaseAction;
+  | SelectPhaseAction
+  | SelectSetTypeAction
+  | AddSegmentToPhaseAction;
