@@ -1,51 +1,30 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Phase, phases } from 'workout-app-common-core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Phase, phases, PhaseVO } from 'workout-app-common-core';
+import BaseSelectDropdown from '../../base-components/BaseSelectDropdown';
 import { selectPhase } from '../../../../../../creators/routine-builder/builder';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    formControl: {
-      minWidth: 200,
-    },
-  })
-);
 
 const PhaseDropdown = ({
   changeHandler,
   phase,
 }: PhaseDropdownProps & PassedInProps): JSX.Element => {
-  const classes = useStyles();
-
-  const id = `phase-select`;
-  const labelId = `${id}-label`;
+  const handleSetChange = (phaseVOId: string) => {
+    changeHandler(phase.id, phaseVOId);
+  };
 
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel id={labelId}>{'Phase'}</InputLabel>
-      <Select
-        labelId={labelId}
-        id={id}
-        value={phase.phaseId}
-        onChange={(
-          e: React.ChangeEvent<{
-            name?: string | undefined;
-            value: unknown;
-          }>
-        ) => {
-          changeHandler(phase.id, e.target.value as string);
-        }}
-      >
-        {phases.map((phaseVO, index) => (
-          <MenuItem key={index} value={phaseVO.id}>
-            {phaseVO.name}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <BaseSelectDropdown
+      value={phase.phaseId}
+      label={'Phase'}
+      changeHandler={handleSetChange}
+      data={phases.map((phaseVO: PhaseVO) => {
+        return {
+          id: phaseVO.id,
+          name: phaseVO.name,
+        };
+      })}
+    />
   );
 };
 
