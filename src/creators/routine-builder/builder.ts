@@ -114,18 +114,18 @@ export const addSegmentToPhase = (id: string): AddSegmentToPhaseAction => {
   };
 };
 
-export interface AddExerciseAndSetToSegmentAction {
-  type: ActionTypes.ADD_EXERCISE_AND_SET_TO_SEGMENT;
+export interface UpdateSegmentExerciseAction {
+  type: ActionTypes.UPDATE_SEGMENT_EXERCISE;
   segmentId: string;
   exerciseId: string;
 }
 
-export const addExerciseAndSetToSegment = (
+export const updateSegmentExercise = (
   segmentId: string,
   exerciseId: string
-): AddExerciseAndSetToSegmentAction => {
+): UpdateSegmentExerciseAction => {
   return {
-    type: ActionTypes.ADD_EXERCISE_AND_SET_TO_SEGMENT,
+    type: ActionTypes.UPDATE_SEGMENT_EXERCISE,
     segmentId: segmentId,
     exerciseId: exerciseId,
   };

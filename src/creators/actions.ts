@@ -24,7 +24,7 @@ import {
   HideAppSnackbarAction,
 } from './app-snackbar';
 import {
-  AddExerciseAndSetToSegmentAction,
+  UpdateSegmentExerciseAction,
   AddPhaseToRoutineAction,
   AddSegmentToPhaseAction,
   BuildNewRoutineAction,
@@ -60,7 +60,7 @@ export enum ActionTypes {
   SELECT_PHASE = 'SELECT_PHASE',
   SELECT_SET_TYPE = 'SELECT_SET_TYPE',
   ADD_SEGMENT_TO_PHASE = 'ADD_SEGMENT_TO_PHASE',
-  ADD_EXERCISE_AND_SET_TO_SEGMENT = 'ADD_EXERCISE_AND_SET_TO_SEGMENT',
+  UPDATE_SEGMENT_EXERCISE = 'UPDATE_SEGMENT_EXERCISE',
   ADD_SET_TO_EXERCISE = 'ADD_SET_TO_EXERCISE',
 
   // Side drawer actions
@@ -104,4 +104,4 @@ export type ApplicationActions =
   | SelectPhaseAction
   | SelectSetTypeAction
   | AddSegmentToPhaseAction
-  | AddExerciseAndSetToSegmentAction;
+  | UpdateSegmentExerciseAction;
