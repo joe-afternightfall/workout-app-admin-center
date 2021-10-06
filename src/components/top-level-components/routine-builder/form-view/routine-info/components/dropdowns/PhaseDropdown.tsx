@@ -15,6 +15,7 @@ const PhaseDropdown = ({
 
   return (
     <BaseSelectDropdown
+      id={phase.id}
       value={phase.phaseId}
       label={'Phase'}
       changeHandler={handleSetChange}
