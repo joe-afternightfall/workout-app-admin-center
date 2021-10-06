@@ -1,12 +1,14 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import ExerciseCard from './ExerciseCard';
-import { Box, Grid, Paper, List } from '@material-ui/core';
+import ExerciseSearch from '../inputs/ExerciseSearch';
+import { IconButton, Box, Grid, Paper, List } from '@material-ui/core';
 import SetTypeDropdown from '../inputs/SetTypeDropdown';
 import { isStraightSet, Segment } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import BaseListItem from '../../../base-components/BaseListItem';
+import BaseListDivider from '../../../base-components/BaseListDivider';
+import { getSetTypeName } from '../../../../../../../utils/name-finder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,6 +25,11 @@ const SegmentCard = ({
   segment,
 }: SegmentCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
+  const [editSetType, setEditSetType] = React.useState<boolean>(true);
+
+  const title = editSetType
+    ? 'Select Set Type'
+    : getSetTypeName(segment.trainingSetTypeId);
 
   return (
     <Grid item xs={12}>
@@ -30,11 +37,14 @@ const SegmentCard = ({
         <Paper style={{ padding: 16 }} elevation={0}>
           <List>
             <BaseListItem
-              title={'Set Type'}
+              title={title}
+              isEditing={editSetType}
               component={<SetTypeDropdown segment={segment} />}
+              editClickHandler={setEditSetType}
             />
+            <BaseListDivider />
             {isStraightSet(segment.trainingSetTypeId) ? (
-              <ExerciseCard segment={segment} />
+              <ExerciseSearch segment={segment} />
             ) : undefined}
           </List>
         </Paper>
