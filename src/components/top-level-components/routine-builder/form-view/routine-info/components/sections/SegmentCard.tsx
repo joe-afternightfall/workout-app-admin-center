@@ -2,10 +2,11 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import ExerciseCard from './ExerciseCard';
-import { Box, Grid, Paper } from '@material-ui/core';
+import { Box, Grid, Paper, List } from '@material-ui/core';
 import SetTypeDropdown from '../dropdowns/SetTypeDropdown';
 import { isStraightSet, Segment } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import BaseListItem from '../BaseListItem';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,18 +25,21 @@ const SegmentCard = ({
   const classes = useStyles();
 
   return (
-    <Box className={classes.root}>
-      <Paper style={{ padding: 16 }} elevation={0}>
-        <Grid container>
-          <Grid item xs={12}>
-            <SetTypeDropdown segment={segment} />
-          </Grid>
-          {isStraightSet(segment.trainingSetTypeId) ? (
-            <ExerciseCard segment={segment} />
-          ) : undefined}
-        </Grid>
-      </Paper>
-    </Box>
+    <Grid item xs={12}>
+      <Box className={classes.root}>
+        <Paper style={{ padding: 16 }} elevation={0}>
+          <List>
+            <BaseListItem
+              title={'Set Type'}
+              component={<SetTypeDropdown segment={segment} />}
+            />
+            {isStraightSet(segment.trainingSetTypeId) ? (
+              <ExerciseCard segment={segment} />
+            ) : undefined}
+          </List>
+        </Paper>
+      </Box>
+    </Grid>
   );
 };
 
