@@ -14,6 +14,7 @@ const useStyles = makeStyles(() =>
 );
 
 export default function BaseSelectDropdown({
+  id,
   data,
   label,
   value,
@@ -22,17 +23,17 @@ export default function BaseSelectDropdown({
 }: BaseSelectDropdownProps): JSX.Element {
   const classes = useStyles();
 
-  const id = `${label}-select`;
+  const selectId = `${id}-select`;
   const labelId = `${id}-label`;
 
   return (
     <FormControl
       className={fullWidth ? classes.fullWidth : classes.formControl}
     >
-      <InputLabel id={labelId}>{label}</InputLabel>
+      {label && <InputLabel id={labelId}>{label}</InputLabel>}
       <Select
         labelId={labelId}
-        id={id}
+        id={selectId}
         value={value}
         onChange={(
           e: React.ChangeEvent<{
@@ -56,8 +57,9 @@ export default function BaseSelectDropdown({
 }
 
 export interface BaseSelectDropdownProps {
+  id: string;
   value: string | undefined;
-  label: string;
+  label?: string;
   fullWidth?: boolean;
   changeHandler: (value: string) => void;
   data: {
