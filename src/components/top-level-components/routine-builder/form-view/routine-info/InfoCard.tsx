@@ -5,7 +5,7 @@ import { Add } from '@material-ui/icons';
 import SegmentCard from './components/sections/SegmentCard';
 import BaseCard from '../base-components/BaseCard';
 import { Grid, IconButton } from '@material-ui/core';
-import PhaseDropdown from './components/dropdowns/PhaseDropdown';
+import PhaseDropdown from './components/inputs/PhaseDropdown';
 import { Phase, phases } from 'workout-app-common-core';
 import { State } from '../../../../../configs/redux/store';
 import { addSegmentToPhase } from '../../../../../creators/routine-builder/builder';

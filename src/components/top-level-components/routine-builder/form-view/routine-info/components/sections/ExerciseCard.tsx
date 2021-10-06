@@ -9,7 +9,7 @@ import { State } from '../../../../../../../configs/redux/store';
 import { updateSegmentExercise } from '../../../../../../../creators/routine-builder/builder';
 import SetIncrementer from '../inputs/SetIncrementer';
 import RestBetweenDropdown from '../inputs/RestBetweenDropdown';
-import BaseListItem from '../BaseListItem';
+import BaseListItem from '../../../base-components/BaseListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

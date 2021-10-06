@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
-import { Grid, IconButton, Divider, Typography } from '@material-ui/core';
-import BaseListItem from '../BaseListItem';
+import { Grid, IconButton, Typography } from '@material-ui/core';
+import BaseListItem from '../../../base-components/BaseListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

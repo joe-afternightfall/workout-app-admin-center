@@ -2,7 +2,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
-import BaseListItem from '../BaseListItem';
+import BaseListItem from '../../../base-components/BaseListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import BaseSelectDropdown from '../../../base-components/BaseSelectDropdown';
 import { updateRestBetween } from '../../../../../../../creators/routine-builder/builder';

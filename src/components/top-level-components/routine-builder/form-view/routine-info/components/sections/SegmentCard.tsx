@@ -3,10 +3,10 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import ExerciseCard from './ExerciseCard';
 import { Box, Grid, Paper, List } from '@material-ui/core';
-import SetTypeDropdown from '../dropdowns/SetTypeDropdown';
+import SetTypeDropdown from '../inputs/SetTypeDropdown';
 import { isStraightSet, Segment } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import BaseListItem from '../BaseListItem';
+import BaseListItem from '../../../base-components/BaseListItem';
 
 const useStyles = makeStyles(() =>
   createStyles({
