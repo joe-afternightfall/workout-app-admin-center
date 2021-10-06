@@ -1,11 +1,11 @@
 import React from 'react';
 import { Dispatch } from 'redux';
+import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import BaseListItem from '../BaseListItem';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { phases, PhaseVO } from 'workout-app-common-core';
 import BaseSelectDropdown from '../../../base-components/BaseSelectDropdown';
 import { updateRestBetween } from '../../../../../../../creators/routine-builder/builder';
-import { Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,23 +49,18 @@ const RestBetweenDropdown = ({
   };
 
   return (
-    <Grid container alignItems={'center'}>
-      <Grid item xs={6} sm={8}>
-        <Typography variant={'body2'} color={'textSecondary'}>
-          {title}
-        </Typography>
-      </Grid>
-      <Grid item xs={6} sm={4}>
+    <BaseListItem
+      title={title}
+      component={
         <BaseSelectDropdown
-          value={value}
-          // label={type === 'Sets' ? type : 'Next Segment'}
-          label={''}
-          changeHandler={handleSelectChange}
-          data={data}
           fullWidth
+          data={data}
+          id={uuidv4()}
+          value={value}
+          changeHandler={handleSelectChange}
         />
-      </Grid>
-    </Grid>
+      }
+    />
   );
 };
 
@@ -74,6 +69,7 @@ interface PassedInProps {
   segmentId: string;
   type: 'Sets' | 'Segment';
 }
+
 export interface RestBetweenDropdownProps {
   updateRestHandler: (option: string) => void;
 }
