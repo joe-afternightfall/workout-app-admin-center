@@ -30,8 +30,9 @@ const SetTypeDropdown = ({
 
   return (
     <BaseSelectDropdown
+      fullWidth
+      id={segment.id}
       value={segment.trainingSetTypeId}
-      label={'Set Type'}
       changeHandler={handleSetChange}
       data={trainingSetTypes.map((set: TrainingSetType) => {
         return {
