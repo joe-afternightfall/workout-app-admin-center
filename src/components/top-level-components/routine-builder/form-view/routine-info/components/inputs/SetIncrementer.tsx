@@ -5,6 +5,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { Grid, IconButton, Divider, Typography } from '@material-ui/core';
+import BaseListItem from '../BaseListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,13 +17,9 @@ const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Grid container alignItems={'center'}>
-      <Grid item xs={6} sm={8}>
-        <Typography variant={'body2'} color={'textSecondary'}>
-          {'Number of sets: '}
-        </Typography>
-      </Grid>
-      <Grid item xs={6} sm={4}>
+    <BaseListItem
+      title={'Number of sets: '}
+      component={
         <Grid container alignItems={'center'} justify={'space-between'}>
           <Grid item>
             <IconButton>
@@ -38,8 +35,8 @@ const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
             </IconButton>
           </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      }
+    />
   );
 };
 
