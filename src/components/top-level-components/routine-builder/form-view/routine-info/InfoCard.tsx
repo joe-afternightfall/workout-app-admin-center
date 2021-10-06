@@ -12,7 +12,9 @@ import { addSegmentToPhase } from '../../../../../creators/routine-builder/build
 
 const InfoCard = ({
   phase,
+  isEditing,
   activeCardId,
+  editHandler,
   addSegmentToPhaseHandler,
 }: InfoCardProps & PassedInProps): JSX.Element => {
   const cardId = `${phase.id}-'info-card'`;
@@ -26,16 +28,20 @@ const InfoCard = ({
 
   return (
     <BaseCard
-      isActive={isActive}
-      activeTitleComponent={
+      cardId={cardId}
+      titleText={phaseTitle}
+      isSelectedCard={isActive}
+      isEditing={isEditing}
+      doneClickHandler={() => {
+        editHandler(false);
+      }}
+      editingTitleComponent={
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <PhaseDropdown phase={phase} />
           </Grid>
         </Grid>
       }
-      cardId={cardId}
-      baseTitleText={phaseTitle}
       actionButton={
         <IconButton onClick={addSegmentToPhaseHandler}>
           <Add />
@@ -56,6 +62,8 @@ const InfoCard = ({
 
 interface PassedInProps {
   phase: Phase;
+  isEditing: boolean;
+  editHandler: (editing: boolean) => void;
 }
 
 export interface InfoCardProps {

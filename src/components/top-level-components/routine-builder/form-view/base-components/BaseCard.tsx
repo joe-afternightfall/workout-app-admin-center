@@ -51,7 +51,7 @@ const BaseCard = ({
               <DoneIcon />
             </IconButton>
           ) : (
-            actionButton
+            isSelectedCard && actionButton
           )
         }
       />
