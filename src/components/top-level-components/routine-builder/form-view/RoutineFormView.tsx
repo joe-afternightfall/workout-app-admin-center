@@ -25,11 +25,20 @@ const RoutineFormView = ({
   addPhaseHandler,
 }: RoutineFormViewProps): JSX.Element => {
   const classes = useStyles();
+  const [editingPhase, setEditingPhase] = React.useState(false);
+
+  const handleEditPhase = (editing: boolean) => {
+    setEditingPhase(editing);
+  };
+
   return (
     <Grid container>
       <Grid item xs={7} container spacing={2}>
         <Grid item xs={12}>
-          <RoutineTitleCard />
+          <RoutineTitleCard
+            isEditing={editingPhase}
+            editHandler={handleEditPhase}
+          />
         </Grid>
 
         {phases.map((phase: Phase, index: number) => {

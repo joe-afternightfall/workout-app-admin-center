@@ -7,6 +7,7 @@ import {
   Grid,
   IconButton,
   InputLabel,
+  Menu,
   MenuItem,
   Select,
   TextField,
@@ -30,12 +31,14 @@ const useStyles = makeStyles(() =>
 );
 
 const RoutineTitleCard = ({
+  editHandler,
+  isEditing,
   routineTitle,
   activeCardId,
   titleChangeHandler,
   selectedWorkoutCategoryId,
   categoryChangeHandler,
-}: RoutineTitleCardProps): JSX.Element => {
+}: RoutineTitleCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const cardId = 'routine-title-card';
   const isActive = activeCardId === cardId;
@@ -47,11 +50,27 @@ const RoutineTitleCard = ({
     }
   });
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <BaseCard
-      isActive={isActive}
       cardId={cardId}
-      activeTitleComponent={
+      titleText={routineTitle ? routineTitle : 'Untitled Routine'}
+      isSelectedCard={isActive}
+      isEditing={isEditing}
+      doneClickHandler={() => {
+        editHandler(false);
+      }}
+      editingTitleComponent={
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -93,16 +112,47 @@ const RoutineTitleCard = ({
           </Grid>
         </Grid>
       }
-      baseTitleText={routineTitle ? routineTitle : 'Untitled Routine'}
-      baseSubheader={isActive ? undefined : subheader}
+      subheader={isEditing ? undefined : subheader}
       actionButton={
-        <IconButton aria-label={'phase-settings'}>
-          <MoreVertIcon />
-        </IconButton>
+        <div>
+          <IconButton color={'inherit'} onClick={handleMenu}>
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id={'routine-menu'}
+            open={open}
+            keepMounted
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            anchorEl={anchorEl}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                editHandler(true);
+              }}
+            >
+              {'Edit'}
+            </MenuItem>
+            <MenuItem onClick={handleClose}>{'Add Phase'}</MenuItem>
+          </Menu>
+        </div>
       }
     />
   );
 };
+
+interface PassedInProps {
+  isEditing: boolean;
+  editHandler: (editing: boolean) => void;
+}
 
 export interface RoutineTitleCardProps {
   routineTitle: string;

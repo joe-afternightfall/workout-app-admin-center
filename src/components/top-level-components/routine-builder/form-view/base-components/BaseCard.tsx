@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Card, CardContent, CardHeader } from '@material-ui/core';
+import { Card, CardContent, CardHeader, IconButton } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { setActiveCard } from '../../../../../creators/routine-builder/builder';
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -16,14 +17,16 @@ const useStyles = makeStyles(() =>
 );
 
 const BaseCard = ({
-  isActive,
-  baseTitleText,
-  baseSubheader,
+  isSelectedCard,
+  isEditing,
+  subheader,
+  titleText,
   cardId,
+  doneClickHandler,
   actionButton,
   cardContent,
   selectCardHandler,
-  activeTitleComponent,
+  editingTitleComponent,
 }: BaseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
@@ -32,17 +35,25 @@ const BaseCard = ({
       onClick={() => {
         selectCardHandler(cardId);
       }}
-      raised={isActive}
+      raised={isSelectedCard}
       className={classes.root}
     >
       <CardHeader
-        disableTypography={isActive}
-        title={isActive ? activeTitleComponent : baseTitleText}
-        subheader={isActive ? undefined : baseSubheader}
+        disableTypography={isEditing}
+        title={isEditing ? editingTitleComponent : titleText}
+        subheader={isEditing ? undefined : subheader}
         className={clsx({
-          [classes.activeBorder]: isActive,
+          [classes.activeBorder]: isSelectedCard,
         })}
-        action={actionButton}
+        action={
+          isEditing ? (
+            <IconButton color={'inherit'} onClick={doneClickHandler}>
+              <DoneIcon />
+            </IconButton>
+          ) : (
+            actionButton
+          )
+        }
       />
       {cardContent && <CardContent>{cardContent}</CardContent>}
     </Card>
@@ -50,13 +61,15 @@ const BaseCard = ({
 };
 
 interface PassedInProps {
-  isActive: boolean;
-  activeTitleComponent: JSX.Element;
-  baseTitleText: string;
   cardId: string;
-  baseSubheader?: string;
+  titleText: string;
+  isSelectedCard: boolean;
+  editingTitleComponent: JSX.Element;
+  subheader?: string;
   actionButton?: JSX.Element;
   cardContent?: JSX.Element;
+  isEditing: boolean;
+  doneClickHandler: () => void;
 }
 
 export interface BaseCardProps {
