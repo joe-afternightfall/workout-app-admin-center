@@ -14,9 +14,7 @@ const ActionMenu = ({
       menuItems={[
         {
           title: 'Edit',
-          clickHandler: () => {
-            editHandler(true);
-          },
+          clickHandler: editHandler,
         },
         {
           title: 'Add Phase',
@@ -28,7 +26,7 @@ const ActionMenu = ({
 };
 
 interface PassedInProps {
-  editHandler: (isEditing: boolean) => void;
+  editHandler: () => void;
 }
 
 interface ActionMenuProps {

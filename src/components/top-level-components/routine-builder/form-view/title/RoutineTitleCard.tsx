@@ -8,7 +8,7 @@ import { workoutCategories } from 'workout-app-common-core';
 
 const RoutineTitleCard = ({
   editHandler,
-  isEditing,
+  editingCardId,
   routineTitle,
   activeCardId,
   selectedWorkoutCategoryId,
@@ -16,6 +16,7 @@ const RoutineTitleCard = ({
   let subheader = 'Category';
   const cardId = 'routine-title-card';
   const isActive = activeCardId === cardId;
+  const isEditing = editingCardId === cardId;
 
   workoutCategories.find((category) => {
     if (category.id === selectedWorkoutCategoryId) {
@@ -30,18 +31,24 @@ const RoutineTitleCard = ({
       isSelectedCard={isActive}
       isEditing={isEditing}
       doneClickHandler={() => {
-        editHandler(false);
+        editHandler('');
       }}
       editingTitleComponent={<EditingTitle />}
       subheader={isEditing ? undefined : subheader}
-      actionButton={<ActionMenu editHandler={editHandler} />}
+      actionButton={
+        <ActionMenu
+          editHandler={() => {
+            editHandler(cardId);
+          }}
+        />
+      }
     />
   );
 };
 
 interface PassedInProps {
-  isEditing: boolean;
-  editHandler: (editing: boolean) => void;
+  editingCardId: string;
+  editHandler: (cardId: string) => void;
 }
 
 export interface RoutineTitleCardProps {

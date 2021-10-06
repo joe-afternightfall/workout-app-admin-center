@@ -9,16 +9,19 @@ import PhaseDropdown from './components/inputs/PhaseDropdown';
 import { Phase, phases } from 'workout-app-common-core';
 import { State } from '../../../../../configs/redux/store';
 import { addSegmentToPhase } from '../../../../../creators/routine-builder/builder';
+import BaseActionMenu from '../base-components/BaseActionMenu';
+import { v4 as uuidv4 } from 'uuid';
 
 const InfoCard = ({
   phase,
-  isEditing,
+  editingCardId,
   activeCardId,
   editHandler,
   addSegmentToPhaseHandler,
 }: InfoCardProps & PassedInProps): JSX.Element => {
   const cardId = `${phase.id}-'info-card'`;
   const isActive = activeCardId === cardId;
+  const isEditing = editingCardId === cardId;
   let phaseTitle = 'Untitled Phase';
   phases.find((phaseVO) => {
     if (phaseVO.id === phase.phaseId) {
@@ -33,7 +36,7 @@ const InfoCard = ({
       isSelectedCard={isActive}
       isEditing={isEditing}
       doneClickHandler={() => {
-        editHandler(false);
+        editHandler('');
       }}
       editingTitleComponent={
         <Grid container spacing={2}>
@@ -43,9 +46,21 @@ const InfoCard = ({
         </Grid>
       }
       actionButton={
-        <IconButton onClick={addSegmentToPhaseHandler}>
-          <Add />
-        </IconButton>
+        <BaseActionMenu
+          id={`info-${uuidv4()}-menu`}
+          menuItems={[
+            {
+              title: 'Edit',
+              clickHandler: () => {
+                editHandler(cardId);
+              },
+            },
+            {
+              title: 'Add Segment',
+              clickHandler: addSegmentToPhaseHandler,
+            },
+          ]}
+        />
       }
       cardContent={
         <Grid item xs={12} container>
@@ -62,8 +77,8 @@ const InfoCard = ({
 
 interface PassedInProps {
   phase: Phase;
-  isEditing: boolean;
-  editHandler: (editing: boolean) => void;
+  editingCardId: string;
+  editHandler: (cardId: string) => void;
 }
 
 export interface InfoCardProps {
