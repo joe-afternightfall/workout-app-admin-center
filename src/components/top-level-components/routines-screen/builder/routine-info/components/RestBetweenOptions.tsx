@@ -11,6 +11,10 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
+import {
+  restBetweenSetOptions,
+  restBetweenNextSegmentOptions,
+} from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,16 +42,6 @@ const RestBetweenOptions = ({
   updateRestHandler,
 }: RestBetweenOptionsProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
-  let data;
-  let title = '';
-
-  if (type === 'Sets') {
-    title = 'Rest between sets:';
-    data = buildMenuOptions(['15', '20', '25', '30', '45', '60']);
-  } else {
-    title = 'Rest between next segment:';
-    data = buildMenuOptions(['30', '45', '60', '90', '120']);
-  }
 
   const handleSelectChange = (option: string) => {
     updateRestHandler(option);
@@ -72,7 +66,7 @@ const RestBetweenOptions = ({
               // changeHandler(e.target.value as string);
             }}
           >
-            {buildMenuOptions(['15', '20', '25', '30', '45', '60']).map(
+            {buildMenuOptions(restBetweenSetOptions).map(
               (info, index: number) => {
                 return (
                   <MenuItem key={index} value={info.id}>
@@ -103,7 +97,7 @@ const RestBetweenOptions = ({
               // changeHandler(e.target.value as string);
             }}
           >
-            {buildMenuOptions(['30', '45', '60', '90', '120']).map(
+            {buildMenuOptions(restBetweenNextSegmentOptions).map(
               (info, index: number) => {
                 return (
                   <MenuItem key={index} value={info.id}>
