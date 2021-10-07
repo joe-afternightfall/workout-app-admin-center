@@ -51,6 +51,7 @@ const RestBetweenDropdown = ({
   return (
     <BaseListItem
       title={title}
+      hideEditButton
       component={
         <BaseSelectDropdown
           fullWidth

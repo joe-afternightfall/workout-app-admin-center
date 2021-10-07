@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import ExerciseSearch from '../inputs/ExerciseSearch';
 import { IconButton, Box, Grid, Paper, List } from '@material-ui/core';
 import SetTypeDropdown from '../inputs/SetTypeDropdown';
 import { isStraightSet, Segment } from 'workout-app-common-core';
@@ -9,6 +8,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import BaseListItem from '../../../base-components/BaseListItem';
 import BaseListDivider from '../../../base-components/BaseListDivider';
 import { getSetTypeName } from '../../../../../../../utils/name-finder';
+import ExerciseInfo from './ExerciseInfo';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -44,7 +44,7 @@ const SegmentCard = ({
             />
             <BaseListDivider />
             {isStraightSet(segment.trainingSetTypeId) ? (
-              <ExerciseSearch segment={segment} />
+              <ExerciseInfo segment={segment} />
             ) : undefined}
           </List>
         </Paper>

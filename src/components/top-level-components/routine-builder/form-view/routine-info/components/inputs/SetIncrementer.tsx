@@ -19,6 +19,7 @@ const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
   return (
     <BaseListItem
       title={'Number of sets: '}
+      hideEditButton
       component={
         <Grid container alignItems={'center'} justify={'space-between'}>
           <Grid item>
