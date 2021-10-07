@@ -7,8 +7,7 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
-import BuilderCard from './builder/components/BuilderCard';
+import RoutineBuilder from './builder/RoutineBuilder';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -22,7 +21,9 @@ class RoutinesScreen extends Component<RoutinesScreenProps> {
 
     return (
       <Grid xs={12} item container>
-        <BuilderCard />
+        <Grid item xs={7}>
+          <RoutineBuilder />
+        </Grid>
       </Grid>
     );
   }

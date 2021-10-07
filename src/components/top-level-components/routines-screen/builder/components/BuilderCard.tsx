@@ -10,6 +10,7 @@ import {
   ListItem,
   ListItemText,
   ListSubheader,
+  Typography,
 } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -68,69 +69,77 @@ const BuilderCard = ({ blah }: BuilderCardProps): JSX.Element => {
   };
 
   return (
-    <Grid container>
-      <Grid item xs={7} container spacing={2}>
-        <Grid item xs={12}>
-          <Card raised={false} square className={classes.root}>
-            <CardHeader
-              title={'Routine Title'}
-              subheader={'workout category'}
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-            />
-            <CardContent>
-              <List subheader={<ListSubheader>{'Phase'}</ListSubheader>}>
-                <BaseListItem
-                  selectedCardId={openCard}
-                  listId={'list-item-1'}
-                  scrollToHandler={() => {
-                    scrollToSection('list-item-1');
-                  }}
-                  title={'Exercise 1'}
-                />
-                <BaseListItem
-                  selectedCardId={openCard}
-                  listId={'list-item-2'}
-                  scrollToHandler={() => {
-                    scrollToSection('list-item-2');
-                  }}
-                  title={'Exercise 2'}
-                />
-                <BaseListItem
-                  selectedCardId={openCard}
-                  listId={'list-item-3'}
-                  scrollToHandler={() => {
-                    scrollToSection('list-item-3');
-                  }}
-                  title={'Exercise 3'}
-                />
+    <Card raised={false} square className={classes.root}>
+      <CardHeader
+        title={'Routine Title'}
+        subheader={'workout category'}
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+      />
+      <CardContent>
+        <List subheader={<ListSubheader>{'Phase'}</ListSubheader>}>
+          <BaseListItem
+            selectedCardId={openCard}
+            listId={'list-item-1'}
+            scrollToHandler={() => {
+              scrollToSection('list-item-1');
+            }}
+            title={
+              <Grid container>
+                <Grid item xs={12}>
+                  <Typography variant={'h6'}>{'Exercise 1'}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant={'h6'}>{'Exercise 2'}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant={'caption'} color={'textSecondary'}>
+                    {'set type: Super Set'}
+                  </Typography>
+                </Grid>
+              </Grid>
+            }
+          />
+          <BaseListItem
+            selectedCardId={openCard}
+            listId={'list-item-2'}
+            scrollToHandler={() => {
+              scrollToSection('list-item-2');
+            }}
+            title={'Exercise 2'}
+          />
+          <BaseListItem
+            selectedCardId={openCard}
+            listId={'list-item-3'}
+            scrollToHandler={() => {
+              scrollToSection('list-item-3');
+            }}
+            title={'Exercise 3'}
+          />
 
-                <BaseListItem
-                  selectedCardId={openCard}
-                  listId={'list-item-4'}
-                  scrollToHandler={() => {
-                    scrollToSection('list-item-4');
-                  }}
-                  title={'Exercise 4'}
-                />
+          <BaseListItem
+            selectedCardId={openCard}
+            listId={'list-item-4'}
+            scrollToHandler={() => {
+              scrollToSection('list-item-4');
+            }}
+            title={'Exercise 4'}
+          />
 
-                <BaseListItem
-                  selectedCardId={openCard}
-                  listId={'list-item-5'}
-                  scrollToHandler={() => {
-                    scrollToSection('list-item-5');
-                  }}
-                  title={'Exercise 5'}
-                />
-              </List>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Grid>
+          <BaseListItem
+            selectedCardId={openCard}
+            listId={'list-item-5'}
+            scrollToHandler={() => {
+              scrollToSection('list-item-5');
+            }}
+            title={'Exercise 5'}
+          />
+        </List>
+      </CardContent>
+    </Card>
   );
 };
 

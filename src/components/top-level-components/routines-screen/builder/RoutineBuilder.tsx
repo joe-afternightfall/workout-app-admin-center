@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Phase } from 'workout-app-common-core';
+import BuilderCard from './components/BuilderCard';
 import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -16,7 +17,9 @@ const RoutineBuilder = ({ phases }: RoutineBuilderProps): JSX.Element => {
 
   return (
     <Grid container>
-      <Grid item xs={7} container spacing={2}></Grid>
+      <BuilderCard />
+
+      {/*todo: add muscle selector slide out */}
     </Grid>
   );
 };

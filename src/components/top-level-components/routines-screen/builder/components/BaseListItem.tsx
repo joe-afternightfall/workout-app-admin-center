@@ -5,13 +5,16 @@ import {
   CardContent,
   CardHeader,
   Grid,
+  List,
   ListItem,
   ListItemText,
+  Typography,
 } from '@material-ui/core';
 import { Phase } from 'workout-app-common-core';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import SetIncrementer from './SetIncrementer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,6 +40,8 @@ const BaseListItem = ({
   const classes = useStyles();
 
   const isActiveCard = selectedCardId === listId;
+  const shouldDisable = React.isValidElement(title);
+  console.log('shouldDisable: ' + shouldDisable);
 
   return (
     <ListItem
@@ -58,8 +63,25 @@ const BaseListItem = ({
               [classes.grow]: isActiveCard,
             })}
           >
-            <CardHeader title={title} />
-            <CardContent></CardContent>
+            <CardHeader disableTypography={shouldDisable} title={title} />
+            {isActiveCard && (
+              <CardContent>
+                <List>
+                  <ListItem>
+                    <ListItemText primary={'Exercise 1: Bent Over Rows'} />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText primary={'Exercise 2: Air Squats'} />
+                  </ListItem>
+                </List>
+                {/*<Grid container>*/}
+                {/*  <Grid item xs={12}>*/}
+                {/*    <Typography>{'Exercise 1'}</Typography>*/}
+                {/*  </Grid>*/}
+                {/*  <SetIncrementer />*/}
+                {/*</Grid>*/}
+              </CardContent>
+            )}
           </Card>
         }
       />
@@ -68,7 +90,7 @@ const BaseListItem = ({
 };
 
 interface PassedInProps {
-  title: string;
+  title: string | JSX.Element;
   listId: string;
   selectedCardId: string;
   scrollToHandler: () => void;
