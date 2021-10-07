@@ -16,17 +16,14 @@ const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Grid container alignItems={'center'} justify={'space-between'}>
-      <Grid item xs={6}>
-        <Typography color={'textSecondary'}>{'Number of sets: '}</Typography>
-      </Grid>
-      <Grid item xs={6} container>
+    <Grid container justify={'center'}>
+      <Grid item xs={12} container alignItems={'center'} justify={'center'}>
         <Grid item>
           <IconButton>
             <RemoveIcon />
           </IconButton>
         </Grid>
-        <Grid item>
+        <Grid item xs={3} container justify={'center'}>
           <Typography>{'6'}</Typography>
         </Grid>
         <Grid item>

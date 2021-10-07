@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Phase } from 'workout-app-common-core';
-import BuilderCard from './components/BuilderCard';
+import BuilderCard from './routine-info/RoutineInfoCard';
 import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 

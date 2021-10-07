@@ -8,12 +8,13 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import RoutineBuilder from './builder/RoutineBuilder';
+import NewRoutineButton from './NewRoutineButton';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class RoutinesScreen extends Component<RoutinesScreenProps> {
   state = {
-    activeTab: 0,
+    displayBuilder: false,
   };
 
   render(): JSX.Element {
@@ -21,9 +22,21 @@ class RoutinesScreen extends Component<RoutinesScreenProps> {
 
     return (
       <Grid xs={12} item container>
-        <Grid item xs={7}>
-          <RoutineBuilder />
-        </Grid>
+        {this.state.displayBuilder ? (
+          <Grid item xs={7}>
+            <RoutineBuilder />
+          </Grid>
+        ) : (
+          <Grid item xs={12}>
+            <NewRoutineButton
+              callback={() => {
+                this.setState({
+                  displayBuilder: true,
+                });
+              }}
+            />
+          </Grid>
+        )}
       </Grid>
     );
   }
