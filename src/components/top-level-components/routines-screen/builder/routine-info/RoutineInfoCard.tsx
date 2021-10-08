@@ -1,41 +1,33 @@
+import clsx from 'clsx';
 import React from 'react';
-import { connect } from 'react-redux';
 import {
   Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  Grid,
-  IconButton,
   List,
+  Divider,
   ListItem,
+  CardHeader,
+  CardContent,
   ListItemText,
   ListSubheader,
-  Typography,
 } from '@material-ui/core';
-import { State } from '../../../../../configs/redux/store';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
-import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
-import { Phase, RoutineTemplateVO } from 'workout-app-common-core';
-import ClickToAddCard from './components/ClickToAddCard';
+import { Phase } from 'workout-app-common-core';
 import ActionMenu from './components/ActionMenu';
+import ClickToAddCard from './components/ClickToAddCard';
+import { State } from '../../../../../configs/redux/store';
+import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      // maxWidth: 360,
       boxShadow: 'none',
       backgroundColor: theme.palette.background.paper,
     },
     animate: {
       transition: 'transform .35s ease-in-out',
-    },
-    grow: {
-      // transform: 'scale(1.5)',
-      height: '100%',
     },
     animateListItem: {
       height: '75vh',
@@ -70,10 +62,7 @@ const RoutineInfoCard = ({
         subheader={'workout category'}
         action={<ActionMenu />}
       />
-      <CardContent
-        id={'routine-info-list'}
-        // style={{ height: '80vh', overflowY: 'scroll' }}
-      >
+      <CardContent>
         {phases.map((phase, index) => {
           return (
             <List
@@ -136,7 +125,4 @@ const mapStateToProps = (state: State): RoutineInfoCardProps => {
   } as unknown as RoutineInfoCardProps;
 };
 
-const mapDispatchToProps = (): RoutineInfoCardProps =>
-  ({} as unknown as RoutineInfoCardProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineInfoCard);
+export default connect(mapStateToProps)(RoutineInfoCard);
