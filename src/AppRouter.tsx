@@ -8,7 +8,7 @@ import SignInScreen from './components/top-level-components/sign-in-screen/SignI
 
 const AppRouter = (props: AppRouterProps): JSX.Element => {
   return props.isValidated ? (
-    <App>
+    <App displayAppBar={props.displayAppBar}>
       <div className={'route'}>
         {Object.keys(routes).map((value: string) => {
           return routes[value].pageProps.map(
@@ -33,11 +33,13 @@ const AppRouter = (props: AppRouterProps): JSX.Element => {
 
 export interface AppRouterProps {
   isValidated: boolean;
+  displayAppBar: boolean;
 }
 
 const mapStateToProps = (state: State): AppRouterProps => {
   return {
     isValidated: state.applicationState.userIsValidated,
+    displayAppBar: state.applicationState.displayAppBar,
   } as unknown as AppRouterProps;
 };
 
