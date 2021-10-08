@@ -1,9 +1,9 @@
 import React from 'react';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
-import { Grid, IconButton, Typography } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import { Grid, IconButton, Typography } from '@material-ui/core';
 
 const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
   return (

@@ -6,24 +6,16 @@ import {
   CardHeader,
   Divider,
   Grid,
-  IconButton,
   List,
   ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
   ListSubheader,
   Typography,
 } from '@material-ui/core';
-import {
-  isStraightSet,
-  isSuperset,
-  Phase,
-  Segment,
-} from 'workout-app-common-core';
+import { Phase, Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import SetIncrementer from '../../components/SetIncrementer';
+import SetIncrementer from './components/SetIncrementer';
 import RestBetweenOptions from './components/RestBetweenOptions';
 import SetTypeDropdown from './components/SetTypeHeader';
 import { Dispatch } from 'redux';
@@ -54,14 +46,10 @@ const ExerciseInfoCard = ({
   segment,
   scrollToHandler,
   selectedCardId,
-  selectExerciseHandler,
-  selectExerciseForSegment,
-  deleteExerciseFromSegmentHandler,
 }: ExerciseInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const isActiveCard = selectedCardId === listId;
   const shouldDisable = React.isValidElement(title);
-  const hasExercise = segment.exercises[0];
 
   return (
     <Card
@@ -86,17 +74,8 @@ const ExerciseInfoCard = ({
 
             <Divider variant={'middle'} />
 
-            <ListItem disableGutters>
-              <Grid container>
-                <Grid item xs={6} container justify={'center'}>
-                  <Typography color={'textSecondary'}>
-                    {'number of sets'}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <SetIncrementer />
-                </Grid>
-              </Grid>
+            <ListItem>
+              <SetIncrementer />
             </ListItem>
             <ListItem>
               <Grid container>
