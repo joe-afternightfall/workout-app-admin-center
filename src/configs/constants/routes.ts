@@ -22,6 +22,7 @@ import ExerciseTypesTable from '../../components/top-level-components/workout-co
 import CircuitBuilderScreen from '../../components/top-level-components/circuit-builder/CircuitBuilderScreen';
 import RoutineBuilderScreen from '../../components/top-level-components/routine-builder/RoutineBuilderScreen';
 import ExercisesScreen from '../../components/top-level-components/exercises-screen/ExercisesScreen';
+import RoutinesScreen from '../../components/top-level-components/routines-screen/RoutinesScreen';
 
 export interface PageProps {
   path: string;
@@ -88,7 +89,7 @@ export const routes: RoutesMap = {
         headerTitle: 'Routine Builder',
         icon: BuilderIcon,
         testId: 'routine-builder-nav',
-        routerComponent: RoutineBuilderScreen,
+        routerComponent: RoutinesScreen,
       },
     ],
   },
