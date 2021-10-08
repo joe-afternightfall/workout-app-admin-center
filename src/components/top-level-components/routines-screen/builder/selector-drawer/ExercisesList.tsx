@@ -11,6 +11,8 @@ import {
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ExerciseVO } from 'workout-app-common-core';
+import { Dispatch } from 'redux';
+import { addExerciseToSegment } from '../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const RoutineInfoCard = ({ exercises }: RoutineInfoCardProps): JSX.Element => {
+const RoutineInfoCard = ({
+  disabled,
+  exercises,
+  addExerciseHandler,
+}: RoutineInfoCardProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -38,7 +44,13 @@ const RoutineInfoCard = ({ exercises }: RoutineInfoCardProps): JSX.Element => {
               key={index}
               // subheader={<ListSubheader>{'Exercise List'}</ListSubheader>}
             >
-              <ListItem button>
+              <ListItem
+                button
+                disabled={disabled}
+                onClick={() => {
+                  addExerciseHandler(exercise.id);
+                }}
+              >
                 <ListItemText primary={exercise.name} />
               </ListItem>
             </List>
@@ -50,16 +62,24 @@ const RoutineInfoCard = ({ exercises }: RoutineInfoCardProps): JSX.Element => {
 };
 
 interface RoutineInfoCardProps {
+  disabled: boolean;
   exercises: ExerciseVO[];
+  addExerciseHandler: (exerciseId: string) => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
+    disabled:
+      state.routineBuilderState.selectExerciseForSegment.segmentId === '',
   } as unknown as RoutineInfoCardProps;
 };
 
-const mapDispatchToProps = (): RoutineInfoCardProps =>
-  ({} as unknown as RoutineInfoCardProps);
+const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardProps =>
+  ({
+    addExerciseHandler: (exerciseId: string) => {
+      dispatch(addExerciseToSegment(exerciseId));
+    },
+  } as unknown as RoutineInfoCardProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutineInfoCard);

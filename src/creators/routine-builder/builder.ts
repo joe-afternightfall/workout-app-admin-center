@@ -179,3 +179,17 @@ export const selectExerciseForSegment = (
     order: order,
   };
 };
+
+export interface AddExerciseToSegmentAction {
+  type: ActionTypes.ADD_EXERCISE_TO_SEGMENT;
+  exerciseId: string;
+}
+
+export const addExerciseToSegment = (
+  exerciseId: string
+): AddExerciseToSegmentAction => {
+  return {
+    type: ActionTypes.ADD_EXERCISE_TO_SEGMENT,
+    exerciseId: exerciseId,
+  };
+};

@@ -132,7 +132,12 @@ const ExerciseCard = ({
                     <SetIncrementer />
                   </Grid>
                   <Grid item xs={6}>
-                    <RestBetweenOptions />
+                    <RestBetweenOptions
+                      restBetweenNextSegmentValue={
+                        segment.secondsRestBetweenNextSegment
+                      }
+                      restBetweenSetValue={segment.secondsRestBetweenSets}
+                    />
                   </Grid>
                 </Grid>
                 <Grid container>
