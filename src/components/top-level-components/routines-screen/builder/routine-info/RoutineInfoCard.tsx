@@ -130,9 +130,6 @@ interface RoutineInfoCardProps {
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
-  console.log(
-    'stat: ' + JSON.stringify(state.routineBuilderState.selectedRoutine)
-  );
   return {
     routineTitle: state.routineBuilderState.selectedRoutine.name,
     phases: state.routineBuilderState.selectedRoutine.phases,
