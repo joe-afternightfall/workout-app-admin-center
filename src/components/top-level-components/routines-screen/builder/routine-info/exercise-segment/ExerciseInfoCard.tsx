@@ -90,30 +90,30 @@ const ExerciseInfoCard = ({
 
             <ListItem disableGutters>
               <Grid container>
-                <Grid item xs={12} container>
-                  <Grid item xs={6}>
-                    <SetIncrementer />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <RestBetweenOptions
-                      restBetweenNextSegmentValue={
-                        segment.secondsRestBetweenNextSegment
-                      }
-                      restBetweenSetValue={segment.secondsRestBetweenSets}
-                    />
-                  </Grid>
+                <Grid item xs={6} container justify={'center'}>
+                  <Typography color={'textSecondary'}>
+                    {'number of sets'}
+                  </Typography>
                 </Grid>
-                <Grid container>
-                  <Grid item xs={6} container justify={'center'}>
-                    <Typography color={'textSecondary'}>
-                      {'number of sets'}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} container justify={'center'}>
-                    <Typography color={'textSecondary'}>
-                      {'rest between'}
-                    </Typography>
-                  </Grid>
+                <Grid item xs={6}>
+                  <SetIncrementer />
+                </Grid>
+              </Grid>
+            </ListItem>
+            <ListItem>
+              <Grid container>
+                <Grid item xs={12}>
+                  <RestBetweenOptions
+                    restBetweenNextSegmentValue={
+                      segment.secondsRestBetweenNextSegment
+                    }
+                    restBetweenSetValue={segment.secondsRestBetweenSets}
+                  />
+                </Grid>
+                <Grid item xs={12} container justify={'center'}>
+                  <Typography color={'textSecondary'}>
+                    {'rest between settings'}
+                  </Typography>
                 </Grid>
               </Grid>
             </ListItem>
