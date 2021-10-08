@@ -26,6 +26,7 @@ import RestBetweenOptions from './RestBetweenOptions';
 import SetTypeDropdown from './SetTypeDropdown';
 import { Dispatch } from 'redux';
 import { selectExerciseForSegment } from '../../../../../../creators/routine-builder/builder';
+import Blinker from '../../../../Blinker';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -49,6 +50,7 @@ const ExerciseCard = ({
   scrollToHandler,
   selectedCardId,
   selectExerciseHandler,
+  selectExerciseForSegment,
 }: ExerciseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const isActiveCard = selectedCardId === listId;
@@ -76,21 +78,33 @@ const ExerciseCard = ({
             {/*todo: 1. Exercises*/}
             {/*todo: 3. Number of sets*/}
             {/*todo: 4. Rest between*/}
-            {isStraightSet(segment.trainingSetTypeId) && (
-              <ListItem
-                onClick={() => {
-                  selectExerciseHandler(1);
-                }}
-              >
-                <ListItemText
-                  primary={
-                    hasExercise
-                      ? hasExercise.exerciseId
-                      : 'Click to add exercise'
+            {isStraightSet(segment.trainingSetTypeId) &&
+              (selectExerciseForSegment.segmentId === segment.id &&
+              selectExerciseForSegment.order === 1 ? (
+                <Blinker
+                  shouldBlink={true}
+                  component={
+                    <ListItem>
+                      <ListItemText primary={'Select Exercise'} />
+                    </ListItem>
                   }
                 />
-              </ListItem>
-            )}
+              ) : (
+                <ListItem
+                  button
+                  onClick={() => {
+                    selectExerciseHandler(1);
+                  }}
+                >
+                  <ListItemText
+                    primary={
+                      segment.exercises[0]
+                        ? segment.exercises[0].exerciseId
+                        : 'Click to add exercise 1'
+                    }
+                  />
+                </ListItem>
+              ))}
 
             {isSuperset(segment.trainingSetTypeId) && (
               <>
@@ -172,11 +186,17 @@ interface PassedInProps {
 export interface ExerciseCardProps {
   phases: Phase[];
   selectExerciseHandler: (order: number) => void;
+  selectExerciseForSegment: {
+    order: number;
+    segmentId: string;
+  };
 }
 
 const mapStateToProps = (state: State): ExerciseCardProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
+    selectExerciseForSegment:
+      state.routineBuilderState.selectExerciseForSegment,
   } as unknown as ExerciseCardProps;
 };
 
