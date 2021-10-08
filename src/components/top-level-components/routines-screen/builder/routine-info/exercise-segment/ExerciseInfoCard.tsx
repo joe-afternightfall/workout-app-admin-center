@@ -81,6 +81,7 @@ const ExerciseInfoCard = ({
               <Grid container>
                 <Grid item xs={12}>
                   <RestBetweenOptions
+                    segmentId={segment.id}
                     restBetweenNextSegmentValue={
                       segment.secondsRestBetweenNextSegment
                     }

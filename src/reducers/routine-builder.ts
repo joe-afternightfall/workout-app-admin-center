@@ -134,7 +134,7 @@ export default {
         clonedPhases.map((phase) => {
           phase.segments.map((segment) => {
             if (segment.id === action.segmentId) {
-              if (action.restType === 'Sets') {
+              if (action.restType === 'set') {
                 segment.secondsRestBetweenSets = action.option;
               } else {
                 segment.secondsRestBetweenNextSegment = action.option;

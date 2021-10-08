@@ -85,7 +85,7 @@ const mapDispatchToProps = (
 ): RestBetweenDropdownProps =>
   ({
     updateRestHandler: (option: string) => {
-      dispatch(updateRestBetween(ownProps.type, ownProps.segmentId, option));
+      // dispatch(updateRestBetween(ownProps.type, ownProps.segmentId, option));
     },
   } as unknown as RestBetweenDropdownProps);
 
