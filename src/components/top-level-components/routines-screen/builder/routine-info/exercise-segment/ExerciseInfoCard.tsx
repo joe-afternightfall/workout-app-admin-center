@@ -3,11 +3,14 @@ import clsx from 'clsx';
 import {
   Card,
   List,
+  Grid,
+  Button,
   Divider,
   ListItem,
   CardHeader,
   CardContent,
   ListSubheader,
+  CardActions,
 } from '@material-ui/core';
 import { Segment } from 'workout-app-common-core';
 import SetIncrementer from './components/SetIncrementer';
@@ -15,6 +18,8 @@ import SetTypeDropdown from './components/SetTypeHeader';
 import ExerciseListItem from './components/ExerciseListItem';
 import RestBetweenOptions from './components/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import BaseMoreVertMenu from '../../../../../shared/BaseMoreVertMenu';
+import ExerciseActionMenu from './components/action-menu/ExerciseActionMenu';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -38,6 +43,13 @@ export default function ExerciseInfoCard({
   const classes = useStyles();
   const isActiveCard = selectedCardId === listId;
   const shouldDisable = React.isValidElement(title);
+  let displayActionMenu = false;
+
+  if (isActiveCard && segment.exercises.length > 0) {
+    displayActionMenu = true;
+  } else if (isActiveCard && segment.trainingSetTypeId !== '') {
+    displayActionMenu = true;
+  }
 
   return (
     <Card
@@ -46,36 +58,51 @@ export default function ExerciseInfoCard({
         [classes.grow]: isActiveCard,
       })}
     >
-      <CardHeader disableTypography={shouldDisable} title={title} />
+      <CardHeader
+        disableTypography={shouldDisable}
+        title={title}
+        action={
+          displayActionMenu && <ExerciseActionMenu segmentId={segment.id} />
+        }
+      />
       {isActiveCard && (
-        <CardContent>
-          <List
-            subheader={
-              <ListSubheader>
-                <SetTypeDropdown segment={segment} />
-              </ListSubheader>
-            }
-          >
-            <Divider variant={'middle'} />
+        <>
+          <CardContent>
+            <List
+              subheader={
+                <ListSubheader>
+                  <SetTypeDropdown segment={segment} />
+                </ListSubheader>
+              }
+            >
+              <Divider variant={'middle'} />
 
-            <ExerciseListItem segment={segment} />
+              <ExerciseListItem segment={segment} />
 
-            <Divider variant={'middle'} />
+              <Divider variant={'middle'} />
 
-            <ListItem>
-              <SetIncrementer segment={segment} />
-            </ListItem>
-            <ListItem>
-              <RestBetweenOptions
-                segmentId={segment.id}
-                restBetweenNextSegmentValue={
-                  segment.secondsRestBetweenNextSegment
-                }
-                restBetweenSetValue={segment.secondsRestBetweenSets}
-              />
-            </ListItem>
-          </List>
-        </CardContent>
+              <ListItem>
+                <SetIncrementer segment={segment} />
+              </ListItem>
+              <ListItem>
+                <RestBetweenOptions
+                  segmentId={segment.id}
+                  restBetweenNextSegmentValue={
+                    segment.secondsRestBetweenNextSegment
+                  }
+                  restBetweenSetValue={segment.secondsRestBetweenSets}
+                />
+              </ListItem>
+            </List>
+          </CardContent>
+          <CardActions>
+            <Grid container alignItems={'center'} justify={'flex-end'}>
+              <Grid item>
+                <Button color={'primary'}>{'Save'}</Button>
+              </Grid>
+            </Grid>
+          </CardActions>
+        </>
       )}
     </Card>
   );

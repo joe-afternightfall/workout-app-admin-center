@@ -211,16 +211,16 @@ export const deleteExerciseFromSegment = (
   };
 };
 
-export interface DeleteSetTypeAndExerciseInfoAction {
-  type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO;
+export interface ResetSetTypeAndExerciseInfoAction {
+  type: ActionTypes.RESET_SET_TYPE_AND_EXERCISE_INFO;
   segmentId: string;
 }
 
-export const deleteSetTypeAndExerciseInfo = (
+export const resetSetTypeAndExerciseInfo = (
   segmentId: string
-): DeleteSetTypeAndExerciseInfoAction => {
+): ResetSetTypeAndExerciseInfoAction => {
   return {
-    type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO,
+    type: ActionTypes.RESET_SET_TYPE_AND_EXERCISE_INFO,
     segmentId: segmentId,
   };
 };
@@ -249,6 +249,20 @@ export const deleteSetFromEachExerciseInSegment = (
 ): DeleteSetFromEachExerciseInSegmentAction => {
   return {
     type: ActionTypes.DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT,
+    segmentId: segmentId,
+  };
+};
+
+export interface DeleteSegmentFromPhaseAction {
+  type: ActionTypes.DELETE_SEGMENT_FROM_PHASE;
+  segmentId: string;
+}
+
+export const deleteSegmentFromPhase = (
+  segmentId: string
+): DeleteSegmentFromPhaseAction => {
+  return {
+    type: ActionTypes.DELETE_SEGMENT_FROM_PHASE,
     segmentId: segmentId,
   };
 };

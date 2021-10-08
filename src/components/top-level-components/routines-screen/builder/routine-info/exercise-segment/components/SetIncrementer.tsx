@@ -15,19 +15,19 @@ const SetIncrementer = ({
   addHandler,
   deleteHandler,
 }: SetIncrementerProps & PassedInProps): JSX.Element => {
-  const numberOfSets = segment.exercises[0]
-    ? segment.exercises[0].sets.length
-    : 0;
-  let disableDelete = true;
   let disableAdd = false;
-  if (segment.exercises[0]) {
+  let disableDelete = true;
+
+  const workoutExercise = segment.exercises[0];
+  const numberOfSets = workoutExercise ? workoutExercise.sets.length : 0;
+
+  if (workoutExercise && workoutExercise.sets.length === 0) {
+    disableDelete = true;
+  } else if (workoutExercise) {
     disableDelete = false;
   }
-  if (segment.exercises[0] && segment.exercises[0].sets.length === 0) {
-    disableDelete = true;
-  }
 
-  if (segment.exercises[0] && segment.exercises[0].sets.length === 5) {
+  if (workoutExercise && workoutExercise.sets.length === 5) {
     disableAdd = true;
   }
   return (

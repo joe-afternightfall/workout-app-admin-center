@@ -187,7 +187,7 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
-      case ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO: {
+      case ActionTypes.RESET_SET_TYPE_AND_EXERCISE_INFO: {
         const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
         clonedPhases.map((phase) => {
           phase.segments.map((segment) => {
@@ -229,6 +229,19 @@ export default {
               segment.exercises.map((exercise) => {
                 exercise.sets.splice(-1);
               });
+            }
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
+      case ActionTypes.DELETE_SEGMENT_FROM_PHASE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              const foundIndex = phase.segments.indexOf(segment);
+              phase.segments.splice(foundIndex, 1);
             }
           });
         });

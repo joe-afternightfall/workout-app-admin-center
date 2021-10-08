@@ -1,32 +1,20 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {
-  getSetTypeName,
   Segment,
+  getSetTypeName,
   TrainingSetType,
   trainingSetTypes,
 } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
-import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
+import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import DeleteSetTypeDialog from './DeleteSetTypeDialog';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      minWidth: 200,
-    },
-  })
-);
+import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
 
 const SetTypeHeader = ({
   segment,
   changeHandler,
 }: SetTypeDropdownProps & PassedInProps): JSX.Element => {
-  const classes = useStyles();
-
   const handleSetChange = (setTypeId: string) => {
     changeHandler(setTypeId);
   };
@@ -34,25 +22,20 @@ const SetTypeHeader = ({
   return (
     <Grid container alignItems={'center'} justify={'space-between'}>
       {segment.trainingSetTypeId ? (
-        <>
-          <Grid item>
-            <Grid container alignItems={'center'} spacing={2}>
-              <Grid item>
-                <Typography variant={'body1'} color={'textSecondary'}>
-                  {'Set type: '}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant={'h5'} color={'textPrimary'}>
-                  {getSetTypeName(segment.trainingSetTypeId)}
-                </Typography>
-              </Grid>
+        <Grid item>
+          <Grid container alignItems={'center'} spacing={2}>
+            <Grid item>
+              <Typography variant={'body1'} color={'textSecondary'}>
+                {'Set type: '}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant={'h5'} color={'textPrimary'}>
+                {getSetTypeName(segment.trainingSetTypeId)}
+              </Typography>
             </Grid>
           </Grid>
-          <Grid item>
-            <DeleteSetTypeDialog segmentId={segment.id} />
-          </Grid>
-        </>
+        </Grid>
       ) : (
         <>
           <Grid item>
@@ -63,7 +46,6 @@ const SetTypeHeader = ({
 
           <Grid item>
             <BaseSelectDropdown
-              // fullWidth
               id={segment.id}
               value={segment.trainingSetTypeId}
               changeHandler={handleSetChange}
