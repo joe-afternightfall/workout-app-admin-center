@@ -170,6 +170,23 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.DELETE_EXERCISE_FROM_SEGMENT: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              segment.exercises.map((exercise) => {
+                if (exercise.exerciseId === action.exerciseId) {
+                  const foundIndex = segment.exercises.indexOf(exercise);
+                  segment.exercises.splice(foundIndex, 1);
+                }
+              });
+            }
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }

@@ -37,6 +37,7 @@ import {
   UpdateRestBetweenAction,
   SelectExerciseForSegmentAction,
   AddExerciseToSegmentAction,
+  DeleteExerciseFromSegmentAction,
 } from './routine-builder/builder';
 import { HideAppBarAction } from './application';
 
@@ -71,6 +72,7 @@ export enum ActionTypes {
   UPDATE_REST_BETWEEN = 'UPDATE_REST_BETWEEN',
   SELECT_EXERCISE_FOR_SEGMENT = 'SELECT_EXERCISE_FOR_SEGMENT',
   ADD_EXERCISE_TO_SEGMENT = 'ADD_EXERCISE_TO_SEGMENT',
+  DELETE_EXERCISE_FROM_SEGMENT = 'DELETE_EXERCISE_FROM_SEGMENT',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -118,4 +120,5 @@ export type ApplicationActions =
   | UpdateRestBetweenAction
   | HideAppBarAction
   | SelectExerciseForSegmentAction
-  | AddExerciseToSegmentAction;
+  | AddExerciseToSegmentAction
+  | DeleteExerciseFromSegmentAction;
