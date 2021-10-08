@@ -10,8 +10,7 @@ import {
 } from 'workout-app-common-core';
 import BaseSelectDropdown from '../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
 import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
-import { Grid, IconButton, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { Grid, Typography } from '@material-ui/core';
 import DeleteSetTypeDialog from './DeleteSetTypeDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,7 +50,7 @@ const SetTypeHeader = ({
             </Grid>
           </Grid>
           <Grid item>
-            <DeleteSetTypeDialog />
+            <DeleteSetTypeDialog segmentId={segment.id} />
           </Grid>
         </>
       ) : (

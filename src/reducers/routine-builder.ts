@@ -187,6 +187,19 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              segment.trainingSetTypeId = '';
+              segment.exercises = [];
+            }
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }

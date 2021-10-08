@@ -210,3 +210,16 @@ export const deleteExerciseFromSegment = (
     exerciseId: exerciseId,
   };
 };
+
+export interface DeleteSetTypeAndExerciseInfoAction {
+  type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO;
+  segmentId: string;
+}
+export const deleteSetTypeAndExerciseInfo = (
+  segmentId: string
+): DeleteSetTypeAndExerciseInfoAction => {
+  return {
+    type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO,
+    segmentId: segmentId,
+  };
+};

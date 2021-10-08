@@ -1,14 +1,19 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import CloseIcon from '@material-ui/icons/Close';
-import { IconButton } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import {
+  Dialog,
+  Button,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogContentText,
+} from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { deleteSetTypeAndExerciseInfo } from '../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function DeleteSetTypeDialog() {
+const DeleteSetTypeDialog = ({
+  deleteHandler,
+}: DeleteSetTypeDialogProps & PassedInProps) => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -57,8 +64,14 @@ export default function DeleteSetTypeDialog() {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} className={classes.deleteButton}>
-            {'Delete'}
+          <Button
+            onClick={() => {
+              deleteHandler();
+              handleClose();
+            }}
+            className={classes.deleteButton}
+          >
+            {'Reset'}
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
             {'Go Back'}
@@ -67,4 +80,24 @@ export default function DeleteSetTypeDialog() {
       </Dialog>
     </div>
   );
+};
+
+interface PassedInProps {
+  segmentId: string;
 }
+
+interface DeleteSetTypeDialogProps {
+  deleteHandler: () => void;
+}
+
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: PassedInProps
+): DeleteSetTypeDialogProps =>
+  ({
+    deleteHandler: () => {
+      dispatch(deleteSetTypeAndExerciseInfo(ownProps.segmentId));
+    },
+  } as unknown as DeleteSetTypeDialogProps);
+
+export default connect(null, mapDispatchToProps)(DeleteSetTypeDialog);
