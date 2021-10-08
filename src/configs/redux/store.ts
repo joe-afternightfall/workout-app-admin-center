@@ -46,6 +46,10 @@ export const createStore = (history: History): Store => {
       circuitTemplates: [],
     } as unknown as ApplicationState,
     routineBuilderState: {
+      selectExerciseForSegment: {
+        segmentId: '',
+        order: -1,
+      },
       selectedRoutine: {
         id: '',
         firebaseId: '',

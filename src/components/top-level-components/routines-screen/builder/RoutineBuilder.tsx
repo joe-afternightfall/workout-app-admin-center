@@ -37,7 +37,7 @@ const RoutineBuilder = ({ phases }: RoutineBuilderProps): JSX.Element => {
   );
 };
 
-export interface RoutineBuilderProps {
+interface RoutineBuilderProps {
   phases: Phase[];
 }
 

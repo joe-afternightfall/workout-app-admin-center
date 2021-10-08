@@ -1,5 +1,5 @@
 import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { RoutineTemplateVO, WorkoutExercise } from 'workout-app-common-core';
+import { RoutineTemplateVO } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
 
@@ -123,6 +123,12 @@ export default {
         newState.selectedRoutine.phases = clonedPhases;
         break;
       }
+      case ActionTypes.SELECT_EXERCISE_FOR_SEGMENT:
+        newState.selectExerciseForSegment = {
+          segmentId: action.segmentId,
+          order: action.order,
+        };
+        break;
       case ActionTypes.UPDATE_REST_BETWEEN: {
         const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
         clonedPhases.map((phase) => {
@@ -150,4 +156,8 @@ export default {
 export interface RoutineBuilderState {
   activeCardId: string;
   selectedRoutine: RoutineTemplateVO;
+  selectExerciseForSegment: {
+    segmentId: string;
+    order: number;
+  };
 }

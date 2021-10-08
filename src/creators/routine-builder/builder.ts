@@ -162,3 +162,20 @@ export const updateRestBetween = (
     option: Number(option),
   };
 };
+
+export interface SelectExerciseForSegmentAction {
+  type: ActionTypes.SELECT_EXERCISE_FOR_SEGMENT;
+  segmentId: string;
+  order: number;
+}
+
+export const selectExerciseForSegment = (
+  segmentId: string,
+  order: number
+): SelectExerciseForSegmentAction => {
+  return {
+    type: ActionTypes.SELECT_EXERCISE_FOR_SEGMENT,
+    segmentId: segmentId,
+    order: order,
+  };
+};

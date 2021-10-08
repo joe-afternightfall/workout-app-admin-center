@@ -24,6 +24,8 @@ import clsx from 'clsx';
 import SetIncrementer from '../../components/SetIncrementer';
 import RestBetweenOptions from './RestBetweenOptions';
 import SetTypeDropdown from './SetTypeDropdown';
+import { Dispatch } from 'redux';
+import { selectExerciseForSegment } from '../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -46,12 +48,12 @@ const ExerciseCard = ({
   segment,
   scrollToHandler,
   selectedCardId,
+  selectExerciseHandler,
 }: ExerciseCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
-
   const isActiveCard = selectedCardId === listId;
   const shouldDisable = React.isValidElement(title);
-  console.log('shouldDisable: ' + shouldDisable);
+  const hasExercise = segment.exercises[0];
 
   return (
     <Card
@@ -75,11 +77,15 @@ const ExerciseCard = ({
             {/*todo: 3. Number of sets*/}
             {/*todo: 4. Rest between*/}
             {isStraightSet(segment.trainingSetTypeId) && (
-              <ListItem button>
+              <ListItem
+                onClick={() => {
+                  selectExerciseHandler(1);
+                }}
+              >
                 <ListItemText
                   primary={
-                    segment.exercises[0]
-                      ? segment.exercises[0].exerciseId
+                    hasExercise
+                      ? hasExercise.exerciseId
                       : 'Click to add exercise'
                   }
                 />
@@ -88,7 +94,12 @@ const ExerciseCard = ({
 
             {isSuperset(segment.trainingSetTypeId) && (
               <>
-                <ListItem button>
+                <ListItem
+                  button
+                  onClick={() => {
+                    selectExerciseHandler(1);
+                  }}
+                >
                   <ListItemText
                     primary={
                       segment.exercises[0]
@@ -97,8 +108,12 @@ const ExerciseCard = ({
                     }
                   />
                 </ListItem>
-
-                <ListItem button>
+                <ListItem
+                  button
+                  onClick={() => {
+                    selectExerciseHandler(2);
+                  }}
+                >
                   <ListItemText
                     primary={
                       segment.exercises[1]
@@ -151,6 +166,7 @@ interface PassedInProps {
 
 export interface ExerciseCardProps {
   phases: Phase[];
+  selectExerciseHandler: (order: number) => void;
 }
 
 const mapStateToProps = (state: State): ExerciseCardProps => {
@@ -159,7 +175,14 @@ const mapStateToProps = (state: State): ExerciseCardProps => {
   } as unknown as ExerciseCardProps;
 };
 
-const mapDispatchToProps = (): ExerciseCardProps =>
-  ({} as unknown as ExerciseCardProps);
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: PassedInProps
+): ExerciseCardProps =>
+  ({
+    selectExerciseHandler: (order: number) => {
+      dispatch(selectExerciseForSegment(ownProps.segment.id, order));
+    },
+  } as unknown as ExerciseCardProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExerciseCard);

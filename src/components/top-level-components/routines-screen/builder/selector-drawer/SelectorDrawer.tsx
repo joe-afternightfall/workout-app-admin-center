@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core/styles';
 import ExercisesList from './ExercisesList';
 import { AppBar, Toolbar, Typography, Drawer } from '@material-ui/core';
+import { State } from '../../../../../configs/redux/store';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SelectorDrawer({ display }: SelectorDrawerProps) {
+const SelectorDrawer = ({
+  display,
+  selectExerciseForSegment,
+}: SelectorDrawerProps & PassedInProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -38,17 +43,47 @@ export default function SelectorDrawer({ display }: SelectorDrawerProps) {
     >
       <AppBar position={'relative'}>
         <Toolbar>
-          <Typography variant={'h6'} noWrap>
-            {'Persistent drawer'}
-          </Typography>
+          {selectExerciseForSegment.segmentId !== '' ? (
+            <>
+              <Typography variant={'h6'} noWrap>
+                {selectExerciseForSegment.segmentId}
+              </Typography>
+              <Typography variant={'h6'} noWrap>
+                {selectExerciseForSegment.order}
+              </Typography>
+            </>
+          ) : (
+            <Typography variant={'h6'} noWrap>
+              {'Exercise Drawer'}
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <ExercisesList />
     </Drawer>
   );
-}
+};
 
-interface SelectorDrawerProps {
+interface PassedInProps {
   display: boolean;
   toggleHandler: (display: boolean) => void;
 }
+
+interface SelectorDrawerProps {
+  selectExerciseForSegment: {
+    segmentId: string;
+    order: number;
+  };
+}
+
+const mapStateToProps = (state: State): SelectorDrawerProps => {
+  return {
+    selectExerciseForSegment:
+      state.routineBuilderState.selectExerciseForSegment,
+  } as unknown as SelectorDrawerProps;
+};
+
+const mapDispatchToProps = (): SelectorDrawerProps =>
+  ({} as unknown as SelectorDrawerProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectorDrawer);
