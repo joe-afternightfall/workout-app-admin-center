@@ -2,14 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  Grid,
   List,
+  Divider,
   ListItem,
+  CardHeader,
+  CardContent,
   ListSubheader,
-  Typography,
 } from '@material-ui/core';
 import { Phase, Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../configs/redux/store';
@@ -33,9 +31,6 @@ const useStyles = makeStyles(() =>
     grow: {
       // transform: 'scale(1.5)',
       height: '100%',
-    },
-    animateListItem: {
-      height: '75vh',
     },
   })
 );
@@ -78,22 +73,13 @@ const ExerciseInfoCard = ({
               <SetIncrementer />
             </ListItem>
             <ListItem>
-              <Grid container>
-                <Grid item xs={12}>
-                  <RestBetweenOptions
-                    segmentId={segment.id}
-                    restBetweenNextSegmentValue={
-                      segment.secondsRestBetweenNextSegment
-                    }
-                    restBetweenSetValue={segment.secondsRestBetweenSets}
-                  />
-                </Grid>
-                <Grid item xs={12} container justify={'center'}>
-                  <Typography color={'textSecondary'}>
-                    {'rest between settings'}
-                  </Typography>
-                </Grid>
-              </Grid>
+              <RestBetweenOptions
+                segmentId={segment.id}
+                restBetweenNextSegmentValue={
+                  segment.secondsRestBetweenNextSegment
+                }
+                restBetweenSetValue={segment.secondsRestBetweenSets}
+              />
             </ListItem>
           </List>
         </CardContent>
