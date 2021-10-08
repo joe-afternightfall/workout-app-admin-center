@@ -25,7 +25,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import SetIncrementer from '../../components/SetIncrementer';
 import RestBetweenOptions from './components/RestBetweenOptions';
-import SetTypeDropdown from './components/SetTypeDropdown';
+import SetTypeDropdown from './components/SetTypeHeader';
 import { Dispatch } from 'redux';
 import {
   deleteExerciseFromSegment,
