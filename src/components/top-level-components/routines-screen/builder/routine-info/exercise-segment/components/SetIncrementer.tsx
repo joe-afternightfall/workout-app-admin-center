@@ -1,30 +1,26 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 const SetIncrementer = (props: SetIncrementerProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
-    <Grid container justify={'center'}>
-      <Grid item xs={12} container alignItems={'center'} justify={'center'}>
+    <Grid container justify={'center'} alignItems={'center'}>
+      <Grid item xs={6}>
+        <Typography variant={'subtitle1'} color={'textSecondary'}>
+          {'Number of sets'}
+        </Typography>
+      </Grid>
+      <Grid item xs={6} container alignItems={'center'} justify={'flex-end'}>
         <Grid item>
           <IconButton>
             <RemoveIcon />
           </IconButton>
         </Grid>
         <Grid item xs={3} container justify={'center'}>
-          <Typography>{'6'}</Typography>
+          <Typography variant={'h6'}>{'6'}</Typography>
         </Grid>
         <Grid item>
           <IconButton>
