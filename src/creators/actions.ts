@@ -36,6 +36,7 @@ import {
   AddSetToExerciseAction,
   UpdateRestBetweenAction,
 } from './routine-builder/builder';
+import { HideAppBarAction } from './application';
 
 export enum ActionTypes {
   // Application Actions
@@ -43,6 +44,7 @@ export enum ActionTypes {
   VALIDATED_USER = 'VALIDATED_USER',
   DISPLAY_APP_SNACKBAR = 'DISPLAY_APP_SNACKBAR',
   HIDE_APP_SNACKBAR = 'HIDE_APP_SNACKBAR',
+  HIDE_APP_BAR = 'HIDE_APP_BAR',
 
   // Workout configurations
   LOAD_EXERCISE_TYPES = 'LOAD_EXERCISE_TYPES',
@@ -109,4 +111,5 @@ export type ApplicationActions =
   | AddSegmentToPhaseAction
   | UpdateSegmentExerciseAction
   | AddSetToExerciseAction
-  | UpdateRestBetweenAction;
+  | UpdateRestBetweenAction
+  | HideAppBarAction;
