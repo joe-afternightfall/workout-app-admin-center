@@ -4,18 +4,26 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Divider,
   Grid,
   List,
   ListItem,
   ListItemText,
+  ListSubheader,
   Typography,
 } from '@material-ui/core';
-import { Phase } from 'workout-app-common-core';
+import {
+  isStraightSet,
+  isSuperset,
+  Phase,
+  Segment,
+} from 'workout-app-common-core';
 import { State } from '../../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import SetIncrementer from '../../components/SetIncrementer';
 import RestBetweenOptions from './RestBetweenOptions';
+import SetTypeDropdown from './SetTypeDropdown';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -35,6 +43,7 @@ const useStyles = makeStyles(() =>
 const ExerciseCard = ({
   listId,
   title,
+  segment,
   scrollToHandler,
   selectedCardId,
 }: ExerciseCardProps & PassedInProps): JSX.Element => {
@@ -54,14 +63,53 @@ const ExerciseCard = ({
       <CardHeader disableTypography={shouldDisable} title={title} />
       {isActiveCard && (
         <CardContent>
-          <List>
+          <List
+            subheader={
+              <ListSubheader>
+                <SetTypeDropdown segment={segment} />
+              </ListSubheader>
+            }
+          >
+            <Divider variant={'middle'} />
             {/*todo: 1. Exercises*/}
-            {/*todo: 2. Workout Category */}
             {/*todo: 3. Number of sets*/}
             {/*todo: 4. Rest between*/}
-            <ListItem>
-              <ListItemText primary={'Exercise 1: Bent Over Rows'} />
-            </ListItem>
+            {isStraightSet(segment.trainingSetTypeId) && (
+              <ListItem button>
+                <ListItemText
+                  primary={
+                    segment.exercises[0]
+                      ? segment.exercises[0].exerciseId
+                      : 'Click to add exercise'
+                  }
+                />
+              </ListItem>
+            )}
+
+            {isSuperset(segment.trainingSetTypeId) && (
+              <>
+                <ListItem button>
+                  <ListItemText
+                    primary={
+                      segment.exercises[0]
+                        ? segment.exercises[0].exerciseId
+                        : 'Click to add exercise 1'
+                    }
+                  />
+                </ListItem>
+
+                <ListItem button>
+                  <ListItemText
+                    primary={
+                      segment.exercises[1]
+                        ? segment.exercises[1].exerciseId
+                        : 'Click to add exercise 2'
+                    }
+                  />
+                </ListItem>
+              </>
+            )}
+            <Divider variant={'middle'} />
             <ListItem disableGutters>
               <Grid container>
                 <Grid item xs={12} container>
@@ -96,6 +144,7 @@ const ExerciseCard = ({
 interface PassedInProps {
   title: string | JSX.Element;
   listId: string;
+  segment: Segment;
   selectedCardId: string;
   scrollToHandler: () => void;
 }

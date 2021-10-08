@@ -3,14 +3,13 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { State } from '../../../configs/redux/store';
-import { ExerciseVO } from 'workout-app-common-core';
+import { ExerciseVO, getParameterTypeName } from 'workout-app-common-core';
 import muscleGroups, {
   MuscleGroup,
 } from '../../../configs/models/workout-configurations/MuscleGroups';
 import MaterialTable from 'material-table';
 import PageTitle from '../../shared/PageTitle';
 import { Button, Grid } from '@material-ui/core';
-import { getParameterTypeName } from '../../../utils/name-finder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
