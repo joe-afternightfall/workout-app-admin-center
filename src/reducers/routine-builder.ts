@@ -1,7 +1,7 @@
-import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { RoutineTemplateVO } from 'workout-app-common-core';
-import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
+import { RoutineTemplateVO, sortEntireRoutine } from 'workout-app-common-core';
+import { v4 as uuidv4 } from 'uuid';
+import { ActionTypes, ApplicationActions } from '../creators/actions';
 
 export default {
   reducer: (
@@ -35,13 +35,13 @@ export default {
               id: uuidv4(),
               order: 1,
               trainingSetTypeId: '',
-              secondsRestBetweenSets: -1,
-              secondsRestBetweenNextSegment: -1,
+              secondsRestBetweenSets: 30,
+              secondsRestBetweenNextSegment: 60,
               exercises: [],
             },
           ],
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.SELECT_PHASE: {
@@ -51,7 +51,7 @@ export default {
             phase.phaseId = action.phaseId;
           }
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.SELECT_SET_TYPE: {
@@ -63,7 +63,7 @@ export default {
             }
           });
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.ADD_SEGMENT_TO_PHASE: {
@@ -81,7 +81,7 @@ export default {
             });
           }
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.UPDATE_SEGMENT_EXERCISE: {
@@ -99,7 +99,7 @@ export default {
             }
           });
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.ADD_SET_TO_EXERCISE: {
@@ -120,7 +120,7 @@ export default {
             });
           });
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       case ActionTypes.SELECT_EXERCISE_FOR_SEGMENT:
@@ -142,7 +142,32 @@ export default {
             }
           });
         });
-        newState.selectedRoutine.phases = clonedPhases;
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
+      case ActionTypes.ADD_EXERCISE_TO_SEGMENT: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        const segmentId = newState.selectExerciseForSegment.segmentId;
+        const exerciseOrder = newState.selectExerciseForSegment.order;
+
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === segmentId) {
+              segment.exercises.push({
+                id: uuidv4(),
+                order: exerciseOrder,
+                exerciseId: action.exerciseId,
+                sets: [],
+              });
+            }
+          });
+        });
+
+        newState.selectExerciseForSegment = {
+          segmentId: '',
+          order: -1,
+        };
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
       default:
