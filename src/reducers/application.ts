@@ -28,6 +28,9 @@ export default {
       case ActionTypes.HIDE_APP_SNACKBAR:
         newState.displayAppSnackbar = false;
         break;
+      case ActionTypes.HIDE_APP_BAR:
+        newState.displayAppBar = false;
+        break;
       case ActionTypes.VALIDATED_USER:
         newState.userIsValidated = true;
         newState.userEmail = action.email;
@@ -106,6 +109,7 @@ export interface ApplicationState {
   userIsValidated: boolean;
   userEmail: string;
   drawerSize: string;
+  displayAppBar: boolean;
   userClickedCloseDrawer: boolean;
   sideDrawerIsOpen: boolean;
   sideDrawerIsClosed: boolean;
