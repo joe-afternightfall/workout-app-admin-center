@@ -32,7 +32,7 @@ class App extends Component<AppProps> {
   };
 
   render(): JSX.Element {
-    const { classes } = this.props;
+    const { classes, displayAppBar } = this.props;
 
     const handleFullScreenClick = (open: boolean) => {
       this.setState({
@@ -58,7 +58,7 @@ class App extends Component<AppProps> {
             <ResponsiveSideDrawer />
 
             <main className={classes.content}>
-              <div className={classes.toolbar} />
+              {displayAppBar && <div className={classes.toolbar} />}
               <div>{this.props.children}</div>
             </main>
           </div>
@@ -70,6 +70,7 @@ class App extends Component<AppProps> {
 
 export interface AppProps extends WithStyles<typeof styles> {
   children: JSX.Element;
+  displayAppBar: boolean;
 }
 
 export default withStyles(styles, { withTheme: true })(App);
