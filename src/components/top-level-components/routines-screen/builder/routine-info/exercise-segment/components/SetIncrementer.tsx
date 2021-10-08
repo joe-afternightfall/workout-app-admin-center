@@ -2,13 +2,13 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import { Grid, IconButton, Typography } from '@material-ui/core';
 import { Segment } from 'workout-app-common-core';
+import RemoveIcon from '@material-ui/icons/Remove';
 import {
   addSetToEachExerciseInSegment,
   deleteSetFromEachExerciseInSegment,
 } from '../../../../../../../creators/routine-builder/builder';
+import { Grid, IconButton, Typography } from '@material-ui/core';
 
 const SetIncrementer = ({
   segment,
