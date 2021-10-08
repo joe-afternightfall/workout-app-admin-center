@@ -33,6 +33,7 @@ import {
 } from '../../../../../../creators/routine-builder/builder';
 import Blinker from '../../../../Blinker';
 import CloseIcon from '@material-ui/icons/Close';
+import ExerciseListItem from './components/ExerciseListItem';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -82,82 +83,15 @@ const ExerciseInfoCard = ({
             }
           >
             <Divider variant={'middle'} />
-            {/*todo: 1. Exercises*/}
-            {/*todo: 3. Number of sets*/}
-            {/*todo: 4. Rest between*/}
-            {isStraightSet(segment.trainingSetTypeId) &&
-              (selectExerciseForSegment.segmentId === segment.id &&
-              selectExerciseForSegment.order === 1 ? (
-                <Blinker
-                  shouldBlink={true}
-                  component={
-                    <ListItem>
-                      <ListItemText primary={'Select Exercise'} />
-                    </ListItem>
-                  }
-                />
-              ) : segment.exercises[0] && segment.exercises[0].exerciseId ? (
-                <ListItem>
-                  <ListItemText primary={segment.exercises[0].exerciseId} />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      onClick={() => {
-                        deleteExerciseFromSegmentHandler(
-                          segment.exercises[0].exerciseId
-                        );
-                      }}
-                    >
-                      <CloseIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ) : (
-                <ListItem
-                  button
-                  onClick={() => {
-                    selectExerciseHandler(1);
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      segment.exercises[0]
-                        ? segment.exercises[0].exerciseId
-                        : 'Click to add exercise 1'
-                    }
-                  />
-                </ListItem>
-              ))}
+
+            {isStraightSet(segment.trainingSetTypeId) && (
+              <ExerciseListItem segment={segment} order={1} />
+            )}
 
             {isSuperset(segment.trainingSetTypeId) && (
               <>
-                <ListItem
-                  button
-                  onClick={() => {
-                    selectExerciseHandler(1);
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      segment.exercises[0]
-                        ? segment.exercises[0].exerciseId
-                        : 'Click to add exercise 1'
-                    }
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  onClick={() => {
-                    selectExerciseHandler(2);
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      segment.exercises[1]
-                        ? segment.exercises[1].exerciseId
-                        : 'Click to add exercise 2'
-                    }
-                  />
-                </ListItem>
+                <ExerciseListItem segment={segment} order={1} />
+                <ExerciseListItem segment={segment} order={2} />
               </>
             )}
             <Divider variant={'middle'} />
