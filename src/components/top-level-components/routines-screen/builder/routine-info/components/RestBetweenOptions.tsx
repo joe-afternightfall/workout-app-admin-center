@@ -38,7 +38,8 @@ function buildMenuOptions(options: string[]): MenuOptions[] {
 
 const RestBetweenOptions = ({
   type,
-  value,
+  restBetweenNextSegmentValue,
+  restBetweenSetValue,
   updateRestHandler,
 }: RestBetweenOptionsProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
@@ -56,7 +57,7 @@ const RestBetweenOptions = ({
             label={'Sets'}
             labelId={'rest-between-sets-label'}
             id={'rest-between-sets-select-menu'}
-            value={value}
+            value={String(restBetweenSetValue)}
             onChange={(
               e: React.ChangeEvent<{
                 name?: string | undefined;
@@ -87,7 +88,7 @@ const RestBetweenOptions = ({
             label={'Next Segment'}
             labelId={'rest-between-next-segment-label'}
             id={'rest-between-next-segment-select-menu'}
-            value={value}
+            value={restBetweenNextSegmentValue}
             onChange={(
               e: React.ChangeEvent<{
                 name?: string | undefined;
@@ -114,7 +115,8 @@ const RestBetweenOptions = ({
 };
 
 interface PassedInProps {
-  value?: string;
+  restBetweenSetValue: number;
+  restBetweenNextSegmentValue: number;
   segmentId?: string;
   type?: 'Sets' | 'Segment';
 }
