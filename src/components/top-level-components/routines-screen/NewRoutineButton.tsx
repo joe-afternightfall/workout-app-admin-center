@@ -2,6 +2,8 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import { hideAppBar } from '../../../creators/application';
+import { userClickedCloseDrawer } from '../../../creators/side-drawer';
 import { buildNewRoutine } from '../../../creators/routine-builder/builder';
 
 const NewRoutineButton = (
@@ -30,6 +32,8 @@ const mapDispatchToProps = (
     newRoutineHandler: () => {
       dispatch(buildNewRoutine());
       ownProps.callback();
+      dispatch(hideAppBar());
+      dispatch(userClickedCloseDrawer());
     },
   } as unknown as NewRoutineButtonProps);
 

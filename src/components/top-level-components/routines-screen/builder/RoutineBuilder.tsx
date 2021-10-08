@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Phase } from 'workout-app-common-core';
-import BuilderCard from './routine-info/RoutineInfoCard';
 import { State } from '../../../../configs/redux/store';
+import BuilderCard from './routine-info/RoutineInfoCard';
+import SelectorDrawer from './selector-drawer/SelectorDrawer';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -14,12 +15,24 @@ const useStyles = makeStyles(() =>
 
 const RoutineBuilder = ({ phases }: RoutineBuilderProps): JSX.Element => {
   const classes = useStyles();
+  const [displayDrawer, setDisplayDrawer] = React.useState(false);
+
+  const toggleSideDrawer = (display: boolean) => {
+    setDisplayDrawer(display);
+  };
 
   return (
-    <Grid container>
-      <BuilderCard />
+    <Grid container spacing={2}>
+      <Grid item xs={7}>
+        <BuilderCard toggleHandler={toggleSideDrawer} />
+      </Grid>
 
-      {/*todo: add muscle selector slide out */}
+      <Grid item xs={5}>
+        <SelectorDrawer
+          toggleHandler={toggleSideDrawer}
+          display={displayDrawer}
+        />
+      </Grid>
     </Grid>
   );
 };

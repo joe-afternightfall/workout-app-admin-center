@@ -9,6 +9,7 @@ import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import RoutineBuilder from './builder/RoutineBuilder';
 import NewRoutineButton from './NewRoutineButton';
+import ExercisesList from './builder/selector-drawer/ExercisesList';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -21,9 +22,9 @@ class RoutinesScreen extends Component<RoutinesScreenProps> {
     const { classes } = this.props;
 
     return (
-      <Grid xs={12} item container>
+      <Grid xs={12} item container spacing={2}>
         {this.state.displayBuilder ? (
-          <Grid item xs={7}>
+          <Grid item xs={12}>
             <RoutineBuilder />
           </Grid>
         ) : (

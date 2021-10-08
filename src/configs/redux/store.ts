@@ -25,6 +25,7 @@ export const createStore = (history: History): Store => {
 
   return createStoreFunc(allReducers, {
     applicationState: {
+      displayAppBar: true,
       displayAppSnackbar: false,
       snackbarProps: {
         text: '',

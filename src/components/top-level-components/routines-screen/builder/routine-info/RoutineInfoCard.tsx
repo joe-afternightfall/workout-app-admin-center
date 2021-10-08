@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Divider,
   Grid,
   IconButton,
   List,
@@ -45,7 +46,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const RoutineInfoCard = ({
   phases,
   routineTitle,
-}: RoutineInfoCardProps): JSX.Element => {
+  toggleHandler,
+}: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
 
@@ -68,7 +70,10 @@ const RoutineInfoCard = ({
         subheader={'workout category'}
         action={<ActionMenu />}
       />
-      <CardContent>
+      <CardContent
+        id={'routine-info-list'}
+        // style={{ height: '80vh', overflowY: 'scroll' }}
+      >
         {phases.map((phase, index) => {
           return (
             <List
@@ -79,6 +84,7 @@ const RoutineInfoCard = ({
                 const listId = `list-item-${segment.order}`;
                 return (
                   <ListItem id={listId} key={listId}>
+                    <Divider />
                     <ListItemText
                       disableTypography
                       className={clsx(classes.animate, {
@@ -87,10 +93,12 @@ const RoutineInfoCard = ({
                       primary={
                         <ExerciseCard
                           title={'Exercise Card ' + segment.order}
+                          segment={segment}
                           selectedCardId={openCard}
                           listId={listId}
                           scrollToHandler={() => {
                             scrollToSection(listId);
+                            toggleHandler(true);
                           }}
                         />
                       }
@@ -111,6 +119,10 @@ const RoutineInfoCard = ({
     </Card>
   );
 };
+
+interface PassedInProps {
+  toggleHandler: (display: boolean) => void;
+}
 
 interface RoutineInfoCardProps {
   routineTitle: string;
