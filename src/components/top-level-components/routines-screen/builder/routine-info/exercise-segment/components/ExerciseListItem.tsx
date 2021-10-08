@@ -6,7 +6,14 @@ import {
   ListItemSecondaryAction,
   ListItemText,
 } from '@material-ui/core';
-import { ExerciseVO, getExerciseName, Segment } from 'workout-app-common-core';
+import {
+  ExerciseVO,
+  getExerciseName,
+  isStraightSet,
+  isSuperset,
+  Segment,
+  WorkoutExercise,
+} from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Dispatch } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
@@ -20,7 +27,6 @@ import Blinker from '../../../../../Blinker';
 const useStyles = makeStyles(() => createStyles({}));
 
 const ExerciseListItem = ({
-  order,
   exercises,
   segment,
   selectExerciseForSegment,
@@ -28,12 +34,15 @@ const ExerciseListItem = ({
   deleteExerciseFromSegmentHandler,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
+  let display = <div />;
 
-  const workoutExercise = segment.exercises[order - 1];
-  return (
-    <>
-      {selectExerciseForSegment.segmentId === segment.id &&
-      selectExerciseForSegment.order === order ? (
+  if (isStraightSet(segment.trainingSetTypeId)) {
+    const blink =
+      selectExerciseForSegment.segmentId === segment.id &&
+      selectExerciseForSegment.order === 1;
+
+    if (blink) {
+      display = (
         <Blinker
           shouldBlink={true}
           component={
@@ -42,37 +51,166 @@ const ExerciseListItem = ({
             </ListItem>
           }
         />
-      ) : workoutExercise && workoutExercise.exerciseId ? (
-        <ListItem>
-          <ListItemText
-            primary={getExerciseName(exercises, workoutExercise.exerciseId)}
-          />
-          <ListItemSecondaryAction>
-            <IconButton
-              onClick={() => {
-                deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-      ) : (
-        <ListItem
-          button
-          onClick={() => {
-            selectExerciseHandler(order);
-          }}
-        >
-          <ListItemText primary={`Click to add exercise ${order}`} />
-        </ListItem>
-      )}
-    </>
-  );
+      );
+    } else {
+      const workoutExercise = segment.exercises[0];
+      if (workoutExercise && workoutExercise.exerciseId) {
+        display = (
+          <ListItem>
+            <ListItemText
+              primary={getExerciseName(exercises, workoutExercise.exerciseId)}
+            />
+            <ListItemSecondaryAction>
+              <IconButton
+                onClick={() => {
+                  deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        );
+      } else {
+        display = (
+          <ListItem
+            button
+            onClick={() => {
+              selectExerciseHandler(1);
+            }}
+          >
+            <ListItemText primary={`Click to add exercise ${1}`} />
+          </ListItem>
+        );
+      }
+    }
+  } else if (isSuperset(segment.trainingSetTypeId)) {
+    let firstComponent: JSX.Element;
+    let secondComponent: JSX.Element;
+    const firstComponentBlink =
+      selectExerciseForSegment.segmentId === segment.id &&
+      selectExerciseForSegment.order === 1;
+    const secondComponentBlink =
+      selectExerciseForSegment.segmentId === segment.id &&
+      selectExerciseForSegment.order === 2;
+
+    if (firstComponentBlink) {
+      firstComponent = (
+        <Blinker
+          shouldBlink={true}
+          component={
+            <ListItem>
+              <ListItemText primary={'Select Exercise 1'} />
+            </ListItem>
+          }
+        />
+      );
+    } else {
+      const workoutExercise = segment.exercises[0];
+      if (
+        workoutExercise &&
+        workoutExercise.exerciseId &&
+        workoutExercise.order === 1
+      ) {
+        firstComponent = (
+          <ListItem>
+            <ListItemText
+              primary={getExerciseName(exercises, workoutExercise.exerciseId)}
+            />
+            <ListItemSecondaryAction>
+              <IconButton
+                onClick={() => {
+                  deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        );
+      } else {
+        firstComponent = (
+          <ListItem
+            button
+            onClick={() => {
+              selectExerciseHandler(1);
+            }}
+          >
+            <ListItemText primary={`Click to add exercise ${1}`} />
+          </ListItem>
+        );
+      }
+    }
+
+    if (secondComponentBlink) {
+      secondComponent = (
+        <Blinker
+          shouldBlink={true}
+          component={
+            <ListItem>
+              <ListItemText primary={'Select Exercise 2'} />
+            </ListItem>
+          }
+        />
+      );
+    } else {
+      let workoutExercise: WorkoutExercise | null = null;
+
+      if (segment.exercises[1]) {
+        workoutExercise = segment.exercises[1];
+      } else if (segment.exercises[0]) {
+        workoutExercise = segment.exercises[0];
+      }
+
+      if (
+        workoutExercise &&
+        workoutExercise.exerciseId &&
+        workoutExercise.order === 2
+      ) {
+        secondComponent = (
+          <ListItem>
+            <ListItemText
+              primary={getExerciseName(exercises, workoutExercise.exerciseId)}
+            />
+            <ListItemSecondaryAction>
+              <IconButton
+                onClick={() => {
+                  workoutExercise &&
+                    deleteExerciseFromSegmentHandler(
+                      workoutExercise.exerciseId
+                    );
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        );
+      } else {
+        secondComponent = (
+          <ListItem
+            button
+            onClick={() => {
+              selectExerciseHandler(2);
+            }}
+          >
+            <ListItemText primary={`Click to add exercise ${2}`} />
+          </ListItem>
+        );
+      }
+    }
+
+    display = (
+      <>
+        {firstComponent}
+        {secondComponent}
+      </>
+    );
+  }
+  return display;
 };
 
 interface PassedInProps {
-  order: number;
   segment: Segment;
 }
 

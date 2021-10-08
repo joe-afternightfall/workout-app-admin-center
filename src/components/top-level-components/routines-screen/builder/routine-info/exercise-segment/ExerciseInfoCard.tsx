@@ -84,17 +84,10 @@ const ExerciseInfoCard = ({
           >
             <Divider variant={'middle'} />
 
-            {isStraightSet(segment.trainingSetTypeId) && (
-              <ExerciseListItem segment={segment} order={1} />
-            )}
+            <ExerciseListItem segment={segment} />
 
-            {isSuperset(segment.trainingSetTypeId) && (
-              <>
-                <ExerciseListItem segment={segment} order={1} />
-                <ExerciseListItem segment={segment} order={2} />
-              </>
-            )}
             <Divider variant={'middle'} />
+
             <ListItem disableGutters>
               <Grid container>
                 <Grid item xs={12} container>
