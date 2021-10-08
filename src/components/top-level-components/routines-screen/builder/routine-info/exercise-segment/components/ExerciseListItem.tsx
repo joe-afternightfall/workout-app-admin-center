@@ -1,28 +1,28 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {
-  IconButton,
   ListItem,
-  ListItemSecondaryAction,
+  IconButton,
   ListItemText,
+  ListItemSecondaryAction,
 } from '@material-ui/core';
 import {
-  ExerciseVO,
-  getExerciseName,
-  isStraightSet,
-  isSuperset,
   Segment,
+  Blinker,
+  isSuperset,
+  ExerciseVO,
+  isStraightSet,
+  getExerciseName,
   WorkoutExercise,
 } from 'workout-app-common-core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import {
-  deleteExerciseFromSegment,
   selectExerciseForSegment,
+  deleteExerciseFromSegment,
 } from '../../../../../../../creators/routine-builder/builder';
 import { State } from '../../../../../../../configs/redux/store';
-import Blinker from '../../../../../Blinker';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => createStyles({}));
 

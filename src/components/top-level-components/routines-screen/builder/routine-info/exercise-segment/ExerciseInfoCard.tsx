@@ -31,8 +31,6 @@ import {
   deleteExerciseFromSegment,
   selectExerciseForSegment,
 } from '../../../../../../creators/routine-builder/builder';
-import Blinker from '../../../../Blinker';
-import CloseIcon from '@material-ui/icons/Close';
 import ExerciseListItem from './components/ExerciseListItem';
 
 const useStyles = makeStyles(() =>
