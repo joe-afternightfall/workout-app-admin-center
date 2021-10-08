@@ -7,8 +7,8 @@ import {
   TrainingSetType,
   trainingSetTypes,
 } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
-import { selectSetType } from '../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
+import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
 import { Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>

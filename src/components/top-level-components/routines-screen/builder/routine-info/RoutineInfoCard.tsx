@@ -17,7 +17,7 @@ import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { scroller } from 'react-scroll';
-import ExerciseCard from './components/ExerciseCard';
+import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
 import { Phase, RoutineTemplateVO } from 'workout-app-common-core';
 import ClickToAddCard from './components/ClickToAddCard';
 import ActionMenu from './components/ActionMenu';
@@ -91,7 +91,7 @@ const RoutineInfoCard = ({
                         [classes.animateListItem]: openCard === listId,
                       })}
                       primary={
-                        <ExerciseCard
+                        <ExerciseInfoCard
                           title={'Exercise Card ' + segment.order}
                           segment={segment}
                           selectedCardId={openCard}

@@ -24,8 +24,8 @@ import { State } from '../../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import SetIncrementer from '../../components/SetIncrementer';
-import RestBetweenOptions from './RestBetweenOptions';
-import SetTypeDropdown from './SetTypeDropdown';
+import RestBetweenOptions from './components/RestBetweenOptions';
+import SetTypeDropdown from './components/SetTypeDropdown';
 import { Dispatch } from 'redux';
 import {
   deleteExerciseFromSegment,
@@ -49,7 +49,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ExerciseCard = ({
+const ExerciseInfoCard = ({
   listId,
   title,
   segment,
@@ -58,7 +58,7 @@ const ExerciseCard = ({
   selectExerciseHandler,
   selectExerciseForSegment,
   deleteExerciseFromSegmentHandler,
-}: ExerciseCardProps & PassedInProps): JSX.Element => {
+}: ExerciseInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const isActiveCard = selectedCardId === listId;
   const shouldDisable = React.isValidElement(title);
@@ -205,7 +205,7 @@ interface PassedInProps {
   scrollToHandler: () => void;
 }
 
-export interface ExerciseCardProps {
+export interface ExerciseInfoCardProps {
   phases: Phase[];
   selectExerciseHandler: (order: number) => void;
   selectExerciseForSegment: {
@@ -215,18 +215,18 @@ export interface ExerciseCardProps {
   deleteExerciseFromSegmentHandler: (exerciseId: string) => void;
 }
 
-const mapStateToProps = (state: State): ExerciseCardProps => {
+const mapStateToProps = (state: State): ExerciseInfoCardProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
     selectExerciseForSegment:
       state.routineBuilderState.selectExerciseForSegment,
-  } as unknown as ExerciseCardProps;
+  } as unknown as ExerciseInfoCardProps;
 };
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
   ownProps: PassedInProps
-): ExerciseCardProps =>
+): ExerciseInfoCardProps =>
   ({
     selectExerciseHandler: (order: number) => {
       dispatch(selectExerciseForSegment(ownProps.segment.id, order));
@@ -234,6 +234,6 @@ const mapDispatchToProps = (
     deleteExerciseFromSegmentHandler: (exerciseId: string) => {
       dispatch(deleteExerciseFromSegment(ownProps.segment.id, exerciseId));
     },
-  } as unknown as ExerciseCardProps);
+  } as unknown as ExerciseInfoCardProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExerciseCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseInfoCard);
