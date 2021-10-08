@@ -200,6 +200,41 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              segment.exercises.map((workoutExercise) => {
+                const setNumber = workoutExercise.sets.length + 1;
+                workoutExercise.sets.push({
+                  id: uuidv4(),
+                  markedDone: false,
+                  setNumber: setNumber,
+                  weight: 0,
+                  reps: 0,
+                });
+              });
+            }
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
+      case ActionTypes.DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            if (segment.id === action.segmentId) {
+              segment.exercises.map((exercise) => {
+                exercise.sets.splice(-1);
+              });
+            }
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }

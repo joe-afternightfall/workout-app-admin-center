@@ -63,7 +63,7 @@ export default function ExerciseInfoCard({
             <Divider variant={'middle'} />
 
             <ListItem>
-              <SetIncrementer />
+              <SetIncrementer segment={segment} />
             </ListItem>
             <ListItem>
               <RestBetweenOptions

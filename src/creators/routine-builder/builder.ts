@@ -215,11 +215,40 @@ export interface DeleteSetTypeAndExerciseInfoAction {
   type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO;
   segmentId: string;
 }
+
 export const deleteSetTypeAndExerciseInfo = (
   segmentId: string
 ): DeleteSetTypeAndExerciseInfoAction => {
   return {
     type: ActionTypes.DELETE_SET_TYPE_AND_EXERCISE_INFO,
+    segmentId: segmentId,
+  };
+};
+
+export interface AddSetToEachExerciseInSegmentAction {
+  type: ActionTypes.ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT;
+  segmentId: string;
+}
+
+export const addSetToEachExerciseInSegment = (
+  segmentId: string
+): AddSetToEachExerciseInSegmentAction => {
+  return {
+    type: ActionTypes.ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT,
+    segmentId: segmentId,
+  };
+};
+
+export interface DeleteSetFromEachExerciseInSegmentAction {
+  type: ActionTypes.DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT;
+  segmentId: string;
+}
+
+export const deleteSetFromEachExerciseInSegment = (
+  segmentId: string
+): DeleteSetFromEachExerciseInSegmentAction => {
+  return {
+    type: ActionTypes.DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT,
     segmentId: segmentId,
   };
 };

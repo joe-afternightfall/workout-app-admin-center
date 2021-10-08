@@ -39,6 +39,8 @@ import {
   AddExerciseToSegmentAction,
   DeleteExerciseFromSegmentAction,
   DeleteSetTypeAndExerciseInfoAction,
+  AddSetToEachExerciseInSegmentAction,
+  DeleteSetFromEachExerciseInSegmentAction,
 } from './routine-builder/builder';
 import { HideAppBarAction } from './application';
 
@@ -75,6 +77,8 @@ export enum ActionTypes {
   ADD_EXERCISE_TO_SEGMENT = 'ADD_EXERCISE_TO_SEGMENT',
   DELETE_EXERCISE_FROM_SEGMENT = 'DELETE_EXERCISE_FROM_SEGMENT',
   DELETE_SET_TYPE_AND_EXERCISE_INFO = 'DELETE_SET_TYPE_AND_EXERCISE_INFO',
+  ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT = 'ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT',
+  DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT = 'DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -124,4 +128,6 @@ export type ApplicationActions =
   | SelectExerciseForSegmentAction
   | AddExerciseToSegmentAction
   | DeleteExerciseFromSegmentAction
-  | DeleteSetTypeAndExerciseInfoAction;
+  | DeleteSetTypeAndExerciseInfoAction
+  | AddSetToEachExerciseInSegmentAction
+  | DeleteSetFromEachExerciseInSegmentAction;
