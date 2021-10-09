@@ -6,16 +6,24 @@ import { routerActions } from 'connected-react-router';
 import { displayAppSnackbar } from '../../creators/app-snackbar';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
+import { RoutineTemplateDAO } from 'workout-app-common-core';
 
-export const saveRoutineTemplate =
+export const saveNewRoutineTemplate =
   (): ThunkAction<void, State, void, AnyAction> =>
   async (dispatch: Dispatch, getState: () => State): Promise<void> => {
     const selectedRoutine = getState().routineBuilderState.selectedRoutine;
 
+    const templateDAO = new RoutineTemplateDAO(
+      selectedRoutine.id,
+      selectedRoutine.name,
+      selectedRoutine.workoutCategoryId,
+      selectedRoutine.phases
+    );
+
     const ref = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
     const newRef = ref.push();
 
-    return await newRef.set(selectedRoutine, (error: Error | null) => {
+    return await newRef.set(templateDAO, (error: Error | null) => {
       if (error) {
         dispatch(
           displayAppSnackbar({
