@@ -9,14 +9,11 @@ import {
 } from 'workout-app-common-core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {
-  selectedExerciseSlotToFill,
-  deleteExerciseFromSegment,
-} from '../../../../../../../creators/routine-builder/builder';
+import ButtonListItem from './exercise-list-item/ButtonListItem';
 import { State } from '../../../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import BlinkingListItem from './exercise-list-item/BlinkingListItem';
-import ButtonListItem from './exercise-list-item/ButtonListItem';
+import { selectedExerciseSlotToFill } from '../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() => createStyles({}));
 
@@ -28,8 +25,6 @@ const ExerciseListItem = ({
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   let display = <div />;
-
-  // todo: simplify this file : can rip out commonalities
 
   if (isStraightSet(segment.trainingSetTypeId)) {
     const blink =
@@ -156,7 +151,6 @@ export interface ExerciseListItemProps {
     order: number;
     segmentId: string;
   };
-  deleteExerciseFromSegmentHandler: (exerciseId: string) => void;
 }
 
 const mapStateToProps = (state: State): ExerciseListItemProps => {
@@ -174,9 +168,6 @@ const mapDispatchToProps = (
   ({
     selectExerciseHandler: (order: number) => {
       dispatch(selectedExerciseSlotToFill(ownProps.segment.id, order));
-    },
-    deleteExerciseFromSegmentHandler: (exerciseId: string) => {
-      dispatch(deleteExerciseFromSegment(ownProps.segment.id, exerciseId));
     },
   } as unknown as ExerciseListItemProps);
 
