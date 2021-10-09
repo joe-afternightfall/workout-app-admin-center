@@ -1,16 +1,16 @@
 import React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { workoutCategories, WorkoutCategoryVO } from 'workout-app-common-core';
-import { CardHeader, IconButton, TextField } from '@material-ui/core';
 import ActionMenu from './ActionMenu';
-import { State } from '../../../../../../configs/redux/store';
 import DoneIcon from '@material-ui/icons/Done';
-import BaseSelectDropdown from '../../../../../shared/BaseSelectDropdown';
 import {
   updateRoutineTitle,
   updateSelectedCategoryId,
 } from '../../../../../../creators/routine-builder/builder';
-import { Dispatch } from 'redux';
+import { State } from '../../../../../../configs/redux/store';
+import { CardHeader, Grid, IconButton, TextField } from '@material-ui/core';
+import BaseSelectDropdown from '../../../../../shared/BaseSelectDropdown';
+import { workoutCategories, WorkoutCategoryVO } from 'workout-app-common-core';
 
 const RoutineTitle = ({
   routineTitle,
@@ -32,41 +32,42 @@ const RoutineTitle = ({
       disableTypography={isEditing}
       title={
         isEditing ? (
-          <TextField
-            fullWidth
-            value={routineTitle}
-            placeholder={'Title'}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              titleChangeHandler(e.target.value);
-            }}
-            variant={'filled'}
-            label={'Routine title'}
-          />
+          <Grid container spacing={2}>
+            <Grid item xs={8} sm={8}>
+              <TextField
+                fullWidth
+                value={routineTitle}
+                placeholder={'Title'}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  titleChangeHandler(e.target.value);
+                }}
+                variant={'filled'}
+                label={'Routine title'}
+              />
+            </Grid>
+            <Grid item xs={8} sm={8}>
+              <BaseSelectDropdown
+                id={'workout-category-dropdown'}
+                value={selectedWorkoutCategoryId}
+                label={'Category'}
+                changeHandler={categoryChangeHandler}
+                variant={'outlined'}
+                data={workoutCategories.map((category: WorkoutCategoryVO) => {
+                  return {
+                    id: category.id,
+                    name: category.name,
+                  };
+                })}
+              />
+            </Grid>
+          </Grid>
         ) : routineTitle === '' ? (
           'Setup Routine'
         ) : (
           routineTitle
         )
       }
-      subheader={
-        isEditing ? (
-          <BaseSelectDropdown
-            id={'workout-category-dropdown'}
-            value={selectedWorkoutCategoryId}
-            label={'Category'}
-            changeHandler={categoryChangeHandler}
-            variant={'outlined'}
-            data={workoutCategories.map((category: WorkoutCategoryVO) => {
-              return {
-                id: category.id,
-                name: category.name,
-              };
-            })}
-          />
-        ) : (
-          subheader
-        )
-      }
+      subheader={isEditing ? undefined : subheader}
       action={
         isEditing ? (
           <IconButton
