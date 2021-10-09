@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RoutineInfoCard = ({
   phases,
-  routineTitle,
   toggleHandler,
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
@@ -111,13 +110,11 @@ interface PassedInProps {
 }
 
 interface RoutineInfoCardProps {
-  routineTitle: string;
   phases: Phase[];
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
-    routineTitle: state.routineBuilderState.selectedRoutine.name,
     phases: state.routineBuilderState.selectedRoutine.phases,
   } as unknown as RoutineInfoCardProps;
 };
