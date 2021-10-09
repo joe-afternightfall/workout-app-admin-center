@@ -7,9 +7,9 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import {
   addSetToEachExerciseInSegment,
   deleteSetFromEachExerciseInSegment,
-} from '../../../../../../../creators/routine-builder/builder';
+} from '../../../../../../../../creators/routine-builder/builder';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-import LineItemTitle from './base-components/LineItemTitle';
+import LineItemTitle from '../base-components/LineItemTitle';
 
 const SetIncrementer = ({
   segment,

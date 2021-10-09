@@ -13,10 +13,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
-import SetIncrementer from './components/SetIncrementer';
-import SetTypeDropdown from './components/SetTypeHeader';
+import SetIncrementer from './components/inputs/SetIncrementer';
+import SetTypeDropdown from './components/inputs/SetTypeHeader';
 import ExerciseListItem from './components/ExerciseListItem';
-import RestBetweenOptions from './components/RestBetweenOptions';
+import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
 import ListItemMessage from './components/base-components/ListItemMessage';
@@ -91,7 +91,7 @@ export default function ExerciseInfoCard({
       />
       <CardContent>
         <List>
-          <Divider variant={'middle'} />
+          <Divider variant={'middle'} style={{ marginBottom: 12 }} />
           {emptySetType && (
             <ListItemMessage message={'select a set type to continue'} />
           )}
@@ -118,7 +118,7 @@ export default function ExerciseInfoCard({
                 </>
               ) : (
                 <>
-                  <Divider variant={'middle'} />
+                  <Divider variant={'middle'} style={{ marginTop: 12 }} />
                   <ListItemMessage message={'select exercises to continue'} />
                 </>
               )}

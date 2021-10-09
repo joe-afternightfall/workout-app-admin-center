@@ -2,8 +2,16 @@ import React from 'react';
 import { Blinker } from 'workout-app-common-core';
 import { ListItem, ListItemText } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    listItem: {
+      background: 'darkgrey',
+      opacity: 0.7,
+    },
+  })
+);
 
 export default function BlinkingListItem({
   title,
@@ -15,7 +23,11 @@ export default function BlinkingListItem({
     <Blinker
       shouldBlink={shouldBlink}
       component={
-        <ListItem>
+        <ListItem
+          className={clsx({
+            [classes.listItem]: shouldBlink,
+          })}
+        >
           <ListItemText primary={title} />
           {/*todo: come back and implement after changing segment implementation*/}
           {/*<ListItemSecondaryAction>*/}

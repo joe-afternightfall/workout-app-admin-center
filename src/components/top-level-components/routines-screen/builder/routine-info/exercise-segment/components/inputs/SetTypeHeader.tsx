@@ -8,8 +8,8 @@ import {
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { selectSetType } from '../../../../../../../creators/routine-builder/builder';
-import BaseSelectDropdown from '../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
+import { selectSetType } from '../../../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
 
 const SetTypeHeader = ({
   segment,

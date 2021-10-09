@@ -5,11 +5,11 @@ import {
   restBetweenNextSegmentOptions,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import LineItemTitle from '../base-components/LineItemTitle';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import BaseSelectDropdown from '../../../../../../shared/BaseSelectDropdown';
-import { updateRestBetween } from '../../../../../../../creators/routine-builder/builder';
-import LineItemTitle from './base-components/LineItemTitle';
+import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
+import { updateRestBetween } from '../../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
