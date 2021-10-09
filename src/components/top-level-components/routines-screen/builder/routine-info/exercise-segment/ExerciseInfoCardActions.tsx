@@ -1,10 +1,8 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
-import { selectPhase } from '../../../../../../creators/routine-builder/builder';
 
 const ExerciseInfoCardActions = ({
   doneHandler,
@@ -54,14 +52,4 @@ const mapStateToProps = (
   } as unknown as ExerciseInfoCardActionsProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): ExerciseInfoCardActionsProps =>
-  ({
-    changeHandler: (workoutPhaseId: string, phaseId: string) => {
-      dispatch(selectPhase(workoutPhaseId, phaseId));
-    },
-  } as unknown as ExerciseInfoCardActionsProps);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ExerciseInfoCardActions);
+export default connect(mapStateToProps)(ExerciseInfoCardActions);
