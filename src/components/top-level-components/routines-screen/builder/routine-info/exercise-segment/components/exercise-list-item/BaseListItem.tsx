@@ -1,10 +1,10 @@
 import React from 'react';
 import { Blinker } from 'workout-app-common-core';
 import { ListItem, ListItemText } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     listItem: {
       background: 'darkgrey',

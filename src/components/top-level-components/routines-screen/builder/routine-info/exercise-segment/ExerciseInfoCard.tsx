@@ -20,6 +20,7 @@ import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
 import ListItemMessage from './components/base-components/ListItemMessage';
+import ExerciseInfoCardActions from './ExerciseInfoCardActions';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -127,16 +128,7 @@ export default function ExerciseInfoCard({
         </List>
       </CardContent>
       {isActiveCard && !emptySetType && (
-        <CardActions>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Divider variant={'middle'} />
-            </Grid>
-            <Grid item container alignItems={'center'} justify={'flex-end'}>
-              <Button color={'primary'}>{'Save'}</Button>
-            </Grid>
-          </Grid>
-        </CardActions>
+        <ExerciseInfoCardActions segment={segment} />
       )}
     </Card>
   );
