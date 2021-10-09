@@ -6,7 +6,7 @@ import { State } from './configs/redux/store';
 import { PageProps, routes } from './configs/constants/routes';
 import SignInScreen from './components/top-level-components/sign-in-screen/SignInScreen';
 import { ROUTINE_BUILDER_SCREEN_PATH } from './configs/constants/app';
-import RoutineBuilder from './components/top-level-components/routines-screen/builder/RoutineBuilder';
+import RoutineBuilder from './components/top-level-components/routine-templates-screen/builder/RoutineBuilder';
 
 const AppRouter = (props: AppRouterProps): JSX.Element => {
   return props.isValidated ? (

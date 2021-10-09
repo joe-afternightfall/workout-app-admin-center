@@ -31,7 +31,7 @@ const SetTypeHeader = ({
             </Typography>
           </Grid>
 
-          <Grid item>
+          <Grid item xs={4}>
             <BaseSelectDropdown
               id={segment.id}
               label={'Set Type'}

@@ -21,7 +21,7 @@ import CircuitTypesTable from '../../components/top-level-components/workout-con
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 import CircuitBuilderScreen from '../../components/top-level-components/circuit-builder/CircuitBuilderScreen';
 import ExercisesScreen from '../../components/top-level-components/exercises-screen/ExercisesScreen';
-import RoutinesScreen from '../../components/top-level-components/routines-screen/RoutinesScreen';
+import RoutinesScreen from '../../components/top-level-components/routine-templates-screen/RoutinesScreen';
 
 export interface PageProps {
   path: string;
