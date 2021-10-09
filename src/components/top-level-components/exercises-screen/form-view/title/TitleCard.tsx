@@ -1,5 +1,4 @@
 import React from 'react';
-import ActionMenu from './ActionMenu';
 import { Card, CardHeader } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -18,10 +17,7 @@ export default function TitleCard({
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        title={newExercise ? 'New Exercise' : 'Edit Exercise'}
-        action={<ActionMenu />}
-      />
+      <CardHeader title={newExercise ? 'New Exercise' : 'Edit Exercise'} />
     </Card>
   );
 }
