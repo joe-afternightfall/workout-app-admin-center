@@ -136,12 +136,14 @@ export default function ExerciseInfoCard({
             </>
           )}
         </List>
-        <Divider variant={'middle'} />
       </CardContent>
       {isActiveCard && !emptySetType && (
         <CardActions>
-          <Grid container alignItems={'center'} justify={'flex-end'}>
-            <Grid item>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Divider variant={'middle'} />
+            </Grid>
+            <Grid item container alignItems={'center'} justify={'flex-end'}>
               <Button color={'primary'}>{'Save'}</Button>
             </Grid>
           </Grid>

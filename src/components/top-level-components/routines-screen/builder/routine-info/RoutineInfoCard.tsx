@@ -5,7 +5,6 @@ import {
   List,
   Divider,
   ListItem,
-  CardHeader,
   CardContent,
   ListItemText,
   ListSubheader,
@@ -13,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Phase } from 'workout-app-common-core';
-import ActionMenu from './components/ActionMenu';
+import RoutineTitle from './components/RoutineTitle';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
 import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
@@ -31,6 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     animateListItem: {
       height: '75vh',
+    },
+    listBackground: {
+      backgroundColor: '#ECECEC',
     },
   })
 );
@@ -57,17 +59,14 @@ const RoutineInfoCard = ({
 
   return (
     <Card raised={false} square className={classes.root}>
-      <CardHeader
-        title={routineTitle ? routineTitle : 'New Routine'}
-        subheader={'workout category'}
-        action={<ActionMenu />}
-      />
+      <RoutineTitle />
       <CardContent>
         {phases.map((phase, index) => {
           return (
             <List
               key={index}
               subheader={<ListSubheader>{'Phase'}</ListSubheader>}
+              className={classes.listBackground}
             >
               {phase.segments.map((segment) => {
                 const listId = `list-item-${segment.id}`;
