@@ -9,6 +9,7 @@ import {
   deleteSetFromEachExerciseInSegment,
 } from '../../../../../../../creators/routine-builder/builder';
 import { Grid, IconButton, Typography } from '@material-ui/core';
+import LineItemTitle from './base-components/LineItemTitle';
 
 const SetIncrementer = ({
   segment,
@@ -33,20 +34,18 @@ const SetIncrementer = ({
   return (
     <Grid container justify={'center'} alignItems={'center'}>
       <Grid item xs={6}>
-        <Typography variant={'subtitle1'} color={'textSecondary'}>
-          {'Number of sets'}
-        </Typography>
+        <LineItemTitle title={'Number of sets'} />
       </Grid>
-      <Grid item xs={6} container alignItems={'center'} justify={'flex-end'}>
-        <Grid item>
+      <Grid item xs={6} container alignItems={'center'}>
+        <Grid item xs={3} container justify={'center'}>
           <IconButton onClick={deleteHandler} disabled={disableDelete}>
             <RemoveIcon />
           </IconButton>
         </Grid>
-        <Grid item xs={3} container justify={'center'}>
-          <Typography variant={'h6'}>{numberOfSets}</Typography>
+        <Grid item xs={6} container justify={'center'}>
+          <Typography variant={'h5'}>{numberOfSets}</Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={3} container justify={'center'}>
           <IconButton onClick={addHandler} disabled={disableAdd}>
             <AddIcon />
           </IconButton>

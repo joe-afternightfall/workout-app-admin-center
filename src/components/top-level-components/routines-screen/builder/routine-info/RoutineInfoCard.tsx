@@ -26,12 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: 'none',
       backgroundColor: theme.palette.background.paper,
     },
-    animate: {
-      transition: 'transform .35s ease-in-out',
-    },
-    animateListItem: {
-      height: '75vh',
-    },
     listBackground: {
       backgroundColor: '#ECECEC',
     },
@@ -88,9 +82,6 @@ const RoutineInfoCard = ({
                     <Divider />
                     <ListItemText
                       disableTypography
-                      className={clsx(classes.animate, {
-                        [classes.animateListItem]: openCard === listId,
-                      })}
                       primary={
                         <ExerciseInfoCard
                           segment={segment}

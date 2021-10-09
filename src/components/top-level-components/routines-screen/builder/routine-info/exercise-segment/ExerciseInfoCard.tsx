@@ -19,6 +19,7 @@ import ExerciseListItem from './components/ExerciseListItem';
 import RestBetweenOptions from './components/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ExerciseActionMenu from './components/action-menu/ExerciseActionMenu';
+import ListItemMessage from './components/base-components/ListItemMessage';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -92,13 +93,7 @@ export default function ExerciseInfoCard({
         <List>
           <Divider variant={'middle'} />
           {emptySetType && (
-            <ListItem style={{ marginTop: 12 }}>
-              <Grid container justify={'center'}>
-                <Typography variant={'h6'} color={'textSecondary'}>
-                  {'select a set type to continue'}
-                </Typography>
-              </Grid>
-            </ListItem>
+            <ListItemMessage message={'select a set type to continue'} />
           )}
 
           {isActiveCard && !emptySetType && (
@@ -108,7 +103,7 @@ export default function ExerciseInfoCard({
               {displayInputs ? (
                 <>
                   <Divider variant={'middle'} />
-                  <ListItem>
+                  <ListItem style={{ marginTop: 16, marginBottom: 16 }}>
                     <SetIncrementer segment={segment} />
                   </ListItem>
                   <ListItem>
@@ -124,13 +119,7 @@ export default function ExerciseInfoCard({
               ) : (
                 <>
                   <Divider variant={'middle'} />
-                  <ListItem style={{ marginTop: 12 }}>
-                    <Grid container justify={'center'}>
-                      <Typography variant={'h6'} color={'textSecondary'}>
-                        {'select exercises to continue'}
-                      </Typography>
-                    </Grid>
-                  </ListItem>
+                  <ListItemMessage message={'select exercises to continue'} />
                 </>
               )}
             </>

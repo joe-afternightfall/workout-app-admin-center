@@ -9,6 +9,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import BaseSelectDropdown from '../../../../../../shared/BaseSelectDropdown';
 import { updateRestBetween } from '../../../../../../../creators/routine-builder/builder';
+import LineItemTitle from './base-components/LineItemTitle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,9 +40,12 @@ const RestBetweenOptions = ({
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+      <Grid item xs={6} container alignItems={'center'}>
+        <LineItemTitle title={'Rest between settings'} />
+      </Grid>
+      <Grid item xs={6}>
+        <Grid container alignItems={'center'} justify={'center'} spacing={2}>
+          <Grid item xs={12}>
             <BaseSelectDropdown
               changeHandler={(option: string) => {
                 updateRestHandler('set', option);
@@ -54,7 +58,7 @@ const RestBetweenOptions = ({
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <BaseSelectDropdown
               changeHandler={(option: string) => {
                 updateRestHandler('segment', option);
@@ -67,11 +71,6 @@ const RestBetweenOptions = ({
             />
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12} container justify={'center'}>
-        <Typography variant={'h6'} color={'textSecondary'}>
-          {'Rest between settings'}
-        </Typography>
       </Grid>
     </Grid>
   );
