@@ -70,7 +70,7 @@ const RoutineInfoCard = ({
               subheader={<ListSubheader>{'Phase'}</ListSubheader>}
             >
               {phase.segments.map((segment) => {
-                const listId = `list-item-${segment.order}`;
+                const listId = `list-item-${segment.id}`;
                 return (
                   <ListItem id={listId} key={listId}>
                     <Divider />
@@ -81,10 +81,8 @@ const RoutineInfoCard = ({
                       })}
                       primary={
                         <ExerciseInfoCard
-                          title={'Exercise Card ' + segment.order}
                           segment={segment}
-                          selectedCardId={openCard}
-                          listId={listId}
+                          isActiveCard={openCard === listId}
                           scrollToHandler={() => {
                             scrollToSection(listId);
                             toggleHandler(true);

@@ -9,8 +9,8 @@ import {
   ListItem,
   CardHeader,
   CardContent,
-  ListSubheader,
   CardActions,
+  Typography,
 } from '@material-ui/core';
 import { Segment } from 'workout-app-common-core';
 import SetIncrementer from './components/SetIncrementer';
@@ -18,7 +18,6 @@ import SetTypeDropdown from './components/SetTypeHeader';
 import ExerciseListItem from './components/ExerciseListItem';
 import RestBetweenOptions from './components/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import BaseMoreVertMenu from '../../../../../shared/BaseMoreVertMenu';
 import ExerciseActionMenu from './components/action-menu/ExerciseActionMenu';
 
 const useStyles = makeStyles(() =>
@@ -34,15 +33,11 @@ const useStyles = makeStyles(() =>
 );
 
 export default function ExerciseInfoCard({
-  listId,
-  title,
   segment,
+  isActiveCard,
   scrollToHandler,
-  selectedCardId,
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
-  const isActiveCard = selectedCardId === listId;
-  const shouldDisable = React.isValidElement(title);
   let displayActionMenu = false;
 
   if (isActiveCard && segment.exercises.length > 0) {
@@ -51,6 +46,8 @@ export default function ExerciseInfoCard({
     displayActionMenu = true;
   }
 
+  const disableTypography = segment.trainingSetTypeId === '';
+  const title = `Segment #${segment.order}`;
   return (
     <Card
       onClick={scrollToHandler}
@@ -59,8 +56,17 @@ export default function ExerciseInfoCard({
       })}
     >
       <CardHeader
-        disableTypography={shouldDisable}
-        title={title}
+        disableTypography={disableTypography}
+        title={
+          disableTypography ? (
+            <Typography variant={'h5'} color={'textSecondary'}>
+              {title}
+            </Typography>
+          ) : (
+            title
+          )
+        }
+        subheader={<SetTypeDropdown segment={segment} />}
         action={
           displayActionMenu && <ExerciseActionMenu segmentId={segment.id} />
         }
@@ -68,13 +74,7 @@ export default function ExerciseInfoCard({
       {isActiveCard && (
         <>
           <CardContent>
-            <List
-              subheader={
-                <ListSubheader>
-                  <SetTypeDropdown segment={segment} />
-                </ListSubheader>
-              }
-            >
+            <List>
               <Divider variant={'middle'} />
 
               <ExerciseListItem segment={segment} />
@@ -109,9 +109,7 @@ export default function ExerciseInfoCard({
 }
 
 interface ExerciseInfoCardProps {
-  title: string | JSX.Element;
-  listId: string;
   segment: Segment;
-  selectedCardId: string;
   scrollToHandler: () => void;
+  isActiveCard: boolean;
 }

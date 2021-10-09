@@ -22,20 +22,7 @@ const SetTypeHeader = ({
   return (
     <Grid container alignItems={'center'} justify={'space-between'}>
       {segment.trainingSetTypeId ? (
-        <Grid item>
-          <Grid container alignItems={'center'} spacing={2}>
-            <Grid item>
-              <Typography variant={'body1'} color={'textSecondary'}>
-                {'Set type: '}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant={'h5'} color={'textPrimary'}>
-                {getSetTypeName(segment.trainingSetTypeId)}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
+        `Set type: ${getSetTypeName(segment.trainingSetTypeId)}`
       ) : (
         <>
           <Grid item>
