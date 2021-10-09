@@ -40,10 +40,7 @@ const ExerciseList = ({
       <CardContent>
         {exercises.map((exercise, index) => {
           return (
-            <List
-              key={index}
-              // subheader={<ListSubheader>{'Exercise List'}</ListSubheader>}
-            >
+            <List key={index}>
               <ListItem
                 button
                 disabled={disabled}
