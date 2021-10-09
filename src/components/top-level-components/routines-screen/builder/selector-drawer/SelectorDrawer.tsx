@@ -5,10 +5,10 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core/styles';
-import ExercisesList from './ExercisesList';
-import { AppBar, Toolbar, Typography, Drawer } from '@material-ui/core';
-import { State } from '../../../../../configs/redux/store';
 import { connect } from 'react-redux';
+import ExercisesList from './ExercisesList';
+import { State } from '../../../../../configs/redux/store';
+import { AppBar, Toolbar, Typography, Drawer } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
