@@ -61,7 +61,7 @@ const TopAppBar = (props: AppBarProps & PassedInAppBarProps): JSX.Element => {
     size: width,
   });
 
-  return (
+  return props.displayAppBar ? (
     <HideOnScroll {...props}>
       <AppBar position={'fixed'} className={classes.appBar}>
         <Toolbar>
@@ -114,11 +114,14 @@ const TopAppBar = (props: AppBarProps & PassedInAppBarProps): JSX.Element => {
         </Toolbar>
       </AppBar>
     </HideOnScroll>
+  ) : (
+    <React.Fragment />
   );
 };
 
 interface AppBarProps {
   drawerSize: string;
+  displayAppBar: boolean;
   openSideDrawerHandler: () => void;
 }
 
@@ -130,6 +133,7 @@ interface PassedInAppBarProps {
 const mapStateToProps = (state: State): AppBarProps => {
   return {
     drawerSize: state.applicationState.drawerSize,
+    displayAppBar: state.applicationState.displayAppBar,
   } as unknown as AppBarProps;
 };
 

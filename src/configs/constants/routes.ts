@@ -3,11 +3,14 @@ import {
   CIRCUIT_TYPES_SCREEN_PATH,
   EXERCISE_TYPES_SCREEN_PATH,
   CIRCUIT_BUILDER_SCREEN_PATH,
+  EXERCISES_SCREEN_PATH,
+  ROUTINE_TEMPLATES_SCREEN_PATH,
 } from './app';
 import {
   Settings,
   DashboardRounded as DashboardIcon,
   Build as BuilderIcon,
+  FitnessCenter,
 } from '@material-ui/icons';
 import { ComponentType } from 'react';
 import { SvgIconTypeMap } from '@material-ui/core';
@@ -17,6 +20,8 @@ import DashboardScreen from '../../components/top-level-components/dashboard-scr
 import CircuitTypesTable from '../../components/top-level-components/workout-configs/circuit-types-screen/CircuitTypesTable';
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 import CircuitBuilderScreen from '../../components/top-level-components/circuit-builder/CircuitBuilderScreen';
+import ExercisesScreen from '../../components/top-level-components/exercises-screen/ExercisesScreen';
+import RoutinesScreen from '../../components/top-level-components/routine-templates-screen/RoutinesScreen';
 
 export interface PageProps {
   path: string;
@@ -69,6 +74,36 @@ export const routes: RoutesMap = {
         icon: BuilderIcon,
         testId: 'circuit-builder-nav',
         routerComponent: CircuitBuilderScreen,
+      },
+    ],
+  },
+  ROUTINE_TEMPLATES_SCREEN: {
+    nested: false,
+    mainTitle: 'Routine Builder',
+    mainIcon: BuilderIcon,
+    pageProps: [
+      {
+        path: ROUTINE_TEMPLATES_SCREEN_PATH,
+        drawerTitle: 'Routine Templates',
+        headerTitle: 'Routine Templates',
+        icon: BuilderIcon,
+        testId: 'routine-template-nav',
+        routerComponent: RoutinesScreen,
+      },
+    ],
+  },
+  EXERCISES_SCREEN: {
+    nested: false,
+    mainTitle: 'Exercises',
+    mainIcon: FitnessCenter,
+    pageProps: [
+      {
+        path: EXERCISES_SCREEN_PATH,
+        drawerTitle: 'Exercises',
+        headerTitle: 'Exercises',
+        icon: FitnessCenter,
+        testId: 'exercises-builder-nav',
+        routerComponent: ExercisesScreen,
       },
     ],
   },

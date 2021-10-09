@@ -11,14 +11,6 @@ interface CustomPalette extends Palette {
       hover: string;
       contrastColor: string;
     };
-    offWhite: string;
-    accents: {
-      pink: string;
-      orange: string;
-      green: string;
-      blue: string;
-      purple: string;
-    };
   };
 }
 
@@ -34,9 +26,6 @@ export function getLightTheme(): Theme {
   return createMuiTheme({
     palette: {
       colors: {
-        // background: '#f3f4f2',
-        offWhite: '#F5F5F5',
-        // headerHighlight: '#502df1',
         active: {
           // highlight: '#5532f1',
           highlight: '#674bf2',
@@ -45,17 +34,6 @@ export function getLightTheme(): Theme {
           // contrastColor: '#708C9B', // text and icon colors
           // background: '#b5aaf5', // left border highlight
         },
-        accents: {
-          pink: '#E43F78',
-          orange: '#EF8C0A',
-          green: '#77C74B',
-          blue: '#2C9DF0',
-          purple: '#725FE7',
-        },
-      },
-      text: {
-        primary: '#686868',
-        secondary: '#686868',
       },
       type: 'light',
       primary: {

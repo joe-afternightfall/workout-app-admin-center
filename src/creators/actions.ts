@@ -11,6 +11,7 @@ import {
 import { LoadCircuitTemplatesAction } from './circuit-template';
 import {
   LoadCircuitTypesAction,
+  LoadExercisesAction,
   LoadExerciseTypesAction,
 } from './workout-configurations';
 import {
@@ -18,17 +19,62 @@ import {
   ClearHoverStylesForMuscleGroupAction,
   ToggleMuscleGroupAction,
 } from './muscle-selector';
+import {
+  DisplayAppSnackbarAction,
+  HideAppSnackbarAction,
+} from './app-snackbar';
+import {
+  AddPhaseToRoutineAction,
+  AddSegmentToPhaseAction,
+  BuildNewRoutineAction,
+  SelectPhaseAction,
+  SelectSetTypeAction,
+  UpdateRoutineTitleAction,
+  UpdateSelectedCategoryIdAction,
+  UpdateRestBetweenAction,
+  SelectedExerciseSlotToFillAction,
+  AddExerciseToSegmentAction,
+  DeleteExerciseFromSegmentAction,
+  ResetSetTypeAndExerciseInfoAction,
+  AddSetToEachExerciseInSegmentAction,
+  DeleteSetFromEachExerciseInSegmentAction,
+  DeleteSegmentFromPhaseAction,
+} from './routine-builder/builder';
+import { HideAppBarAction } from './application';
 
 export enum ActionTypes {
   // Application Actions
   INITIALIZE = 'INITIALIZE',
   VALIDATED_USER = 'VALIDATED_USER',
+  DISPLAY_APP_SNACKBAR = 'DISPLAY_APP_SNACKBAR',
+  HIDE_APP_SNACKBAR = 'HIDE_APP_SNACKBAR',
+  HIDE_APP_BAR = 'HIDE_APP_BAR',
 
   // Workout configurations
   LOAD_EXERCISE_TYPES = 'LOAD_EXERCISE_TYPES',
   LOAD_CIRCUIT_TYPES = 'LOAD_CIRCUIT_TYPES',
   LOAD_CIRCUIT_TEMPLATES = 'LOAD_CIRCUIT_TEMPLATES',
   LOAD_USER_WORKOUTS = 'LOAD_USER_WORKOUTS',
+
+  // New Workout Configs
+  LOAD_EXERCISES = 'LOAD_EXERCISES',
+
+  // Routine Builder Actions
+  BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
+  UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
+  UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
+  ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
+  SELECT_PHASE = 'SELECT_PHASE',
+  SELECT_SET_TYPE = 'SELECT_SET_TYPE',
+  ADD_SEGMENT_TO_PHASE = 'ADD_SEGMENT_TO_PHASE',
+  UPDATE_REST_BETWEEN = 'UPDATE_REST_BETWEEN',
+  SELECTED_EXERCISE_SLOT_TO_FILL = 'SELECTED_EXERCISE_SLOT_TO_FILL',
+  ADD_EXERCISE_TO_SEGMENT = 'ADD_EXERCISE_TO_SEGMENT',
+  DELETE_EXERCISE_FROM_SEGMENT = 'DELETE_EXERCISE_FROM_SEGMENT',
+  RESET_SET_TYPE_AND_EXERCISE_INFO = 'RESET_SET_TYPE_AND_EXERCISE_INFO',
+  ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT = 'ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT',
+  DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT = 'DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT',
+  DELETE_SEGMENT_FROM_PHASE = 'DELETE_SEGMENT_FROM_PHASE',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -59,4 +105,23 @@ export type ApplicationActions =
   | LoadCircuitTypesAction
   | ToggleMuscleGroupAction
   | ApplyHoverStylesToMuscleGroupAction
-  | ClearHoverStylesForMuscleGroupAction;
+  | ClearHoverStylesForMuscleGroupAction
+  | LoadExercisesAction
+  | HideAppSnackbarAction
+  | DisplayAppSnackbarAction
+  | BuildNewRoutineAction
+  | UpdateRoutineTitleAction
+  | UpdateSelectedCategoryIdAction
+  | AddPhaseToRoutineAction
+  | SelectPhaseAction
+  | SelectSetTypeAction
+  | AddSegmentToPhaseAction
+  | UpdateRestBetweenAction
+  | HideAppBarAction
+  | SelectedExerciseSlotToFillAction
+  | AddExerciseToSegmentAction
+  | DeleteExerciseFromSegmentAction
+  | ResetSetTypeAndExerciseInfoAction
+  | AddSetToEachExerciseInSegmentAction
+  | DeleteSetFromEachExerciseInSegmentAction
+  | DeleteSegmentFromPhaseAction;
