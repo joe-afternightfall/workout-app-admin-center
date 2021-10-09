@@ -62,15 +62,16 @@ const ExerciseListItem = ({
             <ListItemText
               primary={getExerciseName(exercises, workoutExercise.exerciseId)}
             />
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => {
-                  deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {/*todo: come back and implement after changing segment implementation*/}
+            {/*<ListItemSecondaryAction>*/}
+            {/*  <IconButton*/}
+            {/*    onClick={() => {*/}
+            {/*      deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <CloseIcon />*/}
+            {/*  </IconButton>*/}
+            {/*</ListItemSecondaryAction>*/}
           </ListItem>
         );
       } else {
@@ -119,15 +120,16 @@ const ExerciseListItem = ({
             <ListItemText
               primary={getExerciseName(exercises, workoutExercise.exerciseId)}
             />
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => {
-                  deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {/*todo: come back and implement after changing segment implementation*/}
+            {/*<ListItemSecondaryAction>*/}
+            {/*  <IconButton*/}
+            {/*    onClick={() => {*/}
+            {/*      deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <CloseIcon />*/}
+            {/*  </IconButton>*/}
+            {/*</ListItemSecondaryAction>*/}
           </ListItem>
         );
       } else {
@@ -174,18 +176,19 @@ const ExerciseListItem = ({
             <ListItemText
               primary={getExerciseName(exercises, workoutExercise.exerciseId)}
             />
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => {
-                  workoutExercise &&
-                    deleteExerciseFromSegmentHandler(
-                      workoutExercise.exerciseId
-                    );
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {/*todo: come back and implement after changing segment implementation*/}
+            {/*<ListItemSecondaryAction>*/}
+            {/*  <IconButton*/}
+            {/*    onClick={() => {*/}
+            {/*      workoutExercise &&*/}
+            {/*        deleteExerciseFromSegmentHandler(*/}
+            {/*          workoutExercise.exerciseId*/}
+            {/*        );*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <CloseIcon />*/}
+            {/*  </IconButton>*/}
+            {/*</ListItemSecondaryAction>*/}
           </ListItem>
         );
       } else {

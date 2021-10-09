@@ -12,7 +12,7 @@ import {
   CardActions,
   Typography,
 } from '@material-ui/core';
-import { Segment } from 'workout-app-common-core';
+import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import SetIncrementer from './components/SetIncrementer';
 import SetTypeDropdown from './components/SetTypeHeader';
 import ExerciseListItem from './components/ExerciseListItem';
@@ -39,6 +39,7 @@ export default function ExerciseInfoCard({
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
   let displayActionMenu = false;
+  let displayInputs = false;
 
   if (isActiveCard && segment.exercises.length > 0) {
     displayActionMenu = true;
@@ -48,6 +49,22 @@ export default function ExerciseInfoCard({
 
   const emptySetType = segment.trainingSetTypeId === '';
   const title = `Segment #${segment.order}`;
+
+  if (isSuperset(segment.trainingSetTypeId)) {
+    if (
+      segment.exercises[0] &&
+      segment.exercises[0].exerciseId !== '' &&
+      segment.exercises[1] &&
+      segment.exercises[1].exerciseId !== ''
+    ) {
+      displayInputs = true;
+    }
+  } else if (isStraightSet(segment.trainingSetTypeId)) {
+    if (segment.exercises[0] && segment.exercises[0].exerciseId !== '') {
+      displayInputs = true;
+    }
+  }
+
   return (
     <Card
       onClick={scrollToHandler}
@@ -88,20 +105,34 @@ export default function ExerciseInfoCard({
             <>
               <ExerciseListItem segment={segment} />
 
-              <Divider variant={'middle'} />
-
-              <ListItem>
-                <SetIncrementer segment={segment} />
-              </ListItem>
-              <ListItem>
-                <RestBetweenOptions
-                  segmentId={segment.id}
-                  restBetweenNextSegmentValue={
-                    segment.secondsRestBetweenNextSegment
-                  }
-                  restBetweenSetValue={segment.secondsRestBetweenSets}
-                />
-              </ListItem>
+              {displayInputs ? (
+                <>
+                  <Divider variant={'middle'} />
+                  <ListItem>
+                    <SetIncrementer segment={segment} />
+                  </ListItem>
+                  <ListItem>
+                    <RestBetweenOptions
+                      segmentId={segment.id}
+                      restBetweenNextSegmentValue={
+                        segment.secondsRestBetweenNextSegment
+                      }
+                      restBetweenSetValue={segment.secondsRestBetweenSets}
+                    />
+                  </ListItem>
+                </>
+              ) : (
+                <>
+                  <Divider variant={'middle'} />
+                  <ListItem style={{ marginTop: 12 }}>
+                    <Grid container justify={'center'}>
+                      <Typography variant={'h6'} color={'textSecondary'}>
+                        {'select exercises to continue'}
+                      </Typography>
+                    </Grid>
+                  </ListItem>
+                </>
+              )}
             </>
           )}
         </List>
