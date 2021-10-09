@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Theme,
-  useTheme,
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import ExercisesList from './ExercisesList';
 import { State } from '../../../../../configs/redux/store';
@@ -29,8 +24,6 @@ const SelectorDrawer = ({
   selectedExerciseSlotForSegment,
 }: SelectorDrawerProps & PassedInProps) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
   return (
     <Drawer

@@ -13,8 +13,6 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class RoutinesScreen extends Component<RoutinesScreenProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
       <Grid xs={12} item container spacing={2}>
         <Grid item xs={12}>
@@ -25,8 +23,6 @@ class RoutinesScreen extends Component<RoutinesScreenProps> {
   }
 }
 
-export interface RoutinesScreenProps extends WithStyles<typeof styles> {
-  DELETE_ME?: undefined;
-}
+export type RoutinesScreenProps = WithStyles<typeof styles>;
 
 export default withStyles(styles, { withTheme: true })(RoutinesScreen);

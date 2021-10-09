@@ -7,15 +7,8 @@ import {
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
 import { updateRestBetween } from '../../../../../../../../creators/routine-builder/builder';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
 
 interface MenuOptions {
   id: string;
@@ -36,8 +29,6 @@ const RestBetweenOptions = ({
   restBetweenSetValue,
   updateRestHandler,
 }: RestBetweenOptionsProps & PassedInProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={6} container alignItems={'center'}>
@@ -86,10 +77,6 @@ export interface RestBetweenOptionsProps {
   updateRestHandler: (type: 'set' | 'segment', option: string) => void;
 }
 
-const mapStateToProps = (state: any): RestBetweenOptionsProps => {
-  return {} as unknown as RestBetweenOptionsProps;
-};
-
 const mapDispatchToProps = (
   dispatch: Dispatch,
   ownProps: PassedInProps
@@ -100,4 +87,4 @@ const mapDispatchToProps = (
     },
   } as unknown as RestBetweenOptionsProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestBetweenOptions);
+export default connect(null, mapDispatchToProps)(RestBetweenOptions);

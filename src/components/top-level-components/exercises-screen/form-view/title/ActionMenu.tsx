@@ -1,17 +1,8 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  })
-);
-
-export default function ActionMenu(props: ActionMenuProps): JSX.Element {
-  const classes = useStyles();
-
+export default function ActionMenu(): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,8 +36,4 @@ export default function ActionMenu(props: ActionMenuProps): JSX.Element {
       </Menu>
     </>
   );
-}
-
-export interface ActionMenuProps {
-  DELETE_ME?: undefined;
 }

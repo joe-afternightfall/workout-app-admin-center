@@ -1,21 +1,12 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ParameterType, parameterTypes } from 'workout-app-common-core';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  })
-);
 
 export default function ParamTypeButtonGroup({
   changeHandler,
   selectedParamType,
 }: ParamTypeButtonGroupProps): JSX.Element {
-  const classes = useStyles();
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>

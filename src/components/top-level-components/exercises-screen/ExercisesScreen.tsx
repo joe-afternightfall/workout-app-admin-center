@@ -28,8 +28,6 @@ class ExercisesScreen extends Component<ExercisesScreenProps, LocalState> {
   };
 
   render(): JSX.Element {
-    const { classes } = this.props;
-
     const handleChange = (tab: number, newExercise: boolean) => {
       this.setState({
         activeTab: tab,

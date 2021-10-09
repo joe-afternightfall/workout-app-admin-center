@@ -60,7 +60,7 @@ interface SetTypeDropdownProps {
   changeHandler: (setTypeId: string) => void;
 }
 
-const mapStateToProps = (state: any): SetTypeDropdownProps => {
+const mapStateToProps = (): SetTypeDropdownProps => {
   return {} as unknown as SetTypeDropdownProps;
 };
 

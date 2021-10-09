@@ -1,37 +1,14 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ExerciseInfo from './exercise-info/ExerciseInfoCard';
-import { ExerciseVO } from 'workout-app-common-core';
 import TitleCard from './title/TitleCard';
-import VerticalMenu from './vertical-menu/VerticalMenu';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  })
-);
-
-interface EditExerciseProps {
-  id: string;
-  name: string;
-  description: string;
-  equipmentId: string;
-  muscleGroupIds: string[];
-  iconId: string;
-  gripTypeId: string;
-  gripWidthId: string;
-  parameterTypeId: string;
-  alternateSides: boolean;
-}
+import { ExerciseVO } from 'workout-app-common-core';
+import ExerciseInfo from './exercise-info/ExerciseInfoCard';
 
 export default function FormView({
   exercise,
   newExercise,
   successCallback,
 }: FormViewProps): JSX.Element {
-  const classes = useStyles();
-
   return (
     <Grid container>
       <Grid item xs={7} container>
@@ -45,9 +22,6 @@ export default function FormView({
             successCallback={successCallback}
           />
         </Grid>
-        {/*<Grid item xs={2} sm={1}>*/}
-        {/*  <VerticalMenu />*/}
-        {/*</Grid>*/}
       </Grid>
     </Grid>
   );

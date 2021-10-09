@@ -1,29 +1,19 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { State } from '../../../configs/redux/store';
-import { ExerciseVO, getParameterTypeName } from 'workout-app-common-core';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../configs/models/workout-configurations/MuscleGroups';
 import MaterialTable from 'material-table';
 import PageTitle from '../../shared/PageTitle';
 import { Button, Grid } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
+import { State } from '../../../configs/redux/store';
+import muscleGroups, {
+  MuscleGroup,
+} from '../../../configs/models/workout-configurations/MuscleGroups';
+import { ExerciseVO, getParameterTypeName } from 'workout-app-common-core';
 
 const ExerciseListTable = ({
   exercises,
   actionClickHandler,
   editClickHandler,
 }: ExerciseListTableProps & PassedInProps): JSX.Element => {
-  const classes = useStyles();
-
   const data = exercises.map((exercise: ExerciseVO, index: number) => {
     index += 1;
     const foundMuscles: (MuscleGroup | undefined)[] =
@@ -145,7 +135,4 @@ const mapStateToProps = (state: State): ExerciseListTableProps => {
   } as unknown as ExerciseListTableProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): ExerciseListTableProps =>
-  ({} as unknown as ExerciseListTableProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExerciseListTable);
+export default connect(mapStateToProps)(ExerciseListTable);

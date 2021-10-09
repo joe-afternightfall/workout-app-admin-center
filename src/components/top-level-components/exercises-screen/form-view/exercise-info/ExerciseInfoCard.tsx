@@ -7,7 +7,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Divider,
   Grid,
   TextField,
@@ -20,7 +19,6 @@ import {
   parameterTypes,
 } from 'workout-app-common-core';
 import MuscleSelector from './components/MuscleSelector';
-import AlternateCheckboxes from './components/AlternateCheckboxes';
 import AlternateRadioGroup from './components/AlternateRadioGroup';
 import OptionalParams from './components/OptionalParams';
 import { saveNewExercise } from '../../../../../services/workout-configurations/exercises';
@@ -235,7 +233,7 @@ export interface ExerciseInfoCardProps {
   ) => void;
 }
 
-const mapStateToProps = (state: any): ExerciseInfoCardProps => {
+const mapStateToProps = (): ExerciseInfoCardProps => {
   return {} as unknown as ExerciseInfoCardProps;
 };
 

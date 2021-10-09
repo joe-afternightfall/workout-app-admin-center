@@ -11,10 +11,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import BaseListItem from './BaseListItem';
 import { State } from '../../../../../../../../configs/redux/store';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { selectedExerciseSlotToFill } from '../../../../../../../../creators/routine-builder/builder';
-
-const useStyles = makeStyles(() => createStyles({}));
 
 const ExerciseListItem = ({
   exercises,
@@ -22,7 +19,6 @@ const ExerciseListItem = ({
   selectedExerciseSlotForSegment,
   selectExerciseHandler,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
-  const classes = useStyles();
   let display = <div />;
 
   if (isStraightSet(segment.trainingSetTypeId)) {
