@@ -46,7 +46,7 @@ export default function ExerciseInfoCard({
     displayActionMenu = true;
   }
 
-  const disableTypography = segment.trainingSetTypeId === '';
+  const emptySetType = segment.trainingSetTypeId === '';
   const title = `Segment #${segment.order}`;
   return (
     <Card
@@ -56,9 +56,9 @@ export default function ExerciseInfoCard({
       })}
     >
       <CardHeader
-        disableTypography={disableTypography}
+        disableTypography={emptySetType}
         title={
-          disableTypography ? (
+          emptySetType ? (
             <Typography variant={'h5'} color={'textSecondary'}>
               {title}
             </Typography>
@@ -71,12 +71,21 @@ export default function ExerciseInfoCard({
           displayActionMenu && <ExerciseActionMenu segmentId={segment.id} />
         }
       />
-      {isActiveCard && (
-        <>
-          <CardContent>
-            <List>
-              <Divider variant={'middle'} />
+      <CardContent>
+        <List>
+          <Divider variant={'middle'} />
+          {emptySetType && (
+            <ListItem style={{ marginTop: 12 }}>
+              <Grid container justify={'center'}>
+                <Typography variant={'h6'} color={'textSecondary'}>
+                  {'select a set type to continue'}
+                </Typography>
+              </Grid>
+            </ListItem>
+          )}
 
+          {isActiveCard && !emptySetType && (
+            <>
               <ExerciseListItem segment={segment} />
 
               <Divider variant={'middle'} />
@@ -93,16 +102,19 @@ export default function ExerciseInfoCard({
                   restBetweenSetValue={segment.secondsRestBetweenSets}
                 />
               </ListItem>
-            </List>
-          </CardContent>
-          <CardActions>
-            <Grid container alignItems={'center'} justify={'flex-end'}>
-              <Grid item>
-                <Button color={'primary'}>{'Save'}</Button>
-              </Grid>
+            </>
+          )}
+        </List>
+        <Divider variant={'middle'} />
+      </CardContent>
+      {isActiveCard && !emptySetType && (
+        <CardActions>
+          <Grid container alignItems={'center'} justify={'flex-end'}>
+            <Grid item>
+              <Button color={'primary'}>{'Save'}</Button>
             </Grid>
-          </CardActions>
-        </>
+          </Grid>
+        </CardActions>
       )}
     </Card>
   );

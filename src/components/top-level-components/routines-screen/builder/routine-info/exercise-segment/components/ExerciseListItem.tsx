@@ -36,6 +36,8 @@ const ExerciseListItem = ({
   const classes = useStyles();
   let display = <div />;
 
+  // todo: simplify this file : can rip out commonalities
+
   if (isStraightSet(segment.trainingSetTypeId)) {
     const blink =
       selectExerciseForSegment.segmentId === segment.id &&
