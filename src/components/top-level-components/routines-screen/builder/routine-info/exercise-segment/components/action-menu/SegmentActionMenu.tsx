@@ -2,9 +2,9 @@ import React from 'react';
 import ActionMenuDialog from './ActionMenuDialog';
 import BaseMoreVertMenu from '../../../../../../../shared/BaseMoreVertMenu';
 
-export default function ExerciseActionMenu({
+export default function SegmentActionMenu({
   segmentId,
-}: ExerciseActionMenuProps): JSX.Element {
+}: SegmentActionMenuProps): JSX.Element {
   const [openDialog, setOpenDialog] = React.useState<boolean>(false);
   const [dialogType, setDialogType] = React.useState<string>('');
 
@@ -46,6 +46,6 @@ export default function ExerciseActionMenu({
   );
 }
 
-export interface ExerciseActionMenuProps {
+export interface SegmentActionMenuProps {
   segmentId: string;
 }

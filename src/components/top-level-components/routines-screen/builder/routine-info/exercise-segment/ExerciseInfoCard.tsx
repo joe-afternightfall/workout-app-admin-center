@@ -18,7 +18,7 @@ import SetTypeDropdown from './components/SetTypeHeader';
 import ExerciseListItem from './components/ExerciseListItem';
 import RestBetweenOptions from './components/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import ExerciseActionMenu from './components/action-menu/ExerciseActionMenu';
+import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
 import ListItemMessage from './components/base-components/ListItemMessage';
 
 const useStyles = makeStyles(() =>
@@ -86,7 +86,7 @@ export default function ExerciseInfoCard({
         }
         subheader={<SetTypeDropdown segment={segment} />}
         action={
-          displayActionMenu && <ExerciseActionMenu segmentId={segment.id} />
+          displayActionMenu && <SegmentActionMenu segmentId={segment.id} />
         }
       />
       <CardContent>
