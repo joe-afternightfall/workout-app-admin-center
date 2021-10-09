@@ -1,13 +1,15 @@
 import React from 'react';
+import {
+  ExerciseVO,
+  MuscleGroup,
+  muscleGroups,
+  getParameterTypeName,
+} from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import PageTitle from '../../shared/PageTitle';
 import { Button, Grid } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../configs/models/workout-configurations/MuscleGroups';
-import { ExerciseVO, getParameterTypeName } from 'workout-app-common-core';
 
 const ExerciseListTable = ({
   exercises,

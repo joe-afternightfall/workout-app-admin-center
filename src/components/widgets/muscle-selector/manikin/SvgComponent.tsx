@@ -9,9 +9,7 @@ import {
 } from '../../../../creators/muscle-selector';
 import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../../configs/models/workout-configurations/MuscleGroups';
+import { muscleGroups, MuscleGroup } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
   createStyles({

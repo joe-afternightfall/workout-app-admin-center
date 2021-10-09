@@ -1,12 +1,13 @@
-import React, { ChangeEvent } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import muscleGroups, {
+import {
   Muscles,
   SideOfBody,
   BodySection,
   MuscleGroup,
-} from '../../../../../../configs/models/workout-configurations/MuscleGroups';
+  muscleGroups,
+} from 'workout-app-common-core';
+import React, { ChangeEvent } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 function buildOptions(group: MuscleGroup): {
   id: string;

@@ -1,9 +1,8 @@
+import { WorkoutVO } from '../configs/models/WorkoutVO';
+import { WorkoutDAO } from '../configs/models/WorkoutDAO';
+import { UserProfileVO, UserProfileDAO } from 'workout-app-common-core';
 import { ExerciseTypeDAO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeDAO';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import { WorkoutDAO } from '../configs/models/WorkoutDAO';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
-import { UserProfileDAO } from '../configs/models/UserProfileDAO';
-import { UserProfileVO } from '../configs/models/UserProfileVO';
 
 export interface ExerciseTypeSnapshot {
   [key: string]: ExerciseTypeDAO;
@@ -57,6 +56,7 @@ export const userProfileSnapToVO = (
       weights: snap[key].weights,
       dateOfBirth: snap[key].dateOfBirth,
       lastUpdatedOn: snap[key].lastUpdatedOn,
+      workouts: snap[key].workouts,
     };
   });
 };
