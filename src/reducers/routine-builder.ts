@@ -123,8 +123,8 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
-      case ActionTypes.SELECT_EXERCISE_FOR_SEGMENT:
-        newState.selectExerciseForSegment = {
+      case ActionTypes.SELECTED_EXERCISE_SLOT_TO_FILL:
+        newState.selectedExerciseSlotForSegment = {
           segmentId: action.segmentId,
           order: action.order,
         };
@@ -147,8 +147,8 @@ export default {
       }
       case ActionTypes.ADD_EXERCISE_TO_SEGMENT: {
         const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
-        const segmentId = newState.selectExerciseForSegment.segmentId;
-        const exerciseOrder = newState.selectExerciseForSegment.order;
+        const segmentId = newState.selectedExerciseSlotForSegment.segmentId;
+        const exerciseOrder = newState.selectedExerciseSlotForSegment.order;
 
         clonedPhases.map((phase) => {
           phase.segments.map((segment) => {
@@ -163,7 +163,7 @@ export default {
           });
         });
 
-        newState.selectExerciseForSegment = {
+        newState.selectedExerciseSlotForSegment = {
           segmentId: '',
           order: -1,
         };
@@ -259,7 +259,7 @@ export default {
 export interface RoutineBuilderState {
   activeCardId: string;
   selectedRoutine: RoutineTemplateVO;
-  selectExerciseForSegment: {
+  selectedExerciseSlotForSegment: {
     segmentId: string;
     order: number;
   };

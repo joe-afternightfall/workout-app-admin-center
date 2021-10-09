@@ -163,18 +163,18 @@ export const updateRestBetween = (
   };
 };
 
-export interface SelectExerciseForSegmentAction {
-  type: ActionTypes.SELECT_EXERCISE_FOR_SEGMENT;
+export interface SelectedExerciseSlotToFillAction {
+  type: ActionTypes.SELECTED_EXERCISE_SLOT_TO_FILL;
   segmentId: string;
   order: number;
 }
 
-export const selectExerciseForSegment = (
+export const selectedExerciseSlotToFill = (
   segmentId: string,
   order: number
-): SelectExerciseForSegmentAction => {
+): SelectedExerciseSlotToFillAction => {
   return {
-    type: ActionTypes.SELECT_EXERCISE_FOR_SEGMENT,
+    type: ActionTypes.SELECTED_EXERCISE_SLOT_TO_FILL,
     segmentId: segmentId,
     order: order,
   };

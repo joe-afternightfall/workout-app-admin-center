@@ -18,7 +18,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import {
-  selectExerciseForSegment,
+  selectedExerciseSlotToFill,
   deleteExerciseFromSegment,
 } from '../../../../../../../creators/routine-builder/builder';
 import { State } from '../../../../../../../configs/redux/store';
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => createStyles({}));
 const ExerciseListItem = ({
   exercises,
   segment,
-  selectExerciseForSegment,
+  selectedExerciseSlotForSegment,
   selectExerciseHandler,
   deleteExerciseFromSegmentHandler,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
@@ -40,8 +40,8 @@ const ExerciseListItem = ({
 
   if (isStraightSet(segment.trainingSetTypeId)) {
     const blink =
-      selectExerciseForSegment.segmentId === segment.id &&
-      selectExerciseForSegment.order === 1;
+      selectedExerciseSlotForSegment.segmentId === segment.id &&
+      selectedExerciseSlotForSegment.order === 1;
 
     if (blink) {
       display = (
@@ -91,11 +91,11 @@ const ExerciseListItem = ({
     let firstComponent: JSX.Element;
     let secondComponent: JSX.Element;
     const firstComponentBlink =
-      selectExerciseForSegment.segmentId === segment.id &&
-      selectExerciseForSegment.order === 1;
+      selectedExerciseSlotForSegment.segmentId === segment.id &&
+      selectedExerciseSlotForSegment.order === 1;
     const secondComponentBlink =
-      selectExerciseForSegment.segmentId === segment.id &&
-      selectExerciseForSegment.order === 2;
+      selectedExerciseSlotForSegment.segmentId === segment.id &&
+      selectedExerciseSlotForSegment.order === 2;
 
     if (firstComponentBlink) {
       firstComponent = (
@@ -222,7 +222,7 @@ interface PassedInProps {
 export interface ExerciseListItemProps {
   exercises: ExerciseVO[];
   selectExerciseHandler: (order: number) => void;
-  selectExerciseForSegment: {
+  selectedExerciseSlotForSegment: {
     order: number;
     segmentId: string;
   };
@@ -233,9 +233,8 @@ const mapStateToProps = (state: State): ExerciseListItemProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
     exercises: state.applicationState.workoutConfigurations.exercises,
-    // todo: rename selectExerciseForSegment with something better
-    selectExerciseForSegment:
-      state.routineBuilderState.selectExerciseForSegment,
+    selectedExerciseSlotForSegment:
+      state.routineBuilderState.selectedExerciseSlotForSegment,
   } as unknown as ExerciseListItemProps;
 };
 
@@ -245,7 +244,7 @@ const mapDispatchToProps = (
 ): ExerciseListItemProps =>
   ({
     selectExerciseHandler: (order: number) => {
-      dispatch(selectExerciseForSegment(ownProps.segment.id, order));
+      dispatch(selectedExerciseSlotToFill(ownProps.segment.id, order));
     },
     deleteExerciseFromSegmentHandler: (exerciseId: string) => {
       dispatch(deleteExerciseFromSegment(ownProps.segment.id, exerciseId));

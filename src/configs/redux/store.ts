@@ -46,7 +46,7 @@ export const createStore = (history: History): Store => {
       circuitTemplates: [],
     } as unknown as ApplicationState,
     routineBuilderState: {
-      selectExerciseForSegment: {
+      selectedExerciseSlotForSegment: {
         segmentId: '',
         order: -1,
       },

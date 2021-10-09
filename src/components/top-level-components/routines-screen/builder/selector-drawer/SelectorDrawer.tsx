@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SelectorDrawer = ({
   display,
-  selectExerciseForSegment,
+  selectedExerciseSlotForSegment,
 }: SelectorDrawerProps & PassedInProps) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -43,13 +43,13 @@ const SelectorDrawer = ({
     >
       <AppBar position={'relative'}>
         <Toolbar>
-          {selectExerciseForSegment.segmentId !== '' ? (
+          {selectedExerciseSlotForSegment.segmentId !== '' ? (
             <>
               <Typography variant={'h6'} noWrap>
-                {selectExerciseForSegment.segmentId}
+                {selectedExerciseSlotForSegment.segmentId}
               </Typography>
               <Typography variant={'h6'} noWrap>
-                {selectExerciseForSegment.order}
+                {selectedExerciseSlotForSegment.order}
               </Typography>
             </>
           ) : (
@@ -70,7 +70,7 @@ interface PassedInProps {
 }
 
 interface SelectorDrawerProps {
-  selectExerciseForSegment: {
+  selectedExerciseSlotForSegment: {
     segmentId: string;
     order: number;
   };
@@ -78,8 +78,8 @@ interface SelectorDrawerProps {
 
 const mapStateToProps = (state: State): SelectorDrawerProps => {
   return {
-    selectExerciseForSegment:
-      state.routineBuilderState.selectExerciseForSegment,
+    selectedExerciseSlotForSegment:
+      state.routineBuilderState.selectedExerciseSlotForSegment,
   } as unknown as SelectorDrawerProps;
 };
 

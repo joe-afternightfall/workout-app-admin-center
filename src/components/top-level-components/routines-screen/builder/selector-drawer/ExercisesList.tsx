@@ -71,7 +71,7 @@ const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
     disabled:
-      state.routineBuilderState.selectExerciseForSegment.segmentId === '',
+      state.routineBuilderState.selectedExerciseSlotForSegment.segmentId === '',
   } as unknown as RoutineInfoCardProps;
 };
 
