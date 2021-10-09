@@ -14,9 +14,6 @@ export default {
       case ActionTypes.BUILD_NEW_ROUTINE:
         newState.selectedRoutine = action.routine;
         break;
-      case ActionTypes.SELECT_ACTIVE_CARD:
-        newState.activeCardId = action.activeCardId;
-        break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
         newState.selectedRoutine.workoutCategoryId = action.id;
         break;
@@ -80,45 +77,6 @@ export default {
               exercises: [],
             });
           }
-        });
-        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
-        break;
-      }
-      case ActionTypes.UPDATE_SEGMENT_EXERCISE: {
-        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
-        clonedPhases.map((phase) => {
-          phase.segments.map((segment) => {
-            if (segment.id === action.segmentId) {
-              const order = segment.exercises.length + 1;
-              segment.exercises.push({
-                id: uuidv4(),
-                order: order,
-                exerciseId: action.exerciseId,
-                sets: [],
-              });
-            }
-          });
-        });
-        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
-        break;
-      }
-      case ActionTypes.ADD_SET_TO_EXERCISE: {
-        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
-        clonedPhases.map((phase) => {
-          phase.segments.map((segment) => {
-            segment.exercises.map((workoutExercise) => {
-              if (workoutExercise.id === action.id) {
-                const setNumber = workoutExercise.sets.length + 1;
-                workoutExercise.sets.push({
-                  id: uuidv4(),
-                  markedDone: false,
-                  setNumber: setNumber,
-                  weight: 0,
-                  reps: 0,
-                });
-              }
-            });
-          });
         });
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;

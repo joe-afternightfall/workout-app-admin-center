@@ -24,16 +24,13 @@ import {
   HideAppSnackbarAction,
 } from './app-snackbar';
 import {
-  UpdateSegmentExerciseAction,
   AddPhaseToRoutineAction,
   AddSegmentToPhaseAction,
   BuildNewRoutineAction,
   SelectPhaseAction,
   SelectSetTypeAction,
-  SetActiveCardAction,
   UpdateRoutineTitleAction,
   UpdateSelectedCategoryIdAction,
-  AddSetToExerciseAction,
   UpdateRestBetweenAction,
   SelectedExerciseSlotToFillAction,
   AddExerciseToSegmentAction,
@@ -64,15 +61,12 @@ export enum ActionTypes {
 
   // Routine Builder Actions
   BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
-  SELECT_ACTIVE_CARD = 'SELECT_ACTIVE_CARD',
   UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
   ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
   SELECT_PHASE = 'SELECT_PHASE',
   SELECT_SET_TYPE = 'SELECT_SET_TYPE',
   ADD_SEGMENT_TO_PHASE = 'ADD_SEGMENT_TO_PHASE',
-  UPDATE_SEGMENT_EXERCISE = 'UPDATE_SEGMENT_EXERCISE',
-  ADD_SET_TO_EXERCISE = 'ADD_SET_TO_EXERCISE',
   UPDATE_REST_BETWEEN = 'UPDATE_REST_BETWEEN',
   SELECTED_EXERCISE_SLOT_TO_FILL = 'SELECTED_EXERCISE_SLOT_TO_FILL',
   ADD_EXERCISE_TO_SEGMENT = 'ADD_EXERCISE_TO_SEGMENT',
@@ -116,15 +110,12 @@ export type ApplicationActions =
   | HideAppSnackbarAction
   | DisplayAppSnackbarAction
   | BuildNewRoutineAction
-  | SetActiveCardAction
   | UpdateRoutineTitleAction
   | UpdateSelectedCategoryIdAction
   | AddPhaseToRoutineAction
   | SelectPhaseAction
   | SelectSetTypeAction
   | AddSegmentToPhaseAction
-  | UpdateSegmentExerciseAction
-  | AddSetToExerciseAction
   | UpdateRestBetweenAction
   | HideAppBarAction
   | SelectedExerciseSlotToFillAction

@@ -20,18 +20,6 @@ export const buildNewRoutine = (): BuildNewRoutineAction => {
   };
 };
 
-export interface SetActiveCardAction {
-  type: ActionTypes.SELECT_ACTIVE_CARD;
-  activeCardId: string;
-}
-
-export const setActiveCard = (id: string): SetActiveCardAction => {
-  return {
-    type: ActionTypes.SELECT_ACTIVE_CARD,
-    activeCardId: id,
-  };
-};
-
 export interface UpdateRoutineTitleAction {
   type: ActionTypes.UPDATE_ROUTINE_TITLE;
   value: string;
@@ -110,35 +98,6 @@ export interface AddSegmentToPhaseAction {
 export const addSegmentToPhase = (id: string): AddSegmentToPhaseAction => {
   return {
     type: ActionTypes.ADD_SEGMENT_TO_PHASE,
-    id: id,
-  };
-};
-
-export interface UpdateSegmentExerciseAction {
-  type: ActionTypes.UPDATE_SEGMENT_EXERCISE;
-  segmentId: string;
-  exerciseId: string;
-}
-
-export const updateSegmentExercise = (
-  segmentId: string,
-  exerciseId: string
-): UpdateSegmentExerciseAction => {
-  return {
-    type: ActionTypes.UPDATE_SEGMENT_EXERCISE,
-    segmentId: segmentId,
-    exerciseId: exerciseId,
-  };
-};
-
-export interface AddSetToExerciseAction {
-  type: ActionTypes.ADD_SET_TO_EXERCISE;
-  id: string;
-}
-
-export const addSetToExercise = (id: string): AddSetToExerciseAction => {
-  return {
-    type: ActionTypes.ADD_SET_TO_EXERCISE,
     id: id,
   };
 };
