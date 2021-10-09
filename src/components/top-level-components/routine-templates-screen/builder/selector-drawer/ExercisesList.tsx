@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const RoutineInfoCard = ({
+const ExerciseList = ({
   disabled,
   exercises,
   addExerciseHandler,
-}: RoutineInfoCardProps): JSX.Element => {
+}: ExerciseListProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -61,25 +61,25 @@ const RoutineInfoCard = ({
   );
 };
 
-interface RoutineInfoCardProps {
+interface ExerciseListProps {
   disabled: boolean;
   exercises: ExerciseVO[];
   addExerciseHandler: (exerciseId: string) => void;
 }
 
-const mapStateToProps = (state: State): RoutineInfoCardProps => {
+const mapStateToProps = (state: State): ExerciseListProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
     disabled:
       state.routineBuilderState.selectedExerciseSlotForSegment.segmentId === '',
-  } as unknown as RoutineInfoCardProps;
+  } as unknown as ExerciseListProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardProps =>
+const mapDispatchToProps = (dispatch: Dispatch): ExerciseListProps =>
   ({
     addExerciseHandler: (exerciseId: string) => {
       dispatch(addExerciseToSegment(exerciseId));
     },
-  } as unknown as RoutineInfoCardProps);
+  } as unknown as ExerciseListProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoutineInfoCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseList);
