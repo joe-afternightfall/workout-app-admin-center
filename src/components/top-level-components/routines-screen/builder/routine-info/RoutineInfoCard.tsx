@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
+import PhaseDropdown from './components/PhaseDropdown';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
 import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
@@ -33,6 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     listBackground: {
       backgroundColor: '#ECECEC',
+    },
+    phaseSubheader: {
+      width: '50%',
+      paddingTop: 16,
+    },
+    topMargin: {
+      marginTop: 16,
     },
   })
 );
@@ -64,8 +72,14 @@ const RoutineInfoCard = ({
           return (
             <List
               key={index}
-              subheader={<ListSubheader>{'Phase'}</ListSubheader>}
-              className={classes.listBackground}
+              subheader={
+                <ListSubheader className={classes.phaseSubheader}>
+                  <PhaseDropdown phase={phase} />
+                </ListSubheader>
+              }
+              className={clsx(classes.listBackground, {
+                [classes.topMargin]: phase.order > 1,
+              })}
             >
               {phase.segments.map((segment) => {
                 const listId = `list-item-${segment.id}`;
