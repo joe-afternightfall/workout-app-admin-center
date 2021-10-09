@@ -15,7 +15,7 @@ import {
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import SetIncrementer from './components/inputs/SetIncrementer';
 import SetTypeDropdown from './components/inputs/SetTypeHeader';
-import ExerciseListItem from './components/ExerciseListItem';
+import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
 import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SegmentActionMenu from './components/action-menu/SegmentActionMenu';

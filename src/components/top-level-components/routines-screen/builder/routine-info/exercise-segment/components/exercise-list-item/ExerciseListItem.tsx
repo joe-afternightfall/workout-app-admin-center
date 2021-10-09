@@ -9,11 +9,10 @@ import {
 } from 'workout-app-common-core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import ButtonListItem from './exercise-list-item/ButtonListItem';
-import { State } from '../../../../../../../configs/redux/store';
+import BaseListItem from './BaseListItem';
+import { State } from '../../../../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import BlinkingListItem from './exercise-list-item/BlinkingListItem';
-import { selectedExerciseSlotToFill } from '../../../../../../../creators/routine-builder/builder';
+import { selectedExerciseSlotToFill } from '../../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() => createStyles({}));
 
@@ -33,20 +32,25 @@ const ExerciseListItem = ({
 
     if (blink) {
       display = (
-        <BlinkingListItem shouldBlink={true} title={'Select Exercise'} />
+        <BaseListItem
+          itemType={'blinker'}
+          shouldBlink={true}
+          title={'Select Exercise'}
+        />
       );
     } else {
       const workoutExercise = segment.exercises[0];
       if (workoutExercise && workoutExercise.exerciseId) {
         display = (
-          <BlinkingListItem
-            shouldBlink={false}
+          <BaseListItem
+            itemType={'standard'}
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
         );
       } else {
         display = (
-          <ButtonListItem
+          <BaseListItem
+            itemType={'button'}
             title={`Click to add exercise ${1}`}
             clickHandler={() => {
               selectExerciseHandler(1);
@@ -67,7 +71,11 @@ const ExerciseListItem = ({
 
     if (firstComponentBlink) {
       firstComponent = (
-        <BlinkingListItem shouldBlink={true} title={'Select Exercise 1'} />
+        <BaseListItem
+          itemType={'blinker'}
+          shouldBlink={true}
+          title={'Select Exercise 1'}
+        />
       );
     } else {
       const workoutExercise = segment.exercises[0];
@@ -77,15 +85,16 @@ const ExerciseListItem = ({
         workoutExercise.order === 1
       ) {
         firstComponent = (
-          <BlinkingListItem
-            shouldBlink={false}
+          <BaseListItem
+            itemType={'standard'}
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
         );
       } else {
         firstComponent = (
-          <ButtonListItem
+          <BaseListItem
             title={`Click to add exercise ${1}`}
+            itemType={'button'}
             clickHandler={() => {
               selectExerciseHandler(1);
             }}
@@ -96,7 +105,11 @@ const ExerciseListItem = ({
 
     if (secondComponentBlink) {
       secondComponent = (
-        <BlinkingListItem shouldBlink={true} title={'Select Exercise 2'} />
+        <BaseListItem
+          itemType={'blinker'}
+          shouldBlink={true}
+          title={'Select Exercise 2'}
+        />
       );
     } else {
       let workoutExercise: WorkoutExercise | null = null;
@@ -113,14 +126,15 @@ const ExerciseListItem = ({
         workoutExercise.order === 2
       ) {
         secondComponent = (
-          <BlinkingListItem
-            shouldBlink={false}
+          <BaseListItem
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
+            itemType={'standard'}
           />
         );
       } else {
         secondComponent = (
-          <ButtonListItem
+          <BaseListItem
+            itemType={'button'}
             title={`Click to add exercise ${2}`}
             clickHandler={() => {
               selectExerciseHandler(2);
