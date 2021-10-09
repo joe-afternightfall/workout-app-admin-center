@@ -13,10 +13,10 @@ import { NavListItem } from './NavListItem';
 import { routerActions } from 'connected-react-router';
 import { State } from '../../../../configs/redux/store';
 import {
-  routes,
+  appNavigationRoutes,
   PageProps,
   RouteProp,
-} from '../../../../configs/constants/routes';
+} from '../../../../configs/constants/app-navigation-routes';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -67,8 +67,8 @@ const Navigation = (
       className={classes.root}
       aria-labelledby={'nested-list-subheader'}
     >
-      {Object.keys(routes).map((value: string, index: number) => {
-        if (routes[value].nested) {
+      {Object.keys(appNavigationRoutes).map((value: string, index: number) => {
+        if (appNavigationRoutes[value].nested) {
           return (
             <>
               <ListItem
@@ -78,9 +78,9 @@ const Navigation = (
                 }}
               >
                 <ListItemIcon>
-                  {React.createElement(routes[value].mainIcon)}
+                  {React.createElement(appNavigationRoutes[value].mainIcon)}
                 </ListItemIcon>
-                <ListItemText primary={routes[value].mainTitle} />
+                <ListItemText primary={appNavigationRoutes[value].mainTitle} />
                 {open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={open} timeout={'auto'} unmountOnExit>
@@ -89,17 +89,20 @@ const Navigation = (
                   disablePadding
                   className={classes.nested}
                 >
-                  {routes[value].pageProps.map(
+                  {appNavigationRoutes[value].pageProps.map(
                     (page: PageProps, secondIndex: number) => {
                       return (
                         <NavListItem
                           key={secondIndex}
                           displayText={shouldDisplayText}
                           currentLocation={props.currentLocation}
-                          pageInfo={routes[value].pageProps[secondIndex]}
+                          pageInfo={
+                            appNavigationRoutes[value].pageProps[secondIndex]
+                          }
                           clickHandler={() => {
                             routeAndClose(
-                              routes[value].pageProps[secondIndex].path
+                              appNavigationRoutes[value].pageProps[secondIndex]
+                                .path
                             );
                           }}
                         />
@@ -116,9 +119,9 @@ const Navigation = (
               key={index}
               displayText={shouldDisplayText}
               currentLocation={props.currentLocation}
-              pageInfo={routes[value].pageProps[0]}
+              pageInfo={appNavigationRoutes[value].pageProps[0]}
               clickHandler={() => {
-                routeAndClose(routes[value].pageProps[0].path);
+                routeAndClose(appNavigationRoutes[value].pageProps[0].path);
               }}
             />
           );

@@ -1,11 +1,9 @@
-import { RouteProp } from '../configs/constants/routes';
+import { RouteProp } from '../configs/constants/app-navigation-routes';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { CircuitTemplateVO } from '../configs/models/CircuitTemplateVO';
 import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import { CircuitTypeVO } from '../configs/models/workout-configurations/circuit-type/CircuitTypeVO';
 import { ExerciseVO } from 'workout-app-common-core';
 import { SnackbarCreatorProps } from '../creators/app-snackbar';
 
@@ -53,9 +51,6 @@ export default {
       case ActionTypes.USER_CLICKED_OPEN_DRAWER:
         newState.userClickedCloseDrawer = false;
         break;
-      case ActionTypes.LOAD_CIRCUIT_TEMPLATES:
-        newState.circuitTemplates = action.templates;
-        break;
       case ActionTypes.LOAD_USER_WORKOUTS:
         newState.userWorkouts = action.workouts;
         break;
@@ -64,9 +59,6 @@ export default {
         break;
       case ActionTypes.LOAD_EXERCISES:
         newState.workoutConfigurations.exercises = action.exercises;
-        break;
-      case ActionTypes.LOAD_CIRCUIT_TYPES:
-        newState.workoutConfigurations.circuitTypes = action.circuitTypes;
         break;
       case ActionTypes.TOGGLE_MUSCLE_GROUP: {
         const foundId = newState.selectedMuscleGroupIds.find(
@@ -113,11 +105,9 @@ export interface ApplicationState {
   userClickedCloseDrawer: boolean;
   sideDrawerIsOpen: boolean;
   sideDrawerIsClosed: boolean;
-  circuitTemplates: CircuitTemplateVO[];
   userWorkouts: WorkoutVO[];
   workoutConfigurations: {
     exerciseTypes: ExerciseTypeVO[];
-    circuitTypes: CircuitTypeVO[];
     exercises: ExerciseVO[];
   };
   selectedMuscleGroupIds: string[];

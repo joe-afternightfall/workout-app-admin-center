@@ -1,27 +1,23 @@
 import {
-  DASHBOARD_SCREEN_PATH,
-  CIRCUIT_TYPES_SCREEN_PATH,
-  EXERCISE_TYPES_SCREEN_PATH,
-  CIRCUIT_BUILDER_SCREEN_PATH,
   EXERCISES_SCREEN_PATH,
+  DASHBOARD_SCREEN_PATH,
+  EXERCISE_TYPES_SCREEN_PATH,
   ROUTINE_TEMPLATES_SCREEN_PATH,
 } from './app';
 import {
   Settings,
-  DashboardRounded as DashboardIcon,
-  Build as BuilderIcon,
   FitnessCenter,
+  Build as BuilderIcon,
+  DashboardRounded as DashboardIcon,
 } from '@material-ui/icons';
 import { ComponentType } from 'react';
 import { SvgIconTypeMap } from '@material-ui/core';
 import { StyledComponentProps } from '@material-ui/core/styles';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import DashboardScreen from '../../components/top-level-components/dashboard-screen/DashboardScreen';
-import CircuitTypesTable from '../../components/top-level-components/workout-configs/circuit-types-screen/CircuitTypesTable';
-import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
-import CircuitBuilderScreen from '../../components/top-level-components/circuit-builder/CircuitBuilderScreen';
 import ExercisesScreen from '../../components/top-level-components/exercises-screen/ExercisesScreen';
+import DashboardScreen from '../../components/top-level-components/dashboard-screen/DashboardScreen';
 import RoutinesScreen from '../../components/top-level-components/routine-templates-screen/RoutinesScreen';
+import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 
 export interface PageProps {
   path: string;
@@ -46,7 +42,7 @@ export type RoutesMap = {
   DASHBOARD: RouteProp;
 };
 
-export const routes: RoutesMap = {
+export const appNavigationRoutes: RoutesMap = {
   DASHBOARD: {
     nested: false,
     mainTitle: '',
@@ -59,21 +55,6 @@ export const routes: RoutesMap = {
         icon: DashboardIcon,
         testId: 'dashboard-nav',
         routerComponent: DashboardScreen,
-      },
-    ],
-  },
-  CIRCUIT_BUILDER_SCREEN: {
-    nested: false,
-    mainTitle: '',
-    mainIcon: BuilderIcon,
-    pageProps: [
-      {
-        path: CIRCUIT_BUILDER_SCREEN_PATH,
-        drawerTitle: 'Circuit Builder',
-        headerTitle: 'Circuit Builder',
-        icon: BuilderIcon,
-        testId: 'circuit-builder-nav',
-        routerComponent: CircuitBuilderScreen,
       },
     ],
   },
@@ -119,14 +100,6 @@ export const routes: RoutesMap = {
         icon: Settings,
         testId: 'exercise-types-nav',
         routerComponent: ExerciseTypesTable,
-      },
-      {
-        path: CIRCUIT_TYPES_SCREEN_PATH,
-        drawerTitle: 'Circuit Types',
-        headerTitle: 'Circuit Types',
-        icon: Settings,
-        testId: 'circuit-types-nav',
-        routerComponent: CircuitTypesTable,
       },
     ],
   },
