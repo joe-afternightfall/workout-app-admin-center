@@ -3,24 +3,21 @@ import clsx from 'clsx';
 import {
   Card,
   List,
-  Grid,
-  Button,
   Divider,
   ListItem,
   CardHeader,
   CardContent,
-  CardActions,
   Typography,
 } from '@material-ui/core';
-import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
+import ExerciseInfoCardActions from './ExerciseInfoCardActions';
 import SetIncrementer from './components/inputs/SetIncrementer';
 import SetTypeDropdown from './components/inputs/SetTypeHeader';
-import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
-import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
+import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import ListItemMessage from './components/base-components/ListItemMessage';
-import ExerciseInfoCardActions from './ExerciseInfoCardActions';
+import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
+import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
+import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -41,11 +41,6 @@ const mapStateToProps = (
 
   ownProps.segment.exercises.map((workoutExercise) => {
     doneDisabled = workoutExercise.sets.length === 0;
-    // if (workoutExercise.exerciseId !== '') {
-    //   doneDisabled = workoutExercise.sets.length === 0;
-    // } else {
-    //   doneDisabled = true;
-    // }
   });
 
   return {
