@@ -33,6 +33,7 @@ const useStyles = makeStyles(() =>
 
 export default function ExerciseInfoCard({
   segment,
+  doneHandler,
   isActiveCard,
   scrollToHandler,
 }: ExerciseInfoCardProps): JSX.Element {
@@ -125,7 +126,7 @@ export default function ExerciseInfoCard({
         </List>
       </CardContent>
       {isActiveCard && !emptySetType && (
-        <ExerciseInfoCardActions segment={segment} />
+        <ExerciseInfoCardActions segment={segment} doneHandler={doneHandler} />
       )}
     </Card>
   );
@@ -134,5 +135,6 @@ export default function ExerciseInfoCard({
 interface ExerciseInfoCardProps {
   segment: Segment;
   scrollToHandler: () => void;
+  doneHandler: () => void;
   isActiveCard: boolean;
 }

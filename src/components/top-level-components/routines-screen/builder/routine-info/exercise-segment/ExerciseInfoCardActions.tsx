@@ -7,6 +7,7 @@ import { Button, CardActions, Divider, Grid } from '@material-ui/core';
 import { selectPhase } from '../../../../../../creators/routine-builder/builder';
 
 const ExerciseInfoCardActions = ({
+  doneHandler,
   doneDisabled,
 }: ExerciseInfoCardActionsProps & PassedInProps): JSX.Element => {
   return (
@@ -16,7 +17,11 @@ const ExerciseInfoCardActions = ({
           <Divider variant={'middle'} />
         </Grid>
         <Grid item container alignItems={'center'} justify={'flex-end'}>
-          <Button disabled={doneDisabled} color={'primary'}>
+          <Button
+            disabled={doneDisabled}
+            color={'primary'}
+            onClick={doneHandler}
+          >
             {'Done'}
           </Button>
         </Grid>
@@ -27,6 +32,7 @@ const ExerciseInfoCardActions = ({
 
 interface PassedInProps {
   segment: Segment;
+  doneHandler: () => void;
 }
 
 interface ExerciseInfoCardActionsProps {

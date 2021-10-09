@@ -41,16 +41,24 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RoutineInfoCard = ({
   phases,
-  toggleHandler,
+  toggleSideDrawerHandler,
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
 
-  const scrollToSection = (id: string) => {
+  const scrollToHandler = (id: string) => {
     if (openCard !== id) {
       setOpenCard(id);
     }
+    scrollTo(id);
+  };
 
+  const doneHandler = (phaseListId: string) => {
+    setOpenCard('');
+    scrollTo(phaseListId);
+  };
+
+  const scrollTo = (id: string) => {
     scroller.scrollTo(id, {
       duration: 800,
       delay: 0,
@@ -87,8 +95,11 @@ const RoutineInfoCard = ({
                           segment={segment}
                           isActiveCard={openCard === listId}
                           scrollToHandler={() => {
-                            scrollToSection(listId);
-                            toggleHandler(true);
+                            scrollToHandler(listId);
+                            toggleSideDrawerHandler(true);
+                          }}
+                          doneHandler={() => {
+                            doneHandler(phase.id);
                           }}
                         />
                       }
@@ -111,7 +122,7 @@ const RoutineInfoCard = ({
 };
 
 interface PassedInProps {
-  toggleHandler: (display: boolean) => void;
+  toggleSideDrawerHandler: (display: boolean) => void;
 }
 
 interface RoutineInfoCardProps {

@@ -24,7 +24,7 @@ const RoutineBuilder = ({ phases }: RoutineBuilderProps): JSX.Element => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={7}>
-        <BuilderCard toggleHandler={toggleSideDrawer} />
+        <BuilderCard toggleSideDrawerHandler={toggleSideDrawer} />
       </Grid>
 
       <Grid item xs={5}>
