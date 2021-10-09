@@ -5,39 +5,21 @@ import {
   StyledComponentProps,
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
-import RoutineBuilder from './builder/RoutineBuilder';
+import { Styles } from '@material-ui/styles';
 import NewRoutineButton from './NewRoutineButton';
-import ExercisesList from './builder/selector-drawer/ExercisesList';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class RoutinesScreen extends Component<RoutinesScreenProps> {
-  state = {
-    displayBuilder: false,
-  };
-
   render(): JSX.Element {
     const { classes } = this.props;
 
     return (
       <Grid xs={12} item container spacing={2}>
-        {this.state.displayBuilder ? (
-          <Grid item xs={12}>
-            <RoutineBuilder />
-          </Grid>
-        ) : (
-          <Grid item xs={12}>
-            <NewRoutineButton
-              callback={() => {
-                this.setState({
-                  displayBuilder: true,
-                });
-              }}
-            />
-          </Grid>
-        )}
+        <Grid item xs={12}>
+          <NewRoutineButton />
+        </Grid>
       </Grid>
     );
   }

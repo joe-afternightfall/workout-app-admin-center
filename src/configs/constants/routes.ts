@@ -5,6 +5,7 @@ import {
   CIRCUIT_BUILDER_SCREEN_PATH,
   ROUTINE_BUILDER_SCREEN_PATH,
   EXERCISES_SCREEN_PATH,
+  ROUTINE_TEMPLATES_SCREEN_PATH,
 } from './app';
 import {
   Settings,
@@ -20,7 +21,6 @@ import DashboardScreen from '../../components/top-level-components/dashboard-scr
 import CircuitTypesTable from '../../components/top-level-components/workout-configs/circuit-types-screen/CircuitTypesTable';
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 import CircuitBuilderScreen from '../../components/top-level-components/circuit-builder/CircuitBuilderScreen';
-import RoutineBuilderScreen from '../../components/top-level-components/routine-builder/RoutineBuilderScreen';
 import ExercisesScreen from '../../components/top-level-components/exercises-screen/ExercisesScreen';
 import RoutinesScreen from '../../components/top-level-components/routines-screen/RoutinesScreen';
 
@@ -78,17 +78,17 @@ export const routes: RoutesMap = {
       },
     ],
   },
-  ROUTINE_BUILDER_SCREEN: {
+  ROUTINE_TEMPLATES_SCREEN: {
     nested: false,
     mainTitle: 'Routine Builder',
     mainIcon: BuilderIcon,
     pageProps: [
       {
-        path: ROUTINE_BUILDER_SCREEN_PATH,
-        drawerTitle: 'Routine Builder',
-        headerTitle: 'Routine Builder',
+        path: ROUTINE_TEMPLATES_SCREEN_PATH,
+        drawerTitle: 'Routine Templates',
+        headerTitle: 'Routine Templates',
         icon: BuilderIcon,
-        testId: 'routine-builder-nav',
+        testId: 'routine-template-nav',
         routerComponent: RoutinesScreen,
       },
     ],

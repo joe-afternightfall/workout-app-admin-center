@@ -18,6 +18,7 @@ import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
 import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,6 +118,7 @@ const RoutineInfoCard = ({
           );
         })}
       </CardContent>
+      <RoutineInfoCardActions />
     </Card>
   );
 };
