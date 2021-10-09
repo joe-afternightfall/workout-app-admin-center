@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import { selectSetType } from '../../../../../../../../creators/routine-builder/builder';
-import BaseSelectDropdown from '../../../../../../routine-builder/form-view/base-components/BaseSelectDropdown';
+import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
 
 const SetTypeHeader = ({
   segment,
@@ -34,6 +34,8 @@ const SetTypeHeader = ({
           <Grid item>
             <BaseSelectDropdown
               id={segment.id}
+              label={'Set Type'}
+              variant={'standard'}
               value={segment.trainingSetTypeId}
               changeHandler={handleSetChange}
               data={trainingSetTypes.map((set: TrainingSetType) => {

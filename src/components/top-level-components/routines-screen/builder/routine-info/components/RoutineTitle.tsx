@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import ActionMenu from './ActionMenu';
+import RoutineInfoActionMenu from './RoutineInfoActionMenu';
 import DoneIcon from '@material-ui/icons/Done';
 import {
   updateRoutineTitle,
@@ -78,7 +78,7 @@ const RoutineTitle = ({
             <DoneIcon />
           </IconButton>
         ) : (
-          <ActionMenu
+          <RoutineInfoActionMenu
             editClickHandler={() => {
               setIsEditing(true);
             }}

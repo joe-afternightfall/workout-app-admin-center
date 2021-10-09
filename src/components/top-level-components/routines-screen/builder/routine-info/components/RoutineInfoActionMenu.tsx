@@ -1,15 +1,15 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import BaseMoreVertMenu from '../../../../../shared/BaseMoreVertMenu';
 import { addPhaseToRoutine } from '../../../../../../creators/routine-builder/builder';
-import BaseActionMenu from '../../../../routine-builder/form-view/base-components/BaseActionMenu';
 
-const ActionMenu = ({
+const RoutineInfoActionMenu = ({
   addPhaseHandler,
   editClickHandler,
-}: ActionMenuProps & PassedInProps): JSX.Element => {
+}: RoutineInfoActionMenuProps & PassedInProps): JSX.Element => {
   return (
-    <BaseActionMenu
+    <BaseMoreVertMenu
       id={'routine-title'}
       menuItems={[
         {
@@ -29,15 +29,15 @@ interface PassedInProps {
   editClickHandler: () => void;
 }
 
-interface ActionMenuProps {
+interface RoutineInfoActionMenuProps {
   addPhaseHandler: () => void;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ActionMenuProps =>
+const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoActionMenuProps =>
   ({
     addPhaseHandler: () => {
       dispatch(addPhaseToRoutine());
     },
-  } as unknown as ActionMenuProps);
+  } as unknown as RoutineInfoActionMenuProps);
 
-export default connect(null, mapDispatchToProps)(ActionMenu);
+export default connect(null, mapDispatchToProps)(RoutineInfoActionMenu);
