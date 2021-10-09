@@ -5,11 +5,9 @@ import { TextField } from '@material-ui/core';
 import PageTitle from '../../../shared/PageTitle';
 import NewExerciseDialog from './NewExerciseDialog';
 import { State } from '../../../../configs/redux/store';
+import { muscleGroups, MuscleGroup } from 'workout-app-common-core';
 import { deleteExerciseType } from '../../../../services/workout-configurations/exercise-types-service';
 import { ExerciseTypeVO } from '../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../../configs/models/workout-configurations/MuscleGroups';
 
 const editField = (props: {
   value: string;

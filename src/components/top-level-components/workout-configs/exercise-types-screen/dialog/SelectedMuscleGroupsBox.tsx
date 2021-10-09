@@ -3,12 +3,10 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Box, Chip, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { muscleGroups, MuscleGroup } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { capitalizeFirstLetter } from '../../../../../utils/formatter';
 import { toggleMuscleGroup } from '../../../../../creators/muscle-selector';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../../../configs/models/workout-configurations/MuscleGroups';
 
 const useStyles = makeStyles(() =>
   createStyles({

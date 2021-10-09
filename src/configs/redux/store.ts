@@ -37,13 +37,10 @@ export const createStore = (history: History): Store => {
       },
       workoutConfigurations: {
         exerciseTypes: [],
-        categoryTypes: [],
-        circuitTypes: [],
         exercises: [],
       },
       selectedMuscleGroupIds: [],
       applyHoverStylesToMuscleGroup: '',
-      circuitTemplates: [],
     } as unknown as ApplicationState,
     routineBuilderState: {
       selectedExerciseSlotForSegment: {

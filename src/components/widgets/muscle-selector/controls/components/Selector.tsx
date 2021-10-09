@@ -3,16 +3,14 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
+  toggleMuscleGroup,
   applyHoverStylesToMuscleGroup,
   clearHoverStylesForMuscleGroup,
-  toggleMuscleGroup,
 } from '../../../../../creators/muscle-selector';
 import { State } from '../../../../../configs/redux/store';
-import muscleGroups, {
-  MuscleGroup,
-} from '../../../../../configs/models/workout-configurations/MuscleGroups';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { muscleGroups, MuscleGroup } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
   createStyles({

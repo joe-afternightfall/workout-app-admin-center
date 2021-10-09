@@ -2,17 +2,13 @@ import { Store } from 'redux';
 import firebase from 'firebase';
 import {
   WORKOUTS_ROUTE,
-  CIRCUIT_TYPES_ROUTE,
-  EXERCISE_TYPES_ROUTE,
-  CIRCUIT_TEMPLATES_ROUTE,
   EXERCISES_DB_ROUTE,
+  EXERCISE_TYPES_ROUTE,
 } from '../configs/constants/firebase-routes';
 import {
-  updateCircuitTemplates,
-  updateCircuitTypes,
   updateExercises,
-  updateExerciseTypes,
   updateUserWorkouts,
+  updateExerciseTypes,
 } from './update-methods';
 
 const firebaseConfig = {
@@ -38,9 +34,7 @@ export class Initializer {
     firebase.analytics();
 
     const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
-    const circuitTypes = firebase.database().ref(CIRCUIT_TYPES_ROUTE);
     const workouts = firebase.database().ref(WORKOUTS_ROUTE);
-    const circuitTemplates = firebase.database().ref(CIRCUIT_TEMPLATES_ROUTE);
     const exercises = firebase.database().ref(EXERCISES_DB_ROUTE);
 
     exercises.on('child_added', async () => {
@@ -67,18 +61,6 @@ export class Initializer {
       await updateExerciseTypes(this.store);
     });
 
-    circuitTypes.on('child_added', async () => {
-      await updateCircuitTypes(this.store);
-    });
-
-    circuitTypes.on('child_changed', async () => {
-      await updateCircuitTypes(this.store);
-    });
-
-    circuitTypes.on('child_removed', async () => {
-      await updateCircuitTypes(this.store);
-    });
-
     workouts.on('child_added', async () => {
       await updateUserWorkouts(this.store);
     });
@@ -89,18 +71,6 @@ export class Initializer {
 
     workouts.on('child_removed', async () => {
       await updateUserWorkouts(this.store);
-    });
-
-    circuitTemplates.on('child_added', async () => {
-      await updateCircuitTemplates(this.store);
-    });
-
-    circuitTemplates.on('child_changed', async () => {
-      await updateCircuitTemplates(this.store);
-    });
-
-    circuitTemplates.on('child_removed', async () => {
-      await updateCircuitTemplates(this.store);
     });
   }
 }

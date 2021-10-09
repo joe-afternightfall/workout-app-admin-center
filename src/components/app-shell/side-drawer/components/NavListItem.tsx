@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { PageProps } from '../../../../configs/constants/routes';
+import { PageProps } from '../../../../configs/constants/app-navigation-routes';
 import { AppTheme } from '../../../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';

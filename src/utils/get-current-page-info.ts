@@ -1,15 +1,21 @@
-import { PageProps, RouteProp, routes } from '../configs/constants/routes';
+import {
+  PageProps,
+  RouteProp,
+  appNavigationRoutes,
+} from '../configs/constants/app-navigation-routes';
 
 export const getPageInfo = (location: string): RouteProp | undefined => {
-  const found = Object.keys(routes).find((route) => {
+  const found = Object.keys(appNavigationRoutes).find((route) => {
     if (
-      routes[route].pageProps.map((page: PageProps) => page.path === location)
+      appNavigationRoutes[route].pageProps.map(
+        (page: PageProps) => page.path === location
+      )
     ) {
-      return routes[route];
+      return appNavigationRoutes[route];
     }
   });
 
   if (found !== undefined) {
-    return routes[found];
+    return appNavigationRoutes[found];
   }
 };
