@@ -20,13 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
 
   return (
     <Toolbar className={classes.root}>

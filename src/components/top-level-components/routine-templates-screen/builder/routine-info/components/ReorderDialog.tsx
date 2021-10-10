@@ -1,36 +1,28 @@
 import React from 'react';
 import {
   Card,
+  List,
   Button,
   Dialog,
+  ListItem,
+  IconButton,
   DialogTitle,
+  CardContent,
   DialogContent,
   DialogActions,
-  IconButton,
-  CardContent,
-  List,
-  ListItem,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
+import { State } from '../../../../../../configs/redux/store';
+import { getPhaseName, Phase } from 'workout-app-common-core';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { getPhaseName, Phase } from 'workout-app-common-core';
-import { State } from '../../../../../../configs/redux/store';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { reorderRoutinePhases } from '../../../../../../creators/routine-builder/builder';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    deleteButton: {
-      color: theme.palette.error.main,
-    },
-    content: {
-      width: '100%',
-
-      minHeight: '20vh',
-    },
     selectedRow: {
       zIndex: 1000,
     },
@@ -41,39 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-const options = [
-  {
-    id: 'card-1',
-    order: 1,
-    title: 'Card #1',
-  },
-  {
-    id: 'card-2',
-    order: 2,
-    title: 'Card #2',
-  },
-  {
-    id: 'card-3',
-    order: 3,
-    title: 'Card #3',
-  },
-  {
-    id: 'card-4',
-    order: 4,
-    title: 'Card #4',
-  },
-  {
-    id: 'card-5',
-    order: 5,
-    title: 'Card #5',
-  },
-  {
-    id: 'card-6',
-    order: 6,
-    title: 'Card #6',
-  },
-];
 
 const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
   const classes = useStyles();
@@ -89,11 +48,6 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
   const closeDialog = () => {
     setOpen(false);
   };
-
-  console.log('phases: ' + JSON.stringify(phases));
-
-  const [dragList, setDragList] =
-    React.useState<{ id: string; order: number; title: string }[]>(options);
 
   const orderAndUpdate = (dropProps: DropResult) => {
     const { removedIndex, addedIndex } = dropProps;
