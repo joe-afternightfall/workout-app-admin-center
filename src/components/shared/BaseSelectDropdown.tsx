@@ -32,7 +32,7 @@ export default function BaseSelectDropdown({
       >
         {data.map((info, index: number) => {
           return (
-            <MenuItem key={index} value={info.id}>
+            <MenuItem key={index} value={info.id} disabled={info.disabled}>
               {info.name}
             </MenuItem>
           );
@@ -50,6 +50,7 @@ export interface BaseSelectDropdownProps {
   data: {
     id: string;
     name: string;
+    disabled?: boolean;
   }[];
   variant: 'standard' | 'outlined' | 'filled';
 }

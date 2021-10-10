@@ -206,6 +206,20 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.REORDER_ROUTINE_PHASES:
+        newState.selectedRoutine.phases = action.phases;
+        break;
+      case ActionTypes.DELETE_PHASE_FROM_ROUTINE: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          if (phase.id === action.phaseId) {
+            const foundIndex = clonedPhases.indexOf(phase);
+            clonedPhases.splice(foundIndex, 1);
+          }
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }

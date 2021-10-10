@@ -10,8 +10,8 @@ import {
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import BaseListItem from './BaseListItem';
-import { State } from '../../../../../../../../configs/redux/store';
-import { selectedExerciseSlotToFill } from '../../../../../../../../creators/routine-builder/builder';
+import { State } from '../../../../../../../../../configs/redux/store';
+import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
 
 const ExerciseListItem = ({
   exercises,

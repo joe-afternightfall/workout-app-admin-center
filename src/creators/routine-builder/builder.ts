@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes } from '../actions';
-import { RoutineTemplateVO } from 'workout-app-common-core';
+import { Phase, RoutineTemplateVO } from 'workout-app-common-core';
 
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
@@ -223,5 +223,33 @@ export const deleteSegmentFromPhase = (
   return {
     type: ActionTypes.DELETE_SEGMENT_FROM_PHASE,
     segmentId: segmentId,
+  };
+};
+
+export interface ReorderRoutinePhasesAction {
+  type: ActionTypes.REORDER_ROUTINE_PHASES;
+  phases: Phase[];
+}
+
+export const reorderRoutinePhases = (
+  phases: Phase[]
+): ReorderRoutinePhasesAction => {
+  return {
+    type: ActionTypes.REORDER_ROUTINE_PHASES,
+    phases: phases,
+  };
+};
+
+export interface DeletePhaseFromRoutineAction {
+  type: ActionTypes.DELETE_PHASE_FROM_ROUTINE;
+  phaseId: string;
+}
+
+export const deletePhaseFromRoutine = (
+  phaseId: string
+): DeletePhaseFromRoutineAction => {
+  return {
+    type: ActionTypes.DELETE_PHASE_FROM_ROUTINE,
+    phaseId: phaseId,
   };
 };

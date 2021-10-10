@@ -41,7 +41,7 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
   );
 };
 
-export interface TempSideDrawerProps {
+interface TempSideDrawerProps {
   open: boolean;
   closeSideDrawerHandler: () => void;
 }

@@ -24,9 +24,9 @@ const useStyles = makeStyles(() =>
     animate: {
       transition: 'transform .35s ease-in-out',
     },
-    grow: {
-      // transform: 'scale(1.5)',
+    activeCard: {
       height: '100%',
+      borderLeft: '6px solid #4285f4',
     },
   })
 );
@@ -69,7 +69,7 @@ export default function ExerciseInfoCard({
     <Card
       onClick={scrollToHandler}
       className={clsx(classes.animate, {
-        [classes.grow]: isActiveCard,
+        [classes.activeCard]: isActiveCard,
       })}
     >
       <CardHeader

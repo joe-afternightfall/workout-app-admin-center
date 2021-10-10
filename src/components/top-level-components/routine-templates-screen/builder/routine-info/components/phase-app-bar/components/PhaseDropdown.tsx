@@ -1,13 +1,15 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { State } from '../../../../../../../../configs/redux/store';
 import { Phase, phases, PhaseVO } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../../../../shared/BaseSelectDropdown';
-import { selectPhase } from '../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
+import { selectPhase } from '../../../../../../../../creators/routine-builder/builder';
 
 const PhaseDropdown = ({
-  changeHandler,
   phase,
+  changeHandler,
+  selectedPhases,
 }: PhaseDropdownProps & PassedInProps): JSX.Element => {
   const handleSetChange = (phaseVOId: string) => {
     changeHandler(phase.id, phaseVOId);
@@ -21,9 +23,13 @@ const PhaseDropdown = ({
       value={phase.phaseId}
       changeHandler={handleSetChange}
       data={phases.map((phaseVO: PhaseVO) => {
+        const foundPhase = selectedPhases.find(
+          (phase) => phase.phaseId === phaseVO.id
+        );
         return {
           id: phaseVO.id,
           name: phaseVO.name,
+          disabled: foundPhase !== undefined,
         };
       })}
     />
@@ -35,8 +41,15 @@ interface PassedInProps {
 }
 
 interface PhaseDropdownProps {
+  selectedPhases: Phase[];
   changeHandler: (workoutPhaseId: string, phaseId: string) => void;
 }
+
+const mapStateToProps = (state: State): PhaseDropdownProps => {
+  return {
+    selectedPhases: state.routineBuilderState.selectedRoutine.phases,
+  } as unknown as PhaseDropdownProps;
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): PhaseDropdownProps =>
   ({
@@ -45,4 +58,4 @@ const mapDispatchToProps = (dispatch: Dispatch): PhaseDropdownProps =>
     },
   } as unknown as PhaseDropdownProps);
 
-export default connect(null, mapDispatchToProps)(PhaseDropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(PhaseDropdown);

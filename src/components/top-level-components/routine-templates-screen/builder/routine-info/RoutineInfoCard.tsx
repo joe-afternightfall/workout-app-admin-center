@@ -7,18 +7,17 @@ import {
   ListItem,
   CardContent,
   ListItemText,
-  ListSubheader,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
-import PhaseDropdown from './components/PhaseDropdown';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
-import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
+import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
+import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     listBackground: {
+      borderRadius: 6,
       backgroundColor: '#ECECEC',
     },
     phaseSubheader: {
@@ -75,11 +75,7 @@ const RoutineInfoCard = ({
           return (
             <List
               key={index}
-              subheader={
-                <ListSubheader className={classes.phaseSubheader}>
-                  <PhaseDropdown phase={phase} />
-                </ListSubheader>
-              }
+              subheader={<PhaseAppBar phase={phase} />}
               className={clsx(classes.listBackground, {
                 [classes.topMargin]: phase.order > 1,
               })}
