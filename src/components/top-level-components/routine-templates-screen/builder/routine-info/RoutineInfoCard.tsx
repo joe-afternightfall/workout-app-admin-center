@@ -7,15 +7,11 @@ import {
   ListItem,
   CardContent,
   ListItemText,
-  ListSubheader,
-  Grid,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
-import ReorderDialog from './components/phase-app-bar/components/ReorderDialog';
-import PhaseDropdown from './components/phase-app-bar/components/PhaseDropdown';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
