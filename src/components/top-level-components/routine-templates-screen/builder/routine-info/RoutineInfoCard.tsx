@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
     },
     listBackground: {
+      borderRadius: 6,
       backgroundColor: '#ECECEC',
     },
     phaseSubheader: {
@@ -69,21 +70,6 @@ const RoutineInfoCard = ({
       smooth: 'easeInOutQuart',
     });
   };
-
-  // <ListSubheader className={classes.phaseSubheader}>
-  //     <Grid
-  //         container
-  //         alignItems={'center'}
-  //         justify={'space-between'}
-  //     >
-  //         <Grid item xs={3}>
-  //             <PhaseDropdown phase={phase} />
-  //         </Grid>
-  //         <Grid item xs={3}>
-  //             <ReorderDialog />
-  //         </Grid>
-  //     </Grid>
-  // </ListSubheader>
 
   return (
     <Card raised={false} square className={classes.root}>

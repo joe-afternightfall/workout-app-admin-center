@@ -8,8 +8,9 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    grow: {
-      flexGrow: 1,
+    root: {
+      borderTop: '6px solid #673AB7',
+      borderRadius: 6,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -28,7 +29,7 @@ export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
   const menuId = 'primary-search-account-menu';
 
   return (
-    <Toolbar>
+    <Toolbar className={classes.root}>
       <Grid container>
         <Grid item xs={6}>
           <PhaseDropdown phase={phase} />

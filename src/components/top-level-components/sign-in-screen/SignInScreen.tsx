@@ -8,7 +8,6 @@ import { routerActions } from 'react-router-redux';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { DASHBOARD_SCREEN_PATH } from '../../../configs/constants/app';
 import { validatedUser } from '../../../creators/user-info';
-import ReorderDialog from '../routine-templates-screen/builder/routine-info/components/ReorderDialog';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -59,9 +58,6 @@ const SignInScreen = (props: SignInScreenProps): JSX.Element => {
       justify={'center'}
       className={classes.root}
     >
-      <Grid item xs={12}>
-        <ReorderDialog />
-      </Grid>
       <Grid item xs={8} md={4}>
         <SignInCard
           email={email}

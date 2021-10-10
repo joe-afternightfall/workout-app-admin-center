@@ -113,7 +113,7 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
 
   return (
     <div>
-      <IconButton onClick={openDialog}>
+      <IconButton disabled={phases.length <= 1} onClick={openDialog}>
         <CompareArrowsIcon />
       </IconButton>
       <Dialog fullWidth open={open} maxWidth={'sm'} onClose={closeDialog}>
