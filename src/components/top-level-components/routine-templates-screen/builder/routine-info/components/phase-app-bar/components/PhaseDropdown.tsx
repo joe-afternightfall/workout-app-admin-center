@@ -1,10 +1,10 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { State } from '../../../../../../configs/redux/store';
+import { State } from '../../../../../../../../configs/redux/store';
 import { Phase, phases, PhaseVO } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../../../../shared/BaseSelectDropdown';
-import { selectPhase } from '../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
+import { selectPhase } from '../../../../../../../../creators/routine-builder/builder';
 
 const PhaseDropdown = ({
   phase,

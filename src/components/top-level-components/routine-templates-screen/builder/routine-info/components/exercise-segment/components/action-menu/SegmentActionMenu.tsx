@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionMenuDialog from './ActionMenuDialog';
-import BaseMoreVertMenu from '../../../../../../../shared/BaseMoreVertMenu';
+import BaseMoreVertMenu from '../../../../../../../../shared/BaseMoreVertMenu';
 
 export default function SegmentActionMenu({
   segmentId,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Segment } from 'workout-app-common-core';
-import { State } from '../../../../../../configs/redux/store';
+import { State } from '../../../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
 
 const ExerciseInfoCardActions = ({

@@ -239,3 +239,17 @@ export const reorderRoutinePhases = (
     phases: phases,
   };
 };
+
+export interface DeletePhaseFromRoutineAction {
+  type: ActionTypes.DELETE_PHASE_FROM_ROUTINE;
+  phaseId: string;
+}
+
+export const deletePhaseFromRoutine = (
+  phaseId: string
+): DeletePhaseFromRoutineAction => {
+  return {
+    type: ActionTypes.DELETE_PHASE_FROM_ROUTINE,
+    phaseId: phaseId,
+  };
+};

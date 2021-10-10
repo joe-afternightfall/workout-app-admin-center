@@ -7,8 +7,8 @@ import {
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
-import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
-import { updateRestBetween } from '../../../../../../../../creators/routine-builder/builder';
+import BaseSelectDropdown from '../../../../../../../../shared/BaseSelectDropdown';
+import { updateRestBetween } from '../../../../../../../../../creators/routine-builder/builder';
 
 interface MenuOptions {
   id: string;
