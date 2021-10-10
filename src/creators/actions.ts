@@ -37,6 +37,7 @@ import {
   AddSetToEachExerciseInSegmentAction,
   DeleteSetFromEachExerciseInSegmentAction,
   DeleteSegmentFromPhaseAction,
+  ReorderRoutinePhasesAction,
 } from './routine-builder/builder';
 import { HideAppBarAction } from './application';
 
@@ -71,6 +72,7 @@ export enum ActionTypes {
   ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT = 'ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT',
   DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT = 'DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT',
   DELETE_SEGMENT_FROM_PHASE = 'DELETE_SEGMENT_FROM_PHASE',
+  REORDER_ROUTINE_PHASES = 'REORDER_ROUTINE_PHASES',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -118,4 +120,5 @@ export type ApplicationActions =
   | ResetSetTypeAndExerciseInfoAction
   | AddSetToEachExerciseInSegmentAction
   | DeleteSetFromEachExerciseInSegmentAction
-  | DeleteSegmentFromPhaseAction;
+  | DeleteSegmentFromPhaseAction
+  | ReorderRoutinePhasesAction;

@@ -206,6 +206,9 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.REORDER_ROUTINE_PHASES:
+        newState.selectedRoutine.phases = action.phases;
+        break;
       default:
         newState = state;
     }

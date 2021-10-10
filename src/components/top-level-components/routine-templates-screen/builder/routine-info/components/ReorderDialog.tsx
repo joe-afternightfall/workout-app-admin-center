@@ -13,10 +13,13 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { arrayMoveImmutable as arrayMove } from 'array-move';
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
-import { arrayMoveImmutable as arrayMove } from 'array-move';
+import { getPhaseName, Phase } from 'workout-app-common-core';
+import { State } from '../../../../../../configs/redux/store';
+import { reorderRoutinePhases } from '../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +75,7 @@ const options = [
   },
 ];
 
-const ReorderDialog = () => {
+const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
   const classes = useStyles();
 
   const [hoveringOverCard, setHoveringOverCard] = React.useState('');
@@ -87,18 +90,19 @@ const ReorderDialog = () => {
     setOpen(false);
   };
 
+  console.log('phases: ' + JSON.stringify(phases));
+
   const [dragList, setDragList] =
     React.useState<{ id: string; order: number; title: string }[]>(options);
 
   const orderAndUpdate = (dropProps: DropResult) => {
     const { removedIndex, addedIndex } = dropProps;
     if (removedIndex !== null && addedIndex !== null) {
-      const reorderedArray = arrayMove(dragList, removedIndex, addedIndex);
-      reorderedArray.map((option, index) => {
-        option.order = index + 1;
+      const reorderedArray = arrayMove(phases, removedIndex, addedIndex);
+      reorderedArray.map((phase, index) => {
+        phase.order = index + 1;
       });
-
-      setDragList(reorderedArray);
+      reorderPhases(reorderedArray);
     }
   };
 
@@ -110,7 +114,7 @@ const ReorderDialog = () => {
   return (
     <div>
       <IconButton onClick={openDialog}>
-        <AddIcon />
+        <CompareArrowsIcon />
       </IconButton>
       <Dialog fullWidth open={open} maxWidth={'sm'} onClose={closeDialog}>
         <DialogTitle>{'Drag and drop to reorder'}</DialogTitle>
@@ -123,37 +127,44 @@ const ReorderDialog = () => {
                 orderAndUpdate(e);
               }}
             >
-              {dragList
-                .sort((a, b) => a.order - b.order)
-                .map((option, index) => {
-                  return (
-                    <Draggable key={index}>
-                      <ListItem
-                        className={'drag-handle'}
-                        style={{ width: '100%' }}
-                      >
-                        <Card
-                          elevation={
-                            hoveringOverCard === option.id ? elevation : 3
-                          }
+              {phases &&
+                phases
+                  .sort((a, b) => a.order - b.order)
+                  .map((phase, index) => {
+                    return (
+                      <Draggable key={index}>
+                        <ListItem
+                          className={'drag-handle'}
                           style={{ width: '100%' }}
-                          onMouseEnter={() => {
-                            handleMouseEvent(option.id, 5);
-                          }}
-                          onMouseLeave={() => {
-                            handleMouseEvent('', -1);
-                          }}
-                          className={classes.card}
-                          onClick={() => {
-                            handleMouseEvent(option.id, 10);
-                          }}
                         >
-                          <CardContent>{option.title}</CardContent>
-                        </Card>
-                      </ListItem>
-                    </Draggable>
-                  );
-                })}
+                          <Card
+                            elevation={
+                              hoveringOverCard === phase.id ? elevation : 3
+                            }
+                            style={{ width: '100%' }}
+                            onMouseEnter={() => {
+                              handleMouseEvent(phase.id, 5);
+                            }}
+                            onMouseLeave={() => {
+                              handleMouseEvent('', -1);
+                            }}
+                            className={classes.card}
+                            onClick={() => {
+                              handleMouseEvent(phase.id, 10);
+                            }}
+                          >
+                            {phase.phaseId && (
+                              <CardContent>
+                                {`${phase.order}. ${getPhaseName(
+                                  phase.phaseId
+                                )}`}
+                              </CardContent>
+                            )}
+                          </Card>
+                        </ListItem>
+                      </Draggable>
+                    );
+                  })}
             </Container>
           </List>
         </DialogContent>
@@ -168,10 +179,23 @@ const ReorderDialog = () => {
 };
 
 interface ReorderDialogProps {
-  actionHandler: () => void;
+  phases: Phase[];
+  reorderPhases: (phases: Phase[]) => void;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): ReorderDialogProps =>
-  ({} as unknown as ReorderDialogProps);
+const mapStateToProps = (state: State): ReorderDialogProps => {
+  return {
+    phases: state.routineBuilderState.selectedRoutine.phases
+      ? state.routineBuilderState.selectedRoutine.phases
+      : [],
+  } as unknown as ReorderDialogProps;
+};
 
-export default connect(null, mapDispatchToProps)(ReorderDialog);
+const mapDispatchToProps = (dispatch: Dispatch): ReorderDialogProps =>
+  ({
+    reorderPhases: (phases: Phase[]) => {
+      dispatch(reorderRoutinePhases(phases));
+    },
+  } as unknown as ReorderDialogProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReorderDialog);

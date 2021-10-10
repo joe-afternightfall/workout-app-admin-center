@@ -8,17 +8,20 @@ import {
   CardContent,
   ListItemText,
   ListSubheader,
+  Grid,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
+import ReorderDialog from './components/ReorderDialog';
 import PhaseDropdown from './components/PhaseDropdown';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
 import ExerciseInfoCard from './exercise-segment/ExerciseInfoCard';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
+import PhaseAppBar from './components/PhaseAppBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,6 +70,21 @@ const RoutineInfoCard = ({
     });
   };
 
+  // <ListSubheader className={classes.phaseSubheader}>
+  //     <Grid
+  //         container
+  //         alignItems={'center'}
+  //         justify={'space-between'}
+  //     >
+  //         <Grid item xs={3}>
+  //             <PhaseDropdown phase={phase} />
+  //         </Grid>
+  //         <Grid item xs={3}>
+  //             <ReorderDialog />
+  //         </Grid>
+  //     </Grid>
+  // </ListSubheader>
+
   return (
     <Card raised={false} square className={classes.root}>
       <RoutineTitle />
@@ -75,11 +93,7 @@ const RoutineInfoCard = ({
           return (
             <List
               key={index}
-              subheader={
-                <ListSubheader className={classes.phaseSubheader}>
-                  <PhaseDropdown phase={phase} />
-                </ListSubheader>
-              }
+              subheader={<PhaseAppBar phase={phase} />}
               className={clsx(classes.listBackground, {
                 [classes.topMargin]: phase.order > 1,
               })}
