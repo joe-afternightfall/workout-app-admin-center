@@ -1,9 +1,13 @@
 import React from 'react';
 import { Dispatch } from 'redux';
+import {
+  Phase,
+  phases,
+  PhaseVO,
+  NightfallSelectDropdown,
+} from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../../../configs/redux/store';
-import { Phase, phases, PhaseVO } from 'workout-app-common-core';
-import BaseSelectDropdown from '../../../../../../../shared/BaseSelectDropdown';
 import { selectPhase } from '../../../../../../../../creators/routine-builder/builder';
 
 const PhaseDropdown = ({
@@ -16,7 +20,7 @@ const PhaseDropdown = ({
   };
 
   return (
-    <BaseSelectDropdown
+    <NightfallSelectDropdown
       id={phase.id}
       label={'Phase'}
       variant={'standard'}

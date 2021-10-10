@@ -9,8 +9,11 @@ import {
 } from '../../../../../../creators/routine-builder/builder';
 import { State } from '../../../../../../configs/redux/store';
 import { CardHeader, Grid, IconButton, TextField } from '@material-ui/core';
-import BaseSelectDropdown from '../../../../../shared/BaseSelectDropdown';
-import { workoutCategories, WorkoutCategoryVO } from 'workout-app-common-core';
+import {
+  workoutCategories,
+  WorkoutCategoryVO,
+  NightfallSelectDropdown,
+} from 'workout-app-common-core';
 
 const RoutineTitle = ({
   routineTitle,
@@ -46,7 +49,7 @@ const RoutineTitle = ({
               />
             </Grid>
             <Grid item xs={8} sm={8}>
-              <BaseSelectDropdown
+              <NightfallSelectDropdown
                 id={'workout-category-dropdown'}
                 value={selectedWorkoutCategoryId}
                 label={'Category'}

@@ -14,10 +14,10 @@ import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
-import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
+import RoutineInfoCardActions from './components/RoutineInfoCardActions';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

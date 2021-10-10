@@ -1,5 +1,5 @@
 import React from 'react';
-import { Blinker } from 'workout-app-common-core';
+import { NightfallBlinker } from 'workout-app-common-core';
 import { ListItem, ListItemText } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -24,7 +24,7 @@ export default function BlinkingListItem({
   switch (itemType) {
     case 'blinker':
       display = (
-        <Blinker
+        <NightfallBlinker
           shouldBlink={shouldBlink}
           component={
             <ListItem

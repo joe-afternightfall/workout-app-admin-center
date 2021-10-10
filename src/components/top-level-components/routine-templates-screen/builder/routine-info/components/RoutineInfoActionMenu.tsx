@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import BaseMoreVertMenu from '../../../../../shared/BaseMoreVertMenu';
+import { NightfallMoreVertMenu } from 'workout-app-common-core';
 import { addPhaseToRoutine } from '../../../../../../creators/routine-builder/builder';
 
 const RoutineInfoActionMenu = ({
@@ -9,7 +9,7 @@ const RoutineInfoActionMenu = ({
   editClickHandler,
 }: RoutineInfoActionMenuProps & PassedInProps): JSX.Element => {
   return (
-    <BaseMoreVertMenu
+    <NightfallMoreVertMenu
       id={'routine-title'}
       menuItems={[
         {

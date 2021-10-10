@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import AppTooltip from '../shared/AppTooltip';
 import MenuIcon from '@material-ui/icons/Menu';
 import { State } from '../../configs/redux/store';
 import icon from '../../configs/icons/rainbow-shades.svg';
@@ -12,6 +11,7 @@ import { AppBar, Grid, IconButton, Toolbar } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import { NightfallTooltip } from 'workout-app-common-core';
 
 const drawerSize = (props: { size: string }) => props.size;
 
@@ -81,8 +81,8 @@ const TopAppBar = (props: AppBarProps & PassedInAppBarProps): JSX.Element => {
             <Grid item>
               <Grid container spacing={2} alignItems={'center'}>
                 <Grid item>
-                  <AppTooltip
-                    element={
+                  <NightfallTooltip
+                    component={
                       <IconButton
                         onClick={() => {
                           props.fullScreenClickHandler(!props.isFullScreen);

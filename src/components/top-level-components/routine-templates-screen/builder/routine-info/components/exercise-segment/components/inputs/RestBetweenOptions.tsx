@@ -2,12 +2,12 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import {
   restBetweenSetOptions,
+  NightfallSelectDropdown,
   restBetweenNextSegmentOptions,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
-import BaseSelectDropdown from '../../../../../../../../shared/BaseSelectDropdown';
 import { updateRestBetween } from '../../../../../../../../../creators/routine-builder/builder';
 
 interface MenuOptions {
@@ -37,7 +37,7 @@ const RestBetweenOptions = ({
       <Grid item xs={6}>
         <Grid container alignItems={'center'} justify={'center'} spacing={2}>
           <Grid item xs={12}>
-            <BaseSelectDropdown
+            <NightfallSelectDropdown
               changeHandler={(option: string) => {
                 updateRestHandler('set', option);
               }}
@@ -50,7 +50,7 @@ const RestBetweenOptions = ({
           </Grid>
 
           <Grid item xs={12}>
-            <BaseSelectDropdown
+            <NightfallSelectDropdown
               changeHandler={(option: string) => {
                 updateRestHandler('segment', option);
               }}
