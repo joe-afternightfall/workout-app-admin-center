@@ -13,7 +13,7 @@ const RoutineInfoActionMenu = ({
       id={'routine-title'}
       menuItems={[
         {
-          title: 'Edit',
+          title: 'Edit Routine Title',
           clickHandler: editClickHandler,
         },
         {
