@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
+import BuilderAppBar from '../BuilderAppBar';
 import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
 import ClickToAddCard from './components/ClickToAddCard';
@@ -18,7 +19,8 @@ import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
-import BuilderAppBar from '../BuilderAppBar';
+import { Container, Draggable, DropResult } from 'react-smooth-dnd';
+import { arrayMoveImmutable as arrayMove } from 'array-move';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     topMargin: {
       marginTop: 16,
+    },
+    selectedRow: {
+      zIndex: 1000,
     },
   })
 );
@@ -69,6 +74,15 @@ const RoutineInfoCard = ({
     });
   };
 
+  const orderAndUpdate = (dropProps: DropResult) => {
+    const { removedIndex, addedIndex, payload } = dropProps;
+    if (removedIndex !== null && addedIndex !== null) {
+      console.log('payload: ' + JSON.stringify(payload));
+      // const reorderedArray = arrayMove(phases, removedIndex, addedIndex);
+      // reorderPhases(reorderedArray);
+    }
+  };
+
   return (
     <Card raised={false} square className={classes.root}>
       <BuilderAppBar isEditing={isEditing} editClickHandler={setIsEditing} />
@@ -83,30 +97,43 @@ const RoutineInfoCard = ({
                 [classes.topMargin]: phase.order > 1,
               })}
             >
-              {phase.segments.map((segment) => {
-                const listId = `list-item-${segment.id}`;
-                return (
-                  <ListItem id={listId} key={listId}>
-                    <Divider />
-                    <ListItemText
-                      disableTypography
-                      primary={
-                        <ExerciseInfoCard
-                          segment={segment}
-                          isActiveCard={openCard === listId}
-                          scrollToHandler={() => {
-                            scrollToHandler(listId);
-                            toggleSideDrawerHandler(true);
-                          }}
-                          doneHandler={() => {
-                            doneHandler(phase.id);
-                          }}
+              <Container
+                dragClass={classes.selectedRow}
+                dragHandleSelector={'.segment-drag-handle'}
+                onDrop={(e: DropResult) => {
+                  orderAndUpdate(e);
+                }}
+                getChildPayload={() => {
+                  return phase.segments;
+                }}
+              >
+                {phase.segments.map((segment) => {
+                  const listId = `list-item-${segment.id}`;
+                  return (
+                    <Draggable key={listId}>
+                      <ListItem id={listId}>
+                        <Divider />
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <ExerciseInfoCard
+                              segment={segment}
+                              isActiveCard={openCard === listId}
+                              scrollToHandler={() => {
+                                scrollToHandler(listId);
+                                toggleSideDrawerHandler(true);
+                              }}
+                              doneHandler={() => {
+                                doneHandler(phase.id);
+                              }}
+                            />
+                          }
                         />
-                      }
-                    />
-                  </ListItem>
-                );
-              })}
+                      </ListItem>
+                    </Draggable>
+                  );
+                })}
+              </Container>
               <ListItem key={'click-to-add-card'}>
                 <ListItemText
                   disableTypography
