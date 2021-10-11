@@ -36,21 +36,6 @@ export default {
       case ActionTypes.LOGOUT_USER:
         newState.userIsValidated = false;
         break;
-      case ActionTypes.CLOSE_TEMP_SIDE_DRAWER:
-        newState.isTempSideDrawerOpen = false;
-        break;
-      case ActionTypes.OPEN_TEMP_SIDE_DRAWER:
-        newState.isTempSideDrawerOpen = true;
-        break;
-      case ActionTypes.SET_DRAWER_SIZE:
-        newState.drawerSize = action.size;
-        break;
-      case ActionTypes.USER_CLICKED_CLOSE_DRAWER:
-        newState.userClickedCloseDrawer = true;
-        break;
-      case ActionTypes.USER_CLICKED_OPEN_DRAWER:
-        newState.userClickedCloseDrawer = false;
-        break;
       case ActionTypes.LOAD_USER_WORKOUTS:
         newState.userWorkouts = action.workouts;
         break;
@@ -100,10 +85,7 @@ export interface ApplicationState {
   snackbarProps: SnackbarCreatorProps;
   userIsValidated: boolean;
   userEmail: string;
-  drawerSize: string;
   displayAppBar: boolean;
-  userClickedCloseDrawer: boolean;
-  isTempSideDrawerOpen: boolean;
   sideDrawerIsClosed: boolean;
   userWorkouts: WorkoutVO[];
   workoutConfigurations: {

@@ -1,14 +1,6 @@
 import { LocationChangeAction } from 'connected-react-router';
 import { LoadUsersWorkoutsAction, ValidatedUserAction } from './user-info';
 import {
-  CloseSideDrawerAction,
-  OpenSideDrawerAction,
-  SetDrawerSizeAction,
-  UserClickedCloseDrawerAction,
-  UserClickedOpenDrawerAction,
-  LogoutUserAction,
-} from './side-drawer';
-import {
   LoadExercisesAction,
   LoadExerciseTypesAction,
 } from './workout-configurations';
@@ -41,7 +33,7 @@ import {
   DeletePhaseFromRoutineAction,
   ReorderRoutineSegmentsAction,
 } from './routine-builder/builder';
-import { HideAppBarAction } from './application';
+import { HideAppBarAction, LogoutUserAction } from './application';
 
 export enum ActionTypes {
   // Application Actions
@@ -79,11 +71,6 @@ export enum ActionTypes {
   REORDER_ROUTINE_SEGMENTS = 'REORDER_ROUTINE_SEGMENTS',
 
   // Side drawer actions
-  CLOSE_TEMP_SIDE_DRAWER = 'CLOSE_TEMP_SIDE_DRAWER',
-  OPEN_TEMP_SIDE_DRAWER = 'OPEN_TEMP_SIDE_DRAWER',
-  SET_DRAWER_SIZE = 'SET_DRAWER_SIZE',
-  USER_CLICKED_CLOSE_DRAWER = 'USER_CLICKED_CLOSE_DRAWER',
-  USER_CLICKED_OPEN_DRAWER = 'USER_CLICKED_OPEN_DRAWER',
   LOGOUT_USER = 'LOGOUT_USER',
 
   // Manikin Muscle Group Selector
@@ -95,11 +82,6 @@ export enum ActionTypes {
 export type ApplicationActions =
   | LocationChangeAction
   | ValidatedUserAction
-  | CloseSideDrawerAction
-  | OpenSideDrawerAction
-  | SetDrawerSizeAction
-  | UserClickedCloseDrawerAction
-  | UserClickedOpenDrawerAction
   | LogoutUserAction
   | LoadUsersWorkoutsAction
   | LoadExerciseTypesAction

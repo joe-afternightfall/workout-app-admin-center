@@ -11,8 +11,8 @@ import { CssBaseline } from '@material-ui/core';
 import { getLightTheme } from './configs/theme/light-theme';
 import { DocumentFullScreen } from '@chiragrupani/fullscreen-react';
 import AppBar from './components/app-shell/AppBar';
-import ResponsiveSideDrawer from './components/app-shell/side-drawer/ResponsiveSideDrawer';
 import AppSnackbar from './components/app-shell/AppSnackbar';
+import AppSideDrawer from './components/app-shell/side-drawer/AppSideDrawer';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
@@ -55,7 +55,7 @@ class App extends Component<AppProps> {
               fullScreenClickHandler={handleFullScreenClick}
             />
             <AppSnackbar />
-            <ResponsiveSideDrawer />
+            <AppSideDrawer />
 
             <main className={classes.content}>
               {displayAppBar && <div className={classes.toolbar} />}
