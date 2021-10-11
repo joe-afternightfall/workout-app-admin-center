@@ -68,18 +68,18 @@ describe('Application Reducer', () => {
 
   it('should return close side drawer action', () => {
     const state = application.reducer(undefined, {
-      type: ActionTypes.CLOSE_SIDE_DRAWER,
+      type: ActionTypes.CLOSE_TEMP_SIDE_DRAWER,
     });
 
-    expect(state.sideDrawerIsOpen).toBe(false);
+    expect(state.isTempSideDrawerOpen).toBe(false);
   });
 
   it('should return open side drawer action', () => {
     const state = application.reducer(undefined, {
-      type: ActionTypes.OPEN_SIDE_DRAWER,
+      type: ActionTypes.OPEN_TEMP_SIDE_DRAWER,
     });
 
-    expect(state.sideDrawerIsOpen).toBe(true);
+    expect(state.isTempSideDrawerOpen).toBe(true);
   });
 
   it('should return set drawer size action', () => {

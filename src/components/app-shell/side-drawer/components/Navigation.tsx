@@ -51,7 +51,7 @@ const Navigation = (
   };
 
   const close = () => {
-    if (props.isDrawerOpen) {
+    if (props.isTempSideDrawerOpen) {
       setTimeout(() => {
         props.closeSideDrawerHandler();
       }, 300);
@@ -150,7 +150,7 @@ const Navigation = (
 export interface NavigationProps {
   activePage: RouteProp;
   currentLocation: string;
-  isDrawerOpen: boolean;
+  isTempSideDrawerOpen: boolean;
   routeClickHandler: (path: string) => void;
   signOutClickHandler: () => void;
   closeSideDrawerHandler: () => void;
@@ -165,7 +165,7 @@ const mapStateToProps = (state: State): NavigationProps => {
   return {
     activePage: state.applicationState.activePage,
     currentLocation: state.applicationState.currentLocation,
-    isDrawerOpen: state.applicationState.sideDrawerIsOpen,
+    isTempSideDrawerOpen: state.applicationState.isTempSideDrawerOpen,
     drawerSize: state.applicationState.drawerSize,
   } as unknown as NavigationProps;
 };

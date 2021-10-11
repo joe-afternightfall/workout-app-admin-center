@@ -48,7 +48,7 @@ interface TempSideDrawerProps {
 
 const mapStateToProps = (state: State): TempSideDrawerProps => {
   return {
-    open: state.applicationState.sideDrawerIsOpen,
+    open: state.applicationState.isTempSideDrawerOpen,
   } as unknown as TempSideDrawerProps;
 };
 
