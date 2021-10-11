@@ -50,12 +50,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RoutineInfoCard = ({
   phases,
+  newRoutine,
   reorderSegments,
   toggleSideDrawerHandler,
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
-  const [isEditing, setIsEditing] = React.useState(false);
+  const [isEditing, setIsEditing] = React.useState(newRoutine);
 
   const scrollToHandler = (id: string) => {
     if (openCard !== id) {
@@ -166,6 +167,7 @@ interface PassedInProps {
 }
 
 interface RoutineInfoCardProps {
+  newRoutine: boolean;
   phases: Phase[];
   reorderSegments: (phaseId: string, segments: Segment[]) => void;
 }
@@ -173,6 +175,7 @@ interface RoutineInfoCardProps {
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
+    newRoutine: state.routineBuilderState.newRoutine,
   } as unknown as RoutineInfoCardProps;
 };
 

@@ -12,6 +12,7 @@ export default {
 
     switch (action.type) {
       case ActionTypes.BUILD_NEW_ROUTINE:
+        newState.newRoutine = action.newRoutine;
         newState.selectedRoutine = action.routine;
         break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
@@ -240,6 +241,7 @@ export default {
 
 export interface RoutineBuilderState {
   activeCardId: string;
+  newRoutine: boolean;
   selectedRoutine: RoutineTemplateVO;
   selectedExerciseSlotForSegment: {
     segmentId: string;

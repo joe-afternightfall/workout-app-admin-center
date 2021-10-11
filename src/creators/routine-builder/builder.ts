@@ -4,12 +4,14 @@ import { Phase, RoutineTemplateVO, Segment } from 'workout-app-common-core';
 
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
+  newRoutine: boolean;
   routine: RoutineTemplateVO;
 }
 
 export const buildNewRoutine = (): BuildNewRoutineAction => {
   return {
     type: ActionTypes.BUILD_NEW_ROUTINE,
+    newRoutine: true,
     routine: {
       id: uuidv4(),
       firebaseId: '',
