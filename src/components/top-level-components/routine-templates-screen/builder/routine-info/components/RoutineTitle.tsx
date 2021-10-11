@@ -1,96 +1,103 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import RoutineInfoActionMenu from './RoutineInfoActionMenu';
-import DoneIcon from '@material-ui/icons/Done';
-import {
-  updateRoutineTitle,
-  updateSelectedCategoryId,
-} from '../../../../../../creators/routine-builder/builder';
-import { State } from '../../../../../../configs/redux/store';
-import { CardHeader, Grid, IconButton, TextField } from '@material-ui/core';
 import {
   workoutCategories,
   WorkoutCategoryVO,
   NightfallSelectDropdown,
 } from 'workout-app-common-core';
+import { connect } from 'react-redux';
+import {
+  updateRoutineTitle,
+  updateSelectedCategoryId,
+} from '../../../../../../creators/routine-builder/builder';
+import { State } from '../../../../../../configs/redux/store';
+import { Grid, TextField, Typography } from '@material-ui/core';
+
+function titleRow(
+  title: string,
+  isEditing: boolean,
+  editingComponent: JSX.Element,
+  editingTitle: string
+): JSX.Element {
+  return (
+    <Grid item xs={12} container alignItems={'center'}>
+      <Grid item xs={6}>
+        <Typography variant={'h6'} color={'textSecondary'}>
+          {title}
+        </Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Grid container justify={'flex-end'}>
+          {isEditing ? (
+            editingComponent
+          ) : (
+            <Typography variant={'h5'} color={'textPrimary'}>
+              {editingTitle}
+            </Typography>
+          )}
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
 
 const RoutineTitle = ({
+  isEditing,
   routineTitle,
   titleChangeHandler,
   categoryChangeHandler,
   selectedWorkoutCategoryId,
-}: RoutineTitleProps): JSX.Element => {
+}: RoutineTitleProps & PassedInProps): JSX.Element => {
   let subheader = 'select category';
-  const [isEditing, setIsEditing] = React.useState(false);
-
   workoutCategories.find((category) => {
     if (category.id === selectedWorkoutCategoryId) {
       subheader = category.name;
     }
   });
-
+  const title = routineTitle === '' ? 'Setup Routine' : routineTitle;
+  const categoryTitle = subheader === '' ? 'select category' : subheader;
   return (
-    <CardHeader
-      disableTypography={isEditing}
-      title={
-        isEditing ? (
-          <Grid container spacing={2}>
-            <Grid item xs={8} sm={8}>
-              <TextField
-                fullWidth
-                value={routineTitle}
-                placeholder={'Title'}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  titleChangeHandler(e.target.value);
-                }}
-                variant={'filled'}
-                label={'Routine title'}
-              />
-            </Grid>
-            <Grid item xs={8} sm={8}>
-              <NightfallSelectDropdown
-                id={'workout-category-dropdown'}
-                value={selectedWorkoutCategoryId}
-                label={'Category'}
-                changeHandler={categoryChangeHandler}
-                variant={'outlined'}
-                data={workoutCategories.map((category: WorkoutCategoryVO) => {
-                  return {
-                    id: category.id,
-                    name: category.name,
-                  };
-                })}
-              />
-            </Grid>
-          </Grid>
-        ) : routineTitle === '' ? (
-          'Setup Routine'
-        ) : (
-          routineTitle
-        )
-      }
-      subheader={isEditing ? undefined : subheader}
-      action={
-        isEditing ? (
-          <IconButton
-            onClick={() => {
-              setIsEditing(false);
-            }}
-          >
-            <DoneIcon />
-          </IconButton>
-        ) : (
-          <RoutineInfoActionMenu
-            editClickHandler={() => {
-              setIsEditing(true);
-            }}
-          />
-        )
-      }
-    />
+    <Grid container spacing={2} style={{ marginBottom: 16 }}>
+      {titleRow(
+        'Routine Title',
+        isEditing,
+        <TextField
+          fullWidth
+          value={routineTitle}
+          placeholder={'Title'}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            titleChangeHandler(e.target.value);
+          }}
+          variant={'filled'}
+          label={'Routine title'}
+        />,
+        title
+      )}
+      {titleRow(
+        'Workout Category',
+        isEditing,
+        <NightfallSelectDropdown
+          id={'workout-category-dropdown'}
+          value={selectedWorkoutCategoryId}
+          label={'Category'}
+          changeHandler={categoryChangeHandler}
+          variant={'outlined'}
+          data={workoutCategories.map((category: WorkoutCategoryVO) => {
+            return {
+              id: category.id,
+              name: category.name,
+            };
+          })}
+        />,
+        categoryTitle
+      )}
+    </Grid>
   );
 };
+
+interface PassedInProps {
+  isEditing: boolean;
+}
 
 export interface RoutineTitleProps {
   routineTitle: string;

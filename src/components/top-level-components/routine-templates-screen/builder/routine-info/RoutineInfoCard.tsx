@@ -18,6 +18,7 @@ import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
+import BuilderAppBar from '../BuilderAppBar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +47,7 @@ const RoutineInfoCard = ({
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
+  const [isEditing, setIsEditing] = React.useState(false);
 
   const scrollToHandler = (id: string) => {
     if (openCard !== id) {
@@ -69,8 +71,9 @@ const RoutineInfoCard = ({
 
   return (
     <Card raised={false} square className={classes.root}>
-      <RoutineTitle />
+      <BuilderAppBar isEditing={isEditing} editClickHandler={setIsEditing} />
       <CardContent>
+        <RoutineTitle isEditing={isEditing} />
         {phases.map((phase, index) => {
           return (
             <List
