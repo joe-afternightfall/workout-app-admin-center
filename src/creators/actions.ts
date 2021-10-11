@@ -39,6 +39,7 @@ import {
   DeleteSegmentFromPhaseAction,
   ReorderRoutinePhasesAction,
   DeletePhaseFromRoutineAction,
+  ReorderRoutineSegmentsAction,
 } from './routine-builder/builder';
 import { HideAppBarAction } from './application';
 
@@ -75,6 +76,7 @@ export enum ActionTypes {
   DELETE_SEGMENT_FROM_PHASE = 'DELETE_SEGMENT_FROM_PHASE',
   REORDER_ROUTINE_PHASES = 'REORDER_ROUTINE_PHASES',
   DELETE_PHASE_FROM_ROUTINE = 'DELETE_PHASE_FROM_ROUTINE',
+  REORDER_ROUTINE_SEGMENTS = 'REORDER_ROUTINE_SEGMENTS',
 
   // Side drawer actions
   CLOSE_SIDE_DRAWER = 'CLOSE_SIDE_DRAWER',
@@ -124,4 +126,5 @@ export type ApplicationActions =
   | DeleteSetFromEachExerciseInSegmentAction
   | DeleteSegmentFromPhaseAction
   | ReorderRoutinePhasesAction
-  | DeletePhaseFromRoutineAction;
+  | DeletePhaseFromRoutineAction
+  | ReorderRoutineSegmentsAction;

@@ -8,19 +8,21 @@ import {
   CardContent,
   ListItemText,
 } from '@material-ui/core';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import BuilderAppBar from '../BuilderAppBar';
-import { Phase } from 'workout-app-common-core';
 import RoutineTitle from './components/RoutineTitle';
+import { Phase, Segment } from 'workout-app-common-core';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
+import { arrayMoveImmutable as arrayMove } from 'array-move';
 import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
+import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
-import { Container, Draggable, DropResult } from 'react-smooth-dnd';
-import { arrayMoveImmutable as arrayMove } from 'array-move';
+import { reorderRoutineSegments } from '../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RoutineInfoCard = ({
   phases,
+  reorderSegments,
   toggleSideDrawerHandler,
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
@@ -77,9 +80,15 @@ const RoutineInfoCard = ({
   const orderAndUpdate = (dropProps: DropResult) => {
     const { removedIndex, addedIndex, payload } = dropProps;
     if (removedIndex !== null && addedIndex !== null) {
-      console.log('payload: ' + JSON.stringify(payload));
-      // const reorderedArray = arrayMove(phases, removedIndex, addedIndex);
-      // reorderPhases(reorderedArray);
+      const reorderedArray: Segment[] = arrayMove(
+        payload.segments,
+        removedIndex,
+        addedIndex
+      );
+      reorderedArray.map((segment, index) => {
+        segment.order = index + 1;
+      });
+      reorderSegments(payload.phaseId, reorderedArray);
     }
   };
 
@@ -104,7 +113,10 @@ const RoutineInfoCard = ({
                   orderAndUpdate(e);
                 }}
                 getChildPayload={() => {
-                  return phase.segments;
+                  return {
+                    phaseId: phase.id,
+                    segments: phase.segments,
+                  };
                 }}
               >
                 {phase.segments.map((segment) => {
@@ -155,6 +167,7 @@ interface PassedInProps {
 
 interface RoutineInfoCardProps {
   phases: Phase[];
+  reorderSegments: (phaseId: string, segments: Segment[]) => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
@@ -163,4 +176,11 @@ const mapStateToProps = (state: State): RoutineInfoCardProps => {
   } as unknown as RoutineInfoCardProps;
 };
 
-export default connect(mapStateToProps)(RoutineInfoCard);
+const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardProps =>
+  ({
+    reorderSegments: (phaseId: string, segments: Segment[]) => {
+      dispatch(reorderRoutineSegments(phaseId, segments));
+    },
+  } as unknown as RoutineInfoCardProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineInfoCard);

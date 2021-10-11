@@ -9,6 +9,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  Fade,
 } from '@material-ui/core';
 import ExerciseInfoCardActions from './ExerciseInfoCardActions';
 import SetIncrementer from './components/inputs/SetIncrementer';
@@ -39,7 +40,7 @@ const useStyles = makeStyles(() =>
       },
       opacity: 0.5,
       marginBottom: -24,
-      minHeight: '3vh',
+      minHeight: 20,
       width: '100%',
     },
   })
@@ -52,6 +53,8 @@ export default function ExerciseInfoCard({
   scrollToHandler,
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
+  const [displayDragIndicator, setDisplayDragIndicator] = React.useState(false);
+
   let displayActionMenu = false;
   let displayInputs = false;
 
@@ -80,7 +83,14 @@ export default function ExerciseInfoCard({
   }
 
   return (
-    <React.Fragment>
+    <div
+      onMouseOver={() => {
+        setDisplayDragIndicator(true);
+      }}
+      onMouseLeave={() => {
+        setDisplayDragIndicator(false);
+      }}
+    >
       <Grid
         item
         xs={12}
@@ -88,10 +98,12 @@ export default function ExerciseInfoCard({
         justify={'center'}
         className={clsx('segment-drag-handle', classes.indicatorContainer)}
       >
-        <DragIndicatorIcon
-          className={clsx(classes.dragIndicator)}
-          fontSize={'small'}
-        />
+        <Fade in={displayDragIndicator || isActiveCard}>
+          <DragIndicatorIcon
+            className={clsx(classes.dragIndicator)}
+            fontSize={'small'}
+          />
+        </Fade>
       </Grid>
       <Card
         onClick={scrollToHandler}
@@ -155,7 +167,7 @@ export default function ExerciseInfoCard({
           />
         )}
       </Card>
-    </React.Fragment>
+    </div>
   );
 }
 
