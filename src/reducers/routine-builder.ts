@@ -12,6 +12,7 @@ export default {
 
     switch (action.type) {
       case ActionTypes.BUILD_NEW_ROUTINE:
+        newState.newRoutine = action.newRoutine;
         newState.selectedRoutine = action.routine;
         break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
@@ -220,6 +221,16 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.REORDER_ROUTINE_SEGMENTS: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          if (phase.id === action.phaseId) {
+            phase.segments = action.segments;
+          }
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }
@@ -230,6 +241,7 @@ export default {
 
 export interface RoutineBuilderState {
   activeCardId: string;
+  newRoutine: boolean;
   selectedRoutine: RoutineTemplateVO;
   selectedExerciseSlotForSegment: {
     segmentId: string;

@@ -1,15 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes } from '../actions';
-import { Phase, RoutineTemplateVO } from 'workout-app-common-core';
+import { Phase, RoutineTemplateVO, Segment } from 'workout-app-common-core';
 
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
+  newRoutine: boolean;
   routine: RoutineTemplateVO;
 }
 
 export const buildNewRoutine = (): BuildNewRoutineAction => {
   return {
     type: ActionTypes.BUILD_NEW_ROUTINE,
+    newRoutine: true,
     routine: {
       id: uuidv4(),
       firebaseId: '',
@@ -251,5 +253,22 @@ export const deletePhaseFromRoutine = (
   return {
     type: ActionTypes.DELETE_PHASE_FROM_ROUTINE,
     phaseId: phaseId,
+  };
+};
+
+export interface ReorderRoutineSegmentsAction {
+  type: ActionTypes.REORDER_ROUTINE_SEGMENTS;
+  phaseId: string;
+  segments: Segment[];
+}
+
+export const reorderRoutineSegments = (
+  phaseId: string,
+  segments: Segment[]
+): ReorderRoutineSegmentsAction => {
+  return {
+    type: ActionTypes.REORDER_ROUTINE_SEGMENTS,
+    phaseId: phaseId,
+    segments: segments,
   };
 };

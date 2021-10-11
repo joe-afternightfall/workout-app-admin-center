@@ -36,11 +36,11 @@ export default {
       case ActionTypes.LOGOUT_USER:
         newState.userIsValidated = false;
         break;
-      case ActionTypes.CLOSE_SIDE_DRAWER:
-        newState.sideDrawerIsOpen = false;
+      case ActionTypes.CLOSE_TEMP_SIDE_DRAWER:
+        newState.isTempSideDrawerOpen = false;
         break;
-      case ActionTypes.OPEN_SIDE_DRAWER:
-        newState.sideDrawerIsOpen = true;
+      case ActionTypes.OPEN_TEMP_SIDE_DRAWER:
+        newState.isTempSideDrawerOpen = true;
         break;
       case ActionTypes.SET_DRAWER_SIZE:
         newState.drawerSize = action.size;
@@ -103,7 +103,7 @@ export interface ApplicationState {
   drawerSize: string;
   displayAppBar: boolean;
   userClickedCloseDrawer: boolean;
-  sideDrawerIsOpen: boolean;
+  isTempSideDrawerOpen: boolean;
   sideDrawerIsClosed: boolean;
   userWorkouts: WorkoutVO[];
   workoutConfigurations: {

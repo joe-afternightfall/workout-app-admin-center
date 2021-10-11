@@ -8,17 +8,21 @@ import {
   CardContent,
   ListItemText,
 } from '@material-ui/core';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
-import { Phase } from 'workout-app-common-core';
+import BuilderAppBar from '../BuilderAppBar';
 import RoutineTitle from './components/RoutineTitle';
+import { Phase, Segment } from 'workout-app-common-core';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../../configs/redux/store';
+import { arrayMoveImmutable as arrayMove } from 'array-move';
 import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
+import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
-import BuilderAppBar from '../BuilderAppBar';
+import { reorderRoutineSegments } from '../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,16 +42,21 @@ const useStyles = makeStyles((theme: Theme) =>
     topMargin: {
       marginTop: 16,
     },
+    selectedRow: {
+      zIndex: 1000,
+    },
   })
 );
 
 const RoutineInfoCard = ({
   phases,
+  newRoutine,
+  reorderSegments,
   toggleSideDrawerHandler,
 }: RoutineInfoCardProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
-  const [isEditing, setIsEditing] = React.useState(false);
+  const [isEditing, setIsEditing] = React.useState(newRoutine);
 
   const scrollToHandler = (id: string) => {
     if (openCard !== id) {
@@ -69,6 +78,21 @@ const RoutineInfoCard = ({
     });
   };
 
+  const orderAndUpdate = (dropProps: DropResult) => {
+    const { removedIndex, addedIndex, payload } = dropProps;
+    if (removedIndex !== null && addedIndex !== null) {
+      const reorderedArray: Segment[] = arrayMove(
+        payload.segments,
+        removedIndex,
+        addedIndex
+      );
+      reorderedArray.map((segment, index) => {
+        segment.order = index + 1;
+      });
+      reorderSegments(payload.phaseId, reorderedArray);
+    }
+  };
+
   return (
     <Card raised={false} square className={classes.root}>
       <BuilderAppBar isEditing={isEditing} editClickHandler={setIsEditing} />
@@ -83,30 +107,46 @@ const RoutineInfoCard = ({
                 [classes.topMargin]: phase.order > 1,
               })}
             >
-              {phase.segments.map((segment) => {
-                const listId = `list-item-${segment.id}`;
-                return (
-                  <ListItem id={listId} key={listId}>
-                    <Divider />
-                    <ListItemText
-                      disableTypography
-                      primary={
-                        <ExerciseInfoCard
-                          segment={segment}
-                          isActiveCard={openCard === listId}
-                          scrollToHandler={() => {
-                            scrollToHandler(listId);
-                            toggleSideDrawerHandler(true);
-                          }}
-                          doneHandler={() => {
-                            doneHandler(phase.id);
-                          }}
+              <Container
+                dragClass={classes.selectedRow}
+                dragHandleSelector={'.segment-drag-handle'}
+                onDrop={(e: DropResult) => {
+                  orderAndUpdate(e);
+                }}
+                getChildPayload={() => {
+                  return {
+                    phaseId: phase.id,
+                    segments: phase.segments,
+                  };
+                }}
+              >
+                {phase.segments.map((segment) => {
+                  const listId = `list-item-${segment.id}`;
+                  return (
+                    <Draggable key={listId}>
+                      <ListItem id={listId}>
+                        <Divider />
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <ExerciseInfoCard
+                              segment={segment}
+                              isActiveCard={openCard === listId}
+                              scrollToHandler={() => {
+                                scrollToHandler(listId);
+                                toggleSideDrawerHandler(true);
+                              }}
+                              doneHandler={() => {
+                                doneHandler(phase.id);
+                              }}
+                            />
+                          }
                         />
-                      }
-                    />
-                  </ListItem>
-                );
-              })}
+                      </ListItem>
+                    </Draggable>
+                  );
+                })}
+              </Container>
               <ListItem key={'click-to-add-card'}>
                 <ListItemText
                   disableTypography
@@ -127,13 +167,23 @@ interface PassedInProps {
 }
 
 interface RoutineInfoCardProps {
+  newRoutine: boolean;
   phases: Phase[];
+  reorderSegments: (phaseId: string, segments: Segment[]) => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
+    newRoutine: state.routineBuilderState.newRoutine,
   } as unknown as RoutineInfoCardProps;
 };
 
-export default connect(mapStateToProps)(RoutineInfoCard);
+const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardProps =>
+  ({
+    reorderSegments: (phaseId: string, segments: Segment[]) => {
+      dispatch(reorderRoutineSegments(phaseId, segments));
+    },
+  } as unknown as RoutineInfoCardProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoutineInfoCard);

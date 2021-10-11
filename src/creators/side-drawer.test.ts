@@ -14,7 +14,7 @@ describe('side-drawer creator methods', () => {
     const action = closeSideDrawer();
 
     expect(action).toEqual({
-      type: ActionTypes.CLOSE_SIDE_DRAWER,
+      type: ActionTypes.CLOSE_TEMP_SIDE_DRAWER,
     });
   });
 
@@ -22,7 +22,7 @@ describe('side-drawer creator methods', () => {
     const action = openSideDrawer();
 
     expect(action).toEqual({
-      type: ActionTypes.OPEN_SIDE_DRAWER,
+      type: ActionTypes.OPEN_TEMP_SIDE_DRAWER,
     });
   });
 

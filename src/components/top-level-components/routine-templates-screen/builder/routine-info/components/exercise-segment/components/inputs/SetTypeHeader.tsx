@@ -26,7 +26,7 @@ const SetTypeHeader = ({
       ) : (
         <>
           <Grid item>
-            <Typography variant={'h5'} color={'textSecondary'}>
+            <Typography variant={'subtitle1'} color={'textSecondary'}>
               {'Set type: '}
             </Typography>
           </Grid>

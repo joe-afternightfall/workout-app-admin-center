@@ -8,6 +8,8 @@ import {
   CardHeader,
   CardContent,
   Typography,
+  Grid,
+  Fade,
 } from '@material-ui/core';
 import ExerciseInfoCardActions from './ExerciseInfoCardActions';
 import SetIncrementer from './components/inputs/SetIncrementer';
@@ -18,6 +20,7 @@ import ListItemMessage from './components/base-components/ListItemMessage';
 import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,6 +30,18 @@ const useStyles = makeStyles(() =>
     activeCard: {
       height: '100%',
       borderLeft: '6px solid #4285f4',
+    },
+    dragIndicator: {
+      transform: 'rotate(90deg)',
+    },
+    indicatorContainer: {
+      '&:hover': {
+        cursor: 'move',
+      },
+      opacity: 0.5,
+      marginBottom: -24,
+      minHeight: 20,
+      width: '100%',
     },
   })
 );
@@ -38,6 +53,8 @@ export default function ExerciseInfoCard({
   scrollToHandler,
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
+  const [displayDragIndicator, setDisplayDragIndicator] = React.useState(false);
+
   let displayActionMenu = false;
   let displayInputs = false;
 
@@ -66,69 +83,91 @@ export default function ExerciseInfoCard({
   }
 
   return (
-    <Card
-      onClick={scrollToHandler}
-      className={clsx(classes.animate, {
-        [classes.activeCard]: isActiveCard,
-      })}
+    <div
+      onMouseOver={() => {
+        setDisplayDragIndicator(true);
+      }}
+      onMouseLeave={() => {
+        setDisplayDragIndicator(false);
+      }}
     >
-      <CardHeader
-        disableTypography={emptySetType}
-        title={
-          emptySetType ? (
-            <Typography variant={'h5'} color={'textSecondary'}>
+      <Grid
+        item
+        xs={12}
+        container
+        justify={'center'}
+        className={clsx('segment-drag-handle', classes.indicatorContainer)}
+      >
+        <Fade in={displayDragIndicator || isActiveCard}>
+          <DragIndicatorIcon
+            className={clsx(classes.dragIndicator)}
+            fontSize={'small'}
+          />
+        </Fade>
+      </Grid>
+      <Card
+        onClick={scrollToHandler}
+        className={clsx(classes.animate, {
+          [classes.activeCard]: isActiveCard,
+        })}
+      >
+        <CardHeader
+          disableTypography={emptySetType}
+          title={
+            <Typography variant={'h6'} color={'textSecondary'}>
               {title}
             </Typography>
-          ) : (
-            title
-          )
-        }
-        subheader={<SetTypeDropdown segment={segment} />}
-        action={
-          displayActionMenu && <SegmentActionMenu segmentId={segment.id} />
-        }
-      />
-      <CardContent>
-        <List>
-          <Divider variant={'middle'} style={{ marginBottom: 12 }} />
-          {emptySetType && (
-            <ListItemMessage message={'select a set type to continue'} />
-          )}
+          }
+          subheader={<SetTypeDropdown segment={segment} />}
+          action={
+            displayActionMenu && <SegmentActionMenu segmentId={segment.id} />
+          }
+        />
+        <CardContent>
+          <List>
+            <Divider variant={'middle'} style={{ marginBottom: 12 }} />
+            {emptySetType && (
+              <ListItemMessage message={'select a set type to continue'} />
+            )}
 
-          {isActiveCard && !emptySetType && (
-            <>
-              <ExerciseListItem segment={segment} />
+            {isActiveCard && !emptySetType && (
+              <>
+                <ExerciseListItem segment={segment} />
 
-              {displayInputs ? (
-                <>
-                  <Divider variant={'middle'} />
-                  <ListItem style={{ marginTop: 16, marginBottom: 16 }}>
-                    <SetIncrementer segment={segment} />
-                  </ListItem>
-                  <ListItem>
-                    <RestBetweenOptions
-                      segmentId={segment.id}
-                      restBetweenNextSegmentValue={
-                        segment.secondsRestBetweenNextSegment
-                      }
-                      restBetweenSetValue={segment.secondsRestBetweenSets}
-                    />
-                  </ListItem>
-                </>
-              ) : (
-                <>
-                  <Divider variant={'middle'} style={{ marginTop: 12 }} />
-                  <ListItemMessage message={'select exercises to continue'} />
-                </>
-              )}
-            </>
-          )}
-        </List>
-      </CardContent>
-      {isActiveCard && !emptySetType && (
-        <ExerciseInfoCardActions segment={segment} doneHandler={doneHandler} />
-      )}
-    </Card>
+                {displayInputs ? (
+                  <>
+                    <Divider variant={'middle'} />
+                    <ListItem style={{ marginTop: 16, marginBottom: 16 }}>
+                      <SetIncrementer segment={segment} />
+                    </ListItem>
+                    <ListItem>
+                      <RestBetweenOptions
+                        segmentId={segment.id}
+                        restBetweenNextSegmentValue={
+                          segment.secondsRestBetweenNextSegment
+                        }
+                        restBetweenSetValue={segment.secondsRestBetweenSets}
+                      />
+                    </ListItem>
+                  </>
+                ) : (
+                  <>
+                    <Divider variant={'middle'} style={{ marginTop: 12 }} />
+                    <ListItemMessage message={'select exercises to continue'} />
+                  </>
+                )}
+              </>
+            )}
+          </List>
+        </CardContent>
+        {isActiveCard && !emptySetType && (
+          <ExerciseInfoCardActions
+            segment={segment}
+            doneHandler={doneHandler}
+          />
+        )}
+      </Card>
+    </div>
   );
 }
 
