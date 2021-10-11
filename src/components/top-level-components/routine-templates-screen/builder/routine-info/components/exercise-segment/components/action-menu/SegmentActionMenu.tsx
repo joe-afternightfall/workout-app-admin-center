@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionMenuDialog from './ActionMenuDialog';
-import BaseMoreVertMenu from '../../../../../../../../shared/BaseMoreVertMenu';
+import { NightfallMoreVertMenu } from 'workout-app-common-core';
 
 export default function SegmentActionMenu({
   segmentId,
@@ -25,7 +25,7 @@ export default function SegmentActionMenu({
         segmentId={segmentId}
         closeHandler={handleClose}
       />
-      <BaseMoreVertMenu
+      <NightfallMoreVertMenu
         id={segmentId}
         menuItems={[
           {

@@ -1,19 +1,20 @@
 import React from 'react';
 import {
+  Box,
   Dialog,
   Button,
+  IconButton,
+  Typography,
   DialogTitle,
   DialogContent,
   DialogActions,
   DialogContentText,
-  IconButton,
-  Typography,
-  Box,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import { NightfallTooltip } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { deletePhaseFromRoutine } from '../../../../../../../../creators/routine-builder/builder';
 
@@ -45,9 +46,15 @@ const DeletePhaseDialog = ({
 
   return (
     <div>
-      <IconButton onClick={openDialog}>
-        <Delete />
-      </IconButton>
+      <NightfallTooltip
+        title={'Delete Phase'}
+        placement={'top'}
+        component={
+          <IconButton onClick={openDialog}>
+            <Delete />
+          </IconButton>
+        }
+      />
       <Dialog open={open} onClose={closeDialog}>
         <DialogTitle>{'Hold up!'}</DialogTitle>
         <DialogContent>

@@ -5,11 +5,11 @@ import {
   getSetTypeName,
   TrainingSetType,
   trainingSetTypes,
+  NightfallSelectDropdown,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import { selectSetType } from '../../../../../../../../../creators/routine-builder/builder';
-import BaseSelectDropdown from '../../../../../../../../shared/BaseSelectDropdown';
 
 const SetTypeHeader = ({
   segment,
@@ -32,7 +32,7 @@ const SetTypeHeader = ({
           </Grid>
 
           <Grid item xs={4}>
-            <BaseSelectDropdown
+            <NightfallSelectDropdown
               id={segment.id}
               label={'Set Type'}
               variant={'standard'}

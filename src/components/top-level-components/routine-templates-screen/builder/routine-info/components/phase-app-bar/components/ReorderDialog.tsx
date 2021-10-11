@@ -15,7 +15,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
 import { State } from '../../../../../../../../configs/redux/store';
-import { getPhaseName, Phase } from 'workout-app-common-core';
+import { getPhaseName, NightfallTooltip, Phase } from 'workout-app-common-core';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -67,9 +67,16 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
 
   return (
     <div>
-      <IconButton disabled={phases.length <= 1} onClick={openDialog}>
-        <CompareArrowsIcon />
-      </IconButton>
+      <NightfallTooltip
+        title={'Reorder Phases'}
+        placement={'top'}
+        component={
+          <IconButton disabled={phases.length <= 1} onClick={openDialog}>
+            <CompareArrowsIcon />
+          </IconButton>
+        }
+      />
+
       <Dialog fullWidth open={open} maxWidth={'sm'} onClose={closeDialog}>
         <DialogTitle>{'Drag and drop to reorder'}</DialogTitle>
         <DialogContent>
