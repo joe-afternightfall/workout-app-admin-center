@@ -11,15 +11,15 @@ import {
   Grid,
   Fade,
 } from '@material-ui/core';
-import ExerciseInfoCardActions from './ExerciseInfoCardActions';
-import SetIncrementer from './components/inputs/SetIncrementer';
-import SetTypeDropdown from './components/inputs/SetTypeHeader';
+import ExerciseInfoCardActions from './editing-segment/EditingInfoCardActions';
+import SetIncrementer from './editing-segment/components/inputs/SetIncrementer';
+import SetTypeDropdown from './editing-segment/components/inputs/SetTypeHeader';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import RestBetweenOptions from './components/inputs/RestBetweenOptions';
-import ListItemMessage from './components/base-components/ListItemMessage';
-import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
+import RestBetweenOptions from './editing-segment/components/inputs/RestBetweenOptions';
+import ListItemMessage from './editing-segment/components/base-components/ListItemMessage';
+import SegmentActionMenu from './editing-segment/components/action-menu/SegmentActionMenu';
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
-import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
+import ExerciseListItem from './editing-segment/components/exercise-list-item/ExerciseListItem';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
 const useStyles = makeStyles((theme: Theme) =>
