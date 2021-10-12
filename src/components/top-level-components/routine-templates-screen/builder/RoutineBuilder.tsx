@@ -1,27 +1,28 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Grid, Slide, Fade } from '@material-ui/core';
 import BuilderCard from './routine-info/RoutineInfoCard';
 import SelectorDrawer from './selector-drawer/SelectorDrawer';
 
 export default function RoutineBuilder(): JSX.Element {
-  const [displayDrawer, setDisplayDrawer] = React.useState(false);
+  const [display, setDisplay] = React.useState(false);
 
-  const toggleSideDrawer = (display: boolean) => {
-    setDisplayDrawer(display);
-  };
+  useEffect(() => {
+    setDisplay(true);
+  });
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={7}>
-        <BuilderCard toggleSideDrawerHandler={toggleSideDrawer} />
-      </Grid>
+      <Fade in={display}>
+        <Grid item xs={7}>
+          <BuilderCard />
+        </Grid>
+      </Fade>
 
-      <Grid item xs={5}>
-        <SelectorDrawer
-          toggleHandler={toggleSideDrawer}
-          display={displayDrawer}
-        />
-      </Grid>
+      <Slide direction={'left'} in={display} mountOnEnter unmountOnExit>
+        <Grid item xs={5}>
+          <SelectorDrawer display={display} />
+        </Grid>
+      </Slide>
     </Grid>
   );
 }

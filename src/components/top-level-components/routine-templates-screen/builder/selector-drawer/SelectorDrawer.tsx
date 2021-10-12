@@ -59,7 +59,6 @@ const SelectorDrawer = ({
 
 interface PassedInProps {
   display: boolean;
-  toggleHandler: (display: boolean) => void;
 }
 
 interface SelectorDrawerProps {

@@ -52,8 +52,7 @@ const RoutineInfoCard = ({
   phases,
   newRoutine,
   reorderSegments,
-  toggleSideDrawerHandler,
-}: RoutineInfoCardProps & PassedInProps): JSX.Element => {
+}: RoutineInfoCardProps): JSX.Element => {
   const classes = useStyles();
   const [openCard, setOpenCard] = React.useState('');
   const [isEditing, setIsEditing] = React.useState(newRoutine);
@@ -134,7 +133,6 @@ const RoutineInfoCard = ({
                               isActiveCard={openCard === listId}
                               scrollToHandler={() => {
                                 scrollToHandler(listId);
-                                toggleSideDrawerHandler(true);
                               }}
                               doneHandler={() => {
                                 doneHandler(phase.id);
@@ -161,10 +159,6 @@ const RoutineInfoCard = ({
     </Card>
   );
 };
-
-interface PassedInProps {
-  toggleSideDrawerHandler: (display: boolean) => void;
-}
 
 interface RoutineInfoCardProps {
   newRoutine: boolean;
