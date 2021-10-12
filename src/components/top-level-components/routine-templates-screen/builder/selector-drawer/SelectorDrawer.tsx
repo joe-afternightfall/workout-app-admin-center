@@ -3,7 +3,7 @@ import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import ExercisesList from './ExercisesList';
 import { State } from '../../../../../configs/redux/store';
-import { AppBar, Toolbar, Typography, Drawer } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Drawer, Fade } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +25,11 @@ const SelectorDrawer = ({
 }: SelectorDrawerProps & PassedInProps) => {
   const classes = useStyles();
 
+  const segmentIdEmpty = selectedExerciseSlotForSegment.segmentId === '';
+  const exerciseTitle = segmentIdEmpty
+    ? 'Exercise Drawer'
+    : `Exercise for slot #${selectedExerciseSlotForSegment.order}`;
+
   return (
     <Drawer
       open={display}
@@ -36,23 +41,12 @@ const SelectorDrawer = ({
     >
       <AppBar position={'relative'}>
         <Toolbar>
-          {selectedExerciseSlotForSegment.segmentId !== '' ? (
-            <>
-              <Typography variant={'h6'} noWrap>
-                {selectedExerciseSlotForSegment.segmentId}
-              </Typography>
-              <Typography variant={'h6'} noWrap>
-                {selectedExerciseSlotForSegment.order}
-              </Typography>
-            </>
-          ) : (
-            <Typography variant={'h6'} noWrap>
-              {'Exercise Drawer'}
-            </Typography>
-          )}
+          <Typography variant={'h6'} noWrap>
+            {exerciseTitle}
+          </Typography>
         </Toolbar>
       </AppBar>
-      <ExercisesList />
+      {!segmentIdEmpty && <ExercisesList />}
     </Drawer>
   );
 };
