@@ -19,11 +19,11 @@ import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
-export default function EditingSegmentInfoCard({
+export default function EditingSegmentContainer({
   segment,
   doneHandler,
   isActiveCard,
-}: EditingSegmentInfoCardProps): JSX.Element {
+}: EditingSegmentContainerProps): JSX.Element {
   let displayActionMenu = false;
   let displayInputs = false;
 
@@ -109,7 +109,7 @@ export default function EditingSegmentInfoCard({
   );
 }
 
-interface EditingSegmentInfoCardProps {
+interface EditingSegmentContainerProps {
   segment: Segment;
   doneHandler: () => void;
   isActiveCard: boolean;

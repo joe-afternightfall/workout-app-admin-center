@@ -1,6 +1,11 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
+import {
+  isStraightSet,
+  isSuperset,
+  NightfallMoreVertMenu,
+  Segment,
+} from 'workout-app-common-core';
 import {
   Fade,
   Grid,
@@ -9,11 +14,12 @@ import {
   CardContent,
   Typography,
   Divider,
+  Collapse,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import { Link } from '@material-ui/icons';
-import SegmentActionMenu from '../components/action-menu/SegmentActionMenu';
+import SegmentActionMenu from '../editing-segment/components/action-menu/SegmentActionMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,19 +49,24 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function BaseInfoCard({
+export default function CompletedSegmentCard({
   segment,
   isActiveCard,
-}: BaseInfoCardProps): JSX.Element {
+  editClickHandler,
+}: CompletedSegmentCardProps): JSX.Element {
   const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
   const [displayDragIndicator, setDisplayDragIndicator] = React.useState(false);
-  const title = '';
+  let title = '';
 
-  // if (isSuperset(segment.trainingSetTypeId)) {
-  //   title = 'Superset';
-  // } else if (isStraightSet(segment.trainingSetTypeId)) {
-  //   title = 'Straight set';
-  // }
+  const superset = isSuperset(segment.trainingSetTypeId);
+  const straightSet = isStraightSet(segment.trainingSetTypeId);
+
+  if (superset) {
+    title = 'Superset';
+  } else if (straightSet) {
+    title = 'Straight set';
+  }
 
   return (
     <div
@@ -65,6 +76,7 @@ export default function BaseInfoCard({
       onMouseLeave={() => {
         setDisplayDragIndicator(false);
       }}
+      onClick={() => setExpanded(true)}
     >
       <Grid
         item
@@ -92,14 +104,24 @@ export default function BaseInfoCard({
                   </Grid>
                   <Grid item>
                     <Typography variant={'h6'} color={'textSecondary'}>
-                      {'Superset'}
+                      {title}
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
 
               <Grid item>
-                <SegmentActionMenu segmentId={'lkj'} />
+                <NightfallMoreVertMenu
+                  id={segment.id}
+                  menuItems={[
+                    {
+                      title: 'Edit',
+                      clickHandler: () => {
+                        editClickHandler();
+                      },
+                    },
+                  ]}
+                />
               </Grid>
             </Grid>
           }
@@ -107,7 +129,14 @@ export default function BaseInfoCard({
 
         <CardContent>
           <Grid container>
-            <Grid item xs={9}>
+            <Grid
+              item
+              xs={9}
+              container
+              alignItems={'center'}
+              // style={{ height: '100%' }}
+            >
+              {/*todo: superset container */}
               <Grid container>
                 <Grid item xs={12}>
                   <Typography variant={'h6'} color={'textPrimary'}>
@@ -135,6 +164,13 @@ export default function BaseInfoCard({
                   </Typography>
                 </Grid>
               </Grid>
+
+              {/*<Grid item>*/}
+              {/*// todo: straight set container*/}
+              {/*  <Typography variant={'h6'} color={'textPrimary'}>*/}
+              {/*    {'1. Bent Over Rows'}*/}
+              {/*  </Typography>*/}
+              {/*</Grid>*/}
             </Grid>
             <Grid item xs={3}>
               <Grid
@@ -173,12 +209,44 @@ export default function BaseInfoCard({
             </Grid>
           </Grid>
         </CardContent>
+
+        <Collapse in={expanded} timeout={'auto'} unmountOnExit>
+          <CardContent style={{ marginTop: 12 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} container>
+                <Grid item xs={6} container justify={'center'}>
+                  <Typography variant={'h6'} color={'textPrimary'}>
+                    {'30 seconds'}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} container justify={'center'}>
+                  <Typography variant={'h6'} color={'textPrimary'}>
+                    {'60 seconds'}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} container>
+                <Grid item xs={6} container justify={'center'}>
+                  <Typography variant={'h6'} color={'textSecondary'}>
+                    {'rest between sets'}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} container justify={'center'}>
+                  <Typography variant={'h6'} color={'textSecondary'}>
+                    {'rest between next segment'}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Collapse>
       </Card>
     </div>
   );
 }
 
-interface BaseInfoCardProps {
-  isActiveCard?: boolean;
-  segment?: Segment;
+interface CompletedSegmentCardProps {
+  isActiveCard: boolean;
+  segment: Segment;
+  editClickHandler: () => void;
 }
