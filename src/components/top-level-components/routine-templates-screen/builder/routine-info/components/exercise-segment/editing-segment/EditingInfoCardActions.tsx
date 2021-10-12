@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Segment } from 'workout-app-common-core';
-import { State } from '../../../../../../../configs/redux/store';
+import { State } from '../../../../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
 
-const ExerciseInfoCardActions = ({
+const EditingInfoCardActions = ({
   doneHandler,
   doneDisabled,
-}: ExerciseInfoCardActionsProps & PassedInProps): JSX.Element => {
+}: EditingInfoCardActionsProps & PassedInProps): JSX.Element => {
   return (
     <CardActions>
       <Grid container spacing={2}>
@@ -33,14 +33,14 @@ interface PassedInProps {
   doneHandler: () => void;
 }
 
-interface ExerciseInfoCardActionsProps {
+interface EditingInfoCardActionsProps {
   doneDisabled: boolean;
 }
 
 const mapStateToProps = (
   state: State,
   ownProps: PassedInProps
-): ExerciseInfoCardActionsProps => {
+): EditingInfoCardActionsProps => {
   let doneDisabled = true;
 
   ownProps.segment.exercises.map((workoutExercise) => {
@@ -49,7 +49,7 @@ const mapStateToProps = (
 
   return {
     doneDisabled: doneDisabled,
-  } as unknown as ExerciseInfoCardActionsProps;
+  } as unknown as EditingInfoCardActionsProps;
 };
 
-export default connect(mapStateToProps)(ExerciseInfoCardActions);
+export default connect(mapStateToProps)(EditingInfoCardActions);

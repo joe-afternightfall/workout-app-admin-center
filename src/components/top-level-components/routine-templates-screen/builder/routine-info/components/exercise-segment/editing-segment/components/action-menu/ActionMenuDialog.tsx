@@ -13,7 +13,7 @@ import { Grid } from '@material-ui/core';
 import {
   deleteSegmentFromPhase,
   resetSetTypeAndExerciseInfo,
-} from '../../../../../../../../../creators/routine-builder/builder';
+} from '../../../../../../../../../../creators/routine-builder/builder';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
