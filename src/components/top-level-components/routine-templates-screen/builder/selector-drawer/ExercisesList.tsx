@@ -60,8 +60,13 @@ interface ExerciseListProps {
 }
 
 const mapStateToProps = (state: State): ExerciseListProps => {
+  const searchValue = state.routineBuilderState.exerciseSearchValue;
+  const filteredExercises =
+    state.applicationState.workoutConfigurations.exercises.filter(
+      (exercise) => exercise.name.toLowerCase().search(searchValue) != -1
+    );
   return {
-    exercises: state.applicationState.workoutConfigurations.exercises,
+    exercises: filteredExercises,
     disabled:
       state.routineBuilderState.selectedExerciseSlotForSegment.segmentId === '',
   } as unknown as ExerciseListProps;

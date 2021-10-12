@@ -1,11 +1,11 @@
-import { RouteProp } from '../configs/constants/app-navigation-routes';
+import { ExerciseVO } from 'workout-app-common-core';
+import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
-import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
-import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import { ExerciseVO } from 'workout-app-common-core';
 import { SnackbarCreatorProps } from '../creators/app-snackbar';
+import { ActionTypes, ApplicationActions } from '../creators/actions';
+import { RouteProp } from '../configs/constants/app-navigation-routes';
+import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 
 export default {
   reducer: (
