@@ -14,7 +14,7 @@ import {
 import ExerciseInfoCardActions from './ExerciseInfoCardActions';
 import SetIncrementer from './components/inputs/SetIncrementer';
 import SetTypeDropdown from './components/inputs/SetTypeHeader';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import ListItemMessage from './components/base-components/ListItemMessage';
 import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
@@ -22,14 +22,15 @@ import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    animate: {
+    cardRoot: {
+      minHeight: '42vh',
       transition: 'transform .35s ease-in-out',
     },
     activeCard: {
       height: '100%',
-      borderLeft: '6px solid #4285f4',
+      borderLeft: `6px solid ${theme.palette.primary.main}`,
     },
     dragIndicator: {
       transform: 'rotate(90deg)',
@@ -107,7 +108,7 @@ export default function ExerciseInfoCard({
       </Grid>
       <Card
         onClick={scrollToHandler}
-        className={clsx(classes.animate, {
+        className={clsx(classes.cardRoot, {
           [classes.activeCard]: isActiveCard,
         })}
       >

@@ -37,9 +37,9 @@ export function getLightTheme(): Theme {
       },
       type: 'light',
       primary: {
-        light: '#4dabf5',
-        main: '#2196f3',
-        dark: '#1769aa',
+        light: '#488fd4',
+        main: '#1B73CA',
+        dark: '#12508d',
         // contrastText: '#6B8E9B',
         contrastText: '#FFF',
       },

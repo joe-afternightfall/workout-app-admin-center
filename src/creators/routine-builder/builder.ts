@@ -272,3 +272,17 @@ export const reorderRoutineSegments = (
     segments: segments,
   };
 };
+
+export interface FilterExercisesForSearchValueAction {
+  type: ActionTypes.FILTER_EXERCISES_FOR_SEARCH_VALUE;
+  searchValue: string;
+}
+
+export const filterExercisesForSearchValue = (
+  searchValue: string
+): FilterExercisesForSearchValueAction => {
+  return {
+    type: ActionTypes.FILTER_EXERCISES_FOR_SEARCH_VALUE,
+    searchValue: searchValue,
+  };
+};

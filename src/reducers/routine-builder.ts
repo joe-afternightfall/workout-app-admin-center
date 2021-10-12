@@ -231,6 +231,10 @@ export default {
         newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
         break;
       }
+      case ActionTypes.FILTER_EXERCISES_FOR_SEARCH_VALUE: {
+        newState.exerciseSearchValue = action.searchValue;
+        break;
+      }
       default:
         newState = state;
     }
@@ -247,4 +251,5 @@ export interface RoutineBuilderState {
     segmentId: string;
     order: number;
   };
+  exerciseSearchValue: string;
 }

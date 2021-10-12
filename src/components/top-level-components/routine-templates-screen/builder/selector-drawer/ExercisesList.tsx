@@ -4,7 +4,6 @@ import {
   Card,
   List,
   ListItem,
-  CardHeader,
   CardContent,
   ListItemText,
 } from '@material-ui/core';
@@ -27,16 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ExerciseList = ({
-  disabled,
-  exercises,
-  addExerciseHandler,
-}: ExerciseListProps): JSX.Element => {
+const ExerciseList = (props: ExerciseListProps): JSX.Element => {
   const classes = useStyles();
+  const { disabled, exercises } = props;
 
   return (
     <Card raised={false} square className={classes.root}>
-      <CardHeader title={'Exercise List'} />
       <CardContent>
         {exercises.map((exercise, index) => {
           return (
@@ -45,10 +40,10 @@ const ExerciseList = ({
                 button
                 disabled={disabled}
                 onClick={() => {
-                  addExerciseHandler(exercise.id);
+                  props.addExerciseHandler(exercise.id);
                 }}
               >
-                <ListItemText primary={exercise.name} />
+                <ListItemText primary={`${index}. ${exercise.name}`} />
               </ListItem>
             </List>
           );
@@ -65,8 +60,13 @@ interface ExerciseListProps {
 }
 
 const mapStateToProps = (state: State): ExerciseListProps => {
+  const searchValue = state.routineBuilderState.exerciseSearchValue;
+  const filteredExercises =
+    state.applicationState.workoutConfigurations.exercises.filter(
+      (exercise) => exercise.name.toLowerCase().search(searchValue) != -1
+    );
   return {
-    exercises: state.applicationState.workoutConfigurations.exercises,
+    exercises: filteredExercises,
     disabled:
       state.routineBuilderState.selectedExerciseSlotForSegment.segmentId === '',
   } as unknown as ExerciseListProps;

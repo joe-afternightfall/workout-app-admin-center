@@ -32,6 +32,7 @@ import {
   ReorderRoutinePhasesAction,
   DeletePhaseFromRoutineAction,
   ReorderRoutineSegmentsAction,
+  FilterExercisesForSearchValueAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 
@@ -69,6 +70,7 @@ export enum ActionTypes {
   REORDER_ROUTINE_PHASES = 'REORDER_ROUTINE_PHASES',
   DELETE_PHASE_FROM_ROUTINE = 'DELETE_PHASE_FROM_ROUTINE',
   REORDER_ROUTINE_SEGMENTS = 'REORDER_ROUTINE_SEGMENTS',
+  FILTER_EXERCISES_FOR_SEARCH_VALUE = 'FILTER_EXERCISES_FOR_SEARCH_VALUE',
 
   // Side drawer actions
   LOGOUT_USER = 'LOGOUT_USER',
@@ -109,4 +111,5 @@ export type ApplicationActions =
   | DeleteSegmentFromPhaseAction
   | ReorderRoutinePhasesAction
   | DeletePhaseFromRoutineAction
-  | ReorderRoutineSegmentsAction;
+  | ReorderRoutineSegmentsAction
+  | FilterExercisesForSearchValueAction;
