@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import BaseListItem from './BaseListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
+import { Grid, ListItem, ListItemText } from '@material-ui/core';
+import LineItemTitle from '../base-components/LineItemTitle';
 
 const ExerciseListItem = ({
   exercises,
@@ -141,10 +143,22 @@ const ExerciseListItem = ({
     }
 
     display = (
-      <>
-        {firstComponent}
-        {secondComponent}
-      </>
+      <ListItem>
+        <ListItemText
+          disableTypography
+          primary={
+            <Grid container>
+              <Grid item xs={6} container alignItems={'center'}>
+                <LineItemTitle title={'Exercises'} />
+              </Grid>
+              <Grid item xs={6} container>
+                {firstComponent}
+                {secondComponent}
+              </Grid>
+            </Grid>
+          }
+        />
+      </ListItem>
     );
   }
   return display;
