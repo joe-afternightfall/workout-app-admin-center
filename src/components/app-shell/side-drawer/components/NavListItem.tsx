@@ -1,16 +1,15 @@
 import clsx from 'clsx';
 import React from 'react';
-import { PageProps } from '../../../../configs/constants/app-navigation-routes';
+import { ListItem, ListItemIcon } from '@material-ui/core';
+import { NightfallTooltip } from 'workout-app-common-core';
 import { AppTheme } from '../../../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { PageProps } from '../../../../configs/constants/app-navigation-routes';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     activeIcon: {
-      // color: theme.palette.colors.active.highlight,
-      color: '#1C2571',
-      // background: theme.palette.colors.active.hover,
+      color: theme.palette.colors.active.highlight,
     },
     listItem: {
       '&:hover': {
@@ -26,34 +25,33 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
   const isActive = props.currentLocation === props.pageInfo.path;
 
   return (
-    <ListItem
-      button
-      onClick={props.clickHandler}
-      className={clsx(classes.listItem, {
-        [classes.activeIcon]: isActive,
-      })}
-      data-testid={props.pageInfo.testId}
-    >
-      <ListItemIcon
-        className={clsx({
-          [classes.activeIcon]: isActive,
-        })}
-      >
-        {React.createElement(props.pageInfo.icon)}
-      </ListItemIcon>
-      {props.displayText ? (
-        <ListItemText
-          data-testid={`list-item-${props.pageInfo.testId}`}
-          primary={props.pageInfo.drawerTitle}
-        />
-      ) : undefined}
-    </ListItem>
+    <NightfallTooltip
+      component={
+        <ListItem
+          button
+          onClick={props.clickHandler}
+          className={clsx(classes.listItem, {
+            [classes.activeIcon]: isActive,
+          })}
+          data-testid={props.pageInfo.testId}
+        >
+          <ListItemIcon
+            className={clsx({
+              [classes.activeIcon]: isActive,
+            })}
+          >
+            {React.createElement(props.pageInfo.icon)}
+          </ListItemIcon>
+        </ListItem>
+      }
+      title={props.pageInfo.drawerTitle}
+      placement={'right'}
+    />
   );
 }
 
 export interface NavListItemProps {
   pageInfo: PageProps;
   clickHandler: () => void;
-  displayText: boolean;
   currentLocation: string;
 }
