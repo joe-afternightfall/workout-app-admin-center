@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CompletedSets from './components/CompletedSets';
 import CompletedExercises from './components/CompletedExercises';
 import CompletedCardHeader from './components/CompletedCardHeader';
@@ -7,7 +7,14 @@ import CompletedRestBetween from './components/CompletedRestBetween';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
 import { Link, ExpandMore, ArrowRightAlt as Arrow } from '@material-ui/icons';
-import { Grid, IconButton, CardContent, CardActions } from '@material-ui/core';
+import {
+  Grid,
+  IconButton,
+  CardContent,
+  CardActions,
+  Typography,
+} from '@material-ui/core';
+import { verifySegmentComplete } from '../../../../../../../../utils/verify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     expandOpen: {
       transform: 'rotate(180deg)',
+    },
+    defaultMessage: {
+      margin: 'auto',
+      textAlign: 'center',
+      color: theme.palette.info.dark,
     },
   })
 );
@@ -58,6 +70,12 @@ export default function CompletedSegmentCard({
     icon = <React.Fragment />;
   }
 
+  let isComplete = false;
+
+  useEffect(() => {
+    isComplete = verifySegmentComplete(segment);
+  });
+
   return (
     <>
       <CompletedCardHeader
@@ -67,37 +85,47 @@ export default function CompletedSegmentCard({
         editClickHandler={editClickHandler}
       />
 
-      <CardContent>
-        <Grid container>
-          <Grid item xs={9} container alignItems={'center'}>
-            <CompletedExercises
-              segment={segment}
-              icon={icon}
-              setType={setType}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <CompletedSets segment={segment} />
-          </Grid>
-        </Grid>
-      </CardContent>
+      {segment.trainingSetTypeId !== '' ? (
+        <>
+          <CardContent>
+            <Grid container>
+              <Grid item xs={9} container alignItems={'center'}>
+                <CompletedExercises
+                  segment={segment}
+                  icon={icon}
+                  setType={setType}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <CompletedSets segment={segment} />
+              </Grid>
+            </Grid>
+          </CardContent>
 
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-        >
-          <ExpandMore />
-        </IconButton>
-      </CardActions>
+          <CardActions disableSpacing>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+            >
+              <ExpandMore />
+            </IconButton>
+          </CardActions>
 
-      <CompletedRestBetween
-        expanded={expanded}
-        restBetweenSets={segment.secondsRestBetweenSets}
-        restBetweenNextSegment={segment.secondsRestBetweenNextSegment}
-      />
+          <CompletedRestBetween
+            expanded={expanded}
+            restBetweenSets={segment.secondsRestBetweenSets}
+            restBetweenNextSegment={segment.secondsRestBetweenNextSegment}
+          />
+        </>
+      ) : (
+        <CardContent>
+          <Typography className={classes.defaultMessage}>
+            {'click edit to fill out info'}
+          </Typography>
+        </CardContent>
+      )}
     </>
   );
 }
