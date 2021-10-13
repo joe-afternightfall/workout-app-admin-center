@@ -8,8 +8,6 @@ import {
   appNavigationRoutes,
 } from './configs/constants/app-navigation-routes';
 import SignInScreen from './components/top-level-components/sign-in-screen/SignInScreen';
-import { ROUTINE_BUILDER_SCREEN_PATH } from './configs/constants/app';
-import RoutineBuilder from './components/top-level-components/routine-templates-screen/builder/RoutineBuilder';
 
 const AppRouter = (props: AppRouterProps): JSX.Element => {
   return props.isValidated ? (
@@ -29,11 +27,6 @@ const AppRouter = (props: AppRouterProps): JSX.Element => {
             }
           );
         })}
-        <Route
-          exact
-          path={ROUTINE_BUILDER_SCREEN_PATH}
-          component={RoutineBuilder}
-        />
       </div>
     </App>
   ) : (

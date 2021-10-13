@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { addSegmentToPhase } from '../../../../../../creators/routine-builder/builder';
+import { addSegmentToPhase } from '../../../../../creators/routine-builder/builder';
 
 const ClickToAddCard = (
   props: ClickToAddCardProps & PassedInProps

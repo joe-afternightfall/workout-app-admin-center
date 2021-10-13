@@ -7,11 +7,11 @@ import {
   CardContent,
   ListItemText,
 } from '@material-ui/core';
-import { State } from '../../../../../configs/redux/store';
+import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ExerciseVO } from 'workout-app-common-core';
 import { Dispatch } from 'redux';
-import { addExerciseToSegment } from '../../../../../creators/routine-builder/builder';
+import { addExerciseToSegment } from '../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

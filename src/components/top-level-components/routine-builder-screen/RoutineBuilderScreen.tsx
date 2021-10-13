@@ -3,7 +3,7 @@ import { Grid, Slide, Fade } from '@material-ui/core';
 import BuilderCard from './routine-info/RoutineInfoCard';
 import SelectorDrawer from './selector-drawer/SelectorDrawer';
 
-export default function RoutineBuilder(): JSX.Element {
+export default function RoutineBuilderScreen(): JSX.Element {
   const [display, setDisplay] = React.useState(false);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import { SnackbarCreatorProps } from '../creators/app-snackbar';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
 import { RouteProp } from '../configs/constants/app-navigation-routes';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { ROUTINE_BUILDER_SCREEN_PATH } from '../configs/constants/app';
 
 export default {
   reducer: (
@@ -15,10 +16,13 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-      case LOCATION_CHANGE:
-        newState.currentLocation = action.payload.location.pathname;
+      case LOCATION_CHANGE: {
+        const pathname = action.payload.location.pathname;
+        newState.currentLocation = pathname;
         newState.activePage = getPageInfo(newState.currentLocation);
+        newState.displayAppBar = pathname !== ROUTINE_BUILDER_SCREEN_PATH;
         break;
+      }
       case ActionTypes.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarProps = action.snackbarProps;

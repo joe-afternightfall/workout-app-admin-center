@@ -7,8 +7,8 @@ import {
   NightfallSelectDropdown,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
-import { State } from '../../../../../../../../configs/redux/store';
-import { selectPhase } from '../../../../../../../../creators/routine-builder/builder';
+import { State } from '../../../../../../../configs/redux/store';
+import { selectPhase } from '../../../../../../../creators/routine-builder/builder';
 
 const PhaseDropdown = ({
   phase,

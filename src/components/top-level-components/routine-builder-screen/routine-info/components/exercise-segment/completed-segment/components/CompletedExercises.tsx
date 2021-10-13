@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Typography, Divider } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { State } from '../../../../../../../../../configs/redux/store';
+import { State } from '../../../../../../../../configs/redux/store';
 import { ExerciseVO, getExerciseName, Segment } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
