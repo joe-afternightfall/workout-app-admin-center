@@ -42,20 +42,22 @@ export default function ExerciseInfoCard({
   doneEditingHandler,
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
-  const [displayDragIndicator, setDisplayDragIndicator] = React.useState(false);
+  const [displayIcons, setDisplayIcons] = React.useState(false);
   let verifiedComplete = false;
 
   useEffect(() => {
     verifiedComplete = verifySegmentComplete(segment);
   });
 
+  const shouldDisplay = displayIcons || isActiveCard;
+
   return (
     <div
       onMouseOver={() => {
-        setDisplayDragIndicator(true);
+        setDisplayIcons(true);
       }}
       onMouseLeave={() => {
-        setDisplayDragIndicator(false);
+        setDisplayIcons(false);
       }}
     >
       <Grid
@@ -65,7 +67,7 @@ export default function ExerciseInfoCard({
         justify={'center'}
         className={clsx('segment-drag-handle', classes.indicatorContainer)}
       >
-        <Fade in={displayDragIndicator || isActiveCard}>
+        <Fade in={shouldDisplay}>
           <DragIndicatorIcon
             className={clsx(classes.dragIndicator)}
             fontSize={'small'}
@@ -87,6 +89,7 @@ export default function ExerciseInfoCard({
           <CompletedSegmentCard
             segment={segment}
             editClickHandler={editHandler}
+            displayIcons={shouldDisplay}
           />
         )}
       </Card>

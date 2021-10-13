@@ -1,24 +1,25 @@
 import React from 'react';
+import clsx from 'clsx';
 import {
+  Fade,
   Grid,
   Card,
   Divider,
   Collapse,
+  IconButton,
   Typography,
   CardHeader,
   CardContent,
   CardActions,
-  IconButton,
 } from '@material-ui/core';
 import {
-  Segment,
-  isSuperset,
-  isStraightSet,
-  NightfallMoreVertMenu,
-} from 'workout-app-common-core';
-import { Link, ArrowRightAlt as Arrow, ExpandMore } from '@material-ui/icons';
+  Link,
+  Edit,
+  ExpandMore,
+  ArrowRightAlt as Arrow,
+} from '@material-ui/icons';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,11 +36,20 @@ const useStyles = makeStyles((theme: Theme) =>
     expandOpen: {
       transform: 'rotate(180deg)',
     },
+    setsCard: {
+      backgroundColor: '#673AB7',
+      textAlign: 'center',
+      color: '#fff',
+    },
+    setsContainer: {
+      minHeight: '6vh',
+    },
   })
 );
 
 export default function CompletedSegmentCard({
   segment,
+  displayIcons,
   editClickHandler,
 }: CompletedSegmentCardProps): JSX.Element {
   const classes = useStyles();
@@ -83,17 +93,11 @@ export default function CompletedSegmentCard({
             </Grid>
 
             <Grid item>
-              <NightfallMoreVertMenu
-                id={segment.id}
-                menuItems={[
-                  {
-                    title: 'Edit',
-                    clickHandler: () => {
-                      editClickHandler();
-                    },
-                  },
-                ]}
-              />
+              <Fade in={displayIcons}>
+                <IconButton onClick={editClickHandler}>
+                  <Edit />
+                </IconButton>
+              </Fade>
             </Grid>
           </Grid>
         }
@@ -101,14 +105,7 @@ export default function CompletedSegmentCard({
 
       <CardContent>
         <Grid container>
-          <Grid
-            item
-            xs={9}
-            container
-            alignItems={'center'}
-            // style={{ height: '100%' }}
-          >
-            {/*todo: superset container */}
+          <Grid item xs={9} container alignItems={'center'}>
             {superset && (
               <Grid container>
                 <Grid item xs={12}>
@@ -160,33 +157,22 @@ export default function CompletedSegmentCard({
               style={{ height: '100%' }}
             >
               <Grid item xs={12}>
-                <Card
-                  style={{
-                    backgroundColor: '#673AB7',
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  <Grid
-                    container
-                    alignItems={'center'}
-                    justify={'center'}
-                    style={{ minHeight: '6vh' }}
-                  >
-                    <Grid item>
-                      <Typography
-                        variant={'h6'}
-                        // color={'textSecondary'}
-                        // style={{ marginTop: 12, marginBottom: 12 }}
-                      >
-                        {`${
-                          segment.exercises[0] &&
-                          segment.exercises[0].sets.length
-                        } Sets`}
-                      </Typography>
+                {segment.exercises[0] && (
+                  <Card className={classes.setsCard}>
+                    <Grid
+                      container
+                      justify={'center'}
+                      alignItems={'center'}
+                      className={classes.setsContainer}
+                    >
+                      <Grid item>
+                        <Typography variant={'h6'}>
+                          {`${segment.exercises[0].sets.length} Sets`}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Card>
+                  </Card>
+                )}
               </Grid>
             </Grid>
           </Grid>
@@ -252,5 +238,6 @@ export default function CompletedSegmentCard({
 
 interface CompletedSegmentCardProps {
   segment: Segment;
+  displayIcons: boolean;
   editClickHandler: () => void;
 }
