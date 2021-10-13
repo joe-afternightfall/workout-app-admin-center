@@ -1,20 +1,24 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
+import {
+  ExpandMore,
+  Link as LinkIcon,
+  ArrowRightAlt as Arrow,
+} from '@material-ui/icons';
+import {
+  Grid,
+  Link,
+  IconButton,
+  CardContent,
+  CardActions,
+  Typography,
+} from '@material-ui/core';
 import CompletedSets from './components/CompletedSets';
 import CompletedExercises from './components/CompletedExercises';
 import CompletedCardHeader from './components/CompletedCardHeader';
 import CompletedRestBetween from './components/CompletedRestBetween';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
-import { Link, ExpandMore, ArrowRightAlt as Arrow } from '@material-ui/icons';
-import {
-  Grid,
-  IconButton,
-  CardContent,
-  CardActions,
-  Typography,
-} from '@material-ui/core';
-import { verifySegmentComplete } from '../../../../../../../../utils/verify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +39,14 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: 'auto',
       textAlign: 'center',
       color: theme.palette.info.dark,
+    },
+    defaultMessageContent: {
+      marginTop: 24,
+    },
+    editLink: {
+      '&:hover': {
+        cursor: 'pointer',
+      },
     },
   })
 );
@@ -61,7 +73,7 @@ export default function CompletedSegmentCard({
   if (superset) {
     title = 'Superset';
     setType = 'super';
-    icon = <Link className={classes.icon} fontSize={'large'} />;
+    icon = <LinkIcon className={classes.icon} fontSize={'large'} />;
   } else if (straightSet) {
     setType = 'straight';
     title = 'Straight set';
@@ -70,23 +82,16 @@ export default function CompletedSegmentCard({
     icon = <React.Fragment />;
   }
 
-  let isComplete = false;
-
-  useEffect(() => {
-    isComplete = verifySegmentComplete(segment);
-  });
-
   return (
     <>
-      <CompletedCardHeader
-        title={title}
-        icon={icon}
-        display={displayIcons}
-        editClickHandler={editClickHandler}
-      />
-
       {segment.trainingSetTypeId !== '' ? (
         <>
+          <CompletedCardHeader
+            title={title}
+            icon={icon}
+            display={displayIcons}
+            editClickHandler={editClickHandler}
+          />
           <CardContent>
             <Grid container>
               <Grid item xs={9} container alignItems={'center'}>
@@ -120,9 +125,11 @@ export default function CompletedSegmentCard({
           />
         </>
       ) : (
-        <CardContent>
+        <CardContent className={classes.defaultMessageContent}>
           <Typography className={classes.defaultMessage}>
-            {'click edit to fill out info'}
+            <Link className={classes.editLink} onClick={editClickHandler}>
+              {'click to fill out info'}
+            </Link>
           </Typography>
         </CardContent>
       )}
