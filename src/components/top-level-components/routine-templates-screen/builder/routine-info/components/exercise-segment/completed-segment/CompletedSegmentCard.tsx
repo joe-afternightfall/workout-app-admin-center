@@ -220,12 +220,24 @@ export default function CompletedSegmentCard({
               </Grid>
             </Grid>
             <Grid item xs={12} container>
-              <Grid item xs={6} container justify={'center'}>
+              <Grid
+                item
+                xs={6}
+                container
+                justify={'center'}
+                style={{ textAlign: 'center' }}
+              >
                 <Typography variant={'h6'} color={'textSecondary'}>
                   {'rest between sets'}
                 </Typography>
               </Grid>
-              <Grid item xs={6} container justify={'center'}>
+              <Grid
+                item
+                xs={6}
+                container
+                justify={'center'}
+                style={{ textAlign: 'center' }}
+              >
                 <Typography variant={'h6'} color={'textSecondary'}>
                   {'rest between next segment'}
                 </Typography>
