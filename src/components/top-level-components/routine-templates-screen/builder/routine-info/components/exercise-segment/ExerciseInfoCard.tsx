@@ -1,31 +1,17 @@
-import React from 'react';
 import clsx from 'clsx';
-import {
-  Card,
-  List,
-  Divider,
-  ListItem,
-  CardHeader,
-  CardContent,
-  Typography,
-  Grid,
-  Fade,
-} from '@material-ui/core';
-import ExerciseInfoCardActions from './editing-segment/EditingInfoCardActions';
-import SetIncrementer from './editing-segment/components/inputs/SetIncrementer';
-import SetTypeDropdown from './editing-segment/components/inputs/SetTypeHeader';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import RestBetweenOptions from './editing-segment/components/inputs/RestBetweenOptions';
-import ListItemMessage from './editing-segment/components/base-components/ListItemMessage';
-import SegmentActionMenu from './editing-segment/components/action-menu/SegmentActionMenu';
-import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
-import ExerciseListItem from './editing-segment/components/exercise-list-item/ExerciseListItem';
+import React, { useEffect } from 'react';
+import { Segment } from 'workout-app-common-core';
+import { Card, Grid, Fade } from '@material-ui/core';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import { verifySegmentComplete } from '../../../../../../../utils/verify';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import CompletedSegmentCard from './completed-segment/CompletedSegmentCard';
+import EditingSegmentContainer from './editing-segment/EditingSegmentContainer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cardRoot: {
-      minHeight: '42vh',
+      // minHeight: '42vh',
       transition: 'transform .35s ease-in-out',
     },
     activeCard: {
@@ -49,39 +35,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ExerciseInfoCard({
   segment,
-  doneHandler,
+  editHandler,
   isActiveCard,
-  scrollToHandler,
+  isEditingCard,
+  cardClickedHandler,
+  doneEditingHandler,
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
   const [displayDragIndicator, setDisplayDragIndicator] = React.useState(false);
+  let verifiedComplete = false;
 
-  let displayActionMenu = false;
-  let displayInputs = false;
-
-  if (isActiveCard && segment.exercises.length > 0) {
-    displayActionMenu = true;
-  } else if (isActiveCard && segment.trainingSetTypeId !== '') {
-    displayActionMenu = true;
-  }
-
-  const emptySetType = segment.trainingSetTypeId === '';
-  const title = `Segment #${segment.order}`;
-
-  if (isSuperset(segment.trainingSetTypeId)) {
-    if (
-      segment.exercises[0] &&
-      segment.exercises[0].exerciseId !== '' &&
-      segment.exercises[1] &&
-      segment.exercises[1].exerciseId !== ''
-    ) {
-      displayInputs = true;
-    }
-  } else if (isStraightSet(segment.trainingSetTypeId)) {
-    if (segment.exercises[0] && segment.exercises[0].exerciseId !== '') {
-      displayInputs = true;
-    }
-  }
+  useEffect(() => {
+    verifiedComplete = verifySegmentComplete(segment);
+  });
 
   return (
     <div
@@ -107,64 +73,20 @@ export default function ExerciseInfoCard({
         </Fade>
       </Grid>
       <Card
-        onClick={scrollToHandler}
+        onClick={cardClickedHandler}
         className={clsx(classes.cardRoot, {
           [classes.activeCard]: isActiveCard,
         })}
       >
-        <CardHeader
-          disableTypography={emptySetType}
-          title={
-            <Typography variant={'h6'} color={'textSecondary'}>
-              {title}
-            </Typography>
-          }
-          subheader={<SetTypeDropdown segment={segment} />}
-          action={
-            displayActionMenu && <SegmentActionMenu segmentId={segment.id} />
-          }
-        />
-        <CardContent>
-          <List>
-            <Divider variant={'middle'} style={{ marginBottom: 12 }} />
-            {emptySetType && (
-              <ListItemMessage message={'select a set type to continue'} />
-            )}
-
-            {isActiveCard && !emptySetType && (
-              <>
-                <ExerciseListItem segment={segment} />
-
-                {displayInputs ? (
-                  <>
-                    <Divider variant={'middle'} />
-                    <ListItem style={{ marginTop: 16, marginBottom: 16 }}>
-                      <SetIncrementer segment={segment} />
-                    </ListItem>
-                    <ListItem>
-                      <RestBetweenOptions
-                        segmentId={segment.id}
-                        restBetweenNextSegmentValue={
-                          segment.secondsRestBetweenNextSegment
-                        }
-                        restBetweenSetValue={segment.secondsRestBetweenSets}
-                      />
-                    </ListItem>
-                  </>
-                ) : (
-                  <>
-                    <Divider variant={'middle'} style={{ marginTop: 12 }} />
-                    <ListItemMessage message={'select exercises to continue'} />
-                  </>
-                )}
-              </>
-            )}
-          </List>
-        </CardContent>
-        {isActiveCard && !emptySetType && (
-          <ExerciseInfoCardActions
+        {isEditingCard ? (
+          <EditingSegmentContainer
             segment={segment}
-            doneHandler={doneHandler}
+            doneHandler={doneEditingHandler}
+          />
+        ) : (
+          <CompletedSegmentCard
+            segment={segment}
+            editClickHandler={editHandler}
           />
         )}
       </Card>
@@ -174,7 +96,9 @@ export default function ExerciseInfoCard({
 
 interface ExerciseInfoCardProps {
   segment: Segment;
-  scrollToHandler: () => void;
-  doneHandler: () => void;
+  cardClickedHandler: () => void;
+  doneEditingHandler: () => void;
+  editHandler: () => void;
   isActiveCard: boolean;
+  isEditingCard: boolean;
 }
