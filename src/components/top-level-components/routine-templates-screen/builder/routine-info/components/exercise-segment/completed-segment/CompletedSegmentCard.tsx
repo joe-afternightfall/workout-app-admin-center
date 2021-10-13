@@ -14,12 +14,12 @@ import {
   isStraightSet,
   NightfallMoreVertMenu,
 } from 'workout-app-common-core';
-import { Link } from '@material-ui/icons';
+import { Link, ArrowRightAlt as Arrow } from '@material-ui/icons';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    linkIcon: {
+    icon: {
       color: theme.palette.text.secondary,
     },
   })
@@ -32,14 +32,19 @@ export default function CompletedSegmentCard({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   let title = '';
+  let icon: JSX.Element;
 
   const superset = isSuperset(segment.trainingSetTypeId);
   const straightSet = isStraightSet(segment.trainingSetTypeId);
 
   if (superset) {
     title = 'Superset';
+    icon = <Link className={classes.icon} fontSize={'large'} />;
   } else if (straightSet) {
     title = 'Straight set';
+    icon = <Arrow className={classes.icon} fontSize={'large'} />;
+  } else {
+    icon = <React.Fragment />;
   }
 
   return (
@@ -50,9 +55,7 @@ export default function CompletedSegmentCard({
           <Grid container alignItems={'center'} justify={'space-between'}>
             <Grid item>
               <Grid container alignItems={'center'} spacing={2}>
-                <Grid item>
-                  <Link />
-                </Grid>
+                <Grid item>{icon}</Grid>
                 <Grid item>
                   <Typography variant={'h6'} color={'textSecondary'}>
                     {title}
@@ -108,7 +111,7 @@ export default function CompletedSegmentCard({
                       <Divider variant={'fullWidth'} />
                     </Grid>
                     <Grid item xs={2}>
-                      <Link fontSize={'large'} className={classes.linkIcon} />
+                      {icon}
                     </Grid>
                   </Grid>
                 </Grid>

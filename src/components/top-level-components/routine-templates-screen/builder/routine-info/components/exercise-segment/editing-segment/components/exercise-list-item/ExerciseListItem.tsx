@@ -24,12 +24,13 @@ const ExerciseListItem = ({
   let display = <div />;
 
   if (isStraightSet(segment.trainingSetTypeId)) {
+    let straightSetComponent;
     const blink =
       selectedExerciseSlotForSegment.segmentId === segment.id &&
       selectedExerciseSlotForSegment.order === 1;
 
     if (blink) {
-      display = (
+      straightSetComponent = (
         <BaseListItem
           itemType={'blinker'}
           shouldBlink={true}
@@ -39,14 +40,14 @@ const ExerciseListItem = ({
     } else {
       const workoutExercise = segment.exercises[0];
       if (workoutExercise && workoutExercise.exerciseId) {
-        display = (
+        straightSetComponent = (
           <BaseListItem
             itemType={'standard'}
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
         );
       } else {
-        display = (
+        straightSetComponent = (
           <BaseListItem
             itemType={'button'}
             title={`Click to add exercise ${1}`}
@@ -57,6 +58,23 @@ const ExerciseListItem = ({
         );
       }
     }
+    display = (
+      <ListItem>
+        <ListItemText
+          disableTypography
+          primary={
+            <Grid container>
+              <Grid item xs={6} container alignItems={'center'}>
+                <LineItemTitle title={'Exercise'} />
+              </Grid>
+              <Grid item xs={6} container>
+                {straightSetComponent}
+              </Grid>
+            </Grid>
+          }
+        />
+      </ListItem>
+    );
   } else if (isSuperset(segment.trainingSetTypeId)) {
     let firstComponent: JSX.Element;
     let secondComponent: JSX.Element;
