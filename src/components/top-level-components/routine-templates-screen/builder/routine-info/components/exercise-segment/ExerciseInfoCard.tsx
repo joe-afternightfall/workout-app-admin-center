@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Segment } from 'workout-app-common-core';
 import { Card, Grid, Fade } from '@material-ui/core';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
-import { verifySegmentComplete } from '../../../../../../../utils/verify';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import CompletedSegmentCard from './completed-segment/CompletedSegmentCard';
 import EditingSegmentContainer from './editing-segment/EditingSegmentContainer';
@@ -43,11 +42,6 @@ export default function ExerciseInfoCard({
 }: ExerciseInfoCardProps): JSX.Element {
   const classes = useStyles();
   const [displayIcons, setDisplayIcons] = React.useState(false);
-  let verifiedComplete = false;
-
-  useEffect(() => {
-    verifiedComplete = verifySegmentComplete(segment);
-  });
 
   const shouldDisplay = displayIcons || isActiveCard;
 

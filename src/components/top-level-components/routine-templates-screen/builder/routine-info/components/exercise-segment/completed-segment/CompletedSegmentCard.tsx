@@ -1,25 +1,13 @@
-import React from 'react';
 import clsx from 'clsx';
-import {
-  Fade,
-  Grid,
-  Card,
-  Divider,
-  Collapse,
-  IconButton,
-  Typography,
-  CardHeader,
-  CardContent,
-  CardActions,
-} from '@material-ui/core';
-import {
-  Link,
-  Edit,
-  ExpandMore,
-  ArrowRightAlt as Arrow,
-} from '@material-ui/icons';
+import React from 'react';
+import CompletedSets from './components/CompletedSets';
+import CompletedExercises from './components/CompletedExercises';
+import CompletedCardHeader from './components/CompletedCardHeader';
+import CompletedRestBetween from './components/CompletedRestBetween';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
+import { Link, ExpandMore, ArrowRightAlt as Arrow } from '@material-ui/icons';
+import { Grid, IconButton, CardContent, CardActions } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,14 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     expandOpen: {
       transform: 'rotate(180deg)',
-    },
-    setsCard: {
-      backgroundColor: '#673AB7',
-      textAlign: 'center',
-      color: '#fff',
-    },
-    setsContainer: {
-      minHeight: '6vh',
     },
   })
 );
@@ -61,14 +41,17 @@ export default function CompletedSegmentCard({
 
   let title = '';
   let icon: JSX.Element;
+  let setType: 'super' | 'straight' | null = null;
 
   const superset = isSuperset(segment.trainingSetTypeId);
   const straightSet = isStraightSet(segment.trainingSetTypeId);
 
   if (superset) {
     title = 'Superset';
+    setType = 'super';
     icon = <Link className={classes.icon} fontSize={'large'} />;
   } else if (straightSet) {
+    setType = 'straight';
     title = 'Straight set';
     icon = <Arrow className={classes.icon} fontSize={'large'} />;
   } else {
@@ -77,104 +60,24 @@ export default function CompletedSegmentCard({
 
   return (
     <>
-      <CardHeader
-        disableTypography
-        title={
-          <Grid container alignItems={'center'} justify={'space-between'}>
-            <Grid item>
-              <Grid container alignItems={'center'} spacing={2}>
-                <Grid item>{icon}</Grid>
-                <Grid item>
-                  <Typography variant={'h6'} color={'textSecondary'}>
-                    {title}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item>
-              <Fade in={displayIcons}>
-                <IconButton onClick={editClickHandler}>
-                  <Edit />
-                </IconButton>
-              </Fade>
-            </Grid>
-          </Grid>
-        }
+      <CompletedCardHeader
+        title={title}
+        icon={icon}
+        display={displayIcons}
+        editClickHandler={editClickHandler}
       />
 
       <CardContent>
         <Grid container>
           <Grid item xs={9} container alignItems={'center'}>
-            {superset && (
-              <Grid container>
-                <Grid item xs={12}>
-                  <Typography variant={'h6'} color={'textPrimary'}>
-                    {`1. ${
-                      segment.exercises[0] && segment.exercises[0].exerciseId
-                    }`}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Grid
-                    container
-                    spacing={2}
-                    alignItems={'center'}
-                    style={{ height: '100%' }}
-                  >
-                    <Grid item xs={8}>
-                      <Divider variant={'fullWidth'} />
-                    </Grid>
-                    <Grid item xs={2}>
-                      {icon}
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant={'h6'} color={'textPrimary'}>
-                    {`2. ${
-                      segment.exercises[1] && segment.exercises[1].exerciseId
-                    }`}
-                  </Typography>
-                </Grid>
-              </Grid>
-            )}
-            {straightSet && (
-              <Grid>
-                <Typography variant={'h6'} color={'textPrimary'}>
-                  {`1. ${
-                    segment.exercises[0] && segment.exercises[0].exerciseId
-                  }`}
-                </Typography>
-              </Grid>
-            )}
+            <CompletedExercises
+              segment={segment}
+              icon={icon}
+              setType={setType}
+            />
           </Grid>
           <Grid item xs={3}>
-            <Grid
-              container
-              alignItems={'center'}
-              justify={'flex-end'}
-              style={{ height: '100%' }}
-            >
-              <Grid item xs={12}>
-                {segment.exercises[0] && (
-                  <Card className={classes.setsCard}>
-                    <Grid
-                      container
-                      justify={'center'}
-                      alignItems={'center'}
-                      className={classes.setsContainer}
-                    >
-                      <Grid item>
-                        <Typography variant={'h6'}>
-                          {`${segment.exercises[0].sets.length} Sets`}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Card>
-                )}
-              </Grid>
-            </Grid>
+            <CompletedSets segment={segment} />
           </Grid>
         </Grid>
       </CardContent>
@@ -190,48 +93,11 @@ export default function CompletedSegmentCard({
         </IconButton>
       </CardActions>
 
-      <Collapse in={expanded} timeout={'auto'} unmountOnExit>
-        <CardContent style={{ marginTop: 12 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} container>
-              <Grid item xs={6} container justify={'center'}>
-                <Typography variant={'h6'} color={'textPrimary'}>
-                  {'30 seconds'}
-                </Typography>
-              </Grid>
-              <Grid item xs={6} container justify={'center'}>
-                <Typography variant={'h6'} color={'textPrimary'}>
-                  {'60 seconds'}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} container>
-              <Grid
-                item
-                xs={6}
-                container
-                justify={'center'}
-                style={{ textAlign: 'center' }}
-              >
-                <Typography variant={'h6'} color={'textSecondary'}>
-                  {'rest between sets'}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={6}
-                container
-                justify={'center'}
-                style={{ textAlign: 'center' }}
-              >
-                <Typography variant={'h6'} color={'textSecondary'}>
-                  {'rest between next segment'}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Collapse>
+      <CompletedRestBetween
+        expanded={expanded}
+        restBetweenSets={segment.secondsRestBetweenSets}
+        restBetweenNextSegment={segment.secondsRestBetweenNextSegment}
+      />
     </>
   );
 }

@@ -11,12 +11,9 @@ import ExerciseInfoCardActions from './EditingInfoCardActions';
 import SetIncrementer from './components/inputs/SetIncrementer';
 import SetTypeDropdown from './components/inputs/SetTypeHeader';
 import RestBetweenOptions from './components/inputs/RestBetweenOptions';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ListItemMessage from './components/base-components/ListItemMessage';
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({}));
 
 export default function EditingSegmentContainer({
   segment,
