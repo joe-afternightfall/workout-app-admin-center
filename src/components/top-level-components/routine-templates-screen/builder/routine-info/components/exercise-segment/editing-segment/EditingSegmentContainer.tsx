@@ -22,16 +22,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({}));
 export default function EditingSegmentContainer({
   segment,
   doneHandler,
-  isActiveCard,
 }: EditingSegmentContainerProps): JSX.Element {
-  let displayActionMenu = false;
   let displayInputs = false;
-
-  if (isActiveCard && segment.exercises.length > 0) {
-    displayActionMenu = true;
-  } else if (isActiveCard && segment.trainingSetTypeId !== '') {
-    displayActionMenu = true;
-  }
 
   const emptySetType = segment.trainingSetTypeId === '';
   const title = `Segment #${segment.order}`;
@@ -61,18 +53,14 @@ export default function EditingSegmentContainer({
           </Typography>
         }
         subheader={<SetTypeDropdown segment={segment} />}
-        action={
-          displayActionMenu && <SegmentActionMenu segmentId={segment.id} />
-        }
+        action={<SegmentActionMenu segmentId={segment.id} />}
       />
       <CardContent>
         <List>
           <Divider variant={'middle'} style={{ marginBottom: 12 }} />
-          {emptySetType && (
+          {emptySetType ? (
             <ListItemMessage message={'select a set type to continue'} />
-          )}
-
-          {isActiveCard && !emptySetType && (
+          ) : (
             <>
               <ExerciseListItem segment={segment} />
 
@@ -102,7 +90,7 @@ export default function EditingSegmentContainer({
           )}
         </List>
       </CardContent>
-      {isActiveCard && !emptySetType && (
+      {!emptySetType && (
         <ExerciseInfoCardActions segment={segment} doneHandler={doneHandler} />
       )}
     </>
@@ -112,5 +100,4 @@ export default function EditingSegmentContainer({
 interface EditingSegmentContainerProps {
   segment: Segment;
   doneHandler: () => void;
-  isActiveCard: boolean;
 }
