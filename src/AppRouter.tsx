@@ -41,7 +41,7 @@ const AppRouter = (props: AppRouterProps): JSX.Element => {
   );
 };
 
-export interface AppRouterProps {
+interface AppRouterProps {
   isValidated: boolean;
   displayAppBar: boolean;
 }
