@@ -13,7 +13,6 @@ import SetTypeDropdown from './components/inputs/SetTypeHeader';
 import RestBetweenOptions from './components/inputs/RestBetweenOptions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ListItemMessage from './components/base-components/ListItemMessage';
-import SegmentActionMenu from './components/action-menu/SegmentActionMenu';
 import { isStraightSet, isSuperset, Segment } from 'workout-app-common-core';
 import ExerciseListItem from './components/exercise-list-item/ExerciseListItem';
 
@@ -53,7 +52,6 @@ export default function EditingSegmentContainer({
           </Typography>
         }
         subheader={<SetTypeDropdown segment={segment} />}
-        action={<SegmentActionMenu segmentId={segment.id} />}
       />
       <CardContent>
         <List>

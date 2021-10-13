@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
+import EditingDialog from './components/EditingDialog';
 
 const EditingInfoCardActions = ({
+  segment,
   doneHandler,
   doneDisabled,
 }: EditingInfoCardActionsProps & PassedInProps): JSX.Element => {
@@ -14,14 +16,37 @@ const EditingInfoCardActions = ({
         <Grid item xs={12}>
           <Divider variant={'middle'} />
         </Grid>
-        <Grid item container alignItems={'center'} justify={'flex-end'}>
-          <Button
-            disabled={doneDisabled}
-            color={'primary'}
-            onClick={doneHandler}
-          >
-            {'Done'}
-          </Button>
+        <Grid
+          item
+          xs={12}
+          container
+          alignItems={'center'}
+          justify={'flex-end'}
+          spacing={2}
+        >
+          <Grid item>
+            <EditingDialog dialogType={'reset'} segmentId={segment.id} />
+          </Grid>
+          <Grid item style={{ height: '100%' }}>
+            <Divider orientation={'vertical'} variant={'fullWidth'} />
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <EditingDialog dialogType={'delete'} segmentId={segment.id} />
+            </Grid>
+          </Grid>
+          <Grid item style={{ height: '100%' }}>
+            <Divider orientation={'vertical'} variant={'fullWidth'} />
+          </Grid>
+          <Grid item>
+            <Button
+              disabled={doneDisabled}
+              color={'primary'}
+              onClick={doneHandler}
+            >
+              {'Save'}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </CardActions>
