@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
-import { updateRestBetween } from '../../../../../../../../../creators/routine-builder/builder';
+import { updateRestBetween } from '../../../../../../../../../../creators/routine-builder/builder';
 
 interface MenuOptions {
   id: string;

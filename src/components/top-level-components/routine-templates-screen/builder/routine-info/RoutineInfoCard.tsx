@@ -35,10 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 6,
       backgroundColor: '#ECECEC',
     },
-    phaseSubheader: {
-      width: '50%',
-      paddingTop: 16,
-    },
     topMargin: {
       marginTop: 16,
     },
@@ -48,25 +44,35 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function buildActiveId(segmentId: string) {
+  return `list-item-${segmentId}`;
+}
+
 const RoutineInfoCard = ({
   phases,
   newRoutine,
   reorderSegments,
 }: RoutineInfoCardProps): JSX.Element => {
   const classes = useStyles();
-  const [openCard, setOpenCard] = React.useState('');
-  const [isEditing, setIsEditing] = React.useState(newRoutine);
 
-  const scrollToHandler = (id: string) => {
-    if (openCard !== id) {
-      setOpenCard(id);
+  const [editingCardId, setEditingCardId] = React.useState('');
+  const [activeCardId, setActiveCardId] = React.useState('');
+  const [isEditingRoutineTitle, setIsEditingRoutineTitle] =
+    React.useState(newRoutine);
+
+  const cardClickedHandler = (cardId: string) => {
+    if (activeCardId !== cardId) {
+      setActiveCardId(cardId);
     }
-    scrollTo(id);
+    scrollTo(cardId);
   };
 
-  const doneHandler = (phaseListId: string) => {
-    setOpenCard('');
-    scrollTo(phaseListId);
+  const doneEditingHandler = () => {
+    setEditingCardId('');
+  };
+
+  const editCardClickHandler = (cardId: string) => {
+    setEditingCardId(cardId);
   };
 
   const scrollTo = (id: string) => {
@@ -94,9 +100,12 @@ const RoutineInfoCard = ({
 
   return (
     <Card raised={false} square className={classes.root}>
-      <BuilderAppBar isEditing={isEditing} editClickHandler={setIsEditing} />
+      <BuilderAppBar
+        isEditing={isEditingRoutineTitle}
+        editClickHandler={setIsEditingRoutineTitle}
+      />
       <CardContent>
-        <RoutineTitle isEditing={isEditing} />
+        <RoutineTitle isEditing={isEditingRoutineTitle} />
         {phases.map((phase, index) => {
           return (
             <List
@@ -120,22 +129,26 @@ const RoutineInfoCard = ({
                 }}
               >
                 {phase.segments.map((segment) => {
-                  const listId = `list-item-${segment.id}`;
+                  const listItemId = buildActiveId(segment.id);
                   return (
-                    <Draggable key={listId}>
-                      <ListItem id={listId}>
+                    <Draggable key={listItemId}>
+                      <ListItem id={listItemId}>
                         <Divider />
                         <ListItemText
                           disableTypography
                           primary={
                             <ExerciseInfoCard
                               segment={segment}
-                              isActiveCard={openCard === listId}
-                              scrollToHandler={() => {
-                                scrollToHandler(listId);
+                              isActiveCard={activeCardId === listItemId}
+                              isEditingCard={editingCardId === listItemId}
+                              cardClickedHandler={() => {
+                                cardClickedHandler(listItemId);
                               }}
-                              doneHandler={() => {
-                                doneHandler(phase.id);
+                              doneEditingHandler={() => {
+                                doneEditingHandler();
+                              }}
+                              editHandler={() => {
+                                editCardClickHandler(listItemId);
                               }}
                             />
                           }
