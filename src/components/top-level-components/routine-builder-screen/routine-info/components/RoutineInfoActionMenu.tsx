@@ -2,7 +2,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { NightfallMoreVertMenu } from 'workout-app-common-core';
-import { addPhaseToRoutine } from '../../../../../../creators/routine-builder/builder';
+import { addPhaseToRoutine } from '../../../../../creators/routine-builder/builder';
 
 const RoutineInfoActionMenu = ({
   addPhaseHandler,

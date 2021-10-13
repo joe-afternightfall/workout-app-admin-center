@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { State } from '../../../../../../configs/redux/store';
+import { State } from '../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
-import { saveNewRoutineTemplate } from '../../../../../../services/workout-configurations/routine-templates';
+import { saveNewRoutineTemplate } from '../../../../../services/workout-configurations/routine-templates';
 
 const RoutineInfoCardActions = ({
   saveHandler,

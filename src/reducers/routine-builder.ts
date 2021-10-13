@@ -15,6 +15,10 @@ export default {
         newState.newRoutine = action.newRoutine;
         newState.selectedRoutine = action.routine;
         break;
+      case ActionTypes.VIEW_SELECTED_ROUTINE:
+        newState.newRoutine = false;
+        newState.selectedRoutine = action.routine;
+        break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
         newState.selectedRoutine.workoutCategoryId = action.id;
         break;

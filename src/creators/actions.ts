@@ -3,6 +3,7 @@ import { LoadUsersWorkoutsAction, ValidatedUserAction } from './user-info';
 import {
   LoadExercisesAction,
   LoadExerciseTypesAction,
+  LoadRoutineTemplatesAction,
 } from './workout-configurations';
 import {
   ApplyHoverStylesToMuscleGroupAction,
@@ -33,6 +34,7 @@ import {
   DeletePhaseFromRoutineAction,
   ReorderRoutineSegmentsAction,
   FilterExercisesForSearchValueAction,
+  ViewSelectedRoutineAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 
@@ -50,9 +52,11 @@ export enum ActionTypes {
 
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
+  LOAD_ROUTINE_TEMPLATES = 'LOAD_ROUTINE_TEMPLATES',
 
   // Routine Builder Actions
   BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
+  VIEW_SELECTED_ROUTINE = 'VIEW_SELECTED_ROUTINE',
   UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
   ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
@@ -112,4 +116,6 @@ export type ApplicationActions =
   | ReorderRoutinePhasesAction
   | DeletePhaseFromRoutineAction
   | ReorderRoutineSegmentsAction
-  | FilterExercisesForSearchValueAction;
+  | FilterExercisesForSearchValueAction
+  | LoadRoutineTemplatesAction
+  | ViewSelectedRoutineAction;

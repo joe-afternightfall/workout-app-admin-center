@@ -9,7 +9,7 @@ import {
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { selectSetType } from '../../../../../../../../../../creators/routine-builder/builder';
+import { selectSetType } from '../../../../../../../../../creators/routine-builder/builder';
 
 const SetTypeHeader = ({
   segment,

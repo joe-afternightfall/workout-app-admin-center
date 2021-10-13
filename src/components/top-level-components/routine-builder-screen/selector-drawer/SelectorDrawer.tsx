@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import ExercisesList from './ExercisesList';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import { State } from '../../../../../configs/redux/store';
+import { State } from '../../../../configs/redux/store';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Drawer } from '@material-ui/core';
 import { Dispatch } from 'redux';
-import { filterExercisesForSearchValue } from '../../../../../creators/routine-builder/builder';
+import { filterExercisesForSearchValue } from '../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

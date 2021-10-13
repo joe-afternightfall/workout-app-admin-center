@@ -15,14 +15,14 @@ import BuilderAppBar from '../BuilderAppBar';
 import RoutineTitle from './components/RoutineTitle';
 import { Phase, Segment } from 'workout-app-common-core';
 import ClickToAddCard from './components/ClickToAddCard';
-import { State } from '../../../../../configs/redux/store';
+import { State } from '../../../../configs/redux/store';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
 import PhaseAppBar from './components/phase-app-bar/PhaseAppBar';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import RoutineInfoCardActions from './components/RoutineInfoCardActions';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import ExerciseInfoCard from './components/exercise-segment/ExerciseInfoCard';
-import { reorderRoutineSegments } from '../../../../../creators/routine-builder/builder';
+import { reorderRoutineSegments } from '../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

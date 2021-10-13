@@ -16,7 +16,7 @@ import { Grid } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { NightfallTooltip } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { deletePhaseFromRoutine } from '../../../../../../../../creators/routine-builder/builder';
+import { deletePhaseFromRoutine } from '../../../../../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

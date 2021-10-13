@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import {
   updateRoutineTitle,
   updateSelectedCategoryId,
-} from '../../../../../../creators/routine-builder/builder';
-import { State } from '../../../../../../configs/redux/store';
+} from '../../../../../creators/routine-builder/builder';
+import { State } from '../../../../../configs/redux/store';
 import { Grid, TextField, Typography } from '@material-ui/core';
 
 function titleRow(

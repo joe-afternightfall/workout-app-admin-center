@@ -3,8 +3,10 @@ import {
   DASHBOARD_SCREEN_PATH,
   EXERCISE_TYPES_SCREEN_PATH,
   ROUTINE_TEMPLATES_SCREEN_PATH,
+  ROUTINE_BUILDER_SCREEN_PATH,
 } from './app';
 import {
+  ListAlt,
   Settings,
   FitnessCenter,
   Build as BuilderIcon,
@@ -18,6 +20,7 @@ import ExercisesScreen from '../../components/top-level-components/exercises-scr
 import DashboardScreen from '../../components/top-level-components/dashboard-screen/DashboardScreen';
 import RoutinesScreen from '../../components/top-level-components/routine-templates-screen/RoutinesScreen';
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
+import RoutineBuilderScreen from '../../components/top-level-components/routine-builder-screen/RoutineBuilderScreen';
 
 export interface PageProps {
   path: string;
@@ -60,16 +63,31 @@ export const appNavigationRoutes: RoutesMap = {
   },
   ROUTINE_TEMPLATES_SCREEN: {
     nested: false,
-    mainTitle: 'Routine Builder',
-    mainIcon: BuilderIcon,
+    mainTitle: 'Routine Templates',
+    mainIcon: ListAlt,
     pageProps: [
       {
         path: ROUTINE_TEMPLATES_SCREEN_PATH,
         drawerTitle: 'Routine Templates',
         headerTitle: 'Routine Templates',
-        icon: BuilderIcon,
+        icon: ListAlt,
         testId: 'routine-template-nav',
         routerComponent: RoutinesScreen,
+      },
+    ],
+  },
+  ROUTINE_BUILDER_SCREEN: {
+    nested: false,
+    mainTitle: 'Routine Builder',
+    mainIcon: BuilderIcon,
+    pageProps: [
+      {
+        path: ROUTINE_BUILDER_SCREEN_PATH,
+        drawerTitle: 'Routine Builder',
+        headerTitle: 'Routine Builder',
+        icon: BuilderIcon,
+        testId: 'routine-builder-nav',
+        routerComponent: RoutineBuilderScreen,
       },
     ],
   },
