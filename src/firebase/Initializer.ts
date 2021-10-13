@@ -4,11 +4,13 @@ import {
   WORKOUTS_ROUTE,
   EXERCISES_DB_ROUTE,
   EXERCISE_TYPES_ROUTE,
+  ROUTINE_TEMPLATES_DB_ROUTE,
 } from '../configs/constants/firebase-routes';
 import {
   updateExercises,
   updateUserWorkouts,
   updateExerciseTypes,
+  updateRoutineTemplates,
 } from './update-methods';
 
 const firebaseConfig = {
@@ -36,6 +38,19 @@ export class Initializer {
     const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
     const workouts = firebase.database().ref(WORKOUTS_ROUTE);
     const exercises = firebase.database().ref(EXERCISES_DB_ROUTE);
+    const templates = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
+
+    templates.on('child_added', async () => {
+      await updateRoutineTemplates(this.store);
+    });
+
+    templates.on('child_changed', async () => {
+      await updateRoutineTemplates(this.store);
+    });
+
+    templates.on('child_removed', async () => {
+      await updateRoutineTemplates(this.store);
+    });
 
     exercises.on('child_added', async () => {
       await updateExercises(this.store);

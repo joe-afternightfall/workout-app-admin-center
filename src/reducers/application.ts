@@ -1,4 +1,4 @@
-import { ExerciseVO } from 'workout-app-common-core';
+import { ExerciseVO, RoutineTemplateVO } from 'workout-app-common-core';
 import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
@@ -49,6 +49,10 @@ export default {
       case ActionTypes.LOAD_EXERCISES:
         newState.workoutConfigurations.exercises = action.exercises;
         break;
+      case ActionTypes.LOAD_ROUTINE_TEMPLATES:
+        newState.workoutConfigurations.routineTemplates =
+          action.routineTemplates;
+        break;
       case ActionTypes.TOGGLE_MUSCLE_GROUP: {
         const foundId = newState.selectedMuscleGroupIds.find(
           (id: string) => id === action.muscleGroupId
@@ -95,6 +99,7 @@ export interface ApplicationState {
   workoutConfigurations: {
     exerciseTypes: ExerciseTypeVO[];
     exercises: ExerciseVO[];
+    routineTemplates: RoutineTemplateVO[];
   };
   selectedMuscleGroupIds: string[];
   applyHoverStylesToMuscleGroup: string;

@@ -1,4 +1,9 @@
-import { ExerciseDAO, ExerciseVO } from 'workout-app-common-core';
+import {
+  ExerciseDAO,
+  ExerciseVO,
+  RoutineTemplateDAO,
+  RoutineTemplateVO,
+} from 'workout-app-common-core';
 
 export interface ExerciseSnapshot {
   [key: string]: ExerciseDAO;
@@ -20,6 +25,23 @@ export const mapExerciseSnapshotToVO = (
       gripWidthId: snapshot[key].gripWidthId,
       parameterTypeId: snapshot[key].parameterTypeId,
       alternateSides: snapshot[key].alternateSides,
+    };
+  });
+};
+
+export interface RoutineSnapshot {
+  [key: string]: RoutineTemplateDAO;
+}
+export const mapRoutineSnapshotToVO = (
+  snapshot: RoutineSnapshot
+): RoutineTemplateVO[] => {
+  return Object.keys(snapshot).map((key: string): RoutineTemplateVO => {
+    return {
+      firebaseId: key,
+      id: snapshot[key].id,
+      name: snapshot[key].name,
+      workoutCategoryId: snapshot[key].workoutCategoryId,
+      phases: snapshot[key].phases,
     };
   });
 };

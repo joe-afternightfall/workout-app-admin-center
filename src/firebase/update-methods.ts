@@ -2,12 +2,14 @@ import { Store } from 'redux';
 import {
   loadExercises,
   loadExerciseTypes,
+  loadRoutineTemplates,
 } from '../creators/workout-configurations';
 import { loadUsersWorkouts } from '../creators/user-info';
 import { getWorkoutsForUser } from '../services/workout-service';
 import { getAllExercises } from '../services/workout-configurations/exercises';
 import { getAllExerciseTypes } from '../services/workout-configurations/exercise-types-service';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { getAllRoutineTemplates } from '../services/workout-configurations/routine-templates';
 
 export const updateExerciseTypes = async (store: Store): Promise<void> => {
   const exercises: ExerciseTypeVO[] = await getAllExerciseTypes();
@@ -28,4 +30,9 @@ export const updateUserWorkouts = async (store: Store): Promise<void> => {
 export const updateExercises = async (store: Store): Promise<void> => {
   const exercises = await getAllExercises();
   store.dispatch(loadExercises(exercises));
+};
+
+export const updateRoutineTemplates = async (store: Store): Promise<void> => {
+  const routineTemplates = await getAllRoutineTemplates();
+  store.dispatch(loadRoutineTemplates(routineTemplates));
 };

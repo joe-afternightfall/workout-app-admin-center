@@ -4,9 +4,26 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { routerActions } from 'connected-react-router';
 import { displayAppSnackbar } from '../../creators/app-snackbar';
+import { mapRoutineSnapshotToVO } from '../../utils/snapshot-mapper';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
+import { RoutineTemplateDAO, RoutineTemplateVO } from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
-import { RoutineTemplateDAO } from 'workout-app-common-core';
+
+export const getAllRoutineTemplates = async (): Promise<
+  RoutineTemplateVO[]
+> => {
+  return await firebase
+    .database()
+    .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+    .once('value')
+    .then((snapshot) => {
+      if (snapshot.val()) {
+        return mapRoutineSnapshotToVO(snapshot.val());
+      } else {
+        return [];
+      }
+    });
+};
 
 export const saveNewRoutineTemplate =
   (): ThunkAction<void, State, void, AnyAction> =>

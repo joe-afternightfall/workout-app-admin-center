@@ -2,6 +2,20 @@ import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes } from '../actions';
 import { Phase, RoutineTemplateVO, Segment } from 'workout-app-common-core';
 
+export interface ViewSelectedRoutineAction {
+  type: ActionTypes.VIEW_SELECTED_ROUTINE;
+  routine: RoutineTemplateVO;
+}
+
+export const viewSelectedRoutine = (
+  routine: RoutineTemplateVO
+): ViewSelectedRoutineAction => {
+  return {
+    type: ActionTypes.VIEW_SELECTED_ROUTINE,
+    routine: routine,
+  };
+};
+
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
   newRoutine: boolean;
