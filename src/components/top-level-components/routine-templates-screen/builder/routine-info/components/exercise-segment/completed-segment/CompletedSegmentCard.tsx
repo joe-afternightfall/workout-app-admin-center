@@ -7,6 +7,8 @@ import {
   Typography,
   CardHeader,
   CardContent,
+  CardActions,
+  IconButton,
 } from '@material-ui/core';
 import {
   Segment,
@@ -14,13 +16,24 @@ import {
   isStraightSet,
   NightfallMoreVertMenu,
 } from 'workout-app-common-core';
-import { Link, ArrowRightAlt as Arrow } from '@material-ui/icons';
+import { Link, ArrowRightAlt as Arrow, ExpandMore } from '@material-ui/icons';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     icon: {
       color: theme.palette.text.secondary,
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
     },
   })
 );
@@ -31,6 +44,11 @@ export default function CompletedSegmentCard({
 }: CompletedSegmentCardProps): JSX.Element {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   let title = '';
   let icon: JSX.Element;
 
@@ -174,6 +192,17 @@ export default function CompletedSegmentCard({
           </Grid>
         </Grid>
       </CardContent>
+
+      <CardActions disableSpacing>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+        >
+          <ExpandMore />
+        </IconButton>
+      </CardActions>
 
       <Collapse in={expanded} timeout={'auto'} unmountOnExit>
         <CardContent style={{ marginTop: 12 }}>
