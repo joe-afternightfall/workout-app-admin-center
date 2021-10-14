@@ -103,15 +103,17 @@ const mapStateToProps = (state: State): RoutineInfoCardActionsProps => {
             segment.exercises.length > 0
           ) {
             segment.exercises.map((workoutExercise) => {
-              if (
+              saveDisabled = !(
                 workoutExercise.exerciseId !== '' &&
                 workoutExercise.sets.length > 0
-              ) {
-                saveDisabled = false;
-              }
+              );
             });
+          } else {
+            saveDisabled = true;
           }
         });
+      } else {
+        saveDisabled = true;
       }
     });
   }
@@ -129,7 +131,7 @@ const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardActionsProps =>
       dispatch(routerActions.push(ROUTINE_TEMPLATES_SCREEN_PATH));
       setTimeout(() => {
         dispatch(clearRoutineBuilder());
-      }, 500);
+      }, 100);
     },
     saveHandler: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
