@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      boxShadow: 'none',
+      // boxShadow: 'none',
       backgroundColor: theme.palette.background.paper,
     },
     listBackground: {
@@ -99,7 +99,7 @@ const RoutineInfoCard = ({
   };
 
   return (
-    <Card raised={false} square className={classes.root}>
+    <Card square className={classes.root}>
       <BuilderAppBar
         isEditing={isEditingRoutineTitle}
         editClickHandler={setIsEditingRoutineTitle}
