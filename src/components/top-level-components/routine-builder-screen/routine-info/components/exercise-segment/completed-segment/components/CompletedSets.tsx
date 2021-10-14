@@ -12,6 +12,7 @@ const useStyles = makeStyles(() =>
       backgroundColor: '#673AB7',
       textAlign: 'center',
       color: '#fff',
+      boxShadow: 'none',
     },
     setsContainer: {
       minHeight: '6vh',
@@ -33,7 +34,7 @@ export default function CompletedSets({
     >
       <Grid item xs={12}>
         {segment.exercises[0] && (
-          <Card className={classes.setsCard}>
+          <Card raised={false} className={classes.setsCard}>
             <Grid
               container
               justify={'center'}
