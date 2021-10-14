@@ -66,7 +66,7 @@ export const displaySuccessSnackbar = (
     type: ActionTypes.DISPLAY_APP_SNACKBAR,
     snackbarProps: {
       text: text,
-      severity: 'error',
+      severity: 'success',
       position: {
         vertical: 'bottom',
         horizontal: 'right',
