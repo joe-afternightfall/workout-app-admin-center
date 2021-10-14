@@ -4,26 +4,74 @@ import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
-import { saveNewRoutineTemplate } from '../../../../../services/workout-configurations/routine-templates';
+import {
+  saveNewRoutineTemplate,
+  updateRoutineTemplate,
+} from '../../../../../services/workout-configurations/routine-templates';
+import DeleteRoutineDialog from './DeleteRoutineDialog';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { clearRoutineBuilder } from '../../../../../creators/routine-builder/builder';
+import { routerActions } from 'connected-react-router';
+import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../../../../configs/constants/app';
 
-const RoutineInfoCardActions = ({
-  saveHandler,
-  saveDisabled,
-}: RoutineInfoCardActionsProps): JSX.Element => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    cancelButton: {
+      color: theme.palette.grey[500],
+    },
+  })
+);
+
+const RoutineInfoCardActions = (
+  props: RoutineInfoCardActionsProps
+): JSX.Element => {
+  const classes = useStyles();
+  const { saveDisabled, newRoutine, routineName } = props;
+
   return (
     <CardActions>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Divider variant={'middle'} />
         </Grid>
-        <Grid item container alignItems={'center'} justify={'flex-end'}>
-          <Button
-            disabled={saveDisabled}
-            color={'primary'}
-            onClick={saveHandler}
-          >
-            {'Save Routine'}
-          </Button>
+        <Grid
+          item
+          xs={12}
+          container
+          alignItems={'center'}
+          justify={'flex-end'}
+          spacing={2}
+        >
+          <Grid item>
+            <Button
+              className={classes.cancelButton}
+              onClick={props.cancelHandler}
+            >
+              {'Cancel'}
+            </Button>
+          </Grid>
+          {!newRoutine && (
+            <>
+              <Grid item style={{ height: '100%' }}>
+                <Divider orientation={'vertical'} variant={'fullWidth'} />
+              </Grid>
+              <Grid item>
+                <DeleteRoutineDialog routineName={routineName} />
+              </Grid>
+            </>
+          )}
+          <Grid item style={{ height: '100%' }}>
+            <Divider orientation={'vertical'} variant={'fullWidth'} />
+          </Grid>
+          <Grid item>
+            <Button
+              disabled={saveDisabled}
+              color={'primary'}
+              onClick={newRoutine ? props.saveHandler : props.updateHandler}
+            >
+              {newRoutine ? 'Save' : 'Update'}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </CardActions>
@@ -31,8 +79,12 @@ const RoutineInfoCardActions = ({
 };
 
 interface RoutineInfoCardActionsProps {
+  newRoutine: boolean;
+  routineName: string;
   saveDisabled: boolean;
   saveHandler: () => void;
+  updateHandler: () => void;
+  cancelHandler: () => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardActionsProps => {
@@ -66,14 +118,27 @@ const mapStateToProps = (state: State): RoutineInfoCardActionsProps => {
 
   return {
     saveDisabled: saveDisabled,
+    routineName: state.routineBuilderState.selectedRoutine.name,
+    newRoutine: state.routineBuilderState.newRoutine,
   } as unknown as RoutineInfoCardActionsProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardActionsProps =>
   ({
+    cancelHandler: () => {
+      dispatch(routerActions.push(ROUTINE_TEMPLATES_SCREEN_PATH));
+      setTimeout(() => {
+        dispatch(clearRoutineBuilder());
+      }, 500);
+    },
     saveHandler: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
         saveNewRoutineTemplate()
+      );
+    },
+    updateHandler: () => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        updateRoutineTemplate()
       );
     },
   } as unknown as RoutineInfoCardActionsProps);

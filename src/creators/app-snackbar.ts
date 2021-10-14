@@ -32,3 +32,45 @@ export const hideAppSnackbar = (): HideAppSnackbarAction => {
     type: ActionTypes.HIDE_APP_SNACKBAR,
   };
 };
+
+export interface DisplayErrorSnackbarAction {
+  type: ActionTypes.DISPLAY_APP_SNACKBAR;
+  snackbarProps: SnackbarCreatorProps;
+}
+
+export const displayErrorSnackbar = (
+  text: string
+): DisplayErrorSnackbarAction => {
+  return {
+    type: ActionTypes.DISPLAY_APP_SNACKBAR,
+    snackbarProps: {
+      text: text,
+      severity: 'success',
+      position: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    },
+  };
+};
+
+export interface DisplaySuccessSnackbarAction {
+  type: ActionTypes.DISPLAY_APP_SNACKBAR;
+  snackbarProps: SnackbarCreatorProps;
+}
+
+export const displaySuccessSnackbar = (
+  text: string
+): DisplaySuccessSnackbarAction => {
+  return {
+    type: ActionTypes.DISPLAY_APP_SNACKBAR,
+    snackbarProps: {
+      text: text,
+      severity: 'error',
+      position: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    },
+  };
+};
