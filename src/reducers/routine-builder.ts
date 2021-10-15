@@ -1,7 +1,7 @@
 import * as ramda from 'ramda';
-import { RoutineTemplateVO, sortEntireRoutine } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
+import { RoutineTemplateVO, sortEntireRoutine } from 'workout-app-common-core';
 
 export default {
   reducer: (
@@ -18,6 +18,15 @@ export default {
       case ActionTypes.VIEW_SELECTED_ROUTINE:
         newState.newRoutine = false;
         newState.selectedRoutine = action.routine;
+        break;
+      case ActionTypes.CLEAR_ROUTINE_BUILDER:
+        newState.selectedRoutine = {
+          firebaseId: '',
+          id: '',
+          name: '',
+          workoutCategoryId: '',
+          phases: [],
+        };
         break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
         newState.selectedRoutine.workoutCategoryId = action.id;

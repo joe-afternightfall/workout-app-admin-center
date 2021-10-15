@@ -1,27 +1,37 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { NightfallMoreVertMenu } from 'workout-app-common-core';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import { IconButton } from '@material-ui/core';
+import { NightfallTooltip } from 'workout-app-common-core';
 import { addPhaseToRoutine } from '../../../../../creators/routine-builder/builder';
 
-const RoutineInfoActionMenu = ({
-  addPhaseHandler,
-  editClickHandler,
-}: RoutineInfoActionMenuProps & PassedInProps): JSX.Element => {
+const RoutineInfoActionMenu = (
+  props: RoutineInfoActionMenuProps & PassedInProps
+): JSX.Element => {
   return (
-    <NightfallMoreVertMenu
-      id={'routine-title'}
-      menuItems={[
-        {
-          title: 'Edit Routine Title',
-          clickHandler: editClickHandler,
-        },
-        {
-          title: 'Add Phase',
-          clickHandler: addPhaseHandler,
-        },
-      ]}
-    />
+    <>
+      <NightfallTooltip
+        component={
+          <IconButton color={'inherit'} onClick={props.editClickHandler}>
+            <EditIcon />
+          </IconButton>
+        }
+        title={'Edit Routine Title'}
+        placement={'bottom'}
+      />
+
+      <NightfallTooltip
+        component={
+          <IconButton color={'inherit'} onClick={props.addPhaseHandler}>
+            <AddIcon />
+          </IconButton>
+        }
+        title={'Add New Phase'}
+        placement={'bottom'}
+      />
+    </>
   );
 };
 

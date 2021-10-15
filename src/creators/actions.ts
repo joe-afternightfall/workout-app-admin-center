@@ -35,6 +35,7 @@ import {
   ReorderRoutineSegmentsAction,
   FilterExercisesForSearchValueAction,
   ViewSelectedRoutineAction,
+  ClearRoutineBuilderAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 
@@ -57,6 +58,7 @@ export enum ActionTypes {
   // Routine Builder Actions
   BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
   VIEW_SELECTED_ROUTINE = 'VIEW_SELECTED_ROUTINE',
+  CLEAR_ROUTINE_BUILDER = 'CLEAR_ROUTINE_BUILDER',
   UPDATE_ROUTINE_TITLE = 'UPDATE_ROUTINE_TITLE',
   UPDATE_SELECTED_CATEGORY_ID = 'UPDATE_SELECTED_CATEGORY_ID',
   ADD_PHASE_TO_ROUTINE = 'ADD_PHASE_TO_ROUTINE',
@@ -118,4 +120,5 @@ export type ApplicationActions =
   | ReorderRoutineSegmentsAction
   | FilterExercisesForSearchValueAction
   | LoadRoutineTemplatesAction
-  | ViewSelectedRoutineAction;
+  | ViewSelectedRoutineAction
+  | ClearRoutineBuilderAction;

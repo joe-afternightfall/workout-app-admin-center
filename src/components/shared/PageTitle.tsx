@@ -18,7 +18,7 @@ export default function PageTitle(props: PageTitleProps): JSX.Element {
   return (
     <Typography
       noWrap
-      variant={'h4'}
+      variant={'h5'}
       data-testid={'page-title'}
       className={classes.title}
     >

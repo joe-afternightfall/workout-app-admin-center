@@ -16,6 +16,16 @@ export const viewSelectedRoutine = (
   };
 };
 
+export interface ClearRoutineBuilderAction {
+  type: ActionTypes.CLEAR_ROUTINE_BUILDER;
+}
+
+export const clearRoutineBuilder = (): ClearRoutineBuilderAction => {
+  return {
+    type: ActionTypes.CLEAR_ROUTINE_BUILDER,
+  };
+};
+
 export interface BuildNewRoutineAction {
   type: ActionTypes.BUILD_NEW_ROUTINE;
   newRoutine: boolean;

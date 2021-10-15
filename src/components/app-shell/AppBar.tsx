@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../configs/redux/store';
-import icon from '../../configs/icons/rainbow-shades.svg';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import { AppBar, Grid, IconButton, Toolbar } from '@material-ui/core';
@@ -32,9 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         display: 'none',
       },
-    },
-    icon: {
-      height: '40px',
     },
   })
 );
@@ -81,13 +77,6 @@ const TopAppBar = (props: AppBarProps & PassedInAppBarProps): JSX.Element => {
                 }
                 title={props.isFullScreen ? 'Exit Fullscreen' : 'Fullscreen'}
                 placement={'bottom'}
-              />
-            </Grid>
-            <Grid item>
-              <img
-                alt={'cool-shades-icon'}
-                className={classes.icon}
-                src={icon}
               />
             </Grid>
           </Grid>

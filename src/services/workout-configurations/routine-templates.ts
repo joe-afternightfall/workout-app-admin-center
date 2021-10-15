@@ -1,11 +1,15 @@
 import firebase from 'firebase';
+import {
+  displayErrorSnackbar,
+  displaySuccessSnackbar,
+} from '../../creators/app-snackbar';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { routerActions } from 'connected-react-router';
-import { displayAppSnackbar } from '../../creators/app-snackbar';
 import { mapRoutineSnapshotToVO } from '../../utils/snapshot-mapper';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
+import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 import { RoutineTemplateDAO, RoutineTemplateVO } from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
 
@@ -28,13 +32,13 @@ export const getAllRoutineTemplates = async (): Promise<
 export const saveNewRoutineTemplate =
   (): ThunkAction<void, State, void, AnyAction> =>
   async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-    const selectedRoutine = getState().routineBuilderState.selectedRoutine;
+    const template = getState().routineBuilderState.selectedRoutine;
 
     const templateDAO = new RoutineTemplateDAO(
-      selectedRoutine.id,
-      selectedRoutine.name,
-      selectedRoutine.workoutCategoryId,
-      selectedRoutine.phases
+      template.id,
+      template.name,
+      template.workoutCategoryId,
+      template.phases
     );
 
     const ref = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
@@ -43,29 +47,87 @@ export const saveNewRoutineTemplate =
     return await newRef.set(templateDAO, (error: Error | null) => {
       if (error) {
         dispatch(
-          displayAppSnackbar({
-            text: 'Error Saving Routine Template',
-            severity: 'error',
-            position: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          })
+          displayErrorSnackbar(`Error Saving ${template.name} Template`)
         );
       } else {
         dispatch(
-          displayAppSnackbar({
-            text: 'Saved Routine Template!',
-            severity: 'success',
-            position: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          })
+          displaySuccessSnackbar(
+            `Successfully saved ${template.name} Template.`
+          )
         );
         setTimeout(() => {
           dispatch(routerActions.push(ROUTINE_TEMPLATES_SCREEN_PATH));
+          dispatch(clearRoutineBuilder());
         }, 1000);
       }
     });
   };
+
+export const updateRoutineTemplate =
+  (): ThunkAction<void, State, void, AnyAction> =>
+  async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+    const template = getState().routineBuilderState.selectedRoutine;
+
+    return await firebase
+      .database()
+      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .child(template.firebaseId)
+      .update(
+        {
+          name: template.name,
+          workoutCategoryId: template.workoutCategoryId,
+          phases: template.phases,
+        },
+        (error: Error | null) => {
+          if (error) {
+            dispatch(
+              displayErrorSnackbar(`Error updating ${template.name} Template`)
+            );
+          } else {
+            dispatch(
+              displaySuccessSnackbar(
+                `Successfully Updated ${template.name} Template`
+              )
+            );
+            timeoutAndRoute(dispatch);
+          }
+        }
+      );
+  };
+
+export const deleteRoutineTemplate =
+  (): ThunkAction<void, State, void, AnyAction> =>
+  async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+    const template = getState().routineBuilderState.selectedRoutine;
+
+    return (
+      template.firebaseId !== '' &&
+      (await firebase
+        .database()
+        .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+        .child(template.firebaseId)
+        .remove((error) => {
+          if (error) {
+            dispatch(
+              displayErrorSnackbar(
+                `There was a problem deleting the ${template.name} Template`
+              )
+            );
+          } else {
+            dispatch(
+              displaySuccessSnackbar(
+                `Successfully deleted ${template.name} Template.`
+              )
+            );
+            timeoutAndRoute(dispatch);
+          }
+        }))
+    );
+  };
+
+function timeoutAndRoute(dispatch: Dispatch): void {
+  setTimeout(() => {
+    dispatch(routerActions.push(ROUTINE_TEMPLATES_SCREEN_PATH));
+    dispatch(clearRoutineBuilder());
+  }, 1000);
+}

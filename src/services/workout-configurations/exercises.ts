@@ -1,13 +1,16 @@
 import firebase from 'firebase';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  displayErrorSnackbar,
+  displaySuccessSnackbar,
+} from '../../creators/app-snackbar';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
 import { ExerciseDAO, ExerciseVO } from 'workout-app-common-core';
 import { mapExerciseSnapshotToVO } from '../../utils/snapshot-mapper';
 import { EXERCISES_DB_ROUTE } from '../../configs/constants/firebase-routes';
 import { InfoProps } from '../../components/top-level-components/exercises-screen/form-view/exercise-info/ExerciseInfoCard';
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
-import { v4 as uuidv4 } from 'uuid';
-import { displayAppSnackbar } from '../../creators/app-snackbar';
 
 export const getAllExercises = async (): Promise<ExerciseVO[]> => {
   return await firebase
@@ -47,26 +50,12 @@ export const saveNewExercise =
 
     return await newRef.set(newExercise, (error: Error | null) => {
       if (error) {
-        dispatch(
-          displayAppSnackbar({
-            text: 'Error Saving Exercise',
-            severity: 'error',
-            position: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          })
-        );
+        dispatch(displayErrorSnackbar(`Error saving ${info.name}.`));
       } else {
         dispatch(
-          displayAppSnackbar({
-            text: 'Saved Exercise!',
-            severity: 'success',
-            position: {
-              vertical: 'bottom',
-              horizontal: 'right',
-            },
-          })
+          displaySuccessSnackbar(
+            `Successfully created new exercise ${info.name}.`
+          )
         );
         setTimeout(() => {
           successCallback();

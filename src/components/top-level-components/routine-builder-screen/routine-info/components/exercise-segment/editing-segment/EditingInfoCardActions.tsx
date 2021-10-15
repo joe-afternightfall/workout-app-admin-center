@@ -44,7 +44,7 @@ const EditingInfoCardActions = ({
               color={'primary'}
               onClick={doneHandler}
             >
-              {'Save'}
+              {'Done'}
             </Button>
           </Grid>
         </Grid>
