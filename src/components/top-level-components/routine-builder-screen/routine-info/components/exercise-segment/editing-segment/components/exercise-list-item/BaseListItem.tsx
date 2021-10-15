@@ -1,8 +1,14 @@
-import React from 'react';
-import { NightfallBlinker } from 'workout-app-common-core';
-import { ListItem, ListItemText } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import React from 'react';
+import { isDuration, NightfallBlinker } from 'workout-app-common-core';
+import {
+  IconButton,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+} from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import TimerIcon from '@material-ui/icons/Timer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -10,20 +16,23 @@ const useStyles = makeStyles(() =>
       background: 'darkgrey',
       opacity: 0.7,
     },
+    listItemContainer: {
+      width: '100%',
+    },
   })
 );
 
 export default function BlinkingListItem({
   title,
   itemType,
+  isDuration,
   clickHandler,
   shouldBlink = false,
 }: BlinkingListItemProps): JSX.Element {
   const classes = useStyles();
-  let display = <div />;
   switch (itemType) {
     case 'blinker':
-      display = (
+      return (
         <NightfallBlinker
           shouldBlink={shouldBlink}
           component={
@@ -47,28 +56,36 @@ export default function BlinkingListItem({
           }
         />
       );
-      break;
     case 'button':
-      display = (
+      return (
         <ListItem button onClick={clickHandler}>
           <ListItemText primary={title} />
         </ListItem>
       );
-      break;
     case 'standard':
-      display = (
-        <ListItem>
+      return (
+        <ListItem
+          classes={{
+            container: classes.listItemContainer,
+          }}
+        >
           <ListItemText primary={title} />
+          {isDuration && (
+            <ListItemSecondaryAction>
+              <IconButton edge={'end'}>
+                <TimerIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          )}
         </ListItem>
       );
-      break;
   }
-  return display;
 }
 
 export interface BlinkingListItemProps {
   title: string;
   shouldBlink?: boolean;
   clickHandler?: () => void;
+  isDuration?: boolean;
   itemType: 'button' | 'blinker' | 'standard';
 }

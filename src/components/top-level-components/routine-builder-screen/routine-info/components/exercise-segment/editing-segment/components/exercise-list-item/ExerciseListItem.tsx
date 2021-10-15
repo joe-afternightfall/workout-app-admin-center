@@ -6,6 +6,7 @@ import {
   isStraightSet,
   getExerciseName,
   WorkoutExercise,
+  isDuration,
 } from 'workout-app-common-core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +15,13 @@ import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
 import { Grid, ListItem, ListItemText } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
+
+const findExercise = (
+  exercises: ExerciseVO[],
+  id: string
+): ExerciseVO | undefined => {
+  return exercises.find((exercise) => exercise.id === id);
+};
 
 const ExerciseListItem = ({
   exercises,
@@ -40,8 +48,16 @@ const ExerciseListItem = ({
     } else {
       const workoutExercise = segment.exercises[0];
       if (workoutExercise && workoutExercise.exerciseId) {
+        const foundExercise = findExercise(
+          exercises,
+          workoutExercise.exerciseId
+        );
+
+        const isDurationType =
+          foundExercise && isDuration(foundExercise.parameterTypeId);
         straightSetComponent = (
           <BaseListItem
+            isDuration={isDurationType}
             itemType={'standard'}
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
@@ -100,9 +116,18 @@ const ExerciseListItem = ({
         workoutExercise.exerciseId &&
         workoutExercise.order === 1
       ) {
+        const foundExercise = findExercise(
+          exercises,
+          workoutExercise.exerciseId
+        );
+
+        const isDurationType =
+          foundExercise && isDuration(foundExercise.parameterTypeId);
+
         firstComponent = (
           <BaseListItem
             itemType={'standard'}
+            isDuration={isDurationType}
             title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
         );
@@ -141,10 +166,19 @@ const ExerciseListItem = ({
         workoutExercise.exerciseId &&
         workoutExercise.order === 2
       ) {
+        const foundExercise = findExercise(
+          exercises,
+          workoutExercise.exerciseId
+        );
+
+        const isDurationType =
+          foundExercise && isDuration(foundExercise.parameterTypeId);
+
         secondComponent = (
           <BaseListItem
-            title={getExerciseName(exercises, workoutExercise.exerciseId)}
             itemType={'standard'}
+            isDuration={isDurationType}
+            title={getExerciseName(exercises, workoutExercise.exerciseId)}
           />
         );
       } else {
@@ -170,8 +204,8 @@ const ExerciseListItem = ({
                 <LineItemTitle title={'Exercises'} />
               </Grid>
               <Grid item xs={6} container>
-                {firstComponent}
-                {secondComponent}
+                <Grid item>{firstComponent}</Grid>
+                <Grid item>{secondComponent}</Grid>
               </Grid>
             </Grid>
           }
