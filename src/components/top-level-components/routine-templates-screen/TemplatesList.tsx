@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import React, { useState } from 'react';
 import { State } from '../../../configs/redux/store';
-import PreviewRoutineDialog from './PreviewRoutineDialog';
+import PreviewRoutineDialog from './preview-dialog/PreviewRoutineDialog';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { RoutineTemplateVO, workoutCategories } from 'workout-app-common-core';
 
