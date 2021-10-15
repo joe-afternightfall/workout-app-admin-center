@@ -18,7 +18,7 @@ import CompletedExercises from './components/CompletedExercises';
 import CompletedCardHeader from './components/CompletedCardHeader';
 import CompletedRestBetween from './components/CompletedRestBetween';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
+import { Segment, determineTrainingSetType } from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,22 +64,15 @@ export default function CompletedSegmentCard({
   };
 
   let title = '';
-  let icon: JSX.Element;
-  let setType: 'super' | 'straight' | null = null;
+  let icon: JSX.Element = <React.Fragment />;
 
-  const superset = isSuperset(segment.trainingSetTypeId);
-  const straightSet = isStraightSet(segment.trainingSetTypeId);
-
-  if (superset) {
+  const trainingSetType = determineTrainingSetType(segment.trainingSetTypeId);
+  if (trainingSetType === 'superset') {
     title = 'Superset';
-    setType = 'super';
     icon = <LinkIcon className={classes.icon} fontSize={'large'} />;
-  } else if (straightSet) {
-    setType = 'straight';
+  } else if (trainingSetType === 'straight-set') {
     title = 'Straight set';
     icon = <Arrow className={classes.icon} fontSize={'large'} />;
-  } else {
-    icon = <React.Fragment />;
   }
 
   return (
@@ -97,8 +90,8 @@ export default function CompletedSegmentCard({
               <Grid item xs={9} container alignItems={'center'}>
                 <CompletedExercises
                   segment={segment}
-                  icon={icon}
-                  setType={setType}
+                  linkIconSize={'large'}
+                  setType={trainingSetType}
                 />
               </Grid>
               <Grid item xs={3}>
