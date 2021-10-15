@@ -8,9 +8,9 @@ import {
 } from 'workout-app-common-core';
 import PreviewListItem from './PreviewListItem';
 import { Grid, List, ListSubheader } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     content: {
       minHeight: '20vh',

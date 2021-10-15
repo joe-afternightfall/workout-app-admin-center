@@ -8,11 +8,11 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Segment, determineTrainingSetType } from 'workout-app-common-core';
 import CompletedExercises from '../../../routine-builder-screen/routine-info/components/exercise-segment/completed-segment/components/CompletedExercises';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       minHeight: '9vh',
