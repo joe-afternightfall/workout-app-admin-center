@@ -17,7 +17,13 @@ class RoutinesScreen extends Component<RoutinesScreenProps> {
   render(): JSX.Element {
     return (
       <Grid xs={12} item container spacing={2}>
-        <Grid item xs={12} container justify={'space-between'}>
+        <Grid
+          item
+          xs={12}
+          container
+          alignItems={'center'}
+          justify={'space-between'}
+        >
           <Grid item>
             <PageTitle title={'Lists of Routine Templates'} />
           </Grid>
