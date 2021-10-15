@@ -1,11 +1,7 @@
 import * as ramda from 'ramda';
-import {
-  Phase,
-  RoutineTemplateVO,
-  sortEntireRoutine,
-} from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
+import { RoutineTemplateVO, sortEntireRoutine } from 'workout-app-common-core';
 
 export default {
   reducer: (

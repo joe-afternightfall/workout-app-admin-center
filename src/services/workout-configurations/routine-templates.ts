@@ -10,11 +10,7 @@ import {
 } from '../../creators/app-snackbar';
 import { mapRoutineSnapshotToVO } from '../../utils/snapshot-mapper';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
-import {
-  Phase,
-  RoutineTemplateDAO,
-  RoutineTemplateVO,
-} from 'workout-app-common-core';
+import { RoutineTemplateDAO, RoutineTemplateVO } from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 

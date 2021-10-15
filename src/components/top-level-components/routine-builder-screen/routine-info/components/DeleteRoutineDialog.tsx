@@ -1,11 +1,10 @@
 import {
   Dialog,
   Button,
+  Typography,
   DialogTitle,
   DialogContent,
   DialogActions,
-  DialogContentText,
-  Typography,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import React, { useState } from 'react';
