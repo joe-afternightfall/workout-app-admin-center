@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Card,
   List,
-  Divider,
   ListItem,
   CardContent,
   ListItemText,
@@ -28,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      // boxShadow: 'none',
       backgroundColor: theme.palette.background.paper,
     },
     listBackground: {
@@ -48,11 +46,8 @@ function buildActiveId(segmentId: string) {
   return `list-item-${segmentId}`;
 }
 
-const RoutineInfoCard = ({
-  phases,
-  newRoutine,
-  reorderSegments,
-}: RoutineInfoCardProps): JSX.Element => {
+const RoutineInfoCard = (props: RoutineInfoCardProps): JSX.Element => {
+  const { phases, newRoutine } = props;
   const classes = useStyles();
 
   const [editingCardId, setEditingCardId] = React.useState('');
@@ -94,7 +89,7 @@ const RoutineInfoCard = ({
       reorderedArray.map((segment, index) => {
         segment.order = index + 1;
       });
-      reorderSegments(payload.phaseId, reorderedArray);
+      props.reorderSegmentsHandler(payload.phaseId, reorderedArray);
     }
   };
 
@@ -133,7 +128,6 @@ const RoutineInfoCard = ({
                   return (
                     <Draggable key={listItemId}>
                       <ListItem id={listItemId}>
-                        <Divider />
                         <ListItemText
                           disableTypography
                           primary={
@@ -176,7 +170,7 @@ const RoutineInfoCard = ({
 interface RoutineInfoCardProps {
   newRoutine: boolean;
   phases: Phase[];
-  reorderSegments: (phaseId: string, segments: Segment[]) => void;
+  reorderSegmentsHandler: (phaseId: string, segments: Segment[]) => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
@@ -188,7 +182,7 @@ const mapStateToProps = (state: State): RoutineInfoCardProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardProps =>
   ({
-    reorderSegments: (phaseId: string, segments: Segment[]) => {
+    reorderSegmentsHandler: (phaseId: string, segments: Segment[]) => {
       dispatch(reorderRoutineSegments(phaseId, segments));
     },
   } as unknown as RoutineInfoCardProps);

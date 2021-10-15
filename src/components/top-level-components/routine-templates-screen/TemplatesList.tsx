@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Card,
   List,
@@ -7,14 +6,12 @@ import {
   CardHeader,
   ListItemText,
 } from '@material-ui/core';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { State } from '../../../configs/redux/store';
-import { routerActions } from 'connected-react-router';
+import PreviewRoutineDialog from './PreviewRoutineDialog';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ROUTINE_BUILDER_SCREEN_PATH } from '../../../configs/constants/app';
 import { RoutineTemplateVO, workoutCategories } from 'workout-app-common-core';
-import { viewSelectedRoutine } from '../../../creators/routine-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,12 +24,30 @@ const useStyles = makeStyles(() =>
 
 const TemplatesList = ({
   routineTemplates,
-  selectRoutineHandler,
 }: TemplatesListProps): JSX.Element => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState<
+    RoutineTemplateVO | undefined
+  >(undefined);
+
+  const openDialog = (routine: RoutineTemplateVO) => {
+    setOpen(true);
+    setSelectedRoutine(routine);
+  };
+
+  const closeDialog = () => {
+    setOpen(false);
+  };
 
   return (
     <Grid container spacing={2}>
+      <PreviewRoutineDialog
+        open={open}
+        routineTemplate={selectedRoutine}
+        closeHandler={closeDialog}
+      />
+
       {workoutCategories.map((category, index) => {
         return (
           <Grid item xs={4} key={index}>
@@ -45,7 +60,7 @@ const TemplatesList = ({
                       <ListItem
                         button
                         onClick={() => {
-                          selectRoutineHandler(template);
+                          openDialog(template);
                         }}
                       >
                         <ListItemText primary={template.name} />
@@ -64,7 +79,6 @@ const TemplatesList = ({
 
 interface TemplatesListProps {
   routineTemplates: RoutineTemplateVO[];
-  selectRoutineHandler: (routine: RoutineTemplateVO) => void;
 }
 
 const mapStateToProps = (state: State): TemplatesListProps => {
@@ -74,12 +88,4 @@ const mapStateToProps = (state: State): TemplatesListProps => {
   } as unknown as TemplatesListProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): TemplatesListProps =>
-  ({
-    selectRoutineHandler: (routine: RoutineTemplateVO) => {
-      dispatch(viewSelectedRoutine(routine));
-      dispatch(routerActions.push(ROUTINE_BUILDER_SCREEN_PATH));
-    },
-  } as unknown as TemplatesListProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(TemplatesList);
+export default connect(mapStateToProps)(TemplatesList);
