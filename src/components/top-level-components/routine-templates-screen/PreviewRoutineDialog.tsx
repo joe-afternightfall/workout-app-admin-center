@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
     },
     listWrapper: {
-      // border: 'none',
       width: '100%',
       paddingLeft: 24,
       paddingRight: 24,
@@ -63,9 +62,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 6,
       backgroundColor: '#ECECEC',
     },
-    // subHeader: {
-    //   zIndex: 2,
-    // },
     listItemDivider: {
       padding: 4,
       width: '100%',
