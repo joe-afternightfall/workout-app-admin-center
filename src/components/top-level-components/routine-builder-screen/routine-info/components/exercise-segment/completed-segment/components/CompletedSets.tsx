@@ -15,7 +15,7 @@ const useStyles = makeStyles(() =>
       boxShadow: 'none',
     },
     setsContainer: {
-      minHeight: '6vh',
+      height: '100%',
     },
   })
 );
