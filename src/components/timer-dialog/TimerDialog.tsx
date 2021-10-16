@@ -57,18 +57,19 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
         <TimerIcon />
       </IconButton>
       <Dialog onClose={handleClose} open={open} fullWidth maxWidth={'lg'}>
-        <DialogContent>
+        <DialogContent style={{ marginTop: 24, marginBottom: 24 }}>
           <Grid
             container
             justify={'center'}
             alignItems={'center'}
             className={classes.contentWrapper}
+            spacing={2}
           >
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <InputSettings />
             </Grid>
-            <Divider orientation={'vertical'} flexItem />
-            <Grid item xs={8} container spacing={4}>
+            {/*<Divider orientation={'vertical'} flexItem />*/}
+            <Grid item xs={7} container spacing={4}>
               <Grid item xs={12}>
                 <Typography>{'Preview Input'}</Typography>
               </Grid>

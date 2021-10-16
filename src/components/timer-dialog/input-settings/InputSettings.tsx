@@ -101,7 +101,7 @@ export default function InputSettings(): JSX.Element {
   };
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography>{'Configure timer settings below'}</Typography>
         <Divider orientation={'horizontal'} variant={'middle'} />
