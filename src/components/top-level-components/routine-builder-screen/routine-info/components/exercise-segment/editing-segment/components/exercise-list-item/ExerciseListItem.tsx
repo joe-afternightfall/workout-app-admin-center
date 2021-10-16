@@ -84,7 +84,9 @@ const ExerciseListItem = ({
                 <LineItemTitle title={'Exercise'} />
               </Grid>
               <Grid item xs={6} container>
-                {straightSetComponent}
+                <Grid item xs={12}>
+                  {straightSetComponent}
+                </Grid>
               </Grid>
             </Grid>
           }
@@ -204,8 +206,12 @@ const ExerciseListItem = ({
                 <LineItemTitle title={'Exercises'} />
               </Grid>
               <Grid item xs={6} container>
-                <Grid item>{firstComponent}</Grid>
-                <Grid item>{secondComponent}</Grid>
+                <Grid item xs={12}>
+                  {firstComponent}
+                </Grid>
+                <Grid item xs={12}>
+                  {secondComponent}
+                </Grid>
               </Grid>
             </Grid>
           }
