@@ -1,17 +1,18 @@
 import React from 'react';
-import { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
   Grid,
+  Dialog,
+  Divider,
   IconButton,
+  Typography,
+  DialogContent,
 } from '@material-ui/core';
 import TimerIcon from '@material-ui/icons/Timer';
 import { WorkoutTimer } from 'workout-app-common-core';
-import CountdownTimer from './components/countdown-timer/CountdownTimer';
+import InputSettings from './input-settings/InputSettings';
 import CustomStepper from './components/stepper/CustomStepper';
-import { AppTheme } from '../../configs/theme/light-theme';
+import CountdownTimer from './components/countdown-timer/CountdownTimer';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,20 +28,13 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function TimerDialog({
-  timers,
-  activeSet,
-  markedDone,
-}: TimerDialogProps): JSX.Element {
+export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme<AppTheme>();
   const [open, setOpen] = React.useState(false);
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  let fontColor = '#686868';
+  const [activeStep, setActiveStep] = React.useState<number | null>(null);
 
   const handleNextStep = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep && prevActiveStep + 1);
   };
 
   const handleResetStepper = () => {
@@ -55,40 +49,43 @@ export default function TimerDialog({
     setOpen(false);
   };
 
-  if (activeSet) {
-    fontColor = theme.palette.colors.active.highlight;
-  } else if (markedDone) {
-    fontColor = theme.palette.colors.active.highlight;
-  }
-
   timers.sort((a, b) => a.order - b.order);
 
   return (
     <>
-      <IconButton
-        disabled={false}
-        onClick={handleClickOpen}
-        // style={{ color: fontColor }}
-      >
+      <IconButton disabled={false} onClick={handleClickOpen}>
         <TimerIcon />
       </IconButton>
-      <Dialog onClose={handleClose} open={open} fullWidth maxWidth={'sm'}>
-        <DialogTitle disableTypography className={classes.dialogTitle}>
-          <CustomStepper activeStep={activeStep} timers={timers} />
-        </DialogTitle>
+      <Dialog onClose={handleClose} open={open} fullWidth maxWidth={'lg'}>
         <DialogContent>
           <Grid
             container
-            alignItems={'center'}
             justify={'center'}
+            alignItems={'center'}
             className={classes.contentWrapper}
           >
-            <CountdownTimer
-              timers={timers}
-              nextStepHandler={handleNextStep}
-              closeHandler={handleClose}
-              resetStepperHandler={handleResetStepper}
-            />
+            <Grid item xs={4}>
+              <InputSettings />
+            </Grid>
+            <Divider orientation={'vertical'} flexItem />
+            <Grid item xs={8} container spacing={4}>
+              <Grid item xs={12}>
+                <Typography>{'Preview Input'}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                {activeStep && (
+                  <CustomStepper activeStep={activeStep} timers={timers} />
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <CountdownTimer
+                  timers={timers}
+                  nextStepHandler={handleNextStep}
+                  closeHandler={handleClose}
+                  resetStepperHandler={handleResetStepper}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
@@ -98,6 +95,4 @@ export default function TimerDialog({
 
 export interface TimerDialogProps {
   timers: WorkoutTimer[];
-  activeSet: boolean;
-  markedDone: boolean;
 }
