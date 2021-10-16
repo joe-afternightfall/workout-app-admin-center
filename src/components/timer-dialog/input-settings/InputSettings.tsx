@@ -82,6 +82,24 @@ export default function InputSettings(): JSX.Element {
     }
   };
 
+  const handleSave = (timerId: string) => {
+    const clonedTimers = ramda.clone(timers);
+    const foundTimer = clonedTimers.find((timer) => timer.id === timerId);
+    if (foundTimer) {
+      foundTimer.newTimer = false;
+      setTimers(clonedTimers);
+    }
+  };
+
+  const handleDelete = (timer: NewWorkoutTimer) => {
+    const clonedTimers = ramda.clone(timers);
+    const foundIndex = clonedTimers.indexOf(timer);
+    if (foundIndex) {
+      clonedTimers.splice(foundIndex, 1);
+      setTimers(clonedTimers);
+    }
+  };
+
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -107,9 +125,15 @@ export default function InputSettings(): JSX.Element {
                   key={index}
                   timer={timer}
                   changeHandler={changeHandler}
+                  saveHandler={handleSave}
+                  deleteHandler={handleDelete}
                 />
               ) : (
-                <TimerListItemCard timer={timer} key={index} />
+                <TimerListItemCard
+                  key={index}
+                  timer={timer}
+                  deleteHandler={handleDelete}
+                />
               );
             })}
           <ListItem style={{ marginTop: 16 }}>
