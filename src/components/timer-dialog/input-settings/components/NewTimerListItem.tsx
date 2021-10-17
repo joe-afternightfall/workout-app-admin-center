@@ -1,5 +1,4 @@
 import {
-  Card,
   Grid,
   Button,
   TextField,
@@ -12,9 +11,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      paddingTop: 4,
-    },
     cancelButton: {
       color: theme.palette.grey[500],
     },
@@ -40,7 +36,7 @@ export default function NewTimerListItem({
   );
 
   return (
-    <Card className={classes.root}>
+    <>
       <CardContent>
         <Grid container>
           <Grid item xs={4} container alignItems={'center'}>
@@ -99,7 +95,7 @@ export default function NewTimerListItem({
           </Grid>
         </Grid>
       </CardActions>
-    </Card>
+    </>
   );
 }
 
