@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
 import {
   Grid,
   Dialog,
-  Divider,
   IconButton,
   Typography,
   DialogContent,
 } from '@material-ui/core';
+import * as ramda from 'ramda';
+import { v4 as uuidv4 } from 'uuid';
 import TimerIcon from '@material-ui/icons/Timer';
+import React, { useEffect, useState } from 'react';
+import CustomStepper from './components/stepper/CustomStepper';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import CountdownTimer from './components/countdown-timer/CountdownTimer';
 import { validateForOnlyNumbers, WorkoutTimer } from 'workout-app-common-core';
 import InputSettings, { NewWorkoutTimer } from './input-settings/InputSettings';
-import CustomStepper from './components/stepper/CustomStepper';
-import CountdownTimer from './components/countdown-timer/CountdownTimer';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { v4 as uuidv4 } from 'uuid';
-import * as ramda from 'ramda';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,13 +26,38 @@ const useStyles = makeStyles(() =>
     dialogTitle: {
       padding: '16px 0',
     },
+    dialogContent: {
+      marginTop: 24,
+      marginBottom: 24,
+    },
   })
 );
 
-export default function TimerDialog(props: TimerDialogProps): JSX.Element {
+function mapPropsToLocalTimer(timers: WorkoutTimer[]): NewWorkoutTimer[] {
+  return timers.map((timer) => {
+    return {
+      newTimer: false,
+      ...timer,
+    };
+  });
+}
+
+export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState<number | null>(null);
+  const [localTimers, setLocalTimers] = useState<NewWorkoutTimer[]>([]);
+
+  useEffect(() => {
+    if (timers.length === 0) {
+      setActiveStep(null);
+    } else if (timers.length === 1) {
+      setActiveStep(1);
+    } else {
+      setActiveStep(timers.length - 1);
+    }
+    setLocalTimers(mapPropsToLocalTimer(timers));
+  }, []);
 
   const handleNextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep && prevActiveStep + 1);
@@ -50,8 +74,6 @@ export default function TimerDialog(props: TimerDialogProps): JSX.Element {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [localTimers, setLocalTimers] = useState<NewWorkoutTimer[]>([]);
 
   const addTimer = () => {
     const newTimers = [
@@ -123,7 +145,7 @@ export default function TimerDialog(props: TimerDialogProps): JSX.Element {
         <TimerIcon />
       </IconButton>
       <Dialog onClose={handleClose} open={open} fullWidth maxWidth={'lg'}>
-        <DialogContent style={{ marginTop: 24, marginBottom: 24 }}>
+        <DialogContent className={classes.dialogContent}>
           <Grid
             container
             justify={'center'}
