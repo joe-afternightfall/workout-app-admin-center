@@ -135,6 +135,9 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
     const foundIndex = localTimers.indexOf(timer);
     if (foundIndex !== -1) {
       localTimers.splice(foundIndex, 1);
+      localTimers.map((timer, index) => {
+        timer.order = index + 1;
+      });
       const clonedTimers = ramda.clone(localTimers);
       setLocalTimers(clonedTimers);
     }
