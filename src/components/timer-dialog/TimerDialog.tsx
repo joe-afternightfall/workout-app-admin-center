@@ -6,13 +6,16 @@ import {
   DialogContent,
 } from '@material-ui/core';
 import * as ramda from 'ramda';
+import {
+  WorkoutTimer,
+  CustomStepper,
+  CountdownTimer,
+  validateForOnlyNumbers,
+} from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import TimerIcon from '@material-ui/icons/Timer';
 import React, { useEffect, useState } from 'react';
-import CustomStepper from './components/stepper/CustomStepper';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import CountdownTimer from './components/countdown-timer/CountdownTimer';
-import { validateForOnlyNumbers, WorkoutTimer } from 'workout-app-common-core';
 import InputSettings, { NewWorkoutTimer } from './input-settings/InputSettings';
 
 const useStyles = makeStyles(() =>
