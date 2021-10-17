@@ -1,35 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   List,
   Card,
   Grid,
+  Link,
   Divider,
   ListItem,
   Typography,
-  IconButton,
   ListItemText,
   ListItemIcon,
-  ListItemSecondaryAction,
-  Link,
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { validateForOnlyNumbers, WorkoutTimer } from 'workout-app-common-core';
-import TimerListItemCard from './components/TimerListItemCard';
-import { v4 as uuidv4 } from 'uuid';
-import * as ramda from 'ramda';
+import { WorkoutTimer } from 'workout-app-common-core';
 import NewTimerListItem from './components/NewTimerListItem';
+import TimerListItemCard from './components/TimerListItemCard';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    contentWrapper: {
-      minHeight: '30vh',
-      height: '100%',
-      textAlign: 'center',
-      paddingBottom: 16,
-    },
-    dialogTitle: {
-      padding: '16px 0',
+    cardRoot: {
+      paddingTop: 4,
+      marginTop: 12,
+      marginBottom: 12,
     },
   })
 );
@@ -45,6 +36,8 @@ export default function InputSettings({
   deleteHandler,
   addTimerHandler,
 }: InputSettingsProps): JSX.Element {
+  const classes = useStyles();
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -60,28 +53,31 @@ export default function InputSettings({
             paddingRight: 12,
             minHeight: '50vh',
             maxHeight: '65vh',
+            overflowY: 'scroll',
           }}
         >
           {timers
             .sort((a, b) => a.order - b.order)
             .map((timer, index) => {
-              return timer.newTimer ? (
-                <NewTimerListItem
-                  key={index}
-                  timer={timer}
-                  changeHandler={changeHandler}
-                  saveHandler={saveHandler}
-                  deleteHandler={deleteHandler}
-                />
-              ) : (
-                <TimerListItemCard
-                  key={index}
-                  timer={timer}
-                  deleteHandler={deleteHandler}
-                />
+              return (
+                <Card key={index} className={classes.cardRoot}>
+                  {timer.newTimer ? (
+                    <NewTimerListItem
+                      timer={timer}
+                      changeHandler={changeHandler}
+                      saveHandler={saveHandler}
+                      deleteHandler={deleteHandler}
+                    />
+                  ) : (
+                    <TimerListItemCard
+                      timer={timer}
+                      deleteHandler={deleteHandler}
+                    />
+                  )}
+                </Card>
               );
             })}
-          <ListItem style={{ marginTop: 16 }}>
+          <ListItem style={{ marginTop: 24, marginBottom: 16 }}>
             <ListItemIcon>
               <Typography>{`${timers.length + 1}.`}</Typography>
             </ListItemIcon>
