@@ -38,68 +38,13 @@ export interface NewWorkoutTimer extends WorkoutTimer {
   newTimer: boolean;
 }
 
-export default function InputSettings(): JSX.Element {
-  const [timers, setTimers] = useState<NewWorkoutTimer[]>([]);
-
-  const addTimer = () => {
-    const newTimers = [
-      ...timers,
-      {
-        newTimer: true,
-        id: uuidv4(),
-        order: timers.length + 1,
-        stepperTitle: '',
-        timerMessage: '',
-        seconds: 0,
-      },
-    ];
-    setTimers(newTimers);
-  };
-
-  const changeHandler = (
-    timerId: string,
-    type: 'seconds' | 'stepper' | 'timer',
-    value: string
-  ) => {
-    const clonedTimers = ramda.clone(timers);
-    const foundTimer = clonedTimers.find((timer) => timer.id === timerId);
-
-    if (foundTimer) {
-      switch (type) {
-        case 'seconds':
-          if (validateForOnlyNumbers(value)) {
-            foundTimer.seconds = Number(value);
-          }
-          break;
-        case 'stepper':
-          foundTimer.stepperTitle = value;
-          break;
-        case 'timer':
-          foundTimer.timerMessage = value;
-          break;
-      }
-      setTimers(clonedTimers);
-    }
-  };
-
-  const handleSave = (timerId: string) => {
-    const clonedTimers = ramda.clone(timers);
-    const foundTimer = clonedTimers.find((timer) => timer.id === timerId);
-    if (foundTimer) {
-      foundTimer.newTimer = false;
-      setTimers(clonedTimers);
-    }
-  };
-
-  const handleDelete = (timer: NewWorkoutTimer) => {
-    const clonedTimers = ramda.clone(timers);
-    const foundIndex = clonedTimers.indexOf(timer);
-    if (foundIndex) {
-      clonedTimers.splice(foundIndex, 1);
-      setTimers(clonedTimers);
-    }
-  };
-
+export default function InputSettings({
+  timers,
+  saveHandler,
+  changeHandler,
+  deleteHandler,
+  addTimerHandler,
+}: InputSettingsProps): JSX.Element {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -125,14 +70,14 @@ export default function InputSettings(): JSX.Element {
                   key={index}
                   timer={timer}
                   changeHandler={changeHandler}
-                  saveHandler={handleSave}
-                  deleteHandler={handleDelete}
+                  saveHandler={saveHandler}
+                  deleteHandler={deleteHandler}
                 />
               ) : (
                 <TimerListItemCard
                   key={index}
                   timer={timer}
-                  deleteHandler={handleDelete}
+                  deleteHandler={deleteHandler}
                 />
               );
             })}
@@ -142,7 +87,7 @@ export default function InputSettings(): JSX.Element {
             </ListItemIcon>
             <ListItemText
               primary={
-                <Link style={{ cursor: 'pointer' }} onClick={addTimer}>
+                <Link style={{ cursor: 'pointer' }} onClick={addTimerHandler}>
                   {'Click to add'}
                 </Link>
               }
@@ -152,4 +97,16 @@ export default function InputSettings(): JSX.Element {
       </Grid>
     </Grid>
   );
+}
+
+interface InputSettingsProps {
+  timers: NewWorkoutTimer[];
+  addTimerHandler: () => void;
+  changeHandler: (
+    timerId: string,
+    type: 'seconds' | 'stepper' | 'timer',
+    value: string
+  ) => void;
+  saveHandler: (timerId: string) => void;
+  deleteHandler: (timer: NewWorkoutTimer) => void;
 }

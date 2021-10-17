@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   Dialog,
@@ -8,11 +8,13 @@ import {
   DialogContent,
 } from '@material-ui/core';
 import TimerIcon from '@material-ui/icons/Timer';
-import { WorkoutTimer } from 'workout-app-common-core';
-import InputSettings from './input-settings/InputSettings';
+import { validateForOnlyNumbers, WorkoutTimer } from 'workout-app-common-core';
+import InputSettings, { NewWorkoutTimer } from './input-settings/InputSettings';
 import CustomStepper from './components/stepper/CustomStepper';
 import CountdownTimer from './components/countdown-timer/CountdownTimer';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid';
+import * as ramda from 'ramda';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,7 +30,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
+export default function TimerDialog(props: TimerDialogProps): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState<number | null>(null);
@@ -49,7 +51,71 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
     setOpen(false);
   };
 
-  timers.sort((a, b) => a.order - b.order);
+  const [localTimers, setLocalTimers] = useState<NewWorkoutTimer[]>([]);
+
+  const addTimer = () => {
+    const newTimers = [
+      ...localTimers,
+      {
+        newTimer: true,
+        id: uuidv4(),
+        order: localTimers.length + 1,
+        stepperTitle: '',
+        timerMessage: '',
+        seconds: 0,
+      },
+    ];
+    setLocalTimers(newTimers);
+  };
+
+  const changeHandler = (
+    timerId: string,
+    type: 'seconds' | 'stepper' | 'timer',
+    value: string
+  ) => {
+    const clonedTimers = ramda.clone(localTimers);
+    const foundTimer = clonedTimers.find((timer) => timer.id === timerId);
+
+    if (foundTimer) {
+      switch (type) {
+        case 'seconds':
+          if (validateForOnlyNumbers(value)) {
+            foundTimer.seconds = Number(value);
+          }
+          break;
+        case 'stepper':
+          foundTimer.stepperTitle = value;
+          break;
+        case 'timer':
+          foundTimer.timerMessage = value;
+          break;
+      }
+      setLocalTimers(clonedTimers);
+    }
+  };
+
+  const handleSave = (timerId: string) => {
+    const clonedTimers = ramda.clone(localTimers);
+    const foundTimer = clonedTimers.find((timer) => timer.id === timerId);
+    if (foundTimer) {
+      foundTimer.newTimer = false;
+      setLocalTimers(clonedTimers);
+      foundTimer.order === 1
+        ? setActiveStep(1)
+        : setActiveStep(foundTimer.order - 1);
+    }
+  };
+
+  const handleDelete = (timer: NewWorkoutTimer) => {
+    const foundIndex = localTimers.indexOf(timer);
+    if (foundIndex !== -1) {
+      localTimers.splice(foundIndex, 1);
+      const clonedTimers = ramda.clone(localTimers);
+      setLocalTimers(clonedTimers);
+    }
+  };
+
+  localTimers.sort((a, b) => a.order - b.order);
 
   return (
     <>
@@ -66,21 +132,26 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
             spacing={2}
           >
             <Grid item xs={5}>
-              <InputSettings />
+              <InputSettings
+                timers={localTimers}
+                changeHandler={changeHandler}
+                deleteHandler={handleDelete}
+                addTimerHandler={addTimer}
+                saveHandler={handleSave}
+              />
             </Grid>
-            {/*<Divider orientation={'vertical'} flexItem />*/}
             <Grid item xs={7} container spacing={4}>
               <Grid item xs={12}>
                 <Typography>{'Preview Input'}</Typography>
               </Grid>
               <Grid item xs={12}>
                 {activeStep && (
-                  <CustomStepper activeStep={activeStep} timers={timers} />
+                  <CustomStepper activeStep={activeStep} timers={localTimers} />
                 )}
               </Grid>
               <Grid item xs={12}>
                 <CountdownTimer
-                  timers={timers}
+                  timers={localTimers}
                   nextStepHandler={handleNextStep}
                   closeHandler={handleClose}
                   resetStepperHandler={handleResetStepper}
