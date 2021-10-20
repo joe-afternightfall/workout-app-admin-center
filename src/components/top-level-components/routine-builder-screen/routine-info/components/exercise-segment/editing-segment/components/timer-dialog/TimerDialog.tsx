@@ -5,7 +5,6 @@ import {
   Typography,
   DialogContent,
   DialogActions,
-  Button,
 } from '@material-ui/core';
 import * as ramda from 'ramda';
 import {
