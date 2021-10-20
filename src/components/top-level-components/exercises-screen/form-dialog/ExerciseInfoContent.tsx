@@ -1,36 +1,20 @@
 import React from 'react';
-import {
-  Card,
-  Grid,
-  Divider,
-  TextField,
-  CardContent,
-  CardActions,
-} from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { ParameterType, parameterTypes } from 'workout-app-common-core';
+import { Grid, TextField } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
-import MuscleSelector from './info-components/MuscleSelector';
-import OptionalParams from './info-components/OptionalParams';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import AlternateRadioGroup from './info-components/AlternateRadioGroup';
-import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 import {
-  selectAlternateSidesOption,
+  updateExerciseName,
   selectExerciseMuscleId,
   selectExerciseParamType,
+  selectAlternateSidesOption,
   selectOptionalExerciseParam,
-  updateExerciseName,
 } from '../../../../creators/exercise-form/exercise-form';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-  })
-);
+import MuscleSelector from './info-components/MuscleSelector';
+import OptionalParams from './info-components/OptionalParams';
+import { ParameterType, parameterTypes } from 'workout-app-common-core';
+import AlternateRadioGroup from './info-components/AlternateRadioGroup';
+import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 
 const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
   const {
@@ -43,68 +27,55 @@ const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
     selectedParamType,
   } = props;
 
-  const classes = useStyles();
-
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Grid container spacing={2}>
-          <Grid item xs={12} container spacing={2}>
-            <Grid item xs={8}>
-              <TextField
-                fullWidth
-                value={exerciseName}
-                id={'exercise-name'}
-                variant={'outlined'}
-                label={'Exercise Name'}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  props.nameChangeHandler(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <MuscleSelector
-                selectedMuscleId={selectedMuscleId}
-                changeHandler={props.selectMuscleIdHandler}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12}>
-            <ParamTypeButtonGroup
-              changeHandler={props.selectParamTypeHandler}
-              selectedParamType={selectedParamType}
-            />
-          </Grid>
-
-          <Grid item xs={12} container style={{ marginTop: 24 }}>
-            <Grid item xs={6}>
-              <AlternateRadioGroup
-                selectedOption={shouldAlternate}
-                changeHandler={props.selectAlternateSidesHandler}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <OptionalParams
-                params={{
-                  gripWidthId: gripWidthId,
-                  equipmentId: equipmentId,
-                  gripTypeId: gripTypeId,
-                }}
-                selectOptionalParam={props.selectOptionalParamHandler}
-              />
-            </Grid>
-          </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12} container spacing={2}>
+        <Grid item xs={8}>
+          <TextField
+            fullWidth
+            value={exerciseName}
+            id={'exercise-name'}
+            variant={'outlined'}
+            label={'Exercise Name'}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              props.nameChangeHandler(e.target.value);
+            }}
+          />
         </Grid>
-      </CardContent>
-      <CardActions>
-        <Grid container>
-          <Grid item xs={12}>
-            <Divider variant={'middle'} />
-          </Grid>
+        <Grid item xs={4}>
+          <MuscleSelector
+            selectedMuscleId={selectedMuscleId}
+            changeHandler={props.selectMuscleIdHandler}
+          />
         </Grid>
-      </CardActions>
-    </Card>
+      </Grid>
+
+      <Grid item xs={12}>
+        <ParamTypeButtonGroup
+          changeHandler={props.selectParamTypeHandler}
+          selectedParamType={selectedParamType}
+        />
+      </Grid>
+
+      <Grid item xs={12} container style={{ marginTop: 24 }}>
+        <Grid item xs={6}>
+          <AlternateRadioGroup
+            selectedOption={shouldAlternate}
+            changeHandler={props.selectAlternateSidesHandler}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <OptionalParams
+            params={{
+              gripWidthId: gripWidthId,
+              equipmentId: equipmentId,
+              gripTypeId: gripTypeId,
+            }}
+            selectOptionalParam={props.selectOptionalParamHandler}
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

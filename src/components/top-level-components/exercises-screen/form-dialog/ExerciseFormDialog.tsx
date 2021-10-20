@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     deleteButton: {
       color: theme.palette.error.main,
     },
+
     content: {
       minHeight: '20vh',
     },

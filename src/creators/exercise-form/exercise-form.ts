@@ -36,18 +36,6 @@ export const closeExerciseFormDialog = (): CloseExerciseFormDialogAction => {
   };
 };
 
-export interface SetNewOrEditingExerciseFormAction {
-  type: ActionTypes.SET_NEW_OR_EDITING_EXERCISE_FORM;
-  isNewForm: boolean;
-}
-
-export const setNewOrEditingExerciseForm = (isNewForm: boolean) => {
-  return {
-    type: ActionTypes.SET_NEW_OR_EDITING_EXERCISE_FORM,
-    isNewForm: isNewForm,
-  };
-};
-
 export interface SelectExerciseParamTypeAction {
   type: ActionTypes.SELECT_EXERCISE_PARAM_TYPE;
   paramType: ParameterType;

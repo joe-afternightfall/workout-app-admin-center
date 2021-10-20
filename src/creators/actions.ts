@@ -48,7 +48,6 @@ import {
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
   SelectOptionalExerciseParamAction,
-  SetNewOrEditingExerciseFormAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
 
@@ -96,13 +95,13 @@ export enum ActionTypes {
   OPEN_NEW_EXERCISE_FORM_DIALOG = 'OPEN_NEW_EXERCISE_FORM_DIALOG',
   OPEN_EDIT_EXERCISE_FORM_DIALOG = 'OPEN_EDIT_EXERCISE_FORM_DIALOG',
   CLOSE_EXERCISE_FORM_DIALOG = 'CLOSE_EXERCISE_FORM_DIALOG',
-  SET_NEW_OR_EDITING_EXERCISE_FORM = 'SET_NEW_OR_EDITING_EXERCISE_FORM',
   SELECT_EXERCISE_PARAM_TYPE = 'SELECT_EXERCISE_PARAM_TYPE',
   SELECT_ALTERNATE_SIDES_OPTION = 'SELECT_ALTERNATE_SIDES_OPTION',
   SELECT_EXERCISE_MUSCLE_ID = 'SELECT_EXERCISE_MUSCLE_ID',
   SELECT_OPTIONAL_EXERCISE_PARAM = 'SELECT_OPTIONAL_EXERCISE_PARAM',
   UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
+
   CLEAR_EXERCISE_FORM = 'CLEAR_EXERCISE_FORM',
 
   // Side drawer actions
@@ -149,7 +148,6 @@ export type ApplicationActions =
   | LoadRoutineTemplatesAction
   | ViewSelectedRoutineAction
   | ClearRoutineBuilderAction
-  | SetNewOrEditingExerciseFormAction
   | SelectExerciseParamTypeAction
   | SelectAlternateSidesOptionAction
   | SelectExerciseMuscleIdAction
