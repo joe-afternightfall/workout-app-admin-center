@@ -40,6 +40,7 @@ import {
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
   ClearExerciseInfoAction,
+  CloseExerciseFormDialogAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   SaveExerciseInfoAction,
@@ -157,4 +158,5 @@ export type ApplicationActions =
   | SaveExerciseInfoAction
   | ClearExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
-  | OpenNewExerciseFormDialogAction;
+  | OpenNewExerciseFormDialogAction
+  | CloseExerciseFormDialogAction;

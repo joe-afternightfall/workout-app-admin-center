@@ -41,6 +41,43 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.SELECT_ALTERNATE_SIDES_OPTION: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.alternateSides = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.SELECT_EXERCISE_MUSCLE_ID: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.muscleGroupIds = [action.id];
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.SELECT_OPTIONAL_EXERCISE_PARAM: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        switch (action.param) {
+          case 'gripWidth':
+            clonedForm.gripWidthId = action.optionId;
+            break;
+          case 'gripType':
+            clonedForm.gripTypeId = action.optionId;
+            break;
+          case 'equipment':
+            clonedForm.equipmentId = action.optionId;
+            break;
+          default:
+            break;
+        }
+
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.UPDATE_EXERCISE_NAME: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.name = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
       default:
         newState = state;
     }

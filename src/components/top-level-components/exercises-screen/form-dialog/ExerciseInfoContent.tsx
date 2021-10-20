@@ -137,6 +137,9 @@ const mapStateToProps = (state: State): ExerciseInfoContentProps => {
     newExerciseForm: state.exerciseFormState.newExerciseForm,
     shouldAlternate: exerciseForm && exerciseForm.alternateSides,
     exerciseName: exerciseForm && exerciseForm.name,
+    gripWidthId: exerciseForm.gripWidthId,
+    gripTypeId: exerciseForm.gripTypeId,
+    equipmentId: exerciseForm.equipmentId,
     selectedMuscleId:
       exerciseForm &&
       exerciseForm.muscleGroupIds &&
