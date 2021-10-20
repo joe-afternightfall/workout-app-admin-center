@@ -41,9 +41,7 @@ export interface SetNewOrEditingExerciseFormAction {
   isNewForm: boolean;
 }
 
-export const setNewOrEditingExerciseForm = (
-  isNewForm: boolean
-): SetNewOrEditingExerciseFormAction => {
+export const setNewOrEditingExerciseForm = (isNewForm: boolean) => {
   return {
     type: ActionTypes.SET_NEW_OR_EDITING_EXERCISE_FORM,
     isNewForm: isNewForm,

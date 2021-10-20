@@ -36,7 +36,7 @@ export const saveExercise =
 
     if (newExerciseForm) {
       const newExercise = new ExerciseDAO(
-        uuidv4(),
+        exerciseForm.id,
         exerciseForm.name,
         exerciseForm.description,
         exerciseForm.equipmentId,

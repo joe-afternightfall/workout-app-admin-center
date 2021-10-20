@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { ParameterType } from 'workout-app-common-core';
+import { ParameterType, parameterTypes } from 'workout-app-common-core';
 import { State } from '../../../../configs/redux/store';
 import MuscleSelector from './info-components/MuscleSelector';
 import OptionalParams from './info-components/OptionalParams';
@@ -129,6 +129,10 @@ interface ExerciseInfoContentProps {
 
 const mapStateToProps = (state: State): ExerciseInfoContentProps => {
   const exerciseForm = state.exerciseFormState.exerciseForm;
+  // todo: add util method to common core
+  const foundParamType = parameterTypes.find(
+    (type) => type.id === exerciseForm.parameterTypeId
+  );
   return {
     newExerciseForm: state.exerciseFormState.newExerciseForm,
     shouldAlternate: exerciseForm && exerciseForm.alternateSides,
@@ -137,7 +141,7 @@ const mapStateToProps = (state: State): ExerciseInfoContentProps => {
       exerciseForm &&
       exerciseForm.muscleGroupIds &&
       exerciseForm.muscleGroupIds[0],
-    selectedParamType: exerciseForm && exerciseForm.parameterTypeId,
+    selectedParamType: foundParamType && foundParamType,
   } as unknown as ExerciseInfoContentProps;
 };
 
