@@ -18,7 +18,12 @@ export default function ParamTypeButtonGroup({
         <ToggleButtonGroup
           exclusive
           value={selectedParamType}
-          onChange={changeHandler}
+          onChange={(
+            event: React.MouseEvent<HTMLElement>,
+            paramType: ParameterType | null
+          ) => {
+            paramType && changeHandler(paramType);
+          }}
         >
           {parameterTypes.map((type: ParameterType, index: number) => (
             <ToggleButton value={type} key={index}>
@@ -39,9 +44,6 @@ export default function ParamTypeButtonGroup({
 }
 
 export interface ParamTypeButtonGroupProps {
-  changeHandler: (
-    event: React.MouseEvent<HTMLElement>,
-    paramType: ParameterType | null
-  ) => void;
+  changeHandler: (paramType: ParameterType) => void;
   selectedParamType: ParameterType | null;
 }
