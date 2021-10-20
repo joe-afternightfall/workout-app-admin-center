@@ -31,6 +31,7 @@ export default {
       case ActionTypes.OPEN_EDIT_EXERCISE_FORM_DIALOG:
         newState.openExerciseFormDialog = true;
         newState.newExerciseForm = false;
+        newState.exerciseForm = action.selectedExercise;
         break;
       case ActionTypes.CLOSE_EXERCISE_FORM_DIALOG:
         newState.openExerciseFormDialog = false;
