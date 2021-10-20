@@ -4,6 +4,8 @@ import {
   IconButton,
   Typography,
   DialogContent,
+  DialogActions,
+  Button,
 } from '@material-ui/core';
 import * as ramda from 'ramda';
 import {
@@ -17,6 +19,7 @@ import TimerIcon from '@material-ui/icons/Timer';
 import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import InputSettings, { NewWorkoutTimer } from './input-settings/InputSettings';
+import SaveButton from './SaveButton';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,9 +28,6 @@ const useStyles = makeStyles(() =>
       height: '100%',
       textAlign: 'center',
       paddingBottom: 16,
-    },
-    dialogTitle: {
-      padding: '16px 0',
     },
     dialogContent: {
       marginTop: 24,
@@ -45,7 +45,10 @@ function mapPropsToLocalTimer(timers: WorkoutTimer[]): NewWorkoutTimer[] {
   });
 }
 
-export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
+export default function TimerDialog({
+  timers,
+  workoutExerciseId,
+}: TimerDialogProps): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState<number | null>(null);
@@ -188,6 +191,12 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
             </Grid>
           </Grid>
         </DialogContent>
+        <DialogActions>
+          <SaveButton
+            closeHandler={handleClose}
+            workoutExerciseId={workoutExerciseId}
+          />
+        </DialogActions>
       </Dialog>
     </>
   );
@@ -195,4 +204,5 @@ export default function TimerDialog({ timers }: TimerDialogProps): JSX.Element {
 
 export interface TimerDialogProps {
   timers: WorkoutTimer[];
+  workoutExerciseId: string;
 }
