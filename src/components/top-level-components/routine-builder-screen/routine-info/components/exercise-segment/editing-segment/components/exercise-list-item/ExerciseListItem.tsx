@@ -92,7 +92,10 @@ const ExerciseListItem = ({
     if (blink) {
       straightSetComponent = buildBlinker('Select Exercise');
     } else {
-      const workoutExercise = segment.exercises[0];
+      const workoutExercise: WorkoutExercise | undefined =
+        segment.exercises.find(
+          (workoutExercise) => workoutExercise.order === 1
+        );
       if (workoutExercise && workoutExercise.exerciseId) {
         const foundExercise = findExercise(
           exercises,
@@ -103,7 +106,7 @@ const ExerciseListItem = ({
           foundExercise && isDuration(foundExercise.parameterTypeId);
         straightSetComponent = buildStandard(
           isDurationType,
-          segment.exercises[0].id,
+          workoutExercise.id,
           getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
@@ -132,12 +135,11 @@ const ExerciseListItem = ({
     if (firstComponentBlink) {
       firstComponent = buildBlinker('Select Exercise 1');
     } else {
-      const workoutExercise = segment.exercises[0];
-      if (
-        workoutExercise &&
-        workoutExercise.exerciseId &&
-        workoutExercise.order === 1
-      ) {
+      const workoutExercise: WorkoutExercise | undefined =
+        segment.exercises.find(
+          (workoutExercise) => workoutExercise.order === 1
+        );
+      if (workoutExercise && workoutExercise.exerciseId) {
         const foundExercise = findExercise(
           exercises,
           workoutExercise.exerciseId
@@ -148,7 +150,7 @@ const ExerciseListItem = ({
 
         firstComponent = buildStandard(
           isDurationType,
-          segment.exercises[0].id,
+          workoutExercise.id,
           getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
@@ -161,19 +163,12 @@ const ExerciseListItem = ({
     if (secondComponentBlink) {
       secondComponent = buildBlinker('Select Exercise 2');
     } else {
-      let workoutExercise: WorkoutExercise | null = null;
+      const workoutExercise: WorkoutExercise | undefined =
+        segment.exercises.find(
+          (workoutExercise) => workoutExercise.order === 2
+        );
 
-      if (segment.exercises[1]) {
-        workoutExercise = segment.exercises[1];
-      } else if (segment.exercises[0]) {
-        workoutExercise = segment.exercises[0];
-      }
-
-      if (
-        workoutExercise &&
-        workoutExercise.exerciseId &&
-        workoutExercise.order === 2
-      ) {
+      if (workoutExercise && workoutExercise.exerciseId) {
         const foundExercise = findExercise(
           exercises,
           workoutExercise.exerciseId
@@ -184,7 +179,7 @@ const ExerciseListItem = ({
 
         secondComponent = buildStandard(
           isDurationType,
-          segment.exercises[1].id,
+          workoutExercise.id,
           getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
