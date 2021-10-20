@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Card,
   Grid,
-  Button,
   Divider,
   TextField,
   CardContent,
@@ -10,7 +9,6 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import SaveIcon from '@material-ui/icons/Save';
 import { ParameterType } from 'workout-app-common-core';
 import { State } from '../../../../configs/redux/store';
 import MuscleSelector from './info-components/MuscleSelector';
@@ -34,9 +32,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ExerciseInfoContent = (
-  props: ExerciseInfoContentProps & PassedInProps
-): JSX.Element => {
+const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
   const {
     gripTypeId,
     equipmentId,
@@ -112,12 +108,6 @@ const ExerciseInfoContent = (
   );
 };
 
-interface PassedInProps {
-  // isNewExercise: boolean;
-  // successCallback: () => void;
-  // selectedExercise: ExerciseVO | undefined;
-  blahTwo?: boolean;
-}
 interface ExerciseInfoContentProps {
   newExerciseForm: boolean;
   shouldAlternate: boolean;
