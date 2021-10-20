@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import React from 'react';
-import { isDuration, NightfallBlinker } from 'workout-app-common-core';
 import {
-  IconButton,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
+  ListItemSecondaryAction,
 } from '@material-ui/core';
+import TimerDialog from '../timer-dialog/TimerDialog';
+import { NightfallBlinker } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TimerIcon from '@material-ui/icons/Timer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,12 +23,14 @@ const useStyles = makeStyles(() =>
 
 export default function BlinkingListItem({
   title,
-  itemType,
   isDuration,
+  itemType,
   clickHandler,
   shouldBlink = false,
+  workoutExerciseId,
 }: BlinkingListItemProps): JSX.Element {
   const classes = useStyles();
+
   switch (itemType) {
     case 'blinker':
       return (
@@ -42,16 +43,6 @@ export default function BlinkingListItem({
               })}
             >
               <ListItemText primary={title} />
-              {/*todo: come back and implement after changing segment implementation*/}
-              {/*<ListItemSecondaryAction>*/}
-              {/*  <IconButton*/}
-              {/*    onClick={() => {*/}
-              {/*      deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);*/}
-              {/*    }}*/}
-              {/*  >*/}
-              {/*    <CloseIcon />*/}
-              {/*  </IconButton>*/}
-              {/*</ListItemSecondaryAction>*/}
             </ListItem>
           }
         />
@@ -64,17 +55,11 @@ export default function BlinkingListItem({
       );
     case 'standard':
       return (
-        <ListItem
-          classes={{
-            container: classes.listItemContainer,
-          }}
-        >
+        <ListItem>
           <ListItemText primary={title} />
-          {isDuration && (
+          {isDuration && workoutExerciseId && (
             <ListItemSecondaryAction>
-              <IconButton edge={'end'}>
-                <TimerIcon />
-              </IconButton>
+              <TimerDialog timers={[]} workoutExerciseId={workoutExerciseId} />
             </ListItemSecondaryAction>
           )}
         </ListItem>
@@ -87,5 +72,6 @@ export interface BlinkingListItemProps {
   shouldBlink?: boolean;
   clickHandler?: () => void;
   isDuration?: boolean;
+  workoutExerciseId?: string;
   itemType: 'button' | 'blinker' | 'standard';
 }
