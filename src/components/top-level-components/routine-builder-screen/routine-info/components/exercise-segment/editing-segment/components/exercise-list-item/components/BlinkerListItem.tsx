@@ -7,6 +7,6 @@ export default function BlinkerListItem({
   return <BaseListItem title={title} itemType={'blinker'} shouldBlink={true} />;
 }
 
-export interface BlinkerListItemProps {
+interface BlinkerListItemProps {
   title: string;
 }

@@ -25,7 +25,7 @@ export default function BuiltListItem({
   );
 }
 
-export interface BuiltListItemProps {
+interface BuiltListItemProps {
   title: string;
   rightComponent: JSX.Element;
 }

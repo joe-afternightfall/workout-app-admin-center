@@ -1,13 +1,18 @@
 import React from 'react';
+import { Dispatch } from 'redux';
 import {
+  Segment,
   ExerciseVO,
   isDuration,
   getExerciseName,
   WorkoutExercise,
 } from 'workout-app-common-core';
+import { connect } from 'react-redux';
 import ButtonListItem from './components/ButtonListItem';
 import BlinkerListItem from './components/BlinkerListItem';
 import StandardListItem from './components/StandardListItem';
+import { State } from '../../../../../../../../../configs/redux/store';
+import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
 
 const findExercise = (
   exercises: ExerciseVO[],
@@ -16,20 +21,20 @@ const findExercise = (
   return exercises.find((exercise) => exercise.id === id);
 };
 
-export default function ComponentBuilder({
+const ComponentBuilder = ({
   allExercises,
   shouldBlink,
   exerciseOrder,
-  workoutExercises,
+  segment,
   selectExerciseHandler,
-}: ComponentBuilderProps): JSX.Element {
+}: ComponentBuilderProps & PassedInProps): JSX.Element => {
   let builtComponent;
 
   if (shouldBlink) {
     builtComponent = <BlinkerListItem title={'Select Exercise'} />;
   } else {
     const foundWorkoutExercise: WorkoutExercise | undefined =
-      workoutExercises.find(
+      segment.exercises.find(
         (workoutExercise) => workoutExercise.order === exerciseOrder
       );
 
@@ -62,12 +67,33 @@ export default function ComponentBuilder({
   }
 
   return builtComponent;
-}
+};
 
-export interface ComponentBuilderProps {
-  allExercises: ExerciseVO[];
+interface PassedInProps {
   shouldBlink: boolean;
   exerciseOrder: number;
-  workoutExercises: WorkoutExercise[];
+  segment: Segment;
+}
+
+interface ComponentBuilderProps {
+  allExercises: ExerciseVO[];
   selectExerciseHandler: (order: number) => void;
 }
+
+const mapStateToProps = (state: State): ComponentBuilderProps => {
+  return {
+    allExercises: state.applicationState.workoutConfigurations.exercises,
+  } as unknown as ComponentBuilderProps;
+};
+
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: PassedInProps
+): ComponentBuilderProps =>
+  ({
+    selectExerciseHandler: (order: number) => {
+      dispatch(selectedExerciseSlotToFill(ownProps.segment.id, order));
+    },
+  } as unknown as ComponentBuilderProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentBuilder);

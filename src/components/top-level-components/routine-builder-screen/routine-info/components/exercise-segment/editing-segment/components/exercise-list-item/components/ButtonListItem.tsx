@@ -14,7 +14,7 @@ export default function ButtonListItem({
   );
 }
 
-export interface ButtonListItemProps {
+interface ButtonListItemProps {
   title: string;
   clickHandler: () => void;
 }

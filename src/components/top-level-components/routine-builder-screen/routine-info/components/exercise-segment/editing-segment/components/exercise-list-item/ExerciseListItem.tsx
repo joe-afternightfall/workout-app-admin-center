@@ -1,23 +1,14 @@
 import React from 'react';
-import {
-  Segment,
-  isSuperset,
-  ExerciseVO,
-  isStraightSet,
-} from 'workout-app-common-core';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import ComponentBuilder from './ComponentBuilder';
 import BuiltListItem from './components/BuiltListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
-import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
+import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
 
 const ExerciseListItem = ({
-  exercises,
   segment,
   selectedExerciseSlotForSegment,
-  selectExerciseHandler,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
   let display = <div />;
 
@@ -28,11 +19,9 @@ const ExerciseListItem = ({
 
     const straightSetComponent = (
       <ComponentBuilder
-        allExercises={exercises}
-        shouldBlink={blink}
         exerciseOrder={1}
-        workoutExercises={segment.exercises}
-        selectExerciseHandler={selectExerciseHandler}
+        segment={segment}
+        shouldBlink={blink}
       />
     );
 
@@ -49,21 +38,17 @@ const ExerciseListItem = ({
 
     const firstComponent = (
       <ComponentBuilder
-        allExercises={exercises}
-        shouldBlink={firstComponentBlink}
         exerciseOrder={1}
-        workoutExercises={segment.exercises}
-        selectExerciseHandler={selectExerciseHandler}
+        segment={segment}
+        shouldBlink={firstComponentBlink}
       />
     );
 
     const secondComponent = (
       <ComponentBuilder
-        allExercises={exercises}
-        shouldBlink={secondComponentBlink}
         exerciseOrder={2}
-        workoutExercises={segment.exercises}
-        selectExerciseHandler={selectExerciseHandler}
+        segment={segment}
+        shouldBlink={secondComponentBlink}
       />
     );
 
@@ -90,9 +75,7 @@ interface PassedInProps {
   segment: Segment;
 }
 
-export interface ExerciseListItemProps {
-  exercises: ExerciseVO[];
-  selectExerciseHandler: (order: number) => void;
+interface ExerciseListItemProps {
   selectedExerciseSlotForSegment: {
     order: number;
     segmentId: string;
@@ -101,20 +84,9 @@ export interface ExerciseListItemProps {
 
 const mapStateToProps = (state: State): ExerciseListItemProps => {
   return {
-    exercises: state.applicationState.workoutConfigurations.exercises,
     selectedExerciseSlotForSegment:
       state.routineBuilderState.selectedExerciseSlotForSegment,
   } as unknown as ExerciseListItemProps;
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  ownProps: PassedInProps
-): ExerciseListItemProps =>
-  ({
-    selectExerciseHandler: (order: number) => {
-      dispatch(selectedExerciseSlotToFill(ownProps.segment.id, order));
-    },
-  } as unknown as ExerciseListItemProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExerciseListItem);
+export default connect(mapStateToProps)(ExerciseListItem);

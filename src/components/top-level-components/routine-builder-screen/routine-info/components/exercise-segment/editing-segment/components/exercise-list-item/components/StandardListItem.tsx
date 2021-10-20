@@ -16,7 +16,7 @@ export default function StandardListItem({
   );
 }
 
-export interface StandardListItemProps {
+interface StandardListItemProps {
   isDurationType: boolean | undefined;
   id: string;
   title: string;
