@@ -1,8 +1,13 @@
-import React from 'react';
-import { NightfallBlinker } from 'workout-app-common-core';
-import { ListItem, ListItemText } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import React from 'react';
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from '@material-ui/core';
+import TimerDialog from '../../timer-dialog/TimerDialog';
+import { NightfallBlinker } from 'workout-app-common-core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -10,20 +15,25 @@ const useStyles = makeStyles(() =>
       background: 'darkgrey',
       opacity: 0.7,
     },
+    listItemContainer: {
+      width: '100%',
+    },
   })
 );
 
-export default function BlinkingListItem({
+export default function BaseListItem({
   title,
+  isDuration,
   itemType,
   clickHandler,
   shouldBlink = false,
-}: BlinkingListItemProps): JSX.Element {
+  workoutExerciseId,
+}: BaseListItemProps): JSX.Element {
   const classes = useStyles();
-  let display = <div />;
+
   switch (itemType) {
     case 'blinker':
-      display = (
+      return (
         <NightfallBlinker
           shouldBlink={shouldBlink}
           component={
@@ -33,42 +43,35 @@ export default function BlinkingListItem({
               })}
             >
               <ListItemText primary={title} />
-              {/*todo: come back and implement after changing segment implementation*/}
-              {/*<ListItemSecondaryAction>*/}
-              {/*  <IconButton*/}
-              {/*    onClick={() => {*/}
-              {/*      deleteExerciseFromSegmentHandler(workoutExercise.exerciseId);*/}
-              {/*    }}*/}
-              {/*  >*/}
-              {/*    <CloseIcon />*/}
-              {/*  </IconButton>*/}
-              {/*</ListItemSecondaryAction>*/}
             </ListItem>
           }
         />
       );
-      break;
     case 'button':
-      display = (
+      return (
         <ListItem button onClick={clickHandler}>
           <ListItemText primary={title} />
         </ListItem>
       );
-      break;
     case 'standard':
-      display = (
+      return (
         <ListItem>
           <ListItemText primary={title} />
+          {isDuration && workoutExerciseId && (
+            <ListItemSecondaryAction>
+              <TimerDialog timers={[]} workoutExerciseId={workoutExerciseId} />
+            </ListItemSecondaryAction>
+          )}
         </ListItem>
       );
-      break;
   }
-  return display;
 }
 
-export interface BlinkingListItemProps {
+export interface BaseListItemProps {
   title: string;
   shouldBlink?: boolean;
   clickHandler?: () => void;
+  isDuration?: boolean;
+  workoutExerciseId?: string;
   itemType: 'button' | 'blinker' | 'standard';
 }

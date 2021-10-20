@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import SignInCard from './SignInCard';
 import { Grid } from '@material-ui/core';
 import { routerActions } from 'react-router-redux';
+import { validatedUser } from '../../../creators/user-info';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { DASHBOARD_SCREEN_PATH } from '../../../configs/constants/app';
-import { validatedUser } from '../../../creators/user-info';
 
 const useStyles = makeStyles(() =>
   createStyles({
