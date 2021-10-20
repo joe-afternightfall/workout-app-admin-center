@@ -1,5 +1,40 @@
-import { ParameterType } from 'workout-app-common-core';
+import { ExerciseVO, ParameterType } from 'workout-app-common-core';
 import { ActionTypes } from '../actions';
+
+export interface OpenNewExerciseFormDialogAction {
+  type: ActionTypes.OPEN_NEW_EXERCISE_FORM_DIALOG;
+}
+
+export const openNewExerciseFormDialog =
+  (): OpenNewExerciseFormDialogAction => {
+    return {
+      type: ActionTypes.OPEN_NEW_EXERCISE_FORM_DIALOG,
+    };
+  };
+
+export interface OpenEditingExerciseFormDialogAction {
+  type: ActionTypes.OPEN_EDIT_EXERCISE_FORM_DIALOG;
+  selectedExercise: ExerciseVO;
+}
+
+export const openEditingExerciseFormDialog = (
+  selectedExercise: ExerciseVO
+): OpenEditingExerciseFormDialogAction => {
+  return {
+    type: ActionTypes.OPEN_EDIT_EXERCISE_FORM_DIALOG,
+    selectedExercise: selectedExercise,
+  };
+};
+
+export interface CloseExerciseFormDialogAction {
+  type: ActionTypes.CLOSE_EXERCISE_FORM_DIALOG;
+}
+
+export const closeExerciseFormDialog = (): CloseExerciseFormDialogAction => {
+  return {
+    type: ActionTypes.CLOSE_EXERCISE_FORM_DIALOG,
+  };
+};
 
 export interface SetNewOrEditingExerciseFormAction {
   type: ActionTypes.SET_NEW_OR_EDITING_EXERCISE_FORM;
@@ -31,11 +66,11 @@ export const selectExerciseParamType = (
 
 export interface SelectAlternateSidesOptionAction {
   type: ActionTypes.SELECT_ALTERNATE_SIDES_OPTION;
-  value: string;
+  value: boolean;
 }
 
 export const selectAlternateSidesOption = (
-  value: string
+  value: boolean
 ): SelectAlternateSidesOptionAction => {
   return {
     type: ActionTypes.SELECT_ALTERNATE_SIDES_OPTION,

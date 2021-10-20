@@ -52,7 +52,7 @@ const ExerciseFormDialog = (props: ExerciseFormDialogProps) => {
                 props.saveExerciseClickHandler(closeHandler);
               }}
             >
-              {'Save'}
+              {isNewExercise ? 'Save' : 'Update'}
             </Button>
           </Grid>
         }

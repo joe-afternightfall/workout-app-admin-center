@@ -40,6 +40,8 @@ import {
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
   ClearExerciseInfoAction,
+  OpenEditingExerciseFormDialogAction,
+  OpenNewExerciseFormDialogAction,
   SaveExerciseInfoAction,
   SelectAlternateSidesOptionAction,
   SelectExerciseMuscleIdAction,
@@ -90,6 +92,9 @@ export enum ActionTypes {
   ADD_TIMER_TO_WORKOUT_EXERCISE = 'ADD_TIMER_TO_WORKOUT_EXERCISE',
 
   // Exercise Form Actions
+  OPEN_NEW_EXERCISE_FORM_DIALOG = 'OPEN_NEW_EXERCISE_FORM_DIALOG',
+  OPEN_EDIT_EXERCISE_FORM_DIALOG = 'OPEN_EDIT_EXERCISE_FORM_DIALOG',
+  CLOSE_EXERCISE_FORM_DIALOG = 'CLOSE_EXERCISE_FORM_DIALOG',
   SET_NEW_OR_EDITING_EXERCISE_FORM = 'SET_NEW_OR_EDITING_EXERCISE_FORM',
   SELECT_EXERCISE_PARAM_TYPE = 'SELECT_EXERCISE_PARAM_TYPE',
   SELECT_ALTERNATE_SIDES_OPTION = 'SELECT_ALTERNATE_SIDES_OPTION',
@@ -150,4 +155,6 @@ export type ApplicationActions =
   | SelectOptionalExerciseParamAction
   | UpdateExerciseNameAction
   | SaveExerciseInfoAction
-  | ClearExerciseInfoAction;
+  | ClearExerciseInfoAction
+  | OpenEditingExerciseFormDialogAction
+  | OpenNewExerciseFormDialogAction;
