@@ -38,6 +38,16 @@ import {
   ClearRoutineBuilderAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
+import {
+  ClearExerciseInfoAction,
+  SaveExerciseInfoAction,
+  SelectAlternateSidesOptionAction,
+  SelectExerciseMuscleIdAction,
+  SelectExerciseParamTypeAction,
+  SelectOptionalExerciseParamAction,
+  SetNewOrEditingExerciseFormAction,
+  UpdateExerciseNameAction,
+} from './exercise-form/exercise-form';
 
 export enum ActionTypes {
   // Application Actions
@@ -78,6 +88,16 @@ export enum ActionTypes {
   REORDER_ROUTINE_SEGMENTS = 'REORDER_ROUTINE_SEGMENTS',
   FILTER_EXERCISES_FOR_SEARCH_VALUE = 'FILTER_EXERCISES_FOR_SEARCH_VALUE',
   ADD_TIMER_TO_WORKOUT_EXERCISE = 'ADD_TIMER_TO_WORKOUT_EXERCISE',
+
+  // Exercise Form Actions
+  SET_NEW_OR_EDITING_EXERCISE_FORM = 'SET_NEW_OR_EDITING_EXERCISE_FORM',
+  SELECT_EXERCISE_PARAM_TYPE = 'SELECT_EXERCISE_PARAM_TYPE',
+  SELECT_ALTERNATE_SIDES_OPTION = 'SELECT_ALTERNATE_SIDES_OPTION',
+  SELECT_EXERCISE_MUSCLE_ID = 'SELECT_EXERCISE_MUSCLE_ID',
+  SELECT_OPTIONAL_EXERCISE_PARAM = 'SELECT_OPTIONAL_EXERCISE_PARAM',
+  UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
+  SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
+  CLEAR_EXERCISE_FORM = 'CLEAR_EXERCISE_FORM',
 
   // Side drawer actions
   LOGOUT_USER = 'LOGOUT_USER',
@@ -122,4 +142,12 @@ export type ApplicationActions =
   | FilterExercisesForSearchValueAction
   | LoadRoutineTemplatesAction
   | ViewSelectedRoutineAction
-  | ClearRoutineBuilderAction;
+  | ClearRoutineBuilderAction
+  | SetNewOrEditingExerciseFormAction
+  | SelectExerciseParamTypeAction
+  | SelectAlternateSidesOptionAction
+  | SelectExerciseMuscleIdAction
+  | SelectOptionalExerciseParamAction
+  | UpdateExerciseNameAction
+  | SaveExerciseInfoAction
+  | ClearExerciseInfoAction;
