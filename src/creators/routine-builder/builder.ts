@@ -310,3 +310,17 @@ export const filterExercisesForSearchValue = (
     searchValue: searchValue,
   };
 };
+
+export interface AddTimerToWorkoutExerciseAction {
+  type: ActionTypes.ADD_TIMER_TO_WORKOUT_EXERCISE;
+  workoutExerciseId: string;
+}
+
+export const addTimerToWorkoutExercise = (
+  id: string
+): AddTimerToWorkoutExerciseAction => {
+  return {
+    type: ActionTypes.ADD_TIMER_TO_WORKOUT_EXERCISE,
+    workoutExerciseId: id,
+  };
+};
