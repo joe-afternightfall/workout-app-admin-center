@@ -1,26 +1,78 @@
 import React from 'react';
 import {
   Segment,
+  isDuration,
   isSuperset,
   ExerciseVO,
   isStraightSet,
   getExerciseName,
   WorkoutExercise,
-  isDuration,
 } from 'workout-app-common-core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import BaseListItem from './BaseListItem';
+import LineItemTitle from '../base-components/LineItemTitle';
+import { Grid, ListItem, ListItemText } from '@material-ui/core';
 import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
-import { Grid, ListItem, ListItemText } from '@material-ui/core';
-import LineItemTitle from '../base-components/LineItemTitle';
 
 const findExercise = (
   exercises: ExerciseVO[],
   id: string
 ): ExerciseVO | undefined => {
   return exercises.find((exercise) => exercise.id === id);
+};
+
+const buildBlinker = (title: string): JSX.Element => {
+  return <BaseListItem title={title} itemType={'blinker'} shouldBlink={true} />;
+};
+
+const buildStandard = (
+  isDurationType: boolean | undefined,
+  id: string,
+  title: string
+): JSX.Element => {
+  return (
+    <BaseListItem
+      title={title}
+      workoutExerciseId={id}
+      isDuration={isDurationType}
+      itemType={'standard'}
+    />
+  );
+};
+
+const buildButton = (title: string, clickHandler: () => void): JSX.Element => {
+  return (
+    <BaseListItem
+      itemType={'button'}
+      title={title}
+      clickHandler={clickHandler}
+    />
+  );
+};
+
+const buildListItem = (
+  title: string,
+  rightComponent: JSX.Element
+): JSX.Element => {
+  return (
+    <ListItem>
+      <ListItemText
+        disableTypography
+        primary={
+          <Grid container>
+            <Grid item xs={6} container alignItems={'center'}>
+              <LineItemTitle title={title} />
+            </Grid>
+            <Grid item xs={6} container>
+              {rightComponent}
+            </Grid>
+          </Grid>
+        }
+      />
+    </ListItem>
+  );
 };
 
 const ExerciseListItem = ({
@@ -38,13 +90,7 @@ const ExerciseListItem = ({
       selectedExerciseSlotForSegment.order === 1;
 
     if (blink) {
-      straightSetComponent = (
-        <BaseListItem
-          itemType={'blinker'}
-          shouldBlink={true}
-          title={'Select Exercise'}
-        />
-      );
+      straightSetComponent = buildBlinker('Select Exercise');
     } else {
       const workoutExercise = segment.exercises[0];
       if (workoutExercise && workoutExercise.exerciseId) {
@@ -55,43 +101,23 @@ const ExerciseListItem = ({
 
         const isDurationType =
           foundExercise && isDuration(foundExercise.parameterTypeId);
-        straightSetComponent = (
-          <BaseListItem
-            isDuration={isDurationType}
-            itemType={'standard'}
-            title={getExerciseName(exercises, workoutExercise.exerciseId)}
-          />
+        straightSetComponent = buildStandard(
+          isDurationType,
+          segment.exercises[0].id,
+          getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
-        straightSetComponent = (
-          <BaseListItem
-            itemType={'button'}
-            title={`Click to add exercise ${1}`}
-            clickHandler={() => {
-              selectExerciseHandler(1);
-            }}
-          />
-        );
+        straightSetComponent = buildButton(`Click to add exercise ${1}`, () => {
+          selectExerciseHandler(1);
+        });
       }
     }
-    display = (
-      <ListItem>
-        <ListItemText
-          disableTypography
-          primary={
-            <Grid container>
-              <Grid item xs={6} container alignItems={'center'}>
-                <LineItemTitle title={'Exercise'} />
-              </Grid>
-              <Grid item xs={6} container>
-                <Grid item xs={12}>
-                  {straightSetComponent}
-                </Grid>
-              </Grid>
-            </Grid>
-          }
-        />
-      </ListItem>
+
+    display = buildListItem(
+      'Exercise',
+      <Grid item xs={12}>
+        {straightSetComponent}
+      </Grid>
     );
   } else if (isSuperset(segment.trainingSetTypeId)) {
     let firstComponent: JSX.Element;
@@ -104,13 +130,7 @@ const ExerciseListItem = ({
       selectedExerciseSlotForSegment.order === 2;
 
     if (firstComponentBlink) {
-      firstComponent = (
-        <BaseListItem
-          itemType={'blinker'}
-          shouldBlink={true}
-          title={'Select Exercise 1'}
-        />
-      );
+      firstComponent = buildBlinker('Select Exercise 1');
     } else {
       const workoutExercise = segment.exercises[0];
       if (
@@ -126,34 +146,20 @@ const ExerciseListItem = ({
         const isDurationType =
           foundExercise && isDuration(foundExercise.parameterTypeId);
 
-        firstComponent = (
-          <BaseListItem
-            itemType={'standard'}
-            isDuration={isDurationType}
-            title={getExerciseName(exercises, workoutExercise.exerciseId)}
-          />
+        firstComponent = buildStandard(
+          isDurationType,
+          segment.exercises[0].id,
+          getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
-        firstComponent = (
-          <BaseListItem
-            title={`Click to add exercise ${1}`}
-            itemType={'button'}
-            clickHandler={() => {
-              selectExerciseHandler(1);
-            }}
-          />
-        );
+        firstComponent = buildButton(`Click to add exercise ${1}`, () => {
+          selectExerciseHandler(1);
+        });
       }
     }
 
     if (secondComponentBlink) {
-      secondComponent = (
-        <BaseListItem
-          itemType={'blinker'}
-          shouldBlink={true}
-          title={'Select Exercise 2'}
-        />
-      );
+      secondComponent = buildBlinker('Select Exercise 2');
     } else {
       let workoutExercise: WorkoutExercise | null = null;
 
@@ -176,47 +182,28 @@ const ExerciseListItem = ({
         const isDurationType =
           foundExercise && isDuration(foundExercise.parameterTypeId);
 
-        secondComponent = (
-          <BaseListItem
-            itemType={'standard'}
-            isDuration={isDurationType}
-            title={getExerciseName(exercises, workoutExercise.exerciseId)}
-          />
+        secondComponent = buildStandard(
+          isDurationType,
+          segment.exercises[1].id,
+          getExerciseName(exercises, workoutExercise.exerciseId)
         );
       } else {
-        secondComponent = (
-          <BaseListItem
-            itemType={'button'}
-            title={`Click to add exercise ${2}`}
-            clickHandler={() => {
-              selectExerciseHandler(2);
-            }}
-          />
-        );
+        secondComponent = buildButton(`Click to add exercise ${2}`, () => {
+          selectExerciseHandler(2);
+        });
       }
     }
 
-    display = (
-      <ListItem>
-        <ListItemText
-          disableTypography
-          primary={
-            <Grid container>
-              <Grid item xs={6} container alignItems={'center'}>
-                <LineItemTitle title={'Exercises'} />
-              </Grid>
-              <Grid item xs={6} container>
-                <Grid item xs={12}>
-                  {firstComponent}
-                </Grid>
-                <Grid item xs={12}>
-                  {secondComponent}
-                </Grid>
-              </Grid>
-            </Grid>
-          }
-        />
-      </ListItem>
+    display = buildListItem(
+      'Exercises',
+      <>
+        <Grid item xs={12}>
+          {firstComponent}
+        </Grid>
+        <Grid item xs={12}>
+          {secondComponent}
+        </Grid>
+      </>
     );
   }
   return display;
