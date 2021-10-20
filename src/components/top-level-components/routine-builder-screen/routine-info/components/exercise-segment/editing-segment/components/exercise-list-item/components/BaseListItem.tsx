@@ -5,7 +5,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
 } from '@material-ui/core';
-import TimerDialog from '../timer-dialog/TimerDialog';
+import TimerDialog from '../../timer-dialog/TimerDialog';
 import { NightfallBlinker } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -21,14 +21,14 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function BlinkingListItem({
+export default function BaseListItem({
   title,
   isDuration,
   itemType,
   clickHandler,
   shouldBlink = false,
   workoutExerciseId,
-}: BlinkingListItemProps): JSX.Element {
+}: BaseListItemProps): JSX.Element {
   const classes = useStyles();
 
   switch (itemType) {
@@ -67,7 +67,7 @@ export default function BlinkingListItem({
   }
 }
 
-export interface BlinkingListItemProps {
+export interface BaseListItemProps {
   title: string;
   shouldBlink?: boolean;
   clickHandler?: () => void;
