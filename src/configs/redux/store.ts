@@ -10,6 +10,7 @@ import { routerReducer } from 'react-router-redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import application, { ApplicationState } from '../../reducers/application';
 import builder, { RoutineBuilderState } from '../../reducers/routine-builder';
+import exerciseForm, { ExerciseFormState } from '../../reducers/exercise-form';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -19,6 +20,7 @@ export const createStore = (history: History): Store => {
     allReducers = combineReducers({
       applicationState: application.reducer,
       routineBuilderState: builder.reducer,
+      exerciseFormState: exerciseForm.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -55,10 +57,12 @@ export const createStore = (history: History): Store => {
         phases: [],
       },
     } as unknown as RoutineBuilderState,
+    exerciseFormState: {} as unknown as ExerciseFormState,
   });
 };
 
 export interface State {
   applicationState: ApplicationState;
   routineBuilderState: RoutineBuilderState;
+  exerciseFormState: ExerciseFormState;
 }

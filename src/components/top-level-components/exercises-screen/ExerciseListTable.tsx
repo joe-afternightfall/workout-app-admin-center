@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dispatch } from 'redux';
 import {
   ExerciseVO,
   MuscleGroup,
@@ -10,12 +11,14 @@ import MaterialTable from 'material-table';
 import PageTitle from '../../shared/PageTitle';
 import { Button, Grid } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
+import {
+  openNewExerciseFormDialog,
+  openEditingExerciseFormDialog,
+} from '../../../creators/exercise-form/exercise-form';
 
-const ExerciseListTable = ({
-  exercises,
-  actionClickHandler,
-  editClickHandler,
-}: ExerciseListTableProps & PassedInProps): JSX.Element => {
+const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
+  const { exercises } = props;
+
   const data = exercises.map((exercise: ExerciseVO, index: number) => {
     index += 1;
     const foundMuscles: (MuscleGroup | undefined)[] =
@@ -34,10 +37,10 @@ const ExerciseListTable = ({
           <Grid item xs={6}>
             <Button
               onClick={() => {
-                editClickHandler(exercise);
+                props.openEditDialogHandler(exercise);
               }}
             >
-              {'edit'}
+              {'Edit'}
             </Button>
           </Grid>
           <Grid item xs={6}>
@@ -113,22 +116,17 @@ const ExerciseListTable = ({
           icon: 'add',
           tooltip: 'Add New Exercise',
           isFreeAction: true,
-          onClick: () => {
-            actionClickHandler(true);
-          },
+          onClick: props.openNewDialogHandler,
         },
       ]}
     />
   );
 };
 
-interface PassedInProps {
-  actionClickHandler: (newExercise: boolean) => void;
-  editClickHandler: (exercise: ExerciseVO) => void;
-}
-
 interface ExerciseListTableProps {
   exercises: ExerciseVO[];
+  openNewDialogHandler: () => void;
+  openEditDialogHandler: (exercise: ExerciseVO) => void;
 }
 
 const mapStateToProps = (state: State): ExerciseListTableProps => {
@@ -137,4 +135,14 @@ const mapStateToProps = (state: State): ExerciseListTableProps => {
   } as unknown as ExerciseListTableProps;
 };
 
-export default connect(mapStateToProps)(ExerciseListTable);
+const mapDispatchToProps = (dispatch: Dispatch): ExerciseListTableProps =>
+  ({
+    openEditDialogHandler: (exercise: ExerciseVO) => {
+      dispatch(openEditingExerciseFormDialog(exercise));
+    },
+    openNewDialogHandler: () => {
+      dispatch(openNewExerciseFormDialog());
+    },
+  } as unknown as ExerciseListTableProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseListTable);
