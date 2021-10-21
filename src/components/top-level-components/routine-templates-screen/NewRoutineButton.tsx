@@ -21,7 +21,7 @@ const NewRoutineButton = (props: NewRoutineButtonProps): JSX.Element => {
   );
 };
 
-export interface NewRoutineButtonProps {
+interface NewRoutineButtonProps {
   newRoutineHandler: () => void;
 }
 

@@ -43,7 +43,7 @@ const AppSnackbar = ({
   );
 };
 
-export interface AppSnackbarProps {
+interface AppSnackbarProps {
   open: boolean;
   snackbarProps: SnackbarCreatorProps;
   handleClose: () => void;

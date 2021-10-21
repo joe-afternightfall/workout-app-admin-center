@@ -38,7 +38,7 @@ export default function SetTypesMenu(props: SetTypesMenuProps): JSX.Element {
   );
 }
 
-export interface SetTypesMenuProps {
+interface SetTypesMenuProps {
   value: string;
   onChangeHandler: (e: React.ChangeEvent<{ value: unknown }>) => void;
 }

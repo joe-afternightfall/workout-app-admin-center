@@ -61,14 +61,14 @@ const Navigation = (
   );
 };
 
-export interface NavigationProps {
+interface NavigationProps {
   activePage: RouteProp;
   currentLocation: string;
   routeClickHandler: (path: string) => void;
   signOutClickHandler: () => void;
 }
 
-export interface PassedInNavigationProps {
+interface PassedInNavigationProps {
   tempDrawer: boolean;
 }
 

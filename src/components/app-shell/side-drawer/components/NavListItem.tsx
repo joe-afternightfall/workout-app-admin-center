@@ -50,7 +50,7 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
   );
 }
 
-export interface NavListItemProps {
+interface NavListItemProps {
   pageInfo: PageProps;
   clickHandler: () => void;
   currentLocation: string;

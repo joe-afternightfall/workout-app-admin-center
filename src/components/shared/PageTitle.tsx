@@ -27,6 +27,6 @@ export default function PageTitle(props: PageTitleProps): JSX.Element {
   );
 }
 
-export interface PageTitleProps {
+interface PageTitleProps {
   title: string;
 }

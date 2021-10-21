@@ -40,7 +40,7 @@ export default function BaseDialogTitle(
   );
 }
 
-export interface BaseDialogTitleProps {
+interface BaseDialogTitleProps {
   title: string;
   closeClickHandler: () => void;
 }

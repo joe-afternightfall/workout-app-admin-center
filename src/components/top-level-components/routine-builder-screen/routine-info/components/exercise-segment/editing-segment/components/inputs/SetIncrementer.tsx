@@ -59,7 +59,7 @@ interface PassedInProps {
   segment: Segment;
 }
 
-export interface SetIncrementerProps {
+interface SetIncrementerProps {
   addHandler: () => void;
   deleteHandler: () => void;
 }

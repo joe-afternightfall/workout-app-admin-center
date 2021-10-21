@@ -11,6 +11,6 @@ export default function LineItemTitle({
   );
 }
 
-export interface LineItemTitleProps {
+interface LineItemTitleProps {
   title: string;
 }

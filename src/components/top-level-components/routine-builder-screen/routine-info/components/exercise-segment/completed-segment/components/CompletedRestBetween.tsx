@@ -52,7 +52,7 @@ export default function CompletedRestBetween({
   );
 }
 
-export interface CompletedRestBetweenProps {
+interface CompletedRestBetweenProps {
   expanded: boolean;
   restBetweenSets: number;
   restBetweenNextSegment: number;

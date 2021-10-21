@@ -47,7 +47,7 @@ export default function BaseDialogContent(
   );
 }
 
-export interface BaseDialogContentProps {
+interface BaseDialogContentProps {
   title: string;
   dialogContent: JSX.Element;
   dialogActions: JSX.Element;

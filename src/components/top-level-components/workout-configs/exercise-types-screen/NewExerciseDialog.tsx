@@ -134,7 +134,7 @@ export default function NewExerciseDialog(
   );
 }
 
-export interface NewExerciseDialogProps {
+interface NewExerciseDialogProps {
   open: boolean;
   closeClickHandler: () => void;
   selectedMuscleGroupIds: string[];

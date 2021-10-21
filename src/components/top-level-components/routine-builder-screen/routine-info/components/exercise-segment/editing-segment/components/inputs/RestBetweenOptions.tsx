@@ -73,7 +73,7 @@ interface PassedInProps {
   segmentId: string;
 }
 
-export interface RestBetweenOptionsProps {
+interface RestBetweenOptionsProps {
   updateRestHandler: (type: 'set' | 'segment', option: string) => void;
 }
 

@@ -63,7 +63,7 @@ interface PassedInProps {
   selectedIds: string[];
 }
 
-export interface SelectedMuscleGroupsBoxProps {
+interface SelectedMuscleGroupsBoxProps {
   deleteHandler: (muscleGroupCheckboxId: string) => void;
 }
 

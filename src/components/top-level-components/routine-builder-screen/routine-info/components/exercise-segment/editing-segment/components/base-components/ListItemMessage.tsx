@@ -26,6 +26,6 @@ export default function ListItemMessage({
   );
 }
 
-export interface ListItemMessageProps {
+interface ListItemMessageProps {
   message: string;
 }

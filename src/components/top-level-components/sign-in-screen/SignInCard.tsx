@@ -73,7 +73,7 @@ export default function SignInCard(props: SignInFormProps): JSX.Element {
   );
 }
 
-export interface SignInFormProps {
+interface SignInFormProps {
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   clickHandler: () => void;
   password: string;
