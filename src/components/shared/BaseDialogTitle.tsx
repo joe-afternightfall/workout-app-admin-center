@@ -1,9 +1,9 @@
 import React from 'react';
+import { DialogTitle } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

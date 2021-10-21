@@ -1,27 +1,17 @@
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { Dialog } from '@material-ui/core';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { Button, Grid } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import BaseDeleteDialogContent from '../../shared/BaseDeleteDialogContent';
-import { State } from '../../../configs/redux/store';
-import { deleteExercise } from '../../../services/workout-configurations/exercises';
+import { Button } from '@material-ui/core';
 import { ExerciseVO } from 'workout-app-common-core';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    content: {
-      minHeight: '20vh',
-    },
-  })
-);
+import { State } from '../../../configs/redux/store';
+import BaseDeleteDialogContent from '../../shared/BaseDeleteDialogContent';
+import { deleteExercise } from '../../../services/workout-configurations/exercises';
 
 const DeleteExerciseDialog = (
   props: DeleteExerciseDialogProps & PassedInProps
 ) => {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   const closeDialog = () => {
