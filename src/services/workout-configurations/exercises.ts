@@ -97,3 +97,33 @@ export const saveExercise =
         );
     }
   };
+
+export const deleteExercise =
+  (
+    exercise: ExerciseVO,
+    successCallback: () => void
+  ): ThunkAction<void, State, void, AnyAction> =>
+  async (dispatch: Dispatch): Promise<void> => {
+    return await firebase
+      .database()
+      .ref(EXERCISES_DB_ROUTE)
+      .child(exercise.firebaseId)
+      .remove((error) => {
+        if (error) {
+          dispatch(
+            displayErrorSnackbar(
+              `There was a problem deleting the exercise ${exercise.name}!`
+            )
+          );
+        } else {
+          dispatch(
+            displaySuccessSnackbar(
+              `Successfully deleted the exercise ${exercise.name}.`
+            )
+          );
+          setTimeout(() => {
+            successCallback();
+          }, 1000);
+        }
+      });
+  };

@@ -15,6 +15,7 @@ import {
   openNewExerciseFormDialog,
   openEditingExerciseFormDialog,
 } from '../../../creators/exercise-form/exercise-form';
+import DeleteExerciseDialog from './DeleteExerciseDialog';
 
 const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
   const { exercises } = props;
@@ -44,13 +45,7 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button
-              onClick={() => {
-                alert('delete clicked for ' + exercise.name);
-              }}
-            >
-              {'delete'}
-            </Button>
+            <DeleteExerciseDialog exercise={exercise} />
           </Grid>
         </Grid>
       ),

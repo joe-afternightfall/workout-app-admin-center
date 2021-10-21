@@ -3,21 +3,16 @@ import { connect } from 'react-redux';
 import { Dialog } from '@material-ui/core';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import SaveIcon from '@material-ui/icons/Save';
 import { Button, Grid } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
 import ExerciseInfoContent from './ExerciseInfoContent';
 import BaseDialogContent from '../../../shared/BaseDialogContent';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { saveExercise } from '../../../../services/workout-configurations/exercises';
 import { closeExerciseFormDialog } from '../../../../creators/exercise-form/exercise-form';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    deleteButton: {
-      color: theme.palette.error.main,
-    },
-
     content: {
       minHeight: '20vh',
     },
@@ -48,7 +43,6 @@ const ExerciseFormDialog = (props: ExerciseFormDialogProps) => {
           <Grid item container justify={'flex-end'}>
             <Button
               color={'primary'}
-              startIcon={<SaveIcon />}
               onClick={() => {
                 props.saveExerciseClickHandler(closeHandler);
               }}
