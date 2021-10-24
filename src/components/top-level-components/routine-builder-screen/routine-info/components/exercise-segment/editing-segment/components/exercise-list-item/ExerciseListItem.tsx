@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Grid, ListItem, ListItemText } from '@material-ui/core';
 import ComponentBuilder from './ComponentBuilder';
 import BuiltListItem from './components/BuiltListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
@@ -11,9 +11,37 @@ import {
   isCircuitSet,
 } from 'workout-app-common-core';
 
-interface ComponentToRender {
-  title: string;
-  component: JSX.Element;
+interface SlotProps {
+  order: number;
+  segmentId: string;
+}
+
+function buildComp(order: number, segment: Segment, slotProps: SlotProps) {
+  const blink = slotProps.segmentId === segment.id && slotProps.order === order;
+  return (
+    <ComponentBuilder
+      exerciseOrder={order}
+      segment={segment}
+      shouldBlink={blink}
+    />
+  );
+}
+
+function buildListItem(title: string, items: JSX.Element[]) {
+  return (
+    <BuiltListItem
+      title={title}
+      rightComponent={
+        <>
+          {items.map((element, index) => (
+            <Grid item xs={12} key={index}>
+              {element}
+            </Grid>
+          ))}
+        </>
+      }
+    />
+  );
 }
 
 const ExerciseListItem = ({
@@ -21,104 +49,66 @@ const ExerciseListItem = ({
   selectedExerciseSlotForSegment,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
   // let builtListItem = <div />;
-  let title = '';
+  const title = '';
   const componentsToRender: JSX.Element[] = [];
 
   if (isStraightSet(segment.trainingSetTypeId)) {
-    const blink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 1;
-
-    componentsToRender.push(
-      <BuiltListItem
-        title={'Exercise'}
-        rightComponent={
-          <Grid item xs={12}>
-            <ComponentBuilder
-              exerciseOrder={1}
-              segment={segment}
-              shouldBlink={blink}
-            />
-          </Grid>
-        }
-      />
-    );
+    const builtElement = buildComp(1, segment, selectedExerciseSlotForSegment);
+    componentsToRender.push(buildListItem('Exercise', [builtElement]));
   } else if (isSuperset(segment.trainingSetTypeId)) {
-    title = 'Exercises';
-    const firstComponentBlink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 1;
-    const secondComponentBlink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 2;
+    const firstElement = buildComp(1, segment, selectedExerciseSlotForSegment);
+    const secondElement = buildComp(2, segment, selectedExerciseSlotForSegment);
 
     componentsToRender.push(
-      <BuiltListItem
-        title={title}
-        rightComponent={
-          <>
-            <Grid item xs={12}>
-              <ComponentBuilder
-                exerciseOrder={1}
-                segment={segment}
-                shouldBlink={firstComponentBlink}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <ComponentBuilder
-                exerciseOrder={2}
-                segment={segment}
-                shouldBlink={secondComponentBlink}
-              />
-            </Grid>
-          </>
-        }
-      />
+      buildListItem('Exercises', [firstElement, secondElement])
     );
-  }
+  } else if (isCircuitSet(segment.trainingSetTypeId)) {
+    const exerciseLength = segment.exercises.length;
 
-  // else if (isCircuitSet(segment.trainingSetTypeId)) {
-  //   const exerciseLength = segment.exercises.length;
-  //   const componentsToRender: JSX.Element[] = [];
-  //
-  //   if (exerciseLength === 0) {
-  //     const blink =
-  //       selectedExerciseSlotForSegment.segmentId === segment.id &&
-  //       selectedExerciseSlotForSegment.order === 1;
-  //     componentsToRender.push(
-  //       <BuiltListItem
-  //         title={'Exercise # 1'}
-  //         rightComponent={
-  //           <Grid item xs={12}>
-  //             <ComponentBuilder
-  //               exerciseOrder={1}
-  //               segment={segment}
-  //               shouldBlink={blink}
-  //             />
-  //           </Grid>
-  //         }
-  //       />
-  //     );
-  //   } else {
-  //     segment.exercises.map((workoutExercise, index) => {
-  //       componentsToRender.push(
-  //         <BuiltListItem
-  //           title={`Exercise #${index + 1}`}
-  //           rightComponent={
-  //             <Grid item xs={12}>
-  //               <ComponentBuilder
-  //                 exerciseOrder={1}
-  //                 segment={segment}
-  //                 shouldBlink={blink}
-  //               />
-  //             </Grid>
-  //           }
-  //         />
-  //       );
-  //     });
-  //     componentsToRender.push();
-  //   }
-  // }
+    if (exerciseLength === 0) {
+      const blink =
+        selectedExerciseSlotForSegment.segmentId === segment.id &&
+        selectedExerciseSlotForSegment.order === 1;
+
+      componentsToRender.push(
+        <>
+          <BuiltListItem
+            title={'Exercise # 1'}
+            rightComponent={
+              <Grid item xs={12}>
+                <ComponentBuilder
+                  exerciseOrder={1}
+                  segment={segment}
+                  shouldBlink={blink}
+                />
+              </Grid>
+            }
+          />
+          <ListItem button>
+            <ListItemText primary={'add to circuit'} />
+          </ListItem>
+        </>
+      );
+    } else {
+      segment.exercises.map((workoutExercise, index) => {
+        componentsToRender.push(
+          <BuiltListItem
+            title={`Exercise #${index + 1}`}
+            rightComponent={
+              <Grid item xs={12}>
+                <ComponentBuilder
+                  exerciseOrder={1}
+                  segment={segment}
+                  shouldBlink={false}
+                />
+              </Grid>
+            }
+          />
+        );
+      });
+      componentsToRender.push();
+    }
+  }
 
   return <>{componentsToRender.map((element) => element)}</>;
 };
@@ -128,10 +118,7 @@ interface PassedInProps {
 }
 
 interface ExerciseListItemProps {
-  selectedExerciseSlotForSegment: {
-    order: number;
-    segmentId: string;
-  };
+  selectedExerciseSlotForSegment: SlotProps;
 }
 
 const mapStateToProps = (state: State): ExerciseListItemProps => {
