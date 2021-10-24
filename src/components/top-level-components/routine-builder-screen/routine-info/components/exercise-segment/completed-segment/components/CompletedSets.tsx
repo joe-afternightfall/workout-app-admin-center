@@ -25,6 +25,13 @@ export default function CompletedSets({
 }: CompletedSetsProps): JSX.Element {
   const classes = useStyles();
 
+  const setLength = segment.exercises[0].sets.length;
+  let title = '';
+  if (setLength === 1) {
+    title = `${setLength} Set`;
+  } else {
+    title = `${setLength} Sets`;
+  }
   return (
     <Grid
       container
@@ -42,9 +49,7 @@ export default function CompletedSets({
               className={classes.setsContainer}
             >
               <Grid item>
-                <Typography variant={'h6'}>
-                  {`${segment.exercises[0].sets.length} Sets`}
-                </Typography>
+                <Typography variant={'h6'}>{title}</Typography>
               </Grid>
             </Grid>
           </Card>

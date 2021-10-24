@@ -32,7 +32,7 @@ const EditingInfoCardActions = ({
           </Grid>
           <Grid item>
             <Grid item>
-              <EditingDialog dialogType={'delete'} segmentId={segment.id} />
+              <EditingDialog dialogType={'remove'} segmentId={segment.id} />
             </Grid>
           </Grid>
           <Grid item style={{ height: '100%' }}>
