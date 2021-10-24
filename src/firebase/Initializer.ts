@@ -20,8 +20,8 @@ const firebaseConfig = {
   projectId: 'workout-app-d4f5d',
   storageBucket: 'workout-app-d4f5d.appspot.com',
   messagingSenderId: '1035531799240',
-  appId: '1:1035531799240:web:edacdb6be2e4151f6eb3fd',
-  measurementId: 'G-8ZHYM31TZ7',
+  appId: '1:1035531799240:web:f36aacaa51f6a5b76eb3fd',
+  measurementId: 'G-HFR42VTJKC',
 };
 
 export class Initializer {
