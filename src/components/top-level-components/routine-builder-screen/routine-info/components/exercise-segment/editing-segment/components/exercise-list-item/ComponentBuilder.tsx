@@ -14,13 +14,6 @@ import StandardListItem from './components/StandardListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
 
-const findExercise = (
-  exercises: ExerciseVO[],
-  id: string
-): ExerciseVO | undefined => {
-  return exercises.find((exercise) => exercise.id === id);
-};
-
 const ComponentBuilder = ({
   allExercises,
   shouldBlink,
@@ -39,9 +32,8 @@ const ComponentBuilder = ({
       );
 
     if (foundWorkoutExercise && foundWorkoutExercise.exerciseId) {
-      const foundExercise = findExercise(
-        allExercises,
-        foundWorkoutExercise.exerciseId
+      const foundExercise = allExercises.find(
+        (exercise) => exercise.id === foundWorkoutExercise.exerciseId
       );
 
       const isDurationType =
