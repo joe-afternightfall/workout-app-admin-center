@@ -10,25 +10,25 @@ const ExerciseListItem = ({
   segment,
   selectedExerciseSlotForSegment,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
-  let display = <div />;
+  let firstComponent = <div />;
+  let secondComponent = <div />;
+  let title = '';
 
   if (isStraightSet(segment.trainingSetTypeId)) {
+    title = 'Exercise';
     const blink =
       selectedExerciseSlotForSegment.segmentId === segment.id &&
       selectedExerciseSlotForSegment.order === 1;
 
-    const straightSetComponent = (
+    firstComponent = (
       <ComponentBuilder
         exerciseOrder={1}
         segment={segment}
         shouldBlink={blink}
       />
     );
-
-    display = (
-      <BuiltListItem title={'Exercise'} rightComponent={straightSetComponent} />
-    );
   } else if (isSuperset(segment.trainingSetTypeId)) {
+    title = 'Exercises';
     const firstComponentBlink =
       selectedExerciseSlotForSegment.segmentId === segment.id &&
       selectedExerciseSlotForSegment.order === 1;
@@ -36,7 +36,7 @@ const ExerciseListItem = ({
       selectedExerciseSlotForSegment.segmentId === segment.id &&
       selectedExerciseSlotForSegment.order === 2;
 
-    const firstComponent = (
+    firstComponent = (
       <ComponentBuilder
         exerciseOrder={1}
         segment={segment}
@@ -44,31 +44,30 @@ const ExerciseListItem = ({
       />
     );
 
-    const secondComponent = (
+    secondComponent = (
       <ComponentBuilder
         exerciseOrder={2}
         segment={segment}
         shouldBlink={secondComponentBlink}
       />
     );
-
-    display = (
-      <BuiltListItem
-        title={'Exercises'}
-        rightComponent={
-          <>
-            <Grid item xs={12}>
-              {firstComponent}
-            </Grid>
-            <Grid item xs={12}>
-              {secondComponent}
-            </Grid>
-          </>
-        }
-      />
-    );
   }
-  return display;
+
+  return (
+    <BuiltListItem
+      title={title}
+      rightComponent={
+        <>
+          <Grid item xs={12}>
+            {firstComponent}
+          </Grid>
+          <Grid item xs={12}>
+            {secondComponent}
+          </Grid>
+        </>
+      }
+    />
+  );
 };
 
 interface PassedInProps {
