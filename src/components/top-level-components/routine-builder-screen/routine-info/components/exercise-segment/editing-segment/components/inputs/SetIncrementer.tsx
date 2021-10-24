@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
@@ -11,18 +11,17 @@ import {
 import { Grid, IconButton, Typography } from '@material-ui/core';
 import LineItemTitle from '../base-components/LineItemTitle';
 
-const SetIncrementer = ({
-  segment,
-  addHandler,
-  deleteHandler,
-}: SetIncrementerProps & PassedInProps): JSX.Element => {
+const SetIncrementer = (
+  props: SetIncrementerProps & PassedInProps
+): JSX.Element => {
+  const { segment } = props;
   let disableAdd = false;
   let disableDelete = true;
 
   const workoutExercise = segment.exercises[0];
   const numberOfSets = workoutExercise ? workoutExercise.sets.length : 0;
 
-  if (workoutExercise && workoutExercise.sets.length === 0) {
+  if (workoutExercise && workoutExercise.sets.length === 1) {
     disableDelete = true;
   } else if (workoutExercise) {
     disableDelete = false;
@@ -31,6 +30,13 @@ const SetIncrementer = ({
   if (workoutExercise && workoutExercise.sets.length === 5) {
     disableAdd = true;
   }
+
+  useEffect(() => {
+    if (segment.exercises[0].sets.length === 0) {
+      props.addHandler(3);
+    }
+  });
+
   return (
     <Grid container justify={'center'} alignItems={'center'}>
       <Grid item xs={6}>
@@ -38,7 +44,7 @@ const SetIncrementer = ({
       </Grid>
       <Grid item xs={6} container alignItems={'center'}>
         <Grid item xs={3} container justify={'center'}>
-          <IconButton onClick={deleteHandler} disabled={disableDelete}>
+          <IconButton onClick={props.deleteHandler} disabled={disableDelete}>
             <RemoveIcon />
           </IconButton>
         </Grid>
@@ -46,7 +52,12 @@ const SetIncrementer = ({
           <Typography variant={'h5'}>{numberOfSets}</Typography>
         </Grid>
         <Grid item xs={3} container justify={'center'}>
-          <IconButton onClick={addHandler} disabled={disableAdd}>
+          <IconButton
+            onClick={() => {
+              props.addHandler(1);
+            }}
+            disabled={disableAdd}
+          >
             <AddIcon />
           </IconButton>
         </Grid>
@@ -60,7 +71,7 @@ interface PassedInProps {
 }
 
 interface SetIncrementerProps {
-  addHandler: () => void;
+  addHandler: (numberOfSets: number) => void;
   deleteHandler: () => void;
 }
 
@@ -69,8 +80,12 @@ const mapDispatchToProps = (
   ownProps: PassedInProps
 ): SetIncrementerProps =>
   ({
-    addHandler: () => {
-      dispatch(addSetToEachExerciseInSegment(ownProps.segment.id));
+    addHandler: (numberOfSetsToSave: number) => {
+      let savedSets = 0;
+      while (numberOfSetsToSave > savedSets) {
+        dispatch(addSetToEachExerciseInSegment(ownProps.segment.id));
+        savedSets++;
+      }
     },
     deleteHandler: () => {
       dispatch(deleteSetFromEachExerciseInSegment(ownProps.segment.id));

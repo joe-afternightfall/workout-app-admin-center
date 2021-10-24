@@ -27,11 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const EditingDialog = ({
-  dialogType,
-  actionHandler,
-  isDisabled,
-}: EditingDialogProps & PassedInProps) => {
+const EditingDialog = (props: EditingDialogProps & PassedInProps) => {
+  const { dialogType, isDisabled } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -43,16 +40,16 @@ const EditingDialog = ({
     setOpen(false);
   };
 
-  const isDelete = dialogType === 'delete';
+  const isRemove = dialogType === 'remove';
   return (
     <div>
       <Button
         disabled={isDisabled}
         onClick={openDialog}
-        className={isDelete ? classes.deleteButton : undefined}
-        color={isDelete ? undefined : 'secondary'}
+        className={isRemove ? classes.deleteButton : undefined}
+        color={isRemove ? undefined : 'secondary'}
       >
-        {isDelete ? 'Delete' : 'Reset'}
+        {isRemove ? 'Remove' : 'Reset'}
       </Button>
       <Dialog open={open} onClose={closeDialog}>
         <DialogTitle>{'Are you sure?'}</DialogTitle>
@@ -68,14 +65,14 @@ const EditingDialog = ({
         <DialogActions>
           <Button
             onClick={() => {
-              actionHandler();
+              props.actionHandler();
               closeDialog();
             }}
             className={classes.deleteButton}
           >
-            {dialogType === 'reset' ? 'Reset' : 'Delete'}
+            {dialogType === 'reset' ? 'Reset' : 'Remove'}
           </Button>
-          <Button onClick={closeDialog} color="primary" autoFocus>
+          <Button onClick={closeDialog} color={'primary'} autoFocus>
             {'Go Back'}
           </Button>
         </DialogActions>
@@ -86,7 +83,7 @@ const EditingDialog = ({
 
 interface PassedInProps {
   segmentId: string;
-  dialogType: 'reset' | 'delete';
+  dialogType: 'reset' | 'remove';
   isDisabled?: boolean;
 }
 
@@ -102,7 +99,7 @@ const mapDispatchToProps = (
     actionHandler: () => {
       if (ownProps.dialogType === 'reset') {
         dispatch(resetSetTypeAndExerciseInfo(ownProps.segmentId));
-      } else if (ownProps.dialogType === 'delete') {
+      } else if (ownProps.dialogType === 'remove') {
         dispatch(deleteSegmentFromPhase(ownProps.segmentId));
       }
     },
