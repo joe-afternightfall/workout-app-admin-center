@@ -1,39 +1,14 @@
 import React from 'react';
-import {
-  Box,
-  Dialog,
-  Button,
-  IconButton,
-  Typography,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogContentText,
-} from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import { Dialog, IconButton } from '@material-ui/core';
 import { NightfallTooltip } from 'workout-app-common-core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { deletePhaseFromRoutine } from '../../../../../../../creators/routine-builder/builder';
+import BaseDeleteDialogContent from '../../../../../../shared/BaseDeleteDialogContent';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    deleteButton: {
-      color: theme.palette.error.main,
-    },
-    content: {
-      minHeight: '20vh',
-    },
-  })
-);
-
-const DeletePhaseDialog = ({
-  phaseName,
-  deletePhaseHandler,
-}: DeletePhaseDialogProps & PassedInProps) => {
-  const classes = useStyles();
+const DeletePhaseDialog = (props: DeletePhaseDialogProps & PassedInProps) => {
+  const { phaseName } = props;
   const [open, setOpen] = React.useState(false);
 
   const openDialog = () => {
@@ -56,46 +31,14 @@ const DeletePhaseDialog = ({
         }
       />
       <Dialog open={open} onClose={closeDialog}>
-        <DialogTitle>{'Hold up!'}</DialogTitle>
-        <DialogContent>
-          <Grid
-            container
-            alignItems={'center'}
-            justify={'center'}
-            className={classes.content}
-          >
-            <Grid item>
-              <DialogContentText>
-                <Typography>
-                  {'Are you sure you want to delete the '}
-                  <Box component={'span'} fontWeight={'bold'}>
-                    {phaseName}
-                  </Box>
-                  {' phase?'}
-                </Typography>
-              </DialogContentText>
-            </Grid>
-            <Grid item>
-              <DialogContentText>
-                {`This and all the exercise info will be deleted along with it.`}
-              </DialogContentText>
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              deletePhaseHandler();
-              closeDialog();
-            }}
-            className={classes.deleteButton}
-          >
-            {'Yes Delete'}
-          </Button>
-          <Button onClick={closeDialog} color={'primary'} autoFocus>
-            {'Go Back'}
-          </Button>
-        </DialogActions>
+        <BaseDeleteDialogContent
+          highlight={phaseName}
+          closeHandler={closeDialog}
+          deleteHandler={() => {
+            props.deletePhaseHandler();
+            closeDialog();
+          }}
+        />
       </Dialog>
     </div>
   );
