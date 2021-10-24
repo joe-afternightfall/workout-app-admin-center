@@ -116,13 +116,3 @@ export const saveExerciseInfo = (): SaveExerciseInfoAction => {
     type: ActionTypes.SAVE_EXERCISE_INFO,
   };
 };
-
-export interface ClearExerciseInfoAction {
-  type: ActionTypes.CLEAR_EXERCISE_FORM;
-}
-
-export const clearExerciseInfo = (): ClearExerciseInfoAction => {
-  return {
-    type: ActionTypes.CLEAR_EXERCISE_FORM,
-  };
-};

@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderTop: '6px solid #673AB7',
       borderRadius: 6,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
   })
 );
 

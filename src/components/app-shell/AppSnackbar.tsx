@@ -9,16 +9,13 @@ import {
   SnackbarCreatorProps,
 } from '../../creators/app-snackbar';
 
-const AppSnackbar = ({
-  open,
-  handleClose,
-  snackbarProps,
-}: AppSnackbarProps): JSX.Element => {
+const AppSnackbar = (props: AppSnackbarProps): JSX.Element => {
+  const { open, snackbarProps } = props;
   const closeHandler = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-    handleClose();
+    props.handleClose();
   };
 
   return (
@@ -34,7 +31,7 @@ const AppSnackbar = ({
       <Alert
         elevation={6}
         variant={'filled'}
-        onClose={handleClose}
+        onClose={props.handleClose}
         severity={snackbarProps.severity}
       >
         {snackbarProps.text}

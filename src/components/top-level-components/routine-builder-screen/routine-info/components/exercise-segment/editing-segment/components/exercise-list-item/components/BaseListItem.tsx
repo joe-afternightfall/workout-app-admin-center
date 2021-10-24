@@ -15,9 +15,6 @@ const useStyles = makeStyles(() =>
       background: 'darkgrey',
       opacity: 0.7,
     },
-    listItemContainer: {
-      width: '100%',
-    },
   })
 );
 

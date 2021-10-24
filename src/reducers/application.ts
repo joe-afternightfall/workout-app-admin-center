@@ -1,5 +1,4 @@
 import { ExerciseVO, RoutineTemplateVO } from 'workout-app-common-core';
-import { WorkoutVO } from '../configs/models/WorkoutVO';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { SnackbarCreatorProps } from '../creators/app-snackbar';
@@ -39,9 +38,6 @@ export default {
         break;
       case ActionTypes.LOGOUT_USER:
         newState.userIsValidated = false;
-        break;
-      case ActionTypes.LOAD_USER_WORKOUTS:
-        newState.userWorkouts = action.workouts;
         break;
       case ActionTypes.LOAD_EXERCISE_TYPES:
         newState.workoutConfigurations.exerciseTypes = action.exerciseTypes;
@@ -95,7 +91,6 @@ export interface ApplicationState {
   userEmail: string;
   displayAppBar: boolean;
   sideDrawerIsClosed: boolean;
-  userWorkouts: WorkoutVO[];
   workoutConfigurations: {
     exerciseTypes: ExerciseTypeVO[];
     exercises: ExerciseVO[];

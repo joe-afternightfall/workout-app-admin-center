@@ -1,5 +1,5 @@
 import { LocationChangeAction } from 'connected-react-router';
-import { LoadUsersWorkoutsAction, ValidatedUserAction } from './user-info';
+import { ValidatedUserAction } from './user-info';
 import {
   LoadExercisesAction,
   LoadExerciseTypesAction,
@@ -38,7 +38,6 @@ import {
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
-  ClearExerciseInfoAction,
   CloseExerciseFormDialogAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
@@ -60,7 +59,6 @@ export enum ActionTypes {
 
   // Workout configurations
   LOAD_EXERCISE_TYPES = 'LOAD_EXERCISE_TYPES',
-  LOAD_USER_WORKOUTS = 'LOAD_USER_WORKOUTS',
 
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
@@ -100,8 +98,6 @@ export enum ActionTypes {
   UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
-  CLEAR_EXERCISE_FORM = 'CLEAR_EXERCISE_FORM',
-
   // Side drawer actions
   LOGOUT_USER = 'LOGOUT_USER',
 
@@ -115,7 +111,6 @@ export type ApplicationActions =
   | LocationChangeAction
   | ValidatedUserAction
   | LogoutUserAction
-  | LoadUsersWorkoutsAction
   | LoadExerciseTypesAction
   | ToggleMuscleGroupAction
   | ApplyHoverStylesToMuscleGroupAction
@@ -151,7 +146,6 @@ export type ApplicationActions =
   | SelectOptionalExerciseParamAction
   | UpdateExerciseNameAction
   | SaveExerciseInfoAction
-  | ClearExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
   | CloseExerciseFormDialogAction;
