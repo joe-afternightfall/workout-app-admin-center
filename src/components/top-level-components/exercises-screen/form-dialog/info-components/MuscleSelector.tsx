@@ -31,8 +31,6 @@ export default function MuscleSelector({
     return buildOptions(group);
   });
 
-  // todo: use React.useEffect() to set default
-
   let defaultValue = null;
 
   muscleGroups.find((group) => {

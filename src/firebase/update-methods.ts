@@ -4,12 +4,10 @@ import {
   loadExerciseTypes,
   loadRoutineTemplates,
 } from '../creators/workout-configurations';
-import { loadUsersWorkouts } from '../creators/user-info';
-import { getWorkoutsForUser } from '../services/workout-service';
 import { getAllExercises } from '../services/workout-configurations/exercises';
+import { getAllRoutineTemplates } from '../services/workout-configurations/routine-templates';
 import { getAllExerciseTypes } from '../services/workout-configurations/exercise-types-service';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
-import { getAllRoutineTemplates } from '../services/workout-configurations/routine-templates';
 
 export const updateExerciseTypes = async (store: Store): Promise<void> => {
   const exercises: ExerciseTypeVO[] = await getAllExerciseTypes();
@@ -17,14 +15,6 @@ export const updateExerciseTypes = async (store: Store): Promise<void> => {
     a.name.localeCompare(b.name)
   );
   store.dispatch(loadExerciseTypes(exercises));
-};
-
-export const updateUserWorkouts = async (store: Store): Promise<void> => {
-  const email = store.getState().applicationState.userEmail;
-  if (email) {
-    const workouts = await getWorkoutsForUser(email);
-    store.dispatch(loadUsersWorkouts(workouts));
-  }
 };
 
 export const updateExercises = async (store: Store): Promise<void> => {

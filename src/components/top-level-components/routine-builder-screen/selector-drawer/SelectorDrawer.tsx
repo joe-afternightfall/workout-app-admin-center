@@ -14,12 +14,13 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: '38vw',
     },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
+    //todo: good example transition with easing
+    // appBar: {
+    //   transition: theme.transitions.create(['margin', 'width'], {
+    //     easing: theme.transitions.easing.sharp,
+    //     duration: theme.transitions.duration.leavingScreen,
+    //   }),
+    // },
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,

@@ -1,20 +1,17 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
+import Toolbar from '@material-ui/core/Toolbar';
 import PhaseDropdown from './components/PhaseDropdown';
 import ReorderDialog from './components/ReorderDialog';
-import Toolbar from '@material-ui/core/Toolbar';
 import { getPhaseName, Phase } from 'workout-app-common-core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import DeletePhaseDialog from './components/DeletePhaseDialog';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       borderTop: '6px solid #673AB7',
       borderRadius: 6,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
     },
   })
 );

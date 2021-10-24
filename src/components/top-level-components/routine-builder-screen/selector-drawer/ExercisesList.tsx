@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: 'none',
       backgroundColor: theme.palette.background.paper,
     },
+    // necessary for content to be below app bar
+    toolbar: theme.mixins.toolbar,
   })
 );
 
@@ -32,6 +34,7 @@ const ExerciseList = (props: ExerciseListProps): JSX.Element => {
 
   return (
     <Card raised={false} square className={classes.root}>
+      <div className={classes.toolbar} />
       <CardContent>
         {exercises.map((exercise, index) => {
           return (
@@ -43,7 +46,7 @@ const ExerciseList = (props: ExerciseListProps): JSX.Element => {
                   props.addExerciseHandler(exercise.id);
                 }}
               >
-                <ListItemText primary={`${index}. ${exercise.name}`} />
+                <ListItemText primary={`${index + 1}. ${exercise.name}`} />
               </ListItem>
             </List>
           );

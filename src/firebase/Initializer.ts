@@ -1,14 +1,12 @@
 import { Store } from 'redux';
 import firebase from 'firebase';
 import {
-  WORKOUTS_ROUTE,
   EXERCISES_DB_ROUTE,
   EXERCISE_TYPES_ROUTE,
   ROUTINE_TEMPLATES_DB_ROUTE,
 } from '../configs/constants/firebase-routes';
 import {
   updateExercises,
-  updateUserWorkouts,
   updateExerciseTypes,
   updateRoutineTemplates,
 } from './update-methods';
@@ -36,7 +34,6 @@ export class Initializer {
     firebase.analytics();
 
     const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
-    const workouts = firebase.database().ref(WORKOUTS_ROUTE);
     const exercises = firebase.database().ref(EXERCISES_DB_ROUTE);
     const templates = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
 
@@ -74,18 +71,6 @@ export class Initializer {
 
     exerciseTypes.on('child_removed', async () => {
       await updateExerciseTypes(this.store);
-    });
-
-    workouts.on('child_added', async () => {
-      await updateUserWorkouts(this.store);
-    });
-
-    workouts.on('child_changed', async () => {
-      await updateUserWorkouts(this.store);
-    });
-
-    workouts.on('child_removed', async () => {
-      await updateUserWorkouts(this.store);
     });
   }
 }
