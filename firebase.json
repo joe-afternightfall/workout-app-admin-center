@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "workout-app-admin-center",
+    "site": "the-dojo-admin-center",
     "public": "build",
     "ignore": [
       "firebase.json",
