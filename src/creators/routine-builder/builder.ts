@@ -179,23 +179,6 @@ export const addExerciseToSegment = (
   };
 };
 
-export interface DeleteExerciseFromSegmentAction {
-  type: ActionTypes.DELETE_EXERCISE_FROM_SEGMENT;
-  segmentId: string;
-  exerciseId: string;
-}
-
-export const deleteExerciseFromSegment = (
-  segmentId: string,
-  exerciseId: string
-): DeleteExerciseFromSegmentAction => {
-  return {
-    type: ActionTypes.DELETE_EXERCISE_FROM_SEGMENT,
-    segmentId: segmentId,
-    exerciseId: exerciseId,
-  };
-};
-
 export interface ResetSetTypeAndExerciseInfoAction {
   type: ActionTypes.RESET_SET_TYPE_AND_EXERCISE_INFO;
   segmentId: string;

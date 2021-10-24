@@ -25,7 +25,6 @@ import {
   UpdateRestBetweenAction,
   SelectedExerciseSlotToFillAction,
   AddExerciseToSegmentAction,
-  DeleteExerciseFromSegmentAction,
   ResetSetTypeAndExerciseInfoAction,
   AddSetToEachExerciseInSegmentAction,
   DeleteSetFromEachExerciseInSegmentAction,
@@ -80,7 +79,6 @@ export enum ActionTypes {
   UPDATE_REST_BETWEEN = 'UPDATE_REST_BETWEEN',
   SELECTED_EXERCISE_SLOT_TO_FILL = 'SELECTED_EXERCISE_SLOT_TO_FILL',
   ADD_EXERCISE_TO_SEGMENT = 'ADD_EXERCISE_TO_SEGMENT',
-  DELETE_EXERCISE_FROM_SEGMENT = 'DELETE_EXERCISE_FROM_SEGMENT',
   RESET_SET_TYPE_AND_EXERCISE_INFO = 'RESET_SET_TYPE_AND_EXERCISE_INFO',
   ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT = 'ADD_SET_TO_EACH_EXERCISE_IN_SEGMENT',
   DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT = 'DELETE_SET_FROM_EACH_EXERCISE_IN_SEGMENT',
@@ -136,7 +134,6 @@ export type ApplicationActions =
   | HideAppBarAction
   | SelectedExerciseSlotToFillAction
   | AddExerciseToSegmentAction
-  | DeleteExerciseFromSegmentAction
   | ResetSetTypeAndExerciseInfoAction
   | AddSetToEachExerciseInSegmentAction
   | DeleteSetFromEachExerciseInSegmentAction
