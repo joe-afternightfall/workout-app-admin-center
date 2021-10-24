@@ -176,7 +176,7 @@ const ExerciseTypesTable = (props: ExerciseTableProps): JSX.Element => {
   );
 };
 
-export interface ExerciseTableProps {
+interface ExerciseTableProps {
   exerciseTypes: ExerciseTypeVO[];
   selectedMuscleGroupIds: string[];
 }

@@ -70,7 +70,7 @@ const SignInScreen = (props: SignInScreenProps): JSX.Element => {
   );
 };
 
-export interface SignInScreenProps {
+interface SignInScreenProps {
   logInHandler: (username: string) => void;
 }
 

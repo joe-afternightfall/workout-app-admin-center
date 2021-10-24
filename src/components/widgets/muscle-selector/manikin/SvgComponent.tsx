@@ -106,7 +106,7 @@ const SvgComponent = (
   );
 };
 
-export interface SvgComponentProps {
+interface SvgComponentProps {
   hoveringOverGroup: string;
   selectedMuscleGroupIds: string[];
   selectHandler: (muscleGroupCheckboxId: string) => void;
@@ -114,7 +114,7 @@ export interface SvgComponentProps {
   mouseOutHandler: () => void;
 }
 
-export interface PassedInSvgComponentProps {
+interface PassedInSvgComponentProps {
   paths: string[];
   muscleName: string;
   fill: string;

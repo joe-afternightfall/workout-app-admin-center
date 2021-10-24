@@ -201,7 +201,7 @@ export default function OptionalParams({
   );
 }
 
-export interface OptionalParamsProps {
+interface OptionalParamsProps {
   params: {
     gripWidthId: string;
     equipmentId: string;

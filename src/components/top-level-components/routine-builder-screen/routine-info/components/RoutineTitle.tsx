@@ -99,7 +99,7 @@ interface PassedInProps {
   isEditing: boolean;
 }
 
-export interface RoutineTitleProps {
+interface RoutineTitleProps {
   routineTitle: string;
   selectedWorkoutCategoryId: string;
   titleChangeHandler: (value: string) => void;

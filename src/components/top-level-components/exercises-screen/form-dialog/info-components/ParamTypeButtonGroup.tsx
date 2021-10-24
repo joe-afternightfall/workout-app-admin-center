@@ -43,7 +43,7 @@ export default function ParamTypeButtonGroup({
   );
 }
 
-export interface ParamTypeButtonGroupProps {
+interface ParamTypeButtonGroupProps {
   changeHandler: (paramType: ParameterType) => void;
   selectedParamType: ParameterType | null;
 }

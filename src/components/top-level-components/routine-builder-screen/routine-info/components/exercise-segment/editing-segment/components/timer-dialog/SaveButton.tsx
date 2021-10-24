@@ -23,11 +23,11 @@ const SaveButton = (props: SaveButtonProps & PassedInProps): JSX.Element => {
   );
 };
 
-export interface SaveButtonProps {
+interface SaveButtonProps {
   saveHandler: () => void;
 }
 
-export interface PassedInProps {
+interface PassedInProps {
   workoutExerciseId: string;
   closeHandler: () => void;
 }

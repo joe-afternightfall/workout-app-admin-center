@@ -54,6 +54,6 @@ export default function CompletedSets({
   );
 }
 
-export interface CompletedSetsProps {
+interface CompletedSetsProps {
   segment: Segment;
 }

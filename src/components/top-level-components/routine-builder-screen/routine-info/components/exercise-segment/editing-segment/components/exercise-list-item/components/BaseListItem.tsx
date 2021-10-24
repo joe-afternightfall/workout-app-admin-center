@@ -67,7 +67,7 @@ export default function BaseListItem({
   }
 }
 
-export interface BaseListItemProps {
+interface BaseListItemProps {
   title: string;
   shouldBlink?: boolean;
   clickHandler?: () => void;

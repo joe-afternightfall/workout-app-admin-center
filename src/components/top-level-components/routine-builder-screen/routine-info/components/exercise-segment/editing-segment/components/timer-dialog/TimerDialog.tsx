@@ -201,7 +201,7 @@ export default function TimerDialog({
   );
 }
 
-export interface TimerDialogProps {
+interface TimerDialogProps {
   timers: WorkoutTimer[];
   workoutExerciseId: string;
 }

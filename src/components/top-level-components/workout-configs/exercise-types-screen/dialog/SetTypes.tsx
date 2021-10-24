@@ -31,7 +31,7 @@ export default function SetTypes(props: SetTypesProps): JSX.Element {
   );
 }
 
-export interface SetTypesProps {
+interface SetTypesProps {
   clickHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   checked: string;
 }

@@ -43,7 +43,7 @@ export default function CompletedCardHeader({
   );
 }
 
-export interface CompletedCardHeaderProps {
+interface CompletedCardHeaderProps {
   title: string;
   icon: JSX.Element;
   display: boolean;

@@ -28,6 +28,6 @@ export default function SectionTitle(props: SectionTitleProps): JSX.Element {
   );
 }
 
-export interface SectionTitleProps {
+interface SectionTitleProps {
   title: string;
 }

@@ -111,7 +111,7 @@ const Selector = (
   );
 };
 
-export interface SelectorControlProps {
+interface SelectorControlProps {
   hoveringOverGroup: string;
   selectedMuscleGroupIds: string[];
   selectHandler: (muscleGroupCheckboxId: string) => void;
@@ -119,7 +119,7 @@ export interface SelectorControlProps {
   mouseOutHandler: () => void;
 }
 
-export interface SelectorControlsPassedInProps {
+interface SelectorControlsPassedInProps {
   muscleName: string;
   title: string;
 }
