@@ -12,6 +12,7 @@ import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 import { RoutineTemplateDAO, RoutineTemplateVO } from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
+import { loadRoutineTemplates } from '../../creators/workout-configurations';
 
 export const getAllRoutineTemplates = async (): Promise<
   RoutineTemplateVO[]
@@ -28,6 +29,24 @@ export const getAllRoutineTemplates = async (): Promise<
       }
     });
 };
+
+export const fetchAllRoutineTemplates =
+  (): ThunkAction<void, State, void, AnyAction> =>
+  async (dispatch: Dispatch): Promise<void> => {
+    return await firebase
+      .database()
+      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .once('value')
+      .then((snapshot) => {
+        if (snapshot.val()) {
+          dispatch(
+            loadRoutineTemplates(mapRoutineSnapshotToVO(snapshot.val()))
+          );
+        } else {
+          dispatch(loadRoutineTemplates([]));
+        }
+      });
+  };
 
 export const saveNewRoutineTemplate =
   (): ThunkAction<void, State, void, AnyAction> =>

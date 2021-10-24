@@ -38,6 +38,7 @@ export interface RouteProp {
   mainTitle: string;
   mainIcon: OverridableComponent<SvgIconTypeMap>;
   pageProps: PageProps[];
+  shouldDisplayInNav: boolean;
 }
 
 export type RoutesMap = {
@@ -50,6 +51,7 @@ export const appNavigationRoutes: RoutesMap = {
     nested: false,
     mainTitle: '',
     mainIcon: DashboardIcon,
+    shouldDisplayInNav: true,
     pageProps: [
       {
         path: DASHBOARD_SCREEN_PATH,
@@ -65,6 +67,7 @@ export const appNavigationRoutes: RoutesMap = {
     nested: false,
     mainTitle: 'Routine Templates',
     mainIcon: ListAlt,
+    shouldDisplayInNav: true,
     pageProps: [
       {
         path: ROUTINE_TEMPLATES_SCREEN_PATH,
@@ -80,6 +83,7 @@ export const appNavigationRoutes: RoutesMap = {
     nested: false,
     mainTitle: 'Routine Builder',
     mainIcon: BuilderIcon,
+    shouldDisplayInNav: false,
     pageProps: [
       {
         path: ROUTINE_BUILDER_SCREEN_PATH,
@@ -95,6 +99,7 @@ export const appNavigationRoutes: RoutesMap = {
     nested: false,
     mainTitle: 'Exercises',
     mainIcon: FitnessCenter,
+    shouldDisplayInNav: true,
     pageProps: [
       {
         path: EXERCISES_SCREEN_PATH,
@@ -110,6 +115,7 @@ export const appNavigationRoutes: RoutesMap = {
     nested: true,
     mainTitle: 'Configurations',
     mainIcon: Settings,
+    shouldDisplayInNav: true,
     pageProps: [
       {
         path: EXERCISE_TYPES_SCREEN_PATH,

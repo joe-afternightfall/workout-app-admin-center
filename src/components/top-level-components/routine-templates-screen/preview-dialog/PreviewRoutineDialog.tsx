@@ -11,7 +11,7 @@ import PreviewList from './components/PreviewList';
 import DialogAppBar from './components/DialogAppBar';
 import { deepOrange } from '@material-ui/core/colors';
 import { routerActions } from 'connected-react-router';
-import { RoutineTemplateVO } from 'workout-app-common-core';
+import { RoutineTemplateVO, workoutCategories } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ROUTINE_BUILDER_SCREEN_PATH } from '../../../../configs/constants/app';
 import { viewSelectedRoutine } from '../../../../creators/routine-builder/builder';
@@ -32,12 +32,19 @@ const PreviewRoutineDialog = (
 ) => {
   const { open, routineTemplate } = props;
   const classes = useStyles();
+  let subtitle = '';
+  workoutCategories.find((category) => {
+    if (category.id === routineTemplate?.workoutCategoryId) {
+      subtitle = `category: ${category.name}`;
+    }
+  });
 
   return (
     <Dialog open={open} onClose={props.closeHandler} maxWidth={'sm'} fullWidth>
       {routineTemplate && (
         <DialogAppBar
-          name={routineTemplate.name}
+          title={routineTemplate.name}
+          subtitle={subtitle}
           closeHandler={props.closeHandler}
         />
       )}

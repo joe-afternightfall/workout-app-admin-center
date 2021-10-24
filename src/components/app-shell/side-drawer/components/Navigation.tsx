@@ -33,16 +33,18 @@ const Navigation = (
     <List component={'nav'} className={classes.root}>
       {Object.keys(appNavigationRoutes).map((value: string, index: number) => {
         return (
-          <NavListItem
-            key={index}
-            currentLocation={props.currentLocation}
-            pageInfo={appNavigationRoutes[value].pageProps[0]}
-            clickHandler={() => {
-              props.routeClickHandler(
-                appNavigationRoutes[value].pageProps[0].path
-              );
-            }}
-          />
+          appNavigationRoutes[value].shouldDisplayInNav && (
+            <NavListItem
+              key={index}
+              currentLocation={props.currentLocation}
+              pageInfo={appNavigationRoutes[value].pageProps[0]}
+              clickHandler={() => {
+                props.routeClickHandler(
+                  appNavigationRoutes[value].pageProps[0].path
+                );
+              }}
+            />
+          )
         );
       })}
 

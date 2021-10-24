@@ -68,7 +68,7 @@ class App extends Component<AppProps> {
   }
 }
 
-export interface AppProps extends WithStyles<typeof styles> {
+interface AppProps extends WithStyles<typeof styles> {
   children: JSX.Element;
   displayAppBar: boolean;
 }
