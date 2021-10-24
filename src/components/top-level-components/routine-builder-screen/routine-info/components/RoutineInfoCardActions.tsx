@@ -5,8 +5,9 @@ import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
 import { Button, CardActions, Divider, Grid } from '@material-ui/core';
 import {
-  saveNewRoutineTemplate,
   updateRoutineTemplate,
+  saveNewRoutineTemplate,
+  fetchAllRoutineTemplates,
 } from '../../../../../services/workout-configurations/routine-templates';
 import DeleteRoutineDialog from './DeleteRoutineDialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -129,6 +130,9 @@ const mapDispatchToProps = (dispatch: Dispatch): RoutineInfoCardActionsProps =>
   ({
     cancelHandler: () => {
       dispatch(routerActions.push(ROUTINE_TEMPLATES_SCREEN_PATH));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        fetchAllRoutineTemplates()
+      );
       setTimeout(() => {
         dispatch(clearRoutineBuilder());
       }, 100);
