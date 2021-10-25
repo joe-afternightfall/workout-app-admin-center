@@ -14,7 +14,7 @@ import LineItemTitle from '../base-components/LineItemTitle';
 const SetIncrementer = (
   props: SetIncrementerProps & PassedInProps
 ): JSX.Element => {
-  const { segment } = props;
+  const { segment, circuitSet } = props;
   let disableAdd = false;
   let disableDelete = true;
 
@@ -40,7 +40,9 @@ const SetIncrementer = (
   return (
     <Grid container justify={'center'} alignItems={'center'}>
       <Grid item xs={6}>
-        <LineItemTitle title={'Number of sets'} />
+        <LineItemTitle
+          title={circuitSet ? 'Number of laps in circuit' : 'Number of sets'}
+        />
       </Grid>
       <Grid item xs={6} container alignItems={'center'}>
         <Grid item xs={3} container justify={'center'}>
@@ -68,6 +70,7 @@ const SetIncrementer = (
 
 interface PassedInProps {
   segment: Segment;
+  circuitSet: boolean;
 }
 
 interface SetIncrementerProps {
