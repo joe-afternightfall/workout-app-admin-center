@@ -8,6 +8,8 @@ import EditingDialog from './components/EditingDialog';
 const EditingInfoCardActions = ({
   segment,
   doneHandler,
+  isCircuitSet,
+  clearCircuitHandler,
   doneDisabled,
 }: EditingInfoCardActionsProps & PassedInProps): JSX.Element => {
   return (
@@ -25,7 +27,12 @@ const EditingInfoCardActions = ({
           spacing={2}
         >
           <Grid item>
-            <EditingDialog dialogType={'reset'} segmentId={segment.id} />
+            <EditingDialog
+              dialogType={'reset'}
+              segmentId={segment.id}
+              isCircuitSet={isCircuitSet}
+              clearCircuitHandler={clearCircuitHandler}
+            />
           </Grid>
           <Grid item style={{ height: '100%' }}>
             <Divider orientation={'vertical'} variant={'fullWidth'} />
@@ -56,6 +63,8 @@ const EditingInfoCardActions = ({
 interface PassedInProps {
   segment: Segment;
   doneHandler: () => void;
+  isCircuitSet: boolean;
+  clearCircuitHandler?: () => void;
 }
 
 interface EditingInfoCardActionsProps {
