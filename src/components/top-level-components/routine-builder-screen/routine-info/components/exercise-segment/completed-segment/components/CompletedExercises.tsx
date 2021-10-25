@@ -17,6 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function buildLineItem(title: string, index: number): JSX.Element {
+  return (
+    <Grid item xs={12} key={index}>
+      <Typography variant={'h6'} color={'textPrimary'}>
+        {title}
+      </Typography>
+    </Grid>
+  );
+}
+
 const CompletedExercises = ({
   linkIconSize,
   exercises,
@@ -78,6 +88,20 @@ const CompletedExercises = ({
           <Typography variant={'h6'} color={'textPrimary'}>
             {hideNumbers ? firstElementTitle : `1. ${firstElementTitle}`}
           </Typography>
+        </Grid>
+      )}
+      {setType === 'circuit-set' && (
+        <Grid container spacing={2}>
+          {segment.exercises.map((workoutExercise, index) => {
+            const exerciseName = getExerciseName(
+              exercises,
+              workoutExercise.exerciseId
+            );
+            const title = hideNumbers
+              ? exerciseName
+              : `${index + 1}. ${exerciseName}`;
+            return buildLineItem(title, index);
+          })}
         </Grid>
       )}
     </>
