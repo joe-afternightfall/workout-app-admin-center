@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, ListItem, ListItemText } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import ComponentBuilder from './ComponentBuilder';
 import BuiltListItem from './components/BuiltListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
@@ -46,10 +46,9 @@ function buildListItem(title: string, items: JSX.Element[]) {
 
 const ExerciseListItem = ({
   segment,
+  numberOfExercises,
   selectedExerciseSlotForSegment,
 }: ExerciseListItemProps & PassedInProps): JSX.Element => {
-  // let builtListItem = <div />;
-  const title = '';
   const componentsToRender: JSX.Element[] = [];
 
   if (isStraightSet(segment.trainingSetTypeId)) {
@@ -63,50 +62,17 @@ const ExerciseListItem = ({
       buildListItem('Exercises', [firstElement, secondElement])
     );
   } else if (isCircuitSet(segment.trainingSetTypeId)) {
-    const exerciseLength = segment.exercises.length;
-
-    if (exerciseLength === 0) {
-      const blink =
-        selectedExerciseSlotForSegment.segmentId === segment.id &&
-        selectedExerciseSlotForSegment.order === 1;
-
-      componentsToRender.push(
-        <>
-          <BuiltListItem
-            title={'Exercise # 1'}
-            rightComponent={
-              <Grid item xs={12}>
-                <ComponentBuilder
-                  exerciseOrder={1}
-                  segment={segment}
-                  shouldBlink={blink}
-                />
-              </Grid>
-            }
-          />
-          <ListItem button>
-            <ListItemText primary={'add to circuit'} />
-          </ListItem>
-        </>
+    let circuitIndex = 0;
+    while (numberOfExercises > circuitIndex) {
+      circuitIndex++;
+      const element = buildComp(
+        circuitIndex,
+        segment,
+        selectedExerciseSlotForSegment
       );
-    } else {
-      segment.exercises.map((workoutExercise, index) => {
-        componentsToRender.push(
-          <BuiltListItem
-            title={`Exercise #${index + 1}`}
-            rightComponent={
-              <Grid item xs={12}>
-                <ComponentBuilder
-                  exerciseOrder={1}
-                  segment={segment}
-                  shouldBlink={false}
-                />
-              </Grid>
-            }
-          />
-        );
-      });
-      componentsToRender.push();
+      componentsToRender.push(
+        buildListItem(`Exercise #${circuitIndex}`, [element])
+      );
     }
   }
 
@@ -115,6 +81,7 @@ const ExerciseListItem = ({
 
 interface PassedInProps {
   segment: Segment;
+  numberOfExercises: number;
 }
 
 interface ExerciseListItemProps {

@@ -19,6 +19,7 @@ import CompletedCardHeader from './components/CompletedCardHeader';
 import CompletedRestBetween from './components/CompletedRestBetween';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Segment, determineTrainingSetType } from 'workout-app-common-core';
+import trackIcon from '../../../../../../../configs/icons/track-icon.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +49,12 @@ const useStyles = makeStyles((theme: Theme) =>
         cursor: 'pointer',
       },
     },
+    linkRoot: {
+      color: theme.palette.info.dark,
+    },
+    trackIcon: {
+      height: 40,
+    },
   })
 );
 
@@ -73,6 +80,15 @@ export default function CompletedSegmentCard({
   } else if (trainingSetType === 'straight-set') {
     title = 'Straight set';
     icon = <Arrow className={classes.icon} fontSize={'large'} />;
+  } else if (trainingSetType === 'circuit-set') {
+    title = 'Circuit Set';
+    icon = (
+      <img
+        alt={'app-logo'}
+        className={clsx(classes.icon, classes.trackIcon)}
+        src={trackIcon}
+      />
+    );
   }
 
   return (
@@ -95,7 +111,10 @@ export default function CompletedSegmentCard({
                 />
               </Grid>
               <Grid item xs={3}>
-                <CompletedSets segment={segment} />
+                <CompletedSets
+                  segment={segment}
+                  circuitSet={trainingSetType === 'circuit-set'}
+                />
               </Grid>
             </Grid>
           </CardContent>
