@@ -22,16 +22,26 @@ const useStyles = makeStyles(() =>
 
 export default function CompletedSets({
   segment,
+  circuitSet,
 }: CompletedSetsProps): JSX.Element {
   const classes = useStyles();
 
   const setLength = segment.exercises[0].sets.length;
   let title = '';
-  if (setLength === 1) {
-    title = `${setLength} Set`;
+  if (circuitSet) {
+    if (setLength === 1) {
+      title = `${setLength} Lap`;
+    } else {
+      title = `${setLength} Laps`;
+    }
   } else {
-    title = `${setLength} Sets`;
+    if (setLength === 1) {
+      title = `${setLength} Set`;
+    } else {
+      title = `${setLength} Sets`;
+    }
   }
+
   return (
     <Grid
       container
@@ -61,4 +71,5 @@ export default function CompletedSets({
 
 interface CompletedSetsProps {
   segment: Segment;
+  circuitSet: boolean;
 }

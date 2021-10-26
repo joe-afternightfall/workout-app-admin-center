@@ -85,6 +85,8 @@ interface PassedInProps {
   segmentId: string;
   dialogType: 'reset' | 'remove';
   isDisabled?: boolean;
+  clearCircuitHandler?: () => void;
+  isCircuitSet?: boolean;
 }
 
 interface EditingDialogProps {
@@ -98,6 +100,9 @@ const mapDispatchToProps = (
   ({
     actionHandler: () => {
       if (ownProps.dialogType === 'reset') {
+        ownProps.isCircuitSet &&
+          ownProps.clearCircuitHandler &&
+          ownProps.clearCircuitHandler();
         dispatch(resetSetTypeAndExerciseInfo(ownProps.segmentId));
       } else if (ownProps.dialogType === 'remove') {
         dispatch(deleteSegmentFromPhase(ownProps.segmentId));

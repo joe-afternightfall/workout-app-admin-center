@@ -1,84 +1,91 @@
 import React from 'react';
+import {
+  Segment,
+  isSuperset,
+  isCircuitSet,
+  isStraightSet,
+} from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import ComponentBuilder from './ComponentBuilder';
 import BuiltListItem from './components/BuiltListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
-import { Segment, isSuperset, isStraightSet } from 'workout-app-common-core';
 
-const ExerciseListItem = ({
-  segment,
-  selectedExerciseSlotForSegment,
-}: ExerciseListItemProps & PassedInProps): JSX.Element => {
-  let firstComponent = <div />;
-  let secondComponent = <div />;
-  let title = '';
+interface SlotProps {
+  order: number;
+  segmentId: string;
+}
 
-  if (isStraightSet(segment.trainingSetTypeId)) {
-    title = 'Exercise';
-    const blink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 1;
+function buildComp(order: number, segment: Segment, slotProps: SlotProps) {
+  const blink = slotProps.segmentId === segment.id && slotProps.order === order;
+  return (
+    <ComponentBuilder
+      exerciseOrder={order}
+      segment={segment}
+      shouldBlink={blink}
+    />
+  );
+}
 
-    firstComponent = (
-      <ComponentBuilder
-        exerciseOrder={1}
-        segment={segment}
-        shouldBlink={blink}
-      />
-    );
-  } else if (isSuperset(segment.trainingSetTypeId)) {
-    title = 'Exercises';
-    const firstComponentBlink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 1;
-    const secondComponentBlink =
-      selectedExerciseSlotForSegment.segmentId === segment.id &&
-      selectedExerciseSlotForSegment.order === 2;
-
-    firstComponent = (
-      <ComponentBuilder
-        exerciseOrder={1}
-        segment={segment}
-        shouldBlink={firstComponentBlink}
-      />
-    );
-
-    secondComponent = (
-      <ComponentBuilder
-        exerciseOrder={2}
-        segment={segment}
-        shouldBlink={secondComponentBlink}
-      />
-    );
-  }
-
+function buildListItem(title: string, items: JSX.Element[]) {
   return (
     <BuiltListItem
       title={title}
       rightComponent={
         <>
-          <Grid item xs={12}>
-            {firstComponent}
-          </Grid>
-          <Grid item xs={12}>
-            {secondComponent}
-          </Grid>
+          {items.map((element, index) => (
+            <Grid item xs={12} key={index}>
+              {element}
+            </Grid>
+          ))}
         </>
       }
     />
   );
+}
+
+const ExerciseListItem = ({
+  segment,
+  numberOfExercises,
+  selectedExerciseSlotForSegment,
+}: ExerciseListItemProps & PassedInProps): JSX.Element => {
+  const componentsToRender: JSX.Element[] = [];
+
+  if (isStraightSet(segment.trainingSetTypeId)) {
+    const builtElement = buildComp(1, segment, selectedExerciseSlotForSegment);
+    componentsToRender.push(buildListItem('Exercise', [builtElement]));
+  } else if (isSuperset(segment.trainingSetTypeId)) {
+    const firstElement = buildComp(1, segment, selectedExerciseSlotForSegment);
+    const secondElement = buildComp(2, segment, selectedExerciseSlotForSegment);
+
+    componentsToRender.push(
+      buildListItem('Exercises', [firstElement, secondElement])
+    );
+  } else if (isCircuitSet(segment.trainingSetTypeId)) {
+    let circuitIndex = 0;
+    while (numberOfExercises > circuitIndex) {
+      circuitIndex++;
+      const element = buildComp(
+        circuitIndex,
+        segment,
+        selectedExerciseSlotForSegment
+      );
+      componentsToRender.push(
+        buildListItem(`Exercise #${circuitIndex}`, [element])
+      );
+    }
+  }
+
+  return <>{componentsToRender.map((element) => element)}</>;
 };
 
 interface PassedInProps {
   segment: Segment;
+  numberOfExercises: number;
 }
 
 interface ExerciseListItemProps {
-  selectedExerciseSlotForSegment: {
-    order: number;
-    segmentId: string;
-  };
+  selectedExerciseSlotForSegment: SlotProps;
 }
 
 const mapStateToProps = (state: State): ExerciseListItemProps => {
