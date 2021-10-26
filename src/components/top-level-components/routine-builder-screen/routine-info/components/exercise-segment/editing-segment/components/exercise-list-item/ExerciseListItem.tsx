@@ -1,15 +1,15 @@
 import React from 'react';
+import {
+  Segment,
+  isSuperset,
+  isCircuitSet,
+  isStraightSet,
+} from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import ComponentBuilder from './ComponentBuilder';
 import BuiltListItem from './components/BuiltListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
-import {
-  Segment,
-  isSuperset,
-  isStraightSet,
-  isCircuitSet,
-} from 'workout-app-common-core';
 
 interface SlotProps {
   order: number;

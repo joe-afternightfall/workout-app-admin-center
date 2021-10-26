@@ -81,14 +81,16 @@ export default function EditingSegmentContainer({
           ) : (
             <>
               {circuitSet && (
-                <CircuitIncrementer
-                  numberOfExercises={circuitExercises}
-                  incrementor={incrementCircuitExercises}
-                  done={doneSelectingCircuits}
-                  doneHandler={() => {
-                    setDoneSelectingCircuits(true);
-                  }}
-                />
+                <ListItem>
+                  <CircuitIncrementer
+                    numberOfExercises={circuitExercises}
+                    incrementor={incrementCircuitExercises}
+                    done={doneSelectingCircuits}
+                    doneHandler={() => {
+                      setDoneSelectingCircuits(true);
+                    }}
+                  />
+                </ListItem>
               )}
 
               {circuitSet ? (
