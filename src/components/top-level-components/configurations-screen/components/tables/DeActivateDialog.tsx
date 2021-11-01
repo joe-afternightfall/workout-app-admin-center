@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function DeActivateDialog({
   highlight,
   deActivateClickHandler,
-}: BaseDeleteDialogContentProps): JSX.Element {
+}: DeActivateDialogProps): JSX.Element {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -94,7 +94,7 @@ export default function DeActivateDialog({
   );
 }
 
-interface BaseDeleteDialogContentProps {
+interface DeActivateDialogProps {
   highlight: string;
   deActivateClickHandler: () => void;
 }
