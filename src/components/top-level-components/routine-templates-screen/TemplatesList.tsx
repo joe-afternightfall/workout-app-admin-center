@@ -9,9 +9,9 @@ import {
 import { connect } from 'react-redux';
 import React, { useState } from 'react';
 import { State } from '../../../configs/redux/store';
-import PreviewRoutineDialog from './preview-dialog/PreviewRoutineDialog';
+import { RoutineTemplateVO, WorkoutCategoryVO } from 'workout-app-common-core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { RoutineTemplateVO, workoutCategories } from 'workout-app-common-core';
+import PreviewRoutineDialog from './preview-dialog/PreviewRoutineDialog';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,6 +24,7 @@ const useStyles = makeStyles(() =>
 
 const TemplatesList = ({
   routineTemplates,
+  workoutCategories,
 }: TemplatesListProps): JSX.Element => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -79,12 +80,15 @@ const TemplatesList = ({
 
 interface TemplatesListProps {
   routineTemplates: RoutineTemplateVO[];
+  workoutCategories: WorkoutCategoryVO[];
 }
 
 const mapStateToProps = (state: State): TemplatesListProps => {
   return {
     routineTemplates:
       state.applicationState.workoutConfigurations.routineTemplates,
+    workoutCategories:
+      state.applicationState.workoutConfigurations.workoutCategories,
   } as unknown as TemplatesListProps;
 };
 
