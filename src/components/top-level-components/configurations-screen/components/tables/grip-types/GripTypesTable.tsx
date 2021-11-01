@@ -18,9 +18,9 @@ const GripTypesTable = (props: GripTypesTableProps) => {
     null
   );
 
-  const openDialog = (newGripType: boolean, gripType: GripTypeVO | null) => {
+  const openDialog = (isNew: boolean, gripType: GripTypeVO | null) => {
     setOpen(true);
-    setNewGripType(newGripType);
+    setNewGripType(isNew);
     setSelectedGripType(gripType);
   };
 
@@ -94,7 +94,7 @@ const GripTypesTable = (props: GripTypesTableProps) => {
               textAlign: 'center',
             },
             cellStyle: {
-              width: '20%',
+              width: '30%',
               textAlign: 'center',
             },
           },

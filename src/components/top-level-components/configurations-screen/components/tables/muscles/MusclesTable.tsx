@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { MuscleVO } from 'workout-app-common-core';
+import { getManikinMuscleGroupName, MuscleVO } from 'workout-app-common-core';
 import TableActionButtons from '../TableActionButtons';
 import PageTitle from '../../../../../shared/PageTitle';
 import { State } from '../../../../../../configs/redux/store';
@@ -33,7 +33,10 @@ const MusclesTable = (props: MusclesTableProps): JSX.Element => {
     return {
       number: index,
       name: muscle.name,
-      manikinMuscleGroupId: muscle.manikinMuscleGroupId,
+      manikinMuscleGroupName: getManikinMuscleGroupName(
+        muscle.manikinMuscleGroupId,
+        true
+      ),
       actions: (
         <TableActionButtons
           deActivateHighlight={muscle.name}
@@ -79,7 +82,15 @@ const MusclesTable = (props: MusclesTableProps): JSX.Element => {
             field: 'name',
             editable: 'never',
             cellStyle: {
-              width: '70%',
+              width: '40%',
+            },
+          },
+          {
+            title: 'Manikin Muscle Group',
+            field: 'manikinMuscleGroupName',
+            editable: 'never',
+            cellStyle: {
+              width: '30%',
             },
           },
           {

@@ -20,11 +20,11 @@ const MuscleTargetTypesTable = (
     useState<MuscleTargetTypeVO | null>(null);
 
   const openDialog = (
-    newMuscleTargetType: boolean,
+    isNew: boolean,
     muscleTargetType: MuscleTargetTypeVO | null
   ) => {
     setOpen(true);
-    setNewMuscleTargetType(newMuscleTargetType);
+    setNewMuscleTargetType(isNew);
     setSelectedMuscleTargetType(muscleTargetType);
   };
 

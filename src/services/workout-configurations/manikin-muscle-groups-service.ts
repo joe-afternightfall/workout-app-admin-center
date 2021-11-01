@@ -84,7 +84,7 @@ export const deActivateManikinMuscleGroup =
           } else {
             dispatch(
               displaySuccessSnackbar(
-                'Successfully updated manikin muscle group'
+                'Successfully de-activated manikin muscle group'
               )
             );
           }

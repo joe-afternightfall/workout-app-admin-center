@@ -70,7 +70,9 @@ export const deActivateMuscle =
           if (error) {
             dispatch(displayErrorSnackbar('Error de-activating muscle.'));
           } else {
-            dispatch(displaySuccessSnackbar('Successfully updated muscle.'));
+            dispatch(
+              displaySuccessSnackbar('Successfully de-activated muscle.')
+            );
           }
         }
       );

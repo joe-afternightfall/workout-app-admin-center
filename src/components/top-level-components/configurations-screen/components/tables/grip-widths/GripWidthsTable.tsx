@@ -17,9 +17,9 @@ const GripWidthsTable = (props: GripWidthsTableProps) => {
   const [selectedGripWidth, setSelectedGripWidth] =
     useState<GripWidthVO | null>(null);
 
-  const openDialog = (newGripWidth: boolean, gripWidth: GripWidthVO | null) => {
+  const openDialog = (isNew: boolean, gripWidth: GripWidthVO | null) => {
     setOpen(true);
-    setNewGripWidth(newGripWidth);
+    setNewGripWidth(isNew);
     setSelectedGripWidth(gripWidth);
   };
 
@@ -107,7 +107,7 @@ const GripWidthsTable = (props: GripWidthsTableProps) => {
               textAlign: 'center',
             },
             cellStyle: {
-              width: '20%',
+              width: '30%',
               textAlign: 'center',
             },
           },

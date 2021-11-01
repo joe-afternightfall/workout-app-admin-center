@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import TableActionButtons from '../TableActionButtons';
 import PageTitle from '../../../../../shared/PageTitle';
 import { State } from '../../../../../../configs/redux/store';
-import TableActionButtons from '../TableActionButtons';
-import { GripWidthVO, ManikinMuscleGroupVO } from 'workout-app-common-core';
-import { deActivateGripWidth } from '../../../../../../services/workout-configurations/grip-widths-service';
+import { ManikinMuscleGroupVO } from 'workout-app-common-core';
 import ManikinMuscleGroupDialog from './ManikinMuscleGroupDialog';
 import { deActivateManikinMuscleGroup } from '../../../../../../services/workout-configurations/manikin-muscle-groups-service';
 
@@ -21,11 +20,11 @@ const ManikinMuscleGroupsTable = (
     useState<ManikinMuscleGroupVO | null>(null);
 
   const openDialog = (
-    newManikinGroup: boolean,
+    isNew: boolean,
     manikinGroup: ManikinMuscleGroupVO | null
   ) => {
     setOpen(true);
-    setNewManikinGroup(newManikinGroup);
+    setNewManikinGroup(isNew);
     setSelectedManikinMuscleGroup(manikinGroup);
   };
 
