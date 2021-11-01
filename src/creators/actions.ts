@@ -48,6 +48,7 @@ import {
   SelectOptionalExerciseParamAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
+import { LoadGripTypesAction } from './workout-configs/grip-types';
 
 export enum ActionTypes {
   // Application Actions
@@ -62,6 +63,7 @@ export enum ActionTypes {
 
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
+  LOAD_GRIP_TYPES = 'LOAD_GRIP_TYPES',
   LOAD_ROUTINE_TEMPLATES = 'LOAD_ROUTINE_TEMPLATES',
 
   // Routine Builder Actions
@@ -148,4 +150,5 @@ export type ApplicationActions =
   | SaveExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
-  | CloseExerciseFormDialogAction;
+  | CloseExerciseFormDialogAction
+  | LoadGripTypesAction;
