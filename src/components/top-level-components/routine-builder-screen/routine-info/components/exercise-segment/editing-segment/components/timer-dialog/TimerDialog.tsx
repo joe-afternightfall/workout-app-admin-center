@@ -9,9 +9,9 @@ import {
 import * as ramda from 'ramda';
 import {
   WorkoutTimer,
-  CustomStepper,
-  CountdownTimer,
   validateForOnlyNumbers,
+  NightfallStepper,
+  NightfallCountdownTimer,
 } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import TimerIcon from '@material-ui/icons/Timer';
@@ -176,11 +176,14 @@ export default function TimerDialog({
               </Grid>
               <Grid item xs={12}>
                 {activeStep && (
-                  <CustomStepper activeStep={activeStep} timers={localTimers} />
+                  <NightfallStepper
+                    activeStep={activeStep}
+                    timers={localTimers}
+                  />
                 )}
               </Grid>
               <Grid item xs={12}>
-                <CountdownTimer
+                <NightfallCountdownTimer
                   timers={localTimers}
                   nextStepHandler={handleNextStep}
                   closeHandler={handleClose}

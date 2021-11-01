@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import BaseDialogTitle from './BaseDialogTitle';
+import { NightfallDialogTitle } from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +31,10 @@ export default function BaseDeleteDialogContent({
 
   return (
     <>
-      <BaseDialogTitle title={'Hold Up!'} closeClickHandler={closeHandler} />
+      <NightfallDialogTitle
+        title={'Hold Up!'}
+        closeClickHandler={closeHandler}
+      />
       <DialogContent>
         <Grid
           container
