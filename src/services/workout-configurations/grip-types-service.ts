@@ -74,3 +74,24 @@ export const updateGripType =
         }
       );
   };
+
+export const deActivateGripType =
+  (firebaseId: string): ThunkAction<void, State, void, AnyAction> =>
+  async (dispatch: Dispatch): Promise<void> => {
+    return await firebase
+      .database()
+      .ref(FIREBASE_DB_GRIP_TYPES_ROUTE)
+      .child(firebaseId)
+      .update(
+        {
+          active: false,
+        },
+        (error: Error | null) => {
+          if (error) {
+            dispatch(displayErrorSnackbar('Error de-activating grip type.'));
+          } else {
+            dispatch(displaySuccessSnackbar('Successfully de-activated.'));
+          }
+        }
+      );
+  };
