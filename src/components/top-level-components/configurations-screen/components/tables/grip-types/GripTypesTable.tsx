@@ -1,22 +1,14 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import MaterialTable from 'material-table';
+import { AnyAction, Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import GripTypeDialog from './GripTypeDialog';
+import { GripTypeVO } from 'workout-app-common-core';
+import TableActionButtons from '../TableActionButtons';
 import PageTitle from '../../../../../shared/PageTitle';
 import { State } from '../../../../../../configs/redux/store';
-import { Dispatch } from 'redux';
-import { ExerciseVO, GripTypeVO } from 'workout-app-common-core';
-import {
-  openEditingExerciseFormDialog,
-  openNewExerciseFormDialog,
-} from '../../../../../../creators/exercise-form/exercise-form';
-import { connect } from 'react-redux';
-import { useState } from 'react';
-import {
-  ExpandMore,
-  Link as LinkIcon,
-  ArrowRightAlt as Arrow,
-} from '@material-ui/icons';
-import GripTypeDialog from './GripTypeDialog';
-import TableActionButtons from '../TableActionButtons';
+import { deActivateGripType } from '../../../../../../services/workout-configurations/grip-types-service';
 
 const GripTypesTable = (props: GripTypesTableProps) => {
   const { gripTypes } = props;
@@ -44,12 +36,14 @@ const GripTypesTable = (props: GripTypesTableProps) => {
     return {
       number: index,
       name: gripType.name,
-      icon: <LinkIcon />,
+      icon: '---',
       actions: (
         <TableActionButtons
           deActivateHighlight={gripType.name}
           editClickHandler={() => openDialog(false, gripType)}
-          deActivateClickHandler={() => alert('de-activate clicked')}
+          deActivateClickHandler={() =>
+            props.deActivateClickHandler(gripType.firebaseId)
+          }
         />
       ),
     };
@@ -137,6 +131,7 @@ const GripTypesTable = (props: GripTypesTableProps) => {
 
 interface GripTypesTableProps {
   gripTypes: GripTypeVO[];
+  deActivateClickHandler: (firebaseId: string) => void;
 }
 
 const mapStateToProps = (state: State): GripTypesTableProps => {
@@ -147,8 +142,10 @@ const mapStateToProps = (state: State): GripTypesTableProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): GripTypesTableProps =>
   ({
-    updateHandler: () => {
-      dispatch(openNewExerciseFormDialog());
+    deActivateClickHandler: (firebaseId: string) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        deActivateGripType(firebaseId)
+      );
     },
   } as unknown as GripTypesTableProps);
 
