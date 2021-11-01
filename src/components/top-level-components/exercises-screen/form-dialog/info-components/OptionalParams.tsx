@@ -1,11 +1,8 @@
 import React from 'react';
 import {
-  GripType,
-  gripTypes,
-  GripWidth,
-  gripWidths,
-  EquipmentVO,
-  equipmentList,
+  GripTypeVO,
+  GripWidthVO,
+  WorkoutEquipmentVO,
 } from 'workout-app-common-core';
 import { Grid, IconButton, Select, Typography } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -26,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function OptionalParams({
   params,
+  gripWidths,
+  workoutEquipmentList,
+  gripTypes,
   selectOptionalParam,
 }: OptionalParamsProps): JSX.Element {
   const classes = useStyles();
@@ -68,7 +68,7 @@ export default function OptionalParams({
                     );
                   }}
                 >
-                  {gripWidths.map((width: GripWidth, index: number) => (
+                  {gripWidths.map((width: GripWidthVO, index: number) => (
                     <MenuItem value={width.id} key={index}>
                       {width.name}
                     </MenuItem>
@@ -120,7 +120,7 @@ export default function OptionalParams({
                     );
                   }}
                 >
-                  {gripTypes.map((type: GripType, index: number) => (
+                  {gripTypes.map((type: GripTypeVO, index: number) => (
                     <MenuItem value={type.id} key={index}>
                       {type.name}
                     </MenuItem>
@@ -149,7 +149,7 @@ export default function OptionalParams({
             <Grid item xs={4}>
               <IconButton
                 onClick={() => {
-                  selectOptionalParam('equipment', equipmentList[0].id);
+                  selectOptionalParam('equipment', workoutEquipmentList[0].id);
                 }}
               >
                 <AddIcon />
@@ -172,8 +172,8 @@ export default function OptionalParams({
                     );
                   }}
                 >
-                  {equipmentList.map(
-                    (equipment: EquipmentVO, index: number) => (
+                  {workoutEquipmentList.map(
+                    (equipment: WorkoutEquipmentVO, index: number) => (
                       <MenuItem value={equipment.id} key={index}>
                         {equipment.name}
                       </MenuItem>
@@ -204,6 +204,9 @@ interface OptionalParamsProps {
     equipmentId: string;
     gripTypeId: string;
   };
+  gripTypes: GripTypeVO[];
+  workoutEquipmentList: WorkoutEquipmentVO[];
+  gripWidths: GripWidthVO[];
   selectOptionalParam: (
     param: 'gripWidth' | 'gripType' | 'equipment',
     id: string
