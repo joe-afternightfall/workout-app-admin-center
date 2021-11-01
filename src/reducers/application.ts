@@ -2,10 +2,15 @@ import {
   ExerciseVO,
   GripTypeVO,
   GripWidthVO,
+  ManikinMuscleGroupVO,
+  MuscleTargetTypeVO,
+  MuscleVO,
+  ParameterTypeVO,
   PhaseVO,
   RoutineTemplateVO,
   TrainingSetTypeVO,
   WorkoutCategoryVO,
+  WorkoutEquipmentVO,
 } from 'workout-app-common-core';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
@@ -35,6 +40,35 @@ export default {
         break;
       case ActionTypes.LOAD_GRIP_WIDTHS:
         newState.workoutConfigurations.gripWidths = action.gripWidths;
+        break;
+      case ActionTypes.LOAD_MANIKIN_MUSCLE_GROUP:
+        newState.workoutConfigurations.manikinMuscleGroups =
+          action.manikinMuscleGroups;
+        break;
+      case ActionTypes.LOAD_MUSCLES:
+        newState.workoutConfigurations.muscles = action.muscles;
+        break;
+      case ActionTypes.LOAD_MUSCLE_TARGET_TYPES:
+        newState.workoutConfigurations.muscleTargetTypes =
+          action.muscleTargetTypes;
+        break;
+      case ActionTypes.LOAD_PARAMETER_TYPES:
+        newState.workoutConfigurations.parameterTypes = action.parameterTypes;
+        break;
+      case ActionTypes.LOAD_PHASES:
+        newState.workoutConfigurations.phases = action.phases;
+        break;
+      case ActionTypes.LOAD_TRAINING_SET_TYPES:
+        newState.workoutConfigurations.trainingSetTypes =
+          action.trainingSetTypes;
+        break;
+      case ActionTypes.LOAD_WORKOUT_CATEGORIES:
+        newState.workoutConfigurations.workoutCategories =
+          action.workoutCategories;
+        break;
+      case ActionTypes.LOAD_WORKOUT_EQUIPMENT:
+        newState.workoutConfigurations.workoutEquipment =
+          action.workoutEquipment;
         break;
       case ActionTypes.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
@@ -114,6 +148,11 @@ export interface ApplicationState {
     trainingSetTypes: TrainingSetTypeVO[];
     phases: PhaseVO[];
     workoutCategories: WorkoutCategoryVO[];
+    manikinMuscleGroups: ManikinMuscleGroupVO[];
+    muscles: MuscleVO[];
+    muscleTargetTypes: MuscleTargetTypeVO[];
+    parameterTypes: ParameterTypeVO[];
+    workoutEquipment: WorkoutEquipmentVO[];
   };
   selectedMuscleGroupIds: string[];
   applyHoverStylesToMuscleGroup: string;
