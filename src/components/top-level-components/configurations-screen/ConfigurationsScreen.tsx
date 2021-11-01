@@ -8,14 +8,38 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import ConfigsAccordion from './components/ConfigsAccordion';
+import GripTypesTable from './components/tables/grip-types/GripTypesTable';
+import GripWidthsTable from './components/tables/grip-widths/GripWidthsTable';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
+  // todo: grip-width
+  // todo: manikin-muscle-group
+  // todo: muscle
+  // todo: muscle-target-type
+  // todo: parameter-type
+  // todo: phase
+  // todo: training-set-type
+  // todo: workout-category
+  // todo: workout-equipment
+
   render(): JSX.Element {
+    const accordionElements = [
+      {
+        title: 'Grip Types',
+        secondary: 'click to view grip types',
+        element: <GripTypesTable />,
+      },
+      {
+        title: 'Grip Widths',
+        secondary: 'click to view grip widths',
+        element: <GripWidthsTable />,
+      },
+    ];
     return (
-      <Grid>
-        <ConfigsAccordion />
+      <Grid item xs={12}>
+        <ConfigsAccordion accordionElements={accordionElements} />
       </Grid>
     );
   }

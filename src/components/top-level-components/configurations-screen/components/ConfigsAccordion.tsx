@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ConfigsAccordion(): JSX.Element {
+export default function ConfigsAccordion(
+  props: ConfigsAccordionProps
+): JSX.Element {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
@@ -37,40 +39,28 @@ export default function ConfigsAccordion(): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <Accordion
-        expanded={expanded === 'grip-types-panel'}
-        onChange={handleChange('grip-types-panel')}
-      >
-        <AccordionSummary
-          id={'grip-types-header'}
-          expandIcon={<ExpandMoreIcon />}
-        >
-          <Typography className={classes.heading}>{'Grip Types'}</Typography>
-          <Typography className={classes.secondaryHeading}>
-            {'click to view grip types'}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <GripTypesTable />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === 'grip-widths-panel'}
-        onChange={handleChange('grip-widths-panel')}
-      >
-        <AccordionSummary
-          id={'grip-widths-header'}
-          expandIcon={<ExpandMoreIcon />}
-        >
-          <Typography className={classes.heading}>{'Grip Widths'}</Typography>
-          <Typography className={classes.secondaryHeading}>
-            {'click to view grip widths'}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <GripWidthsTable />
-        </AccordionDetails>
-      </Accordion>
+      {props.accordionElements.map((entry, index) => {
+        index += 1;
+        const panelId = `panel-${index}`;
+        return (
+          <Accordion
+            key={index}
+            expanded={expanded === panelId}
+            onChange={handleChange(panelId)}
+          >
+            <AccordionSummary
+              id={`${panelId}-header`}
+              expandIcon={<ExpandMoreIcon />}
+            >
+              <Typography className={classes.heading}>{entry.title}</Typography>
+              <Typography className={classes.secondaryHeading}>
+                {entry.secondary}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>{entry.element}</AccordionDetails>
+          </Accordion>
+        );
+      })}
       <Accordion
         expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
@@ -134,4 +124,12 @@ export default function ConfigsAccordion(): JSX.Element {
       </Accordion>
     </div>
   );
+}
+
+interface ConfigsAccordionProps {
+  accordionElements: {
+    title: string;
+    secondary: string;
+    element: JSX.Element;
+  }[];
 }
