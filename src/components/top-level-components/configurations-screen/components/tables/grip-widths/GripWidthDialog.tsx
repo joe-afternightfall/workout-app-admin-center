@@ -39,7 +39,7 @@ const GripWidthDialog = (
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                label={'Grip Width'}
+                label={'Grip Title'}
                 value={name}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setName(e.target.value);
