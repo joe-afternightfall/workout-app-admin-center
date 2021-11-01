@@ -5,6 +5,7 @@ import {
   updateExercises,
   updateExerciseTypes,
   updateGripTypes,
+  updateGripWidths,
   updateRoutineTemplates,
 } from './update-methods';
 import {
@@ -56,33 +57,37 @@ export class Initializer {
     const refArray = [
       {
         ref: firebase.database().ref(EXERCISE_TYPES_ROUTE),
-        updateMethod: updateExerciseTypes(this.store),
+        updateMethod: () => updateExerciseTypes(this.store),
       },
       {
         ref: firebase.database().ref(FIREBASE_DB_EXERCISES_ROUTE),
-        updateMethod: updateExercises(this.store),
+        updateMethod: () => updateExercises(this.store),
       },
       {
         ref: firebase.database().ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE),
-        updateMethod: updateRoutineTemplates(this.store),
+        updateMethod: () => updateRoutineTemplates(this.store),
       },
       {
         ref: firebase.database().ref(FIREBASE_DB_GRIP_TYPES_ROUTE),
-        updateMethod: updateGripTypes(this.store),
+        updateMethod: () => updateGripTypes(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_GRIP_WIDTHS_ROUTE),
+        updateMethod: () => updateGripWidths(this.store),
       },
     ];
 
     refArray.map((entry) => {
       entry.ref.on('child_added', async () => {
-        await updateExerciseTypes(this.store);
+        await entry.updateMethod();
       });
 
       entry.ref.on('child_changed', async () => {
-        await updateExerciseTypes(this.store);
+        await entry.updateMethod();
       });
 
       entry.ref.on('child_removed', async () => {
-        await updateExerciseTypes(this.store);
+        await entry.updateMethod();
       });
     });
   }
