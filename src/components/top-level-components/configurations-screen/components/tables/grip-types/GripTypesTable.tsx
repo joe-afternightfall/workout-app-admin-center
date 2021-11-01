@@ -47,8 +47,9 @@ const GripTypesTable = (props: GripTypesTableProps) => {
       icon: <LinkIcon />,
       actions: (
         <TableActionButtons
+          deActivateHighlight={gripType.name}
           editClickHandler={() => openDialog(false, gripType)}
-          deleteClickHandler={() => alert('delete clicked')}
+          deActivateClickHandler={() => alert('de-activate clicked')}
         />
       ),
     };

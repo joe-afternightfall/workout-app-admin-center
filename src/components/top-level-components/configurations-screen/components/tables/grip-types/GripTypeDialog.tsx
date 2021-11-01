@@ -26,7 +26,7 @@ const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
       setIconId('');
       setDescription('');
     }
-  }, []);
+  }, [newGripType, selectedGripType]);
 
   return (
     <Dialog open={open} onClose={closeDialogHandler}>
@@ -40,7 +40,6 @@ const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
                 label={'Grip Name'}
                 value={gripName}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                  console.log('e.target.value' + e.target.value);
                   setGripName(e.target.value);
                 }}
               />
