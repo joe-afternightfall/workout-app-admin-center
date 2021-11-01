@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link as LinkIcon } from '@material-ui/icons';
 import { Grid, Typography, Divider } from '@material-ui/core';
+import { getExerciseName, Segment } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { State } from '../../../../../../../../configs/redux/store';
-import { ExerciseVO, getExerciseName, Segment } from 'workout-app-common-core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,29 +25,28 @@ function buildLineItem(title: string, index: number): JSX.Element {
   );
 }
 
-const CompletedExercises = ({
+export default function CompletedExercises({
   linkIconSize,
-  exercises,
   segment,
   setType,
   hideNumbers,
-}: CompletedExercisesProps & PassedInProps): JSX.Element => {
+}: CompletedExercisesProps): JSX.Element {
   const classes = useStyles();
 
-  let firstElementTitle = '';
-  let secondElementTitle = '';
+  let firstElementTitle;
+  let secondElementTitle;
 
   if (setType === 'superset') {
     firstElementTitle =
       segment.exercises[0] &&
-      getExerciseName(exercises, segment.exercises[0].exerciseId);
+      getExerciseName(segment.exercises[0].exerciseId, true);
     secondElementTitle =
       segment.exercises[1] &&
-      getExerciseName(exercises, segment.exercises[1].exerciseId);
+      getExerciseName(segment.exercises[1].exerciseId, true);
   } else if (setType === 'straight-set') {
     firstElementTitle =
       segment.exercises[0] &&
-      getExerciseName(exercises, segment.exercises[0].exerciseId);
+      getExerciseName(segment.exercises[0].exerciseId, true);
   }
 
   return (
@@ -94,35 +91,23 @@ const CompletedExercises = ({
         <Grid container spacing={2}>
           {segment.exercises.map((workoutExercise, index) => {
             const exerciseName = getExerciseName(
-              exercises,
-              workoutExercise.exerciseId
+              workoutExercise.exerciseId,
+              true
             );
             const title = hideNumbers
               ? exerciseName
               : `${index + 1}. ${exerciseName}`;
-            return buildLineItem(title, index);
+            return title && buildLineItem(title, index);
           })}
         </Grid>
       )}
     </>
   );
-};
+}
 
-interface PassedInProps {
+interface CompletedExercisesProps {
   hideNumbers?: boolean;
   segment: Segment;
   linkIconSize: 'inherit' | 'default' | 'small' | 'large';
   setType: 'superset' | 'straight-set' | 'circuit-set' | null;
 }
-
-interface CompletedExercisesProps {
-  exercises: ExerciseVO[];
-}
-
-const mapStateToProps = (state: State): CompletedExercisesProps => {
-  return {
-    exercises: state.applicationState.workoutConfigurations.exercises,
-  } as unknown as CompletedExercisesProps;
-};
-
-export default connect(mapStateToProps)(CompletedExercises);
