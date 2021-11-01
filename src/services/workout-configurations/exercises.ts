@@ -23,13 +23,15 @@ export const saveExercise =
         exerciseForm.id,
         exerciseForm.name,
         exerciseForm.description,
-        exerciseForm.equipmentId,
-        exerciseForm.muscleGroupIds,
-        '',
+        exerciseForm.workoutEquipmentIds,
+        exerciseForm.manikinMuscleGroupIds,
+        exerciseForm.musclesWorked,
+        exerciseForm.iconId,
         exerciseForm.gripTypeId,
         exerciseForm.gripWidthId,
         exerciseForm.parameterTypeId,
-        exerciseForm.alternateSides
+        exerciseForm.alternateSides,
+        exerciseForm.active
       );
 
       return await newRef.set(newExercise, (error: Error | null) => {
@@ -55,13 +57,15 @@ export const saveExercise =
           {
             name: exerciseForm.name,
             description: exerciseForm.description,
-            equipmentId: exerciseForm.equipmentId,
-            muscleGroupIds: exerciseForm.muscleGroupIds,
+            workoutEquipmentIds: exerciseForm.workoutEquipmentIds,
+            manikinMuscleGroupIds: exerciseForm.manikinMuscleGroupIds,
+            musclesWorked: exerciseForm.musclesWorked,
             iconId: exerciseForm.iconId,
             gripTypeId: exerciseForm.gripTypeId,
             gripWidthId: exerciseForm.gripWidthId,
             parameterTypeId: exerciseForm.parameterTypeId,
             alternateSides: exerciseForm.alternateSides,
+            active: exerciseForm.active,
           },
           (error: Error | null) => {
             if (error) {
