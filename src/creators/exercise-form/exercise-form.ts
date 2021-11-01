@@ -1,5 +1,5 @@
-import { ExerciseVO, ParameterType } from 'workout-app-common-core';
 import { ActionTypes } from '../actions';
+import { ExerciseVO, ParameterTypeVO } from 'workout-app-common-core';
 
 export interface OpenNewExerciseFormDialogAction {
   type: ActionTypes.OPEN_NEW_EXERCISE_FORM_DIALOG;
@@ -38,11 +38,11 @@ export const closeExerciseFormDialog = (): CloseExerciseFormDialogAction => {
 
 export interface SelectExerciseParamTypeAction {
   type: ActionTypes.SELECT_EXERCISE_PARAM_TYPE;
-  paramType: ParameterType;
+  paramType: ParameterTypeVO;
 }
 
 export const selectExerciseParamType = (
-  paramType: ParameterType
+  paramType: ParameterTypeVO
 ): SelectExerciseParamTypeAction => {
   return {
     type: ActionTypes.SELECT_EXERCISE_PARAM_TYPE,
