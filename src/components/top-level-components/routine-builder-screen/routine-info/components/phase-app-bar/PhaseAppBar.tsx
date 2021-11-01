@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
 export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
   const classes = useStyles();
 
-  const phaseName = getPhaseName(phase.phaseId);
+  const phaseName = getPhaseName(phase.phaseId, true);
   return (
     <Toolbar className={classes.root}>
       <Grid container>
