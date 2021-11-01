@@ -5,7 +5,15 @@ import {
   LoadExerciseTypesAction,
   LoadGripTypesAction,
   LoadGripWidthsAction,
+  LoadManikinMuscleGroupsAction,
+  LoadMusclesAction,
+  LoadMuscleTargetTypesAction,
+  LoadParameterTypesAction,
+  LoadPhasesAction,
   LoadRoutineTemplatesAction,
+  LoadTrainingSetTypesAction,
+  LoadWorkoutCategoriesAction,
+  LoadWorkoutEquipmentAction,
 } from './load-workout-configs';
 import {
   ApplyHoverStylesToMuscleGroupAction,
@@ -68,7 +76,7 @@ export enum ActionTypes {
   LOAD_GRIP_TYPES = 'LOAD_GRIP_TYPES',
   LOAD_GRIP_WIDTHS = 'LOAD_GRIP_WIDTHS',
   LOAD_MANIKIN_MUSCLE_GROUP = 'LOAD_MANIKIN_MUSCLE_GROUP',
-  LOAD_MUSCLE = 'LOAD_MUSCLE',
+  LOAD_MUSCLES = 'LOAD_MUSCLES',
   LOAD_MUSCLE_TARGET_TYPES = 'LOAD_MUSCLE_TARGET_TYPES',
   LOAD_PARAMETER_TYPES = 'LOAD_PARAMETER_TYPES',
   LOAD_PHASES = 'LOAD_PHASES',
@@ -162,4 +170,12 @@ export type ApplicationActions =
   | OpenNewExerciseFormDialogAction
   | CloseExerciseFormDialogAction
   | LoadGripTypesAction
-  | LoadGripWidthsAction;
+  | LoadGripWidthsAction
+  | LoadManikinMuscleGroupsAction
+  | LoadMusclesAction
+  | LoadMuscleTargetTypesAction
+  | LoadParameterTypesAction
+  | LoadPhasesAction
+  | LoadTrainingSetTypesAction
+  | LoadWorkoutCategoriesAction
+  | LoadWorkoutEquipmentAction;
