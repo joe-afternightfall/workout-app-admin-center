@@ -49,14 +49,6 @@ export class Initializer {
     this.store = store;
   }
 
-  // todo: manikin-muscle-group
-  // todo: muscle
-  // todo: muscle-target-type
-  // todo: parameter-type
-  // todo: phase
-  // todo: training-set-type
-  // todo: workout-category
-  // todo: workout-equipment
   initializeFirebase(): void {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
