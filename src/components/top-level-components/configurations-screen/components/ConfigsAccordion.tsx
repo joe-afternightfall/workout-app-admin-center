@@ -6,6 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import GripTypesTable from './tables/grip-types/GripTypesTable';
+import GripWidthsTable from './tables/grip-widths/GripWidthsTable';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,8 +38,8 @@ export default function ConfigsAccordion(): JSX.Element {
   return (
     <div className={classes.root}>
       <Accordion
-        expanded={expanded === 'panel1'}
-        onChange={handleChange('panel1')}
+        expanded={expanded === 'grip-types-panel'}
+        onChange={handleChange('grip-types-panel')}
       >
         <AccordionSummary
           id={'grip-types-header'}
@@ -46,11 +47,28 @@ export default function ConfigsAccordion(): JSX.Element {
         >
           <Typography className={classes.heading}>{'Grip Types'}</Typography>
           <Typography className={classes.secondaryHeading}>
-            {'Grip Types'}
+            {'click to view grip widths'}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <GripTypesTable />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === 'grip-widths-panel'}
+        onChange={handleChange('grip-widths-panel')}
+      >
+        <AccordionSummary
+          id={'grip-widths-header'}
+          expandIcon={<ExpandMoreIcon />}
+        >
+          <Typography className={classes.heading}>{'Grip Widths'}</Typography>
+          <Typography className={classes.secondaryHeading}>
+            {'click to view grip widths'}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <GripWidthsTable />
         </AccordionDetails>
       </Accordion>
       <Accordion
