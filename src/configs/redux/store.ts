@@ -40,6 +40,12 @@ export const createStore = (history: History): Store => {
       workoutConfigurations: {
         exerciseTypes: [],
         exercises: [],
+        routineTemplates: [],
+        gripTypes: [],
+        gripWidths: [],
+        trainingSetTypes: [],
+        phases: [],
+        workoutCategories: [],
       },
       selectedMuscleGroupIds: [],
       applyHoverStylesToMuscleGroup: '',
