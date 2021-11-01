@@ -10,14 +10,24 @@ import {
   selectAlternateSidesOption,
   selectOptionalExerciseParam,
 } from '../../../../creators/exercise-form/exercise-form';
-import MuscleSelector from './info-components/MuscleSelector';
+import {
+  findParameterType,
+  GripTypeVO,
+  GripWidthVO,
+  ParameterTypeVO,
+  WorkoutEquipmentVO,
+} from 'workout-app-common-core';
 import OptionalParams from './info-components/OptionalParams';
-import { ParameterType, parameterTypes } from 'workout-app-common-core';
+import MuscleSelector from './info-components/MuscleSelector';
 import AlternateRadioGroup from './info-components/AlternateRadioGroup';
 import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 
 const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
   const {
+    gripTypes,
+    gripWidths,
+    parameterTypes,
+    workoutEquipmentList,
     gripTypeId,
     equipmentId,
     gripWidthId,
@@ -52,6 +62,7 @@ const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
 
       <Grid item xs={12}>
         <ParamTypeButtonGroup
+          parameterTypes={parameterTypes}
           changeHandler={props.selectParamTypeHandler}
           selectedParamType={selectedParamType}
         />
@@ -66,6 +77,9 @@ const ExerciseInfoContent = (props: ExerciseInfoContentProps): JSX.Element => {
         </Grid>
         <Grid item xs={6}>
           <OptionalParams
+            gripTypes={gripTypes}
+            gripWidths={gripWidths}
+            workoutEquipmentList={workoutEquipmentList}
             params={{
               gripWidthId: gripWidthId,
               equipmentId: equipmentId,
@@ -87,11 +101,15 @@ interface ExerciseInfoContentProps {
   gripTypeId: string;
   equipmentId: string;
   gripWidthId: string;
-  selectedParamType: ParameterType | null;
+  gripTypes: GripTypeVO[];
+  workoutEquipmentList: WorkoutEquipmentVO[];
+  gripWidths: GripWidthVO[];
+  parameterTypes: ParameterTypeVO[];
+  selectedParamType: ParameterTypeVO | null;
   nameChangeHandler: (value: string) => void;
   selectMuscleIdHandler: (value: string) => void;
   selectAlternateSidesHandler: (value: boolean) => void;
-  selectParamTypeHandler: (paramType: ParameterType) => void;
+  selectParamTypeHandler: (paramType: ParameterTypeVO) => void;
   selectOptionalParamHandler: (
     param: 'gripWidth' | 'gripType' | 'equipment',
     optionId: string
@@ -100,21 +118,19 @@ interface ExerciseInfoContentProps {
 
 const mapStateToProps = (state: State): ExerciseInfoContentProps => {
   const exerciseForm = state.exerciseFormState.exerciseForm;
-  // todo: add util method to common core
-  const foundParamType = parameterTypes.find(
-    (type) => type.id === exerciseForm.parameterTypeId
-  );
+  const foundParamType = findParameterType(exerciseForm.parameterTypeId, true);
+
   return {
     newExerciseForm: state.exerciseFormState.newExerciseForm,
     shouldAlternate: exerciseForm && exerciseForm.alternateSides,
     exerciseName: exerciseForm && exerciseForm.name,
     gripWidthId: exerciseForm.gripWidthId,
     gripTypeId: exerciseForm.gripTypeId,
-    equipmentId: exerciseForm.equipmentId,
+    workoutEquipmentIds: exerciseForm.workoutEquipmentIds,
     selectedMuscleId:
       exerciseForm &&
-      exerciseForm.muscleGroupIds &&
-      exerciseForm.muscleGroupIds[0],
+      exerciseForm.manikinMuscleGroupIds &&
+      exerciseForm.manikinMuscleGroupIds[0],
     selectedParamType: foundParamType && foundParamType,
   } as unknown as ExerciseInfoContentProps;
 };
@@ -130,7 +146,7 @@ const mapDispatchToProps = (dispatch: Dispatch): ExerciseInfoContentProps =>
     selectAlternateSidesHandler: (value: boolean) => {
       dispatch(selectAlternateSidesOption(value));
     },
-    selectParamTypeHandler: (paramType: ParameterType) => {
+    selectParamTypeHandler: (paramType: ParameterTypeVO) => {
       dispatch(selectExerciseParamType(paramType));
     },
     selectOptionalParamHandler: (
