@@ -4,10 +4,12 @@ import {
   loadExerciseTypes,
   loadRoutineTemplates,
 } from '../creators/workout-configurations';
-import { getAllExercises } from '../services/workout-configurations/exercises';
-import { getAllRoutineTemplates } from '../services/workout-configurations/routine-templates';
 import { getAllExerciseTypes } from '../services/workout-configurations/exercise-types-service';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import {
+  getAllExercises,
+  getAllRoutineTemplates,
+} from 'workout-app-common-core';
 
 export const updateExerciseTypes = async (store: Store): Promise<void> => {
   const exercises: ExerciseTypeVO[] = await getAllExerciseTypes();

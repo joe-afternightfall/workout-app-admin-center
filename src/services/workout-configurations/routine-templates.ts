@@ -7,28 +7,14 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { routerActions } from 'connected-react-router';
-import { mapRoutineSnapshotToVO } from '../../utils/snapshot-mapper';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
-import { RoutineTemplateDAO, RoutineTemplateVO } from 'workout-app-common-core';
+import {
+  mapRoutineSnapshotToVO,
+  RoutineTemplateDAO,
+} from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
 import { loadRoutineTemplates } from '../../creators/workout-configurations';
-
-export const getAllRoutineTemplates = async (): Promise<
-  RoutineTemplateVO[]
-> => {
-  return await firebase
-    .database()
-    .ref(ROUTINE_TEMPLATES_DB_ROUTE)
-    .once('value')
-    .then((snapshot) => {
-      if (snapshot.val()) {
-        return mapRoutineSnapshotToVO(snapshot.val());
-      } else {
-        return [];
-      }
-    });
-};
 
 export const fetchAllRoutineTemplates =
   (): ThunkAction<void, State, void, AnyAction> =>
@@ -114,6 +100,7 @@ export const updateRoutineTemplate =
       );
   };
 
+// todo: change to "toggle active"
 export const deleteRoutineTemplate =
   (): ThunkAction<void, State, void, AnyAction> =>
   async (dispatch: Dispatch, getState: () => State): Promise<void> => {
