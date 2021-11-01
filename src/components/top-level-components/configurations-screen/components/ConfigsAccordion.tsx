@@ -47,7 +47,7 @@ export default function ConfigsAccordion(): JSX.Element {
         >
           <Typography className={classes.heading}>{'Grip Types'}</Typography>
           <Typography className={classes.secondaryHeading}>
-            {'click to view grip widths'}
+            {'click to view grip types'}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
