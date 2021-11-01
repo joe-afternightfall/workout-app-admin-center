@@ -3,8 +3,10 @@ import { ValidatedUserAction } from './user-info';
 import {
   LoadExercisesAction,
   LoadExerciseTypesAction,
+  LoadGripTypesAction,
+  LoadGripWidthsAction,
   LoadRoutineTemplatesAction,
-} from './workout-configurations';
+} from './load-workout-configs';
 import {
   ApplyHoverStylesToMuscleGroupAction,
   ClearHoverStylesForMuscleGroupAction,
@@ -48,7 +50,6 @@ import {
   SelectOptionalExerciseParamAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
-import { LoadGripTypesAction } from './workout-configs/grip-types';
 
 export enum ActionTypes {
   // Application Actions
@@ -63,8 +64,17 @@ export enum ActionTypes {
 
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
-  LOAD_GRIP_TYPES = 'LOAD_GRIP_TYPES',
   LOAD_ROUTINE_TEMPLATES = 'LOAD_ROUTINE_TEMPLATES',
+  LOAD_GRIP_TYPES = 'LOAD_GRIP_TYPES',
+  LOAD_GRIP_WIDTHS = 'LOAD_GRIP_WIDTHS',
+  LOAD_MANIKIN_MUSCLE_GROUP = 'LOAD_MANIKIN_MUSCLE_GROUP',
+  LOAD_MUSCLE = 'LOAD_MUSCLE',
+  LOAD_MUSCLE_TARGET_TYPES = 'LOAD_MUSCLE_TARGET_TYPES',
+  LOAD_PARAMETER_TYPES = 'LOAD_PARAMETER_TYPES',
+  LOAD_PHASES = 'LOAD_PHASES',
+  LOAD_TRAINING_SET_TYPES = 'LOAD_TRAINING_SET_TYPES',
+  LOAD_WORKOUT_CATEGORIES = 'LOAD_WORKOUT_CATEGORIES',
+  LOAD_WORKOUT_EQUIPMENT = 'LOAD_WORKOUT_EQUIPMENT',
 
   // Routine Builder Actions
   BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
@@ -151,4 +161,5 @@ export type ApplicationActions =
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
   | CloseExerciseFormDialogAction
-  | LoadGripTypesAction;
+  | LoadGripTypesAction
+  | LoadGripWidthsAction;

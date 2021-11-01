@@ -33,6 +33,9 @@ export default {
       case ActionTypes.LOAD_GRIP_TYPES:
         newState.workoutConfigurations.gripTypes = action.gripTypes;
         break;
+      case ActionTypes.LOAD_GRIP_WIDTHS:
+        newState.workoutConfigurations.gripWidths = action.gripWidths;
+        break;
       case ActionTypes.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarProps = action.snackbarProps;
