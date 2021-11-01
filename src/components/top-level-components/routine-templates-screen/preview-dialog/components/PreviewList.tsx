@@ -48,7 +48,10 @@ export default function PreviewList(props: PreviewListProps): JSX.Element {
                 className={classes.listWrapper}
                 subheader={
                   <ListSubheader component={'div'} disableSticky>
-                    {`Phase #${phase.order} ${getPhaseName(phase.phaseId)}`}
+                    {`Phase #${phase.order} ${getPhaseName(
+                      phase.phaseId,
+                      true
+                    )}`}
                   </ListSubheader>
                 }
               >
