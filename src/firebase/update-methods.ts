@@ -7,9 +7,11 @@ import {
 import { getAllExerciseTypes } from '../services/workout-configurations/exercise-types-service';
 import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 import {
+  getAllActiveGripTypes,
   getAllExercises,
   getAllRoutineTemplates,
 } from 'workout-app-common-core';
+import { loadGripTypes } from '../creators/workout-configs/grip-types';
 
 export const updateExerciseTypes = async (store: Store): Promise<void> => {
   const exercises: ExerciseTypeVO[] = await getAllExerciseTypes();
@@ -22,6 +24,11 @@ export const updateExerciseTypes = async (store: Store): Promise<void> => {
 export const updateExercises = async (store: Store): Promise<void> => {
   const exercises = await getAllExercises();
   store.dispatch(loadExercises(exercises));
+};
+
+export const updateGripTypes = async (store: Store): Promise<void> => {
+  const activeGripTypes = await getAllActiveGripTypes();
+  store.dispatch(loadGripTypes(activeGripTypes));
 };
 
 export const updateRoutineTemplates = async (store: Store): Promise<void> => {
