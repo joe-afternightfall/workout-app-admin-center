@@ -8,8 +8,10 @@ import {
 import {
   updateExercises,
   updateExerciseTypes,
+  updateGripTypes,
   updateRoutineTemplates,
 } from './update-methods';
+import { FIREBASE_DB_GRIP_TYPES_ROUTE } from 'workout-app-common-core';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCxpOEet-ONYFVLUNdagd7o0McN3F2fFRc',
@@ -34,8 +36,21 @@ export class Initializer {
     firebase.analytics();
 
     const exerciseTypes = firebase.database().ref(EXERCISE_TYPES_ROUTE);
+    const gripTypes = firebase.database().ref(FIREBASE_DB_GRIP_TYPES_ROUTE);
     const exercises = firebase.database().ref(EXERCISES_DB_ROUTE);
     const templates = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
+
+    gripTypes.on('child_added', async () => {
+      await updateGripTypes(this.store);
+    });
+
+    gripTypes.on('child_changed', async () => {
+      await updateGripTypes(this.store);
+    });
+
+    gripTypes.on('child_removed', async () => {
+      await updateGripTypes(this.store);
+    });
 
     templates.on('child_added', async () => {
       await updateRoutineTemplates(this.store);
