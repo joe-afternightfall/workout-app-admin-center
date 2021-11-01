@@ -1,10 +1,11 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import { ParameterType, parameterTypes } from 'workout-app-common-core';
+import { ParameterTypeVO } from 'workout-app-common-core';
 
 export default function ParamTypeButtonGroup({
   changeHandler,
+  parameterTypes,
   selectedParamType,
 }: ParamTypeButtonGroupProps): JSX.Element {
   return (
@@ -20,12 +21,12 @@ export default function ParamTypeButtonGroup({
           value={selectedParamType}
           onChange={(
             event: React.MouseEvent<HTMLElement>,
-            paramType: ParameterType | null
+            paramType: ParameterTypeVO | null
           ) => {
             paramType && changeHandler(paramType);
           }}
         >
-          {parameterTypes.map((type: ParameterType, index: number) => (
+          {parameterTypes.map((type: ParameterTypeVO, index: number) => (
             <ToggleButton value={type} key={index}>
               {type.name}
             </ToggleButton>
@@ -44,6 +45,7 @@ export default function ParamTypeButtonGroup({
 }
 
 interface ParamTypeButtonGroupProps {
-  changeHandler: (paramType: ParameterType) => void;
-  selectedParamType: ParameterType | null;
+  changeHandler: (paramType: ParameterTypeVO) => void;
+  selectedParamType: ParameterTypeVO | null;
+  parameterTypes: ParameterTypeVO[];
 }
