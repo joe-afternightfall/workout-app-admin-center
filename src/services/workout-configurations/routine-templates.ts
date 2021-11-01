@@ -10,7 +10,7 @@ import { routerActions } from 'connected-react-router';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 import {
-  mapRoutineSnapshotToVO,
+  mapRoutineTemplateSnapshotToVO,
   RoutineTemplateDAO,
 } from 'workout-app-common-core';
 import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
@@ -26,7 +26,7 @@ export const fetchAllRoutineTemplates =
       .then((snapshot) => {
         if (snapshot.val()) {
           dispatch(
-            loadRoutineTemplates(mapRoutineSnapshotToVO(snapshot.val()))
+            loadRoutineTemplates(mapRoutineTemplateSnapshotToVO(snapshot.val()))
           );
         } else {
           dispatch(loadRoutineTemplates([]));
@@ -43,7 +43,8 @@ export const saveNewRoutineTemplate =
       template.id,
       template.name,
       template.workoutCategoryId,
-      template.phases
+      template.phases,
+      true
     );
 
     const ref = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
