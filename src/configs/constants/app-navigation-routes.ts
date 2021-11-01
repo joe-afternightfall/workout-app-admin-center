@@ -4,6 +4,7 @@ import {
   EXERCISE_TYPES_SCREEN_PATH,
   ROUTINE_TEMPLATES_SCREEN_PATH,
   ROUTINE_BUILDER_SCREEN_PATH,
+  APP_CONFIGS_SCREEN_PATH,
 } from './app';
 import {
   ListAlt,
@@ -21,6 +22,7 @@ import DashboardScreen from '../../components/top-level-components/dashboard-scr
 import RoutinesScreen from '../../components/top-level-components/routine-templates-screen/RoutinesScreen';
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 import RoutineBuilderScreen from '../../components/top-level-components/routine-builder-screen/RoutineBuilderScreen';
+import ConfigurationsScreen from '../../components/top-level-components/configurations-screen/ConfigurationsScreen';
 
 export interface PageProps {
   path: string;
@@ -124,6 +126,22 @@ export const appNavigationRoutes: RoutesMap = {
         icon: Settings,
         testId: 'exercise-types-nav',
         routerComponent: ExerciseTypesTable,
+      },
+    ],
+  },
+  ALL_CONFIGURATIONS_SCREEN: {
+    nested: true,
+    mainTitle: 'App Configs',
+    mainIcon: Settings,
+    shouldDisplayInNav: true,
+    pageProps: [
+      {
+        path: APP_CONFIGS_SCREEN_PATH,
+        drawerTitle: 'App Configs',
+        headerTitle: 'App Configs',
+        icon: Settings,
+        testId: 'app-configs-nav',
+        routerComponent: ConfigurationsScreen,
       },
     ],
   },
