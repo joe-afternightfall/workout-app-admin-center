@@ -19,13 +19,18 @@ export default {
           id: uuidv4(),
           name: '',
           description: '',
-          equipmentId: '',
-          muscleGroupIds: [],
+          manikinMuscleGroupIds: [],
+          workoutEquipmentIds: [],
+          musclesWorked: {
+            primary: [],
+            secondary: [],
+          },
           iconId: '',
           gripTypeId: '',
           gripWidthId: '',
           parameterTypeId: '',
           alternateSides: false,
+          active: true,
         };
         break;
       case ActionTypes.OPEN_EDIT_EXERCISE_FORM_DIALOG:
@@ -50,7 +55,7 @@ export default {
       }
       case ActionTypes.SELECT_EXERCISE_MUSCLE_ID: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        clonedForm.muscleGroupIds = [action.id];
+        clonedForm.manikinMuscleGroupIds.push(action.id);
         newState.exerciseForm = clonedForm;
         break;
       }
@@ -64,7 +69,7 @@ export default {
             clonedForm.gripTypeId = action.optionId;
             break;
           case 'equipment':
-            clonedForm.equipmentId = action.optionId;
+            clonedForm.workoutEquipmentIds.push(action.optionId);
             break;
           default:
             break;
