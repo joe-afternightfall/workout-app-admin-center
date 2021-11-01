@@ -14,7 +14,7 @@ import {
   mapRoutineTemplateSnapshotToVO,
   FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE,
 } from 'workout-app-common-core';
-import { loadRoutineTemplates } from '../../creators/workout-configurations';
+import { loadRoutineTemplates } from '../../creators/load-workout-configs';
 
 export const fetchAllRoutineTemplates =
   (): ThunkAction<void, State, void, AnyAction> =>
