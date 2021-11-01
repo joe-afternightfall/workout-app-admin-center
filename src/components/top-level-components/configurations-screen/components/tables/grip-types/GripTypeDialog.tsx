@@ -10,7 +10,9 @@ import {
   saveNewGripType,
 } from '../../../../../../services/workout-configurations/grip-types-service';
 
-const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
+const GripTypeDialog = (
+  props: GripTypeDialogProps & PassedInProps
+): JSX.Element => {
   const { open, newGripType, selectedGripType, closeDialogHandler } = props;
   const [gripName, setGripName] = useState('');
   const [iconId, setIconId] = useState('');
