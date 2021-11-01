@@ -10,11 +10,11 @@ import { Styles } from '@material-ui/styles';
 import ConfigsAccordion from './components/ConfigsAccordion';
 import GripTypesTable from './components/tables/grip-types/GripTypesTable';
 import GripWidthsTable from './components/tables/grip-widths/GripWidthsTable';
+import ManikinMuscleGroupsTable from './components/tables/manikin-muscle-groups/ManikinMuscleGroupsTable';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
-  // todo: grip-width
   // todo: manikin-muscle-group
   // todo: muscle
   // todo: muscle-target-type
@@ -35,6 +35,11 @@ class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
         title: 'Grip Widths',
         secondary: 'click to view grip widths',
         element: <GripWidthsTable />,
+      },
+      {
+        title: 'Manikin Muscle Groups',
+        secondary: 'click to view manikin muscle groups',
+        element: <ManikinMuscleGroupsTable />,
       },
     ];
     return (
