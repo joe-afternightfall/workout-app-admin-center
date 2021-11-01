@@ -1,27 +1,70 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../configs/redux/store';
 import { Button, Dialog, Grid, TextField } from '@material-ui/core';
-import { NightfallDialogContent } from 'workout-app-common-core';
-import { saveNewGripType } from '../../../../../../services/workout-configurations/grip-types-service';
+import { GripTypeVO, NightfallDialogContent } from 'workout-app-common-core';
+import {
+  saveNewGripType,
+  updateGripType,
+} from '../../../../../../services/workout-configurations/grip-types-service';
 import { ThunkDispatch } from 'redux-thunk';
 
 const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
-  const { open, newGripType, closeDialogHandler } = props;
+  const { open, newGripType, selectedGripType, closeDialogHandler } = props;
   const [gripName, setGripName] = useState('');
+  const [iconId, setIconId] = useState('');
+  const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    if (!newGripType && selectedGripType) {
+      setGripName(selectedGripType.name);
+      setIconId(selectedGripType.iconId);
+      setDescription(selectedGripType.description);
+    } else {
+      setGripName('');
+      setIconId('');
+      setDescription('');
+    }
+  }, []);
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onClose={closeDialogHandler}>
       <NightfallDialogContent
-        title={'New Grip Type'}
+        title={newGripType ? 'New Grip Type' : 'Update Grip Type'}
         dialogContent={
-          <Grid container>
-            <Grid item>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
               <TextField
+                fullWidth
                 label={'Grip Name'}
+                value={gripName}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  console.log('e.target.value' + e.target.value);
                   setGripName(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label={'Icon ID'}
+                value={iconId}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setIconId(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label={'Grip Description'}
+                multiline
+                rows={4}
+                variant={'filled'}
+                value={description}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setDescription(e.target.value);
                 }}
               />
             </Grid>
@@ -33,7 +76,7 @@ const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
               <Button
                 disabled={gripName === ''}
                 onClick={() => {
-                  props.updateClickHandler(gripName);
+                  props.updateClickHandler(gripName, description, iconId);
                 }}
               >
                 {newGripType ? 'Save' : 'Update'}
@@ -48,13 +91,18 @@ const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
 };
 
 interface GripTypeDialogProps {
-  updateClickHandler: (value: string) => void;
+  updateClickHandler: (
+    gripName: string,
+    description: string,
+    iconId: string
+  ) => void;
 }
 
 interface PassedInProps {
   open: boolean;
   newGripType: boolean;
   closeDialogHandler: () => void;
+  selectedGripType: GripTypeVO | null;
 }
 
 const mapStateToProps = (state: State): GripTypeDialogProps => {
@@ -69,17 +117,30 @@ const mapDispatchToProps = (
 ): GripTypeDialogProps =>
   ({
     updateClickHandler: (
-      value: string,
+      gripName: string,
       description: string,
       iconId: string
     ) => {
-      if (ownProps.newGripType) {
+      if (!ownProps.newGripType && ownProps.selectedGripType) {
         (dispatch as ThunkDispatch<State, void, AnyAction>)(
-          saveNewGripType(value, 'description', 'iconId')
+          updateGripType(
+            ownProps.selectedGripType.firebaseId,
+            gripName,
+            description,
+            iconId
+          )
         );
+        setTimeout(() => {
+          ownProps.closeDialogHandler();
+        }, 500);
+      } else {
+        (dispatch as ThunkDispatch<State, void, AnyAction>)(
+          saveNewGripType(gripName, description, iconId)
+        );
+        setTimeout(() => {
+          ownProps.closeDialogHandler();
+        }, 500);
       }
-      //   dispatch(updateGripType());
-      // }
     },
   } as unknown as GripTypeDialogProps);
 

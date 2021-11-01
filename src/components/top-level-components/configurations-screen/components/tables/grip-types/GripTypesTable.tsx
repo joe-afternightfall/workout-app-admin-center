@@ -16,15 +16,23 @@ import {
   ArrowRightAlt as Arrow,
 } from '@material-ui/icons';
 import GripTypeDialog from './GripTypeDialog';
+import TableActionButtons from '../TableActionButtons';
 
 const GripTypesTable = (props: GripTypesTableProps) => {
   const { gripTypes } = props;
   const [open, setOpen] = useState(false);
   const [newGripType, setNewGripType] = useState(false);
+  const [selectedGripType, setSelectedGripType] = useState<GripTypeVO | null>(
+    null
+  );
 
-  const openDialog = (newGripType: boolean) => {
+  const openDialog = (
+    newGripType: boolean,
+    selectedGripType: GripTypeVO | null
+  ) => {
     setOpen(true);
     setNewGripType(newGripType);
+    setSelectedGripType(selectedGripType);
   };
 
   const closeDialog = () => {
@@ -36,7 +44,13 @@ const GripTypesTable = (props: GripTypesTableProps) => {
     return {
       number: index,
       name: gripType.name,
-      // icon: <LinkIcon />,
+      icon: <LinkIcon />,
+      actions: (
+        <TableActionButtons
+          editClickHandler={() => openDialog(false, gripType)}
+          deleteClickHandler={() => alert('delete clicked')}
+        />
+      ),
     };
   });
 
@@ -45,6 +59,7 @@ const GripTypesTable = (props: GripTypesTableProps) => {
       <GripTypeDialog
         open={open}
         newGripType={newGripType}
+        selectedGripType={selectedGripType}
         closeDialogHandler={closeDialog}
       />
       <MaterialTable
@@ -63,11 +78,45 @@ const GripTypesTable = (props: GripTypesTableProps) => {
             title: '#',
             field: 'number',
             editable: 'never',
+            cellStyle: {
+              width: '10%',
+            },
           },
           {
             title: 'Name',
             field: 'name',
             editable: 'never',
+            cellStyle: {
+              width: '40%',
+            },
+          },
+          {
+            title: 'Icon',
+            field: 'icon',
+            editable: 'never',
+            sorting: false,
+            headerStyle: {
+              width: '30%',
+              textAlign: 'center',
+            },
+            cellStyle: {
+              width: '20%',
+              textAlign: 'center',
+            },
+          },
+          {
+            title: 'Actions',
+            field: 'actions',
+            editable: 'never',
+            sorting: false,
+            headerStyle: {
+              width: '20%',
+              textAlign: 'center',
+            },
+            cellStyle: {
+              width: '20%',
+              textAlign: 'center',
+            },
           },
         ]}
         actions={[
@@ -76,7 +125,7 @@ const GripTypesTable = (props: GripTypesTableProps) => {
             tooltip: 'Add New Grip Type',
             isFreeAction: true,
             onClick: () => {
-              openDialog(true);
+              openDialog(true, null);
             },
           },
         ]}
