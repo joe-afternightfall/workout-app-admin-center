@@ -113,6 +113,16 @@ const GripWidthsTable = (props: GripWidthsTableProps) => {
             },
           },
         ]}
+        actions={[
+          {
+            icon: 'add',
+            tooltip: 'Add New Grip Width',
+            isFreeAction: true,
+            onClick: () => {
+              openDialog(true, null);
+            },
+          },
+        ]}
       />
     </>
   );
