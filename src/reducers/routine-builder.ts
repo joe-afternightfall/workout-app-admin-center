@@ -26,6 +26,7 @@ export default {
           name: '',
           workoutCategoryId: '',
           phases: [],
+          active: true,
         };
         break;
       case ActionTypes.UPDATE_SELECTED_CATEGORY_ID:
