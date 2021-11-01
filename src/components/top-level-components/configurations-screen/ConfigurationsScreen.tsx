@@ -8,20 +8,20 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import ConfigsAccordion from './components/ConfigsAccordion';
+import PhasesTable from './components/tables/phases/PhasesTable';
+import MusclesTable from './components/tables/muscles/MusclesTable';
 import GripTypesTable from './components/tables/grip-types/GripTypesTable';
 import GripWidthsTable from './components/tables/grip-widths/GripWidthsTable';
+import ParameterTypesTable from './components/tables/parameter-types/ParameterTypesTable';
+import TrainingSetTypesTable from './components/tables/training-set-types/TrainingSetTypesTable';
 import MuscleTargetTypesTable from './components/tables/muscle-target-types/MuscleTargetTypesTable';
 import ManikinMuscleGroupsTable from './components/tables/manikin-muscle-groups/ManikinMuscleGroupsTable';
+import WorkoutEquipmentTable from './components/tables/workout-equipment/WorkoutEquipmentTable';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
-  // todo: muscle
-  // todo: parameter-type
-  // todo: phase
-  // todo: training-set-type
   // todo: workout-category
-  // todo: workout-equipment
 
   render(): JSX.Element {
     const accordionElements = [
@@ -44,6 +44,36 @@ class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
         title: 'Muscle Target Types',
         secondary: 'click to view muscle target types',
         element: <MuscleTargetTypesTable />,
+      },
+      {
+        title: 'Muscles',
+        secondary: 'click to view muscles',
+        element: <MusclesTable />,
+      },
+      {
+        title: 'Parameter Types',
+        secondary: 'click to view parameter types',
+        element: <ParameterTypesTable />,
+      },
+      {
+        title: 'Phases',
+        secondary: 'click to view phases',
+        element: <PhasesTable />,
+      },
+      {
+        title: 'Training Set Types',
+        secondary: 'click to view training set types',
+        element: <TrainingSetTypesTable />,
+      },
+      // {
+      //   title: 'Workout Categories',
+      //   secondary: 'click to view workout categories',
+      //   element: <WorkoutCategoriesTable />,
+      // },
+      {
+        title: 'Workout Equipment',
+        secondary: 'click to view pieces of workout equipment',
+        element: <WorkoutEquipmentTable />,
       },
     ];
     return (
