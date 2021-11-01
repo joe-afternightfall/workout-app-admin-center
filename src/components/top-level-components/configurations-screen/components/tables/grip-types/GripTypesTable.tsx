@@ -18,17 +18,16 @@ const GripTypesTable = (props: GripTypesTableProps) => {
     null
   );
 
-  const openDialog = (
-    newGripType: boolean,
-    selectedGripType: GripTypeVO | null
-  ) => {
+  const openDialog = (newGripType: boolean, gripType: GripTypeVO | null) => {
     setOpen(true);
     setNewGripType(newGripType);
-    setSelectedGripType(selectedGripType);
+    setSelectedGripType(gripType);
   };
 
   const closeDialog = () => {
     setOpen(false);
+    setNewGripType(!newGripType);
+    setSelectedGripType(null);
   };
 
   const data = gripTypes.map((gripType: GripTypeVO, index: number) => {

@@ -17,17 +17,16 @@ const GripWidthsTable = (props: GripWidthsTableProps) => {
   const [selectedGripWidth, setSelectedGripWidth] =
     useState<GripWidthVO | null>(null);
 
-  const openDialog = (
-    newGripWidth: boolean,
-    selectedGripWidth: GripWidthVO | null
-  ) => {
+  const openDialog = (newGripWidth: boolean, gripWidth: GripWidthVO | null) => {
     setOpen(true);
     setNewGripWidth(newGripWidth);
-    setSelectedGripWidth(selectedGripWidth);
+    setSelectedGripWidth(gripWidth);
   };
 
   const closeDialog = () => {
     setOpen(false);
+    setNewGripWidth(!newGripWidth);
+    setSelectedGripWidth(null);
   };
 
   const data = gripWidths.map((gripWidth: GripWidthVO, index: number) => {

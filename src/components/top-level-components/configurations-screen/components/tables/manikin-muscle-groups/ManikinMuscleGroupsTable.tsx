@@ -22,15 +22,17 @@ const ManikinMuscleGroupsTable = (
 
   const openDialog = (
     newManikinGroup: boolean,
-    selectedManikinGroup: ManikinMuscleGroupVO | null
+    manikinGroup: ManikinMuscleGroupVO | null
   ) => {
     setOpen(true);
     setNewManikinGroup(newManikinGroup);
-    setSelectedManikinMuscleGroup(selectedManikinGroup);
+    setSelectedManikinMuscleGroup(manikinGroup);
   };
 
   const closeDialog = () => {
     setOpen(false);
+    setNewManikinGroup(!newManikinGroup);
+    setSelectedManikinMuscleGroup(null);
   };
 
   const data = manikinMuscleGroups.map((muscleGroup, index) => {

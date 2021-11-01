@@ -21,15 +21,17 @@ const MuscleTargetTypesTable = (
 
   const openDialog = (
     newMuscleTargetType: boolean,
-    selectedMuscleTargetType: MuscleTargetTypeVO | null
+    muscleTargetType: MuscleTargetTypeVO | null
   ) => {
     setOpen(true);
     setNewMuscleTargetType(newMuscleTargetType);
-    setSelectedMuscleTargetType(selectedMuscleTargetType);
+    setSelectedMuscleTargetType(muscleTargetType);
   };
 
   const closeDialog = () => {
     setOpen(false);
+    setNewMuscleTargetType(!newMuscleTargetType);
+    setSelectedMuscleTargetType(null);
   };
 
   const data = muscleTargetTypes.map((muscleTargetType, index) => {
