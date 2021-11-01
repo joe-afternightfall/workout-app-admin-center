@@ -1,11 +1,12 @@
 import React from 'react';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeActivateDialog from './DeActivateDialog';
 import { Grid, IconButton } from '@material-ui/core';
 
 export default function TableActionButtons({
+  deActivateHighlight,
   editClickHandler,
-  deleteClickHandler,
+  deActivateClickHandler,
 }: TableActionButtonsProps): JSX.Element {
   return (
     <Grid container>
@@ -15,15 +16,17 @@ export default function TableActionButtons({
         </IconButton>
       </Grid>
       <Grid item xs={6}>
-        <IconButton onClick={deleteClickHandler}>
-          <DeleteIcon />
-        </IconButton>
+        <DeActivateDialog
+          highlight={deActivateHighlight}
+          deActivateClickHandler={deActivateClickHandler}
+        />
       </Grid>
     </Grid>
   );
 }
 
 interface TableActionButtonsProps {
+  deActivateHighlight: string;
   editClickHandler: () => void;
-  deleteClickHandler: () => void;
+  deActivateClickHandler: () => void;
 }
