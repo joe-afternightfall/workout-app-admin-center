@@ -6,7 +6,15 @@ import {
   updateExerciseTypes,
   updateGripTypes,
   updateGripWidths,
+  updateManikinMuscleGroups,
+  updateMuscles,
+  updateMuscleTargetTypes,
+  updateParameterTypes,
+  updatePhases,
   updateRoutineTemplates,
+  updateTrainingSetTypes,
+  updateWorkoutCategories,
+  updateWorkoutEquipment,
 } from './update-methods';
 import {
   FIREBASE_DB_EXERCISES_ROUTE,
@@ -41,7 +49,6 @@ export class Initializer {
     this.store = store;
   }
 
-  // todo: grip-width
   // todo: manikin-muscle-group
   // todo: muscle
   // todo: muscle-target-type
@@ -74,6 +81,38 @@ export class Initializer {
       {
         ref: firebase.database().ref(FIREBASE_DB_GRIP_WIDTHS_ROUTE),
         updateMethod: () => updateGripWidths(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_MANIKIN_MUSCLE_GROUPS_ROUTE),
+        updateMethod: () => updateManikinMuscleGroups(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_MUSCLES_ROUTE),
+        updateMethod: () => updateMuscles(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_MUSCLE_TARGET_TYPES_ROUTE),
+        updateMethod: () => updateMuscleTargetTypes(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_PARAMETER_TYPES_ROUTE),
+        updateMethod: () => updateParameterTypes(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_PHASES_ROUTE),
+        updateMethod: () => updatePhases(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_TRAINING_SET_TYPES_ROUTE),
+        updateMethod: () => updateTrainingSetTypes(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_WORKOUT_CATEGORIES_ROUTE),
+        updateMethod: () => updateWorkoutCategories(this.store),
+      },
+      {
+        ref: firebase.database().ref(FIREBASE_DB_WORKOUT_EQUIPMENT_ROUTE),
+        updateMethod: () => updateWorkoutEquipment(this.store),
       },
     ];
 
