@@ -10,10 +10,10 @@ import { routerActions } from 'connected-react-router';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 import {
-  mapRoutineTemplateSnapshotToVO,
   RoutineTemplateDAO,
+  mapRoutineTemplateSnapshotToVO,
+  FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE,
 } from 'workout-app-common-core';
-import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
 import { loadRoutineTemplates } from '../../creators/workout-configurations';
 
 export const fetchAllRoutineTemplates =
@@ -21,7 +21,7 @@ export const fetchAllRoutineTemplates =
   async (dispatch: Dispatch): Promise<void> => {
     return await firebase
       .database()
-      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
       .once('value')
       .then((snapshot) => {
         if (snapshot.val()) {
@@ -47,7 +47,7 @@ export const saveNewRoutineTemplate =
       true
     );
 
-    const ref = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
+    const ref = firebase.database().ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE);
     const newRef = ref.push();
 
     return await newRef.set(templateDAO, (error: Error | null) => {
@@ -76,7 +76,7 @@ export const updateRoutineTemplate =
 
     return await firebase
       .database()
-      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
       .child(template.firebaseId)
       .update(
         {
@@ -111,7 +111,7 @@ export const deleteRoutineTemplate =
       template.firebaseId !== '' &&
       (await firebase
         .database()
-        .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+        .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
         .child(template.firebaseId)
         .remove((error) => {
           if (error) {

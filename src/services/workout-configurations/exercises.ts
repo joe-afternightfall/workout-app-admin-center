@@ -6,13 +6,16 @@ import {
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
-import { ExerciseDAO, ExerciseVO } from 'workout-app-common-core';
-import { EXERCISES_DB_ROUTE } from '../../configs/constants/firebase-routes';
+import {
+  ExerciseDAO,
+  ExerciseVO,
+  FIREBASE_DB_EXERCISES_ROUTE,
+} from 'workout-app-common-core';
 
 export const saveExercise =
   (successCallback: () => void): ThunkAction<void, State, void, AnyAction> =>
   async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-    const ref = firebase.database().ref(EXERCISES_DB_ROUTE);
+    const ref = firebase.database().ref(FIREBASE_DB_EXERCISES_ROUTE);
     const newRef = ref.push();
 
     const newExerciseForm = getState().exerciseFormState.newExerciseForm;
@@ -51,7 +54,7 @@ export const saveExercise =
     } else {
       return await firebase
         .database()
-        .ref(EXERCISES_DB_ROUTE)
+        .ref(FIREBASE_DB_EXERCISES_ROUTE)
         .child(exerciseForm.firebaseId)
         .update(
           {
@@ -96,7 +99,7 @@ export const deleteExercise =
   async (dispatch: Dispatch): Promise<void> => {
     return await firebase
       .database()
-      .ref(EXERCISES_DB_ROUTE)
+      .ref(FIREBASE_DB_EXERCISES_ROUTE)
       .child(exercise.firebaseId)
       .remove((error) => {
         if (error) {
