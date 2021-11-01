@@ -7,22 +7,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { ExerciseDAO, ExerciseVO } from 'workout-app-common-core';
-import { mapExerciseSnapshotToVO } from '../../utils/snapshot-mapper';
 import { EXERCISES_DB_ROUTE } from '../../configs/constants/firebase-routes';
-
-export const getAllExercises = async (): Promise<ExerciseVO[]> => {
-  return await firebase
-    .database()
-    .ref(EXERCISES_DB_ROUTE)
-    .once('value')
-    .then((snapshot) => {
-      if (snapshot.val()) {
-        return mapExerciseSnapshotToVO(snapshot.val());
-      } else {
-        return [];
-      }
-    });
-};
 
 export const saveExercise =
   (successCallback: () => void): ThunkAction<void, State, void, AnyAction> =>
@@ -98,6 +83,7 @@ export const saveExercise =
     }
   };
 
+// todo: change to "toggle active"
 export const deleteExercise =
   (
     exercise: ExerciseVO,

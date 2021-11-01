@@ -6,10 +6,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Button, Grid } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
 import ExerciseInfoContent from './ExerciseInfoContent';
-import BaseDialogContent from '../../../shared/BaseDialogContent';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { saveExercise } from '../../../../services/workout-configurations/exercises';
 import { closeExerciseFormDialog } from '../../../../creators/exercise-form/exercise-form';
+import { NightfallDialogContent } from 'workout-app-common-core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,7 +24,7 @@ const ExerciseFormDialog = (props: ExerciseFormDialogProps) => {
   const classes = useStyles();
   return (
     <Dialog open={open} onClose={closeHandler}>
-      <BaseDialogContent
+      <NightfallDialogContent
         title={isNewExercise ? 'New Exercise' : 'Edit Exercise'}
         closeClickHandler={closeHandler}
         dialogContent={
