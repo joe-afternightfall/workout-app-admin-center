@@ -117,7 +117,8 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
                             {phase.phaseId && (
                               <CardContent>
                                 {`${phase.order}. ${getPhaseName(
-                                  phase.phaseId
+                                  phase.phaseId,
+                                  true
                                 )}`}
                               </CardContent>
                             )}
