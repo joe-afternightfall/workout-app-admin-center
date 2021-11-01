@@ -1,14 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../../../../../configs/redux/store';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Button, Dialog, Grid, TextField } from '@material-ui/core';
 import { GripTypeVO, NightfallDialogContent } from 'workout-app-common-core';
 import {
-  saveNewGripType,
   updateGripType,
+  saveNewGripType,
 } from '../../../../../../services/workout-configurations/grip-types-service';
-import { ThunkDispatch } from 'redux-thunk';
 
 const GripTypeDialog = (props: GripTypeDialogProps & PassedInProps) => {
   const { open, newGripType, selectedGripType, closeDialogHandler } = props;
