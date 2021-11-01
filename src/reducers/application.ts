@@ -1,4 +1,12 @@
-import { ExerciseVO, RoutineTemplateVO } from 'workout-app-common-core';
+import {
+  ExerciseVO,
+  GripTypeVO,
+  GripWidthVO,
+  PhaseVO,
+  RoutineTemplateVO,
+  TrainingSetTypeVO,
+  WorkoutCategoryVO,
+} from 'workout-app-common-core';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { getPageInfo } from '../utils/get-current-page-info';
 import { SnackbarCreatorProps } from '../creators/app-snackbar';
@@ -22,6 +30,9 @@ export default {
         newState.displayAppBar = pathname !== ROUTINE_BUILDER_SCREEN_PATH;
         break;
       }
+      case ActionTypes.LOAD_GRIP_TYPES:
+        newState.workoutConfigurations.gripTypes = action.gripTypes;
+        break;
       case ActionTypes.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarProps = action.snackbarProps;
@@ -95,6 +106,11 @@ export interface ApplicationState {
     exerciseTypes: ExerciseTypeVO[];
     exercises: ExerciseVO[];
     routineTemplates: RoutineTemplateVO[];
+    gripTypes: GripTypeVO[];
+    gripWidths: GripWidthVO[];
+    trainingSetTypes: TrainingSetTypeVO[];
+    phases: PhaseVO[];
+    workoutCategories: WorkoutCategoryVO[];
   };
   selectedMuscleGroupIds: string[];
   applyHoverStylesToMuscleGroup: string;
