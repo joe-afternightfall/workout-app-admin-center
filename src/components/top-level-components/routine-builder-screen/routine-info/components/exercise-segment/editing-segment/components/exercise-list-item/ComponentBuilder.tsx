@@ -39,11 +39,20 @@ const ComponentBuilder = ({
       const isDurationType =
         foundExercise && isDuration(foundExercise.parameterTypeId);
 
+      let title = '';
+      const exerciseName = getExerciseName(
+        foundWorkoutExercise.exerciseId,
+        true
+      );
+      if (exerciseName) {
+        title = exerciseName;
+      }
+
       builtComponent = (
         <StandardListItem
           isDurationType={isDurationType}
           id={foundWorkoutExercise.id}
-          title={getExerciseName(allExercises, foundWorkoutExercise.exerciseId)}
+          title={title}
         />
       );
     } else {
