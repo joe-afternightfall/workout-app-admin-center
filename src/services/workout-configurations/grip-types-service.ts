@@ -14,7 +14,7 @@ import { State } from '../../configs/redux/store';
 
 export const saveNewGripType =
   (
-    gripName: string,
+    name: string,
     description: string,
     iconId: string
   ): ThunkAction<void, State, void, AnyAction> =>
@@ -24,7 +24,7 @@ export const saveNewGripType =
 
     const gripTypeDAO = new GripTypeDAO(
       uuidv4(),
-      gripName,
+      name,
       description,
       iconId,
       true
@@ -32,13 +32,9 @@ export const saveNewGripType =
 
     return await newRef.set(gripTypeDAO, (error: Error | null) => {
       if (error) {
-        dispatch(
-          displayErrorSnackbar(`Error saving grip type ${gripTypeDAO.name}.`)
-        );
+        dispatch(displayErrorSnackbar(`Error saving grip type ${name}.`));
       } else {
-        dispatch(
-          displaySuccessSnackbar(`Successfully saved ${gripTypeDAO.name}.`)
-        );
+        dispatch(displaySuccessSnackbar(`Successfully saved ${name}.`));
       }
     });
   };
@@ -46,7 +42,7 @@ export const saveNewGripType =
 export const updateGripType =
   (
     firebaseId: string,
-    gripName: string,
+    name: string,
     description: string,
     iconId: string
   ): ThunkAction<void, State, void, AnyAction> =>
@@ -57,19 +53,15 @@ export const updateGripType =
       .child(firebaseId)
       .update(
         {
-          name: gripName,
+          name: name,
           description: description,
           iconId: iconId,
         },
         (error: Error | null) => {
           if (error) {
-            dispatch(
-              displayErrorSnackbar(`Error updating grip type ${gripName}.`)
-            );
+            dispatch(displayErrorSnackbar(`Error updating grip type ${name}.`));
           } else {
-            dispatch(
-              displaySuccessSnackbar(`Successfully updated ${gripName}.`)
-            );
+            dispatch(displaySuccessSnackbar(`Successfully updated ${name}.`));
           }
         }
       );
@@ -90,7 +82,9 @@ export const deActivateGripType =
           if (error) {
             dispatch(displayErrorSnackbar('Error de-activating grip type.'));
           } else {
-            dispatch(displaySuccessSnackbar('Successfully de-activated.'));
+            dispatch(
+              displaySuccessSnackbar('Successfully de-activated grip type.')
+            );
           }
         }
       );
