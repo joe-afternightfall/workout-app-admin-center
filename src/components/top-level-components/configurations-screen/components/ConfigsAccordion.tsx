@@ -34,16 +34,6 @@ export default function ConfigsAccordion(): JSX.Element {
       setExpanded(isExpanded ? panel : false);
     };
 
-  // todo: grip-type
-  // todo: grip-width
-  // todo: manikin-muscle-group
-  // todo: muscle
-  // todo: muscle-target-type
-  // todo: parameter-type
-  // todo: phase
-  // todo: training-set-type
-  // todo: workout-category
-  // todo: workout-equipment
   return (
     <div className={classes.root}>
       <Accordion
