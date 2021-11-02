@@ -20,6 +20,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { selectOptionalExerciseParam } from '../../../../../creators/exercise-form/exercise-form';
+import DefaultOptionTitle from './optional-params/DefaultOptionTitle';
+import GripWidthSelectMenu from './optional-params/GripWidthSelectMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,12 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const OptionalParams = (props: OptionalParamsProps): JSX.Element => {
   const classes = useStyles();
-  const { params, gripWidths, gripTypes } = props;
-  const {
-    selectedWorkoutEquipmentIds,
-    selectedGripTypeId,
-    selectedGripWidthId,
-  } = params;
+  const { params, gripTypes } = props;
+  const { selectedWorkoutEquipmentIds, selectedGripTypeId } = params;
 
   return (
     <Grid container alignItems={'center'}>
@@ -45,76 +43,16 @@ const OptionalParams = (props: OptionalParamsProps): JSX.Element => {
         <Typography color={'textSecondary'}>{'Optional Parameters'}</Typography>
       </Grid>
       <Grid item xs={12}>
-        {selectedGripWidthId === '' ? (
-          <Grid container alignItems={'center'}>
-            <Grid item xs={8}>
-              <Typography>{'Grip Width'}</Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton
-                onClick={() => {
-                  props.selectOptionalParamHandler(
-                    'gripWidth',
-                    gripWidths[0].id
-                  );
-                }}
-              >
-                <AddIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        ) : (
-          <Grid container alignItems={'center'}>
-            <Grid item xs={8}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id={'grip-width-label'}>{'Grip Width'}</InputLabel>
-                <Select
-                  labelId={'grip-width-label'}
-                  id={'grip-width-select'}
-                  value={selectedGripWidthId}
-                  onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                    props.selectOptionalParamHandler(
-                      'gripWidth',
-                      event.target.value as string
-                    );
-                  }}
-                >
-                  {gripWidths.map((width: GripWidthVO, index: number) => (
-                    <MenuItem value={width.id} key={index}>
-                      {width.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton
-                onClick={() => {
-                  props.selectOptionalParamHandler('gripWidth', '');
-                }}
-              >
-                <Close />
-              </IconButton>
-            </Grid>
-          </Grid>
-        )}
+        <GripWidthSelectMenu />
       </Grid>
       <Grid item xs={12}>
         {selectedGripTypeId === '' ? (
-          <Grid container alignItems={'center'}>
-            <Grid item xs={8}>
-              <Typography>{'Grip Type'}</Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton
-                onClick={() => {
-                  props.selectOptionalParamHandler('gripType', gripTypes[0].id);
-                }}
-              >
-                <AddIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
+          <DefaultOptionTitle
+            title={'Grip Type'}
+            selectOptionHandler={() => {
+              props.selectOptionalParamHandler('gripType', gripTypes[0].id);
+            }}
+          />
         ) : (
           <Grid container alignItems={'center'}>
             <Grid item xs={8}>
