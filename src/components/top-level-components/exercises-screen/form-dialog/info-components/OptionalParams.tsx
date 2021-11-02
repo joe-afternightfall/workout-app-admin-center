@@ -22,6 +22,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { selectOptionalExerciseParam } from '../../../../../creators/exercise-form/exercise-form';
 import DefaultOptionTitle from './optional-params/DefaultOptionTitle';
 import GripWidthSelectMenu from './optional-params/GripWidthSelectMenu';
+import GripTypeSelectMenu from './optional-params/GripTypeSelectMenu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,8 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const OptionalParams = (props: OptionalParamsProps): JSX.Element => {
   const classes = useStyles();
-  const { params, gripTypes } = props;
-  const { selectedWorkoutEquipmentIds, selectedGripTypeId } = params;
 
   return (
     <Grid container alignItems={'center'}>
@@ -46,48 +45,7 @@ const OptionalParams = (props: OptionalParamsProps): JSX.Element => {
         <GripWidthSelectMenu />
       </Grid>
       <Grid item xs={12}>
-        {selectedGripTypeId === '' ? (
-          <DefaultOptionTitle
-            title={'Grip Type'}
-            selectOptionHandler={() => {
-              props.selectOptionalParamHandler('gripType', gripTypes[0].id);
-            }}
-          />
-        ) : (
-          <Grid container alignItems={'center'}>
-            <Grid item xs={8}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id={'grip-type-label'}>{'Grip Type'}</InputLabel>
-                <Select
-                  labelId={'grip-type-label'}
-                  id={'grip-type-select'}
-                  value={selectedGripTypeId}
-                  onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                    props.selectOptionalParamHandler(
-                      'gripType',
-                      event.target.value as string
-                    );
-                  }}
-                >
-                  {gripTypes.map((type: GripTypeVO, index: number) => (
-                    <MenuItem value={type.id} key={index}>
-                      {type.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton
-                onClick={() => {
-                  props.selectOptionalParamHandler('gripType', '');
-                }}
-              >
-                <Close />
-              </IconButton>
-            </Grid>
-          </Grid>
-        )}
+        <GripTypeSelectMenu />
       </Grid>
       <Grid item xs={12}>
         {/*todo: adding list selection for equipment*/}
@@ -152,14 +110,7 @@ const OptionalParams = (props: OptionalParamsProps): JSX.Element => {
 };
 
 interface OptionalParamsProps {
-  gripTypes: GripTypeVO[];
-  gripWidths: GripWidthVO[];
   workoutEquipment: WorkoutEquipmentVO[];
-  params: {
-    selectedGripWidthId: string;
-    selectedWorkoutEquipmentIds: string;
-    selectedGripTypeId: string;
-  };
   selectOptionalParamHandler: (
     param: 'gripWidth' | 'gripType' | 'equipment',
     id: string
@@ -167,17 +118,9 @@ interface OptionalParamsProps {
 }
 
 const mapStateToProps = (state: State): OptionalParamsProps => {
-  const exerciseForm = state.exerciseFormState.exerciseForm;
   return {
-    gripTypes: state.applicationState.workoutConfigurations.gripTypes,
-    gripWidths: state.applicationState.workoutConfigurations.gripWidths,
     workoutEquipment:
       state.applicationState.workoutConfigurations.workoutEquipment,
-    params: {
-      selectedGripWidthId: exerciseForm.gripWidthId,
-      selectedGripTypeId: exerciseForm.gripTypeId,
-      selectedWorkoutEquipmentIds: exerciseForm.workoutEquipmentIds,
-    },
   } as unknown as OptionalParamsProps;
 };
 
