@@ -1,33 +1,27 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { AnyAction, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { State } from '../../../../../../configs/redux/store';
-import { Button, Dialog, Grid, TextField } from '@material-ui/core';
 import {
-  ManikinMuscleGroupVO,
+  Grid,
+  Dialog,
+  Select,
+  Button,
+  MenuItem,
+  TextField,
+  InputLabel,
+  FormControl,
+} from '@material-ui/core';
+import {
   MuscleVO,
+  ManikinMuscleGroupVO,
   NightfallDialogContent,
 } from 'workout-app-common-core';
+import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../../../../../configs/redux/store';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
-  saveNewMuscle,
   updateMuscle,
+  saveNewMuscle,
 } from '../../../../../../services/workout-configurations/muscles-service';
-
-function buildOptions(group: ManikinMuscleGroupVO): {
-  firebaseId: string;
-  id: string;
-  name: string;
-  active: boolean;
-  firstLetter: string;
-} {
-  const firstLetter = group.name[0].toUpperCase();
-  return {
-    firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-    ...group,
-  };
-}
 
 const MusclesDialog = (
   props: MusclesDialogProps & PassedInProps
@@ -39,19 +33,12 @@ const MusclesDialog = (
     selectedMuscle,
     newMuscle,
   } = props;
+
   const [name, setName] = useState('');
   const [manikinGroupId, setManikinGroupId] = useState('');
-  let defaultValue = null;
-
-  const options = manikinMuscleGroups.map((group: ManikinMuscleGroupVO) => {
-    return buildOptions(group);
-  });
-
-  manikinMuscleGroups.find((group) => {
-    if (selectedMuscle && group.id === selectedMuscle.manikinMuscleGroupId) {
-      return (defaultValue = buildOptions(group));
-    }
-  });
+  const selectMuscle = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setManikinGroupId(event.target.value as string);
+  };
 
   useEffect(() => {
     if (!newMuscle && selectedMuscle) {
@@ -80,26 +67,26 @@ const MusclesDialog = (
               />
             </Grid>
             <Grid item xs={12}>
-              <Autocomplete
-                fullWidth
-                value={defaultValue}
-                id={'manikin-muscles'}
-                options={options.sort(
-                  (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
-                )}
-                getOptionLabel={(option) => option.name}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={'Manikin Muscle Group'}
-                    variant={'outlined'}
-                  />
-                )}
-                onChange={(e: ChangeEvent<Record<string, never>>, newValue) => {
-                  newValue && setManikinGroupId(newValue.id);
-                }}
-                getOptionSelected={(option, value) => option.id === value.id}
-              />
+              <FormControl fullWidth>
+                <InputLabel id={'manikin-muscle-label'}>
+                  {'Manikin Muscle'}
+                </InputLabel>
+                <Select
+                  labelId={'manikin-muscle-label'}
+                  id={'manikin-muscle-select'}
+                  value={manikinGroupId}
+                  onChange={selectMuscle}
+                >
+                  <MenuItem disabled value={''}>
+                    <em>{'Muscle List'}</em>
+                  </MenuItem>
+                  {manikinMuscleGroups.map((group) => (
+                    <MenuItem key={group.name} value={group.name}>
+                      {group.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
         }
