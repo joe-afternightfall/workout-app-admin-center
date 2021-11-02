@@ -17,6 +17,8 @@ import TrainingSetTypesTable from './components/tables/training-set-types/Traini
 import MuscleTargetTypesTable from './components/tables/muscle-target-types/MuscleTargetTypesTable';
 import ManikinMuscleGroupsTable from './components/tables/manikin-muscle-groups/ManikinMuscleGroupsTable';
 import WorkoutEquipmentTable from './components/tables/workout-equipment/WorkoutEquipmentTable';
+import PageTitle from '../../shared/PageTitle';
+import WorkoutCategoriesTable from './components/tables/workout-categories/WorkoutCategoriesTable';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -65,11 +67,11 @@ class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
         secondary: 'click to view training set types',
         element: <TrainingSetTypesTable />,
       },
-      // {
-      //   title: 'Workout Categories',
-      //   secondary: 'click to view workout categories',
-      //   element: <WorkoutCategoriesTable />,
-      // },
+      {
+        title: 'Workout Categories',
+        secondary: 'click to view workout categories',
+        element: <WorkoutCategoriesTable />,
+      },
       {
         title: 'Workout Equipment',
         secondary: 'click to view pieces of workout equipment',
@@ -77,8 +79,13 @@ class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
       },
     ];
     return (
-      <Grid item xs={12}>
-        <ConfigsAccordion accordionElements={accordionElements} />
+      <Grid item xs={12} container spacing={2}>
+        <Grid item xs={12}>
+          <PageTitle title={'App Configs'} />
+        </Grid>
+        <Grid item xs={12}>
+          <ConfigsAccordion accordionElements={accordionElements} />
+        </Grid>
       </Grid>
     );
   }
