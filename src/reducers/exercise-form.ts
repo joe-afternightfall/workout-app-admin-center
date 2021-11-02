@@ -96,6 +96,12 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.UPDATE_EXERCISE_EQUIPMENT_LIST_IDS: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.workoutEquipmentIds = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
       default:
         newState = state;
     }

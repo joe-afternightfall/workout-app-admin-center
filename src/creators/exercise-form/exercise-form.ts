@@ -135,6 +135,20 @@ export const updateExerciseIconId = (
   };
 };
 
+export interface UpdateExerciseEquipmentListIdsAction {
+  type: ActionTypes.UPDATE_EXERCISE_EQUIPMENT_LIST_IDS;
+  value: string[];
+}
+
+export const updateExerciseEquipmentListIds = (
+  value: string[]
+): UpdateExerciseEquipmentListIdsAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_EQUIPMENT_LIST_IDS,
+    value: value,
+  };
+};
+
 export interface SaveExerciseInfoAction {
   type: ActionTypes.SAVE_EXERCISE_INFO;
 }
