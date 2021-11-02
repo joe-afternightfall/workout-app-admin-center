@@ -31,11 +31,11 @@ export default function ExerciseInfoContent(): JSX.Element {
       </Grid>
 
       <Grid item xs={12} container style={{ marginTop: 24 }}>
-        <Grid item xs={6}>
-          <MuscleSelector />
+        <Grid item xs={12}>
+          <OptionalParams />
         </Grid>
         <Grid item xs={6}>
-          <OptionalParams />
+          <MuscleSelector />
         </Grid>
       </Grid>
     </Grid>
