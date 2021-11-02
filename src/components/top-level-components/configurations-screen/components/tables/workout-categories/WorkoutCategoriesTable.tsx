@@ -8,6 +8,7 @@ import PageTitle from '../../../../../shared/PageTitle';
 import { State } from '../../../../../../configs/redux/store';
 import TableActionButtons from '../TableActionButtons';
 import WorkoutCategoriesDialog from './WorkoutCategoriesDialog';
+import { deActivateWorkoutCategory } from '../../../../../../services/workout-configurations/workout-categories-service';
 
 const WorkoutCategoriesTable = (
   props: WorkoutCategoriesTableProps
@@ -161,9 +162,9 @@ const mapStateToProps = (state: State): WorkoutCategoriesTableProps => {
 const mapDispatchToProps = (dispatch: Dispatch): WorkoutCategoriesTableProps =>
   ({
     deActivateClickHandler: (firebaseId: string) => {
-      // (dispatch as ThunkDispatch<State, void, AnyAction>)(
-      //   deActivateWorkoutCategory(firebaseId)
-      // );
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        deActivateWorkoutCategory(firebaseId)
+      );
     },
   } as unknown as WorkoutCategoriesTableProps);
 

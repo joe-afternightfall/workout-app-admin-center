@@ -8,6 +8,10 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { NightfallDialogContent } from 'workout-app-common-core';
 import { Button, Dialog, Grid, TextField } from '@material-ui/core';
 import ManikinMuscleSelector from './manikin-muscles/ManikinMuscleSelector';
+import {
+  saveNewWorkoutCategory,
+  updateWorkoutCategory,
+} from '../../../../../../services/workout-configurations/workout-categories-service';
 
 const WorkoutCategoriesDialog = (
   props: WorkoutCategoriesDialogProps & PassedInProps
@@ -143,21 +147,21 @@ const mapDispatchToProps = (
       manikinMuscleGroupIds: string[]
     ) => {
       if (!ownProps.newWorkoutCategory && ownProps.selectedWorkoutCategory) {
-        // (dispatch as ThunkDispatch<State, void, AnyAction>)(
-        //   updateWorkoutCategory(
-        //     ownProps.selectedWorkoutCategory.firebaseId,
-        //     name,
-        //     color,
-        //     manikinMuscleGroupIds
-        //   )
-        // );
-        // setTimeout(() => {
-        //   ownProps.closeDialogHandler();
-        // }, 500);
+        (dispatch as ThunkDispatch<State, void, AnyAction>)(
+          updateWorkoutCategory(
+            ownProps.selectedWorkoutCategory.firebaseId,
+            name,
+            color,
+            manikinMuscleGroupIds
+          )
+        );
+        setTimeout(() => {
+          ownProps.closeDialogHandler();
+        }, 500);
       } else {
-        // (dispatch as ThunkDispatch<State, void, AnyAction>)(
-        //   saveNewWorkoutCategory(name, color, manikinMuscleGroupIds)
-        // );
+        (dispatch as ThunkDispatch<State, void, AnyAction>)(
+          saveNewWorkoutCategory(name, color, manikinMuscleGroupIds)
+        );
         setTimeout(() => {
           ownProps.closeDialogHandler();
         }, 500);
