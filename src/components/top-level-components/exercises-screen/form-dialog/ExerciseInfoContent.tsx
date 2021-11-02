@@ -1,12 +1,12 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import OptionalParams from './info-components/OptionalParams';
 import MuscleSelector from './info-components/MuscleSelector';
 import AlternateRadioGroup from './info-components/AlternateRadioGroup';
 import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 import ExerciseNameTextField from './info-components/ExerciseNameTextField';
-import ExerciseDescriptionTextField from './info-components/ExerciseDescriptionTextField';
+import OptionalParams from './info-components/optional-params/OptionalParams';
 import ExerciseIconIdTextField from './info-components/ExerciseIconIdTextField';
+import ExerciseDescriptionTextField from './info-components/ExerciseDescriptionTextField';
 
 export default function ExerciseInfoContent(): JSX.Element {
   return (
