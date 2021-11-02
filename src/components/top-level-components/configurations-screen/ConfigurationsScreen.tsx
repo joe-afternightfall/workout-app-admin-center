@@ -23,8 +23,6 @@ import WorkoutCategoriesTable from './components/tables/workout-categories/Worko
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ConfigurationsScreen extends Component<ConfigurationsScreenProps> {
-  // todo: workout-category
-
   render(): JSX.Element {
     const accordionElements = [
       {
