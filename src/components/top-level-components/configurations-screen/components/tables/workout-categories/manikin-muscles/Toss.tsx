@@ -92,7 +92,7 @@ export default function MultipleSelect() {
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl} variant={'filled'}>
         <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
         <Select
           labelId="demo-mutiple-checkbox-label"
@@ -113,52 +113,25 @@ export default function MultipleSelect() {
         </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+        <InputLabel id={'manikin-muscle-label'}>{'Manikin Muscle'}</InputLabel>
         <Select
-          labelId="demo-mutiple-chip-label"
-          id="demo-mutiple-chip"
           multiple
+          labelId={'manikin-muscle-label'}
+          id={'manikin-muscle-select'}
           value={personName}
+          MenuProps={MenuProps}
           onChange={handleChange}
-          input={<Input id="select-multiple-chip" />}
+          input={<Input id={'manikin-muscle-chip'} />}
           renderValue={(selected) => (
             <div className={classes.chips}>
-              {(selected as string[]).map((value) => (
+              {(selected as string[]).map((value: string) => (
                 <Chip key={value} label={value} className={classes.chip} />
               ))}
             </div>
           )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl className={clsx(classes.formControl, classes.noLabel)}>
-        <Select
-          multiple
-          displayEmpty
-          value={personName}
-          onChange={handleChange}
-          input={<Input />}
-          renderValue={(selected) => {
-            if ((selected as string[]).length === 0) {
-              return <em>{'Manikin Muscles'}</em>;
-            }
-            return (selected as string[]).join(', ');
-          }}
-          MenuProps={MenuProps}
-          inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem disabled value={''}>
-            <em>{'Select Manikin Muscle'}</em>
+            <em>{'Muscle List'}</em>
           </MenuItem>
           {names.map((name) => (
             <MenuItem
