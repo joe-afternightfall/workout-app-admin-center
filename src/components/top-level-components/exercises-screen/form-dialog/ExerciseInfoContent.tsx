@@ -5,6 +5,8 @@ import MuscleSelector from './info-components/MuscleSelector';
 import AlternateRadioGroup from './info-components/AlternateRadioGroup';
 import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 import ExerciseNameTextField from './info-components/ExerciseNameTextField';
+import ExerciseDescriptionTextField from './info-components/ExerciseDescriptionTextField';
+import ExerciseIconIdTextField from './info-components/ExerciseIconIdTextField';
 
 export default function ExerciseInfoContent(): JSX.Element {
   return (
@@ -14,7 +16,13 @@ export default function ExerciseInfoContent(): JSX.Element {
           <ExerciseNameTextField />
         </Grid>
         <Grid item xs={4}>
-          <MuscleSelector />
+          <ExerciseIconIdTextField />
+        </Grid>
+        <Grid item xs={8}>
+          <ExerciseDescriptionTextField />
+        </Grid>
+        <Grid item xs={4}>
+          <AlternateRadioGroup />
         </Grid>
       </Grid>
 
@@ -24,7 +32,7 @@ export default function ExerciseInfoContent(): JSX.Element {
 
       <Grid item xs={12} container style={{ marginTop: 24 }}>
         <Grid item xs={6}>
-          <AlternateRadioGroup />
+          <MuscleSelector />
         </Grid>
         <Grid item xs={6}>
           <OptionalParams />

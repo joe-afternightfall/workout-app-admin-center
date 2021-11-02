@@ -56,6 +56,8 @@ import {
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
   SelectOptionalExerciseParamAction,
+  UpdateExerciseDescriptionAction,
+  UpdateExerciseIconIdAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
 
@@ -116,6 +118,8 @@ export enum ActionTypes {
   SELECT_EXERCISE_MUSCLE_ID = 'SELECT_EXERCISE_MUSCLE_ID',
   SELECT_OPTIONAL_EXERCISE_PARAM = 'SELECT_OPTIONAL_EXERCISE_PARAM',
   UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
+  UPDATE_EXERCISE_DESCRIPTION = 'UPDATE_EXERCISE_DESCRIPTION',
+  UPDATE_EXERCISE_ICON_ID = 'UPDATE_EXERCISE_ICON_ID',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
   // Side drawer actions
@@ -178,4 +182,6 @@ export type ApplicationActions =
   | LoadPhasesAction
   | LoadTrainingSetTypesAction
   | LoadWorkoutCategoriesAction
-  | LoadWorkoutEquipmentAction;
+  | LoadWorkoutEquipmentAction
+  | UpdateExerciseDescriptionAction
+  | UpdateExerciseIconIdAction;

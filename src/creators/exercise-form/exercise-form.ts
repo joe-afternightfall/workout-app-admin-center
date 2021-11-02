@@ -107,6 +107,34 @@ export const updateExerciseName = (value: string): UpdateExerciseNameAction => {
   };
 };
 
+export interface UpdateExerciseDescriptionAction {
+  type: ActionTypes.UPDATE_EXERCISE_DESCRIPTION;
+  value: string;
+}
+
+export const updateExerciseDescription = (
+  value: string
+): UpdateExerciseDescriptionAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_DESCRIPTION,
+    value: value,
+  };
+};
+
+export interface UpdateExerciseIconIdAction {
+  type: ActionTypes.UPDATE_EXERCISE_ICON_ID;
+  value: string;
+}
+
+export const updateExerciseIconId = (
+  value: string
+): UpdateExerciseIconIdAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_ICON_ID,
+    value: value,
+  };
+};
+
 export interface SaveExerciseInfoAction {
   type: ActionTypes.SAVE_EXERCISE_INFO;
 }

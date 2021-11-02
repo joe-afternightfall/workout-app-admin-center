@@ -84,6 +84,18 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.UPDATE_EXERCISE_DESCRIPTION: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.description = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.UPDATE_EXERCISE_ICON_ID: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.iconId = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
       default:
         newState = state;
     }
