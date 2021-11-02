@@ -9,6 +9,7 @@ import {
   FormControl,
   ListItemText,
 } from '@material-ui/core';
+import { Dispatch } from 'redux';
 import {
   Theme,
   useTheme,
@@ -17,14 +18,8 @@ import {
 } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { WorkoutEquipmentVO } from 'workout-app-common-core';
-import { State } from '../../../../../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import {
-  saveNewWorkoutCategory,
-  updateWorkoutCategory,
-} from '../../../../../../services/workout-configurations/workout-categories-service';
-import { updateExerciseEquipmentListIds } from '../../../../../../creators/exercise-form/exercise-form';
+import { State } from '../../../../../../../configs/redux/store';
+import { updateExerciseEquipmentListIds } from '../../../../../../../creators/exercise-form/exercise-form';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

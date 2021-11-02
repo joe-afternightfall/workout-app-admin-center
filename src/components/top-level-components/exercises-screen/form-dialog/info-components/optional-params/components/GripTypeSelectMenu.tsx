@@ -12,9 +12,9 @@ import { connect } from 'react-redux';
 import { Close } from '@material-ui/icons';
 import { GripTypeVO } from 'workout-app-common-core';
 import DefaultOptionTitle from './DefaultOptionTitle';
+import { State } from '../../../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { selectOptionalExerciseParam } from '../../../../../../creators/exercise-form/exercise-form';
-import { State } from '../../../../../../configs/redux/store';
+import { selectOptionalExerciseParam } from '../../../../../../../creators/exercise-form/exercise-form';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
