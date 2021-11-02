@@ -8,7 +8,7 @@ export default function DefaultOptionTitle(
   return (
     <Grid container alignItems={'center'}>
       <Grid item xs={8}>
-        <Typography>{props.title}</Typography>
+        <Typography color={'textSecondary'}>{props.title}</Typography>
       </Grid>
       <Grid item xs={4}>
         <IconButton onClick={props.selectOptionHandler}>
