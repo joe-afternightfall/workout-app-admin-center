@@ -1,19 +1,23 @@
 import React from 'react';
-import clsx from 'clsx';
 import {
-  createStyles,
-  makeStyles,
-  useTheme,
+  Chip,
+  Input,
+  Select,
+  Checkbox,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  ListItemText,
+} from '@material-ui/core';
+import {
   Theme,
+  useTheme,
+  makeStyles,
+  createStyles,
 } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
+import { connect } from 'react-redux';
+import { ManikinMuscleGroupVO } from 'workout-app-common-core';
+import { State } from '../../../../../../../configs/redux/store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,45 +37,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 6.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-function getStyles(name: string, personName: string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function ManikinMuscleSelector(): JSX.Element {
+const ManikinMuscleSelector = (
+  props: ManikinMuscleSelectorProps & PassedInProps
+): JSX.Element => {
+  const { selectedMuscles, manikinMuscleGroups, selectMuscleHandler } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
-
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setPersonName(event.target.value as string[]);
-  };
 
   return (
     <FormControl className={classes.formControl}>
@@ -80,9 +52,16 @@ export default function ManikinMuscleSelector(): JSX.Element {
         multiple
         labelId={'manikin-muscle-label'}
         id={'manikin-muscle-select'}
-        value={personName}
-        MenuProps={MenuProps}
-        onChange={handleChange}
+        value={selectedMuscles}
+        MenuProps={{
+          PaperProps: {
+            style: {
+              maxHeight: ITEM_HEIGHT * 6.5 + ITEM_PADDING_TOP,
+              width: 250,
+            },
+          },
+        }}
+        onChange={selectMuscleHandler}
         input={<Input id={'manikin-muscle-chip'} />}
         renderValue={(selected) => (
           <div className={classes.chips}>
@@ -95,17 +74,40 @@ export default function ManikinMuscleSelector(): JSX.Element {
         <MenuItem disabled value={''}>
           <em>{'Muscle List'}</em>
         </MenuItem>
-        {names.map((name) => (
+        {manikinMuscleGroups.map((group) => (
           <MenuItem
-            key={name}
-            value={name}
-            style={getStyles(name, personName, theme)}
+            key={group.name}
+            value={group.name}
+            style={{
+              fontWeight:
+                selectedMuscles.indexOf(group.name) === -1
+                  ? theme.typography.fontWeightRegular
+                  : theme.typography.fontWeightMedium,
+            }}
           >
-            <Checkbox checked={personName.indexOf(name) > -1} />
-            <ListItemText primary={name} />
+            <Checkbox checked={selectedMuscles.indexOf(group.name) > -1} />
+            <ListItemText primary={group.name} />
           </MenuItem>
         ))}
       </Select>
     </FormControl>
   );
+};
+
+interface PassedInProps {
+  selectedMuscles: string[];
+  selectMuscleHandler: (event: React.ChangeEvent<{ value: unknown }>) => void;
 }
+
+interface ManikinMuscleSelectorProps {
+  manikinMuscleGroups: ManikinMuscleGroupVO[];
+}
+
+const mapStateToProps = (state: State): ManikinMuscleSelectorProps => {
+  return {
+    manikinMuscleGroups:
+      state.applicationState.workoutConfigurations.manikinMuscleGroups,
+  } as unknown as ManikinMuscleSelectorProps;
+};
+
+export default connect(mapStateToProps)(ManikinMuscleSelector);

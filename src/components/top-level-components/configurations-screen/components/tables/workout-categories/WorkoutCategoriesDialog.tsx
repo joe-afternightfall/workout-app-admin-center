@@ -7,7 +7,7 @@ import { State } from '../../../../../../configs/redux/store';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { NightfallDialogContent } from 'workout-app-common-core';
 import { Button, Dialog, Grid, TextField } from '@material-ui/core';
-import MultipleSelect from './manikin-muscles/Toss';
+import ManikinMuscleSelector from './manikin-muscles/ManikinMuscleSelector';
 
 const WorkoutCategoriesDialog = (
   props: WorkoutCategoriesDialogProps & PassedInProps
@@ -30,6 +30,10 @@ const WorkoutCategoriesDialog = (
 
   const selectColorId = (colorId: string) => {
     setColorId(colorId);
+  };
+
+  const selectMuscle = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setManikinMuscleGroupIds(event.target.value as string[]);
   };
 
   useEffect(() => {
@@ -73,7 +77,10 @@ const WorkoutCategoriesDialog = (
                 />
               </Grid>
               <Grid item xs={6}>
-                <MultipleSelect />
+                <ManikinMuscleSelector
+                  selectMuscleHandler={selectMuscle}
+                  selectedMuscles={manikinMuscleGroupIds}
+                />
               </Grid>
             </Grid>
           </Grid>
