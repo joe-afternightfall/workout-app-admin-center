@@ -32,7 +32,7 @@ const ParameterTypesDialog = (
   }, [newParameterType, selectedParameterType]);
 
   return (
-    <Dialog open={open} onClose={closeDialogHandler}>
+    <Dialog open={open} onClose={closeDialogHandler} maxWidth={'sm'} fullWidth>
       <NightfallDialogContent
         title={
           newParameterType ? 'New Parameter Type' : 'Update Parameter Type'

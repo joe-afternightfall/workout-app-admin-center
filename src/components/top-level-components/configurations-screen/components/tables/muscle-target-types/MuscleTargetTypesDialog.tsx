@@ -36,7 +36,7 @@ const MuscleTargetTypesDialog = (
   }, [newMuscleTargetType, selectedMuscleTargetType]);
 
   return (
-    <Dialog open={open} onClose={closeDialogHandler}>
+    <Dialog open={open} onClose={closeDialogHandler} maxWidth={'sm'} fullWidth>
       <NightfallDialogContent
         title={
           newMuscleTargetType

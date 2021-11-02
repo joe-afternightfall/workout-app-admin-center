@@ -33,7 +33,7 @@ const ManikinMuscleGroupDialog = (
   }, [newManikinMuscleGroup, selectedManikinMuscleGroup]);
 
   return (
-    <Dialog open={open} onClose={closeDialogHandler}>
+    <Dialog open={open} onClose={closeDialogHandler} maxWidth={'sm'} fullWidth>
       <NightfallDialogContent
         title={
           newManikinMuscleGroup
@@ -41,7 +41,12 @@ const ManikinMuscleGroupDialog = (
             : 'Update Manikin Muscle Group'
         }
         dialogContent={
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={2}
+            style={{ minHeight: '20vh' }}
+            alignItems={'center'}
+          >
             <Grid item xs={12}>
               <TextField
                 fullWidth

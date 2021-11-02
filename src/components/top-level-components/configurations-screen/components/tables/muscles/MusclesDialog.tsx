@@ -64,7 +64,7 @@ const MusclesDialog = (
   }, [newMuscle, selectedMuscle]);
 
   return (
-    <Dialog open={open} onClose={closeDialogHandler}>
+    <Dialog open={open} onClose={closeDialogHandler} maxWidth={'sm'} fullWidth>
       <NightfallDialogContent
         title={newMuscle ? 'New Muscle' : 'Update Muscle'}
         dialogContent={

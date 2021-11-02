@@ -28,7 +28,7 @@ const PhasesDialog = (
   }, [newPhase, selectedPhase]);
 
   return (
-    <Dialog open={open} onClose={closeDialogHandler}>
+    <Dialog open={open} onClose={closeDialogHandler} maxWidth={'sm'} fullWidth>
       <NightfallDialogContent
         title={newPhase ? 'New Phase' : 'Update Phase'}
         dialogContent={

@@ -30,7 +30,7 @@ const WorkoutCategoriesDialog = (
     []
   );
 
-  const chosenColorIds = workoutCategories.map((category) => category.id);
+  const chosenColorIds = workoutCategories.map((category) => category.color);
 
   const selectColorId = (colorId: string) => {
     setColorId(colorId);
