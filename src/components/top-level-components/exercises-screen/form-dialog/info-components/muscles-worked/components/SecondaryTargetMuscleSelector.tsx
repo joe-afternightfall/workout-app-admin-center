@@ -9,7 +9,6 @@ import {
   Grid,
   TextField,
   IconButton,
-  Typography,
   FormControl,
   InputLabel,
   Select,
@@ -42,10 +41,6 @@ const SecondaryTargetMuscleSelector = (
   return (
     <Grid container spacing={3}>
       {secondaryMuscles.map((secondary: MuscleInfo, index) => {
-        const foundTargetType = muscleTargetTypes.find(
-          (targetType) => targetType.id === secondary.muscleTargetTypeId
-        );
-
         let defaultValue = null;
 
         muscles.find((muscle: MuscleVO) => {

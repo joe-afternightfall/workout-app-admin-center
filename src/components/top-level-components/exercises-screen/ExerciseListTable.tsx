@@ -2,9 +2,8 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import {
   ExerciseVO,
-  MuscleGroup,
-  muscleGroups,
-  getParameterTypeName,
+  ParameterTypeVO,
+  ManikinMuscleGroupVO,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
@@ -18,21 +17,28 @@ import {
 import DeleteExerciseDialog from './DeleteExerciseDialog';
 
 const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
-  const { exercises } = props;
+  const { exercises, parameterTypes, manikinMuscleGroups } = props;
 
   const data = exercises.map((exercise: ExerciseVO, index: number) => {
     index += 1;
-    const foundMuscles: (MuscleGroup | undefined)[] =
-      exercise.muscleGroupIds.map((id: string) =>
-        muscleGroups.find((muscle: MuscleGroup) => muscle.id === id)
-      );
-
+    const foundParameterType = parameterTypes.find(
+      (parameterType) => parameterType.id === exercise.parameterTypeId
+    );
+    const primaryManikinMuscles: string[] = [];
+    exercise.manikinMuscleGroupIds &&
+      exercise.manikinMuscleGroupIds.map((groupId) => {
+        manikinMuscleGroups.map((group) => {
+          if (group.id === groupId) {
+            primaryManikinMuscles.push(group.name);
+          }
+        });
+      });
     return {
       number: index,
       name: exercise.name,
       firebaseId: exercise.firebaseId,
-      muscle: foundMuscles[0] && foundMuscles[0].name,
-      paramName: getParameterTypeName(exercise.parameterTypeId),
+      primaryMuscle: primaryManikinMuscles,
+      paramName: foundParameterType && foundParameterType.name,
       actions: (
         <Grid container>
           <Grid item xs={6}>
@@ -80,8 +86,8 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
           },
         },
         {
-          title: 'Muscle Group',
-          field: 'muscle',
+          title: 'Primary Muscle',
+          field: 'primaryMuscle',
           cellStyle: {
             width: '20%',
           },
@@ -120,6 +126,8 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
 
 interface ExerciseListTableProps {
   exercises: ExerciseVO[];
+  parameterTypes: ParameterTypeVO[];
+  manikinMuscleGroups: ManikinMuscleGroupVO[];
   openNewDialogHandler: () => void;
   openEditDialogHandler: (exercise: ExerciseVO) => void;
 }
@@ -127,6 +135,9 @@ interface ExerciseListTableProps {
 const mapStateToProps = (state: State): ExerciseListTableProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
+    parameterTypes: state.applicationState.workoutConfigurations.parameterTypes,
+    manikinMuscleGroups:
+      state.applicationState.workoutConfigurations.manikinMuscleGroups,
   } as unknown as ExerciseListTableProps;
 };
 
