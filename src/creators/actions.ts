@@ -49,8 +49,10 @@ import {
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
   AddPrimaryMuscleTargetAction,
+  AddSecondaryMuscleTargetAction,
   CloseExerciseFormDialogAction,
   DeletePrimaryMuscleTargetAction,
+  DeleteSecondaryMuscleTargetAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   SaveExerciseInfoAction,
@@ -59,6 +61,8 @@ import {
   SelectExerciseParamTypeAction,
   SelectOptionalExerciseParamAction,
   SelectPrimaryMuscleAction,
+  SelectSecondaryMuscleAction,
+  SelectSecondaryTargetTypeAction,
   UpdateExerciseDescriptionAction,
   UpdateExerciseEquipmentListIdsAction,
   UpdateExerciseIconIdAction,
@@ -130,6 +134,10 @@ export enum ActionTypes {
   ADD_PRIMARY_MUSCLE_TARGET = 'ADD_PRIMARY_MUSCLE_TARGET',
   DELETE_PRIMARY_MUSCLE_TARGET = 'DELETE_PRIMARY_MUSCLE_TARGET',
   SELECT_PRIMARY_MUSCLE = 'SELECT_PRIMARY_MUSCLE',
+  SELECT_SECONDARY_MUSCLE = 'SELECT_SECONDARY_MUSCLE',
+  ADD_SECONDARY_MUSCLE_TARGET = 'ADD_SECONDARY_MUSCLE_TARGET',
+  DELETE_SECONDARY_MUSCLE_TARGET = 'DELETE_SECONDARY_MUSCLE_TARGET',
+  SELECT_SECONDARY_TARGET_TYPE = 'SELECT_SECONDARY_TARGET_TYPE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
   // Side drawer actions
@@ -199,4 +207,8 @@ export type ApplicationActions =
   | UpdateExerciseManikinMuscleGroupAction
   | AddPrimaryMuscleTargetAction
   | SelectPrimaryMuscleAction
-  | DeletePrimaryMuscleTargetAction;
+  | DeletePrimaryMuscleTargetAction
+  | SelectSecondaryMuscleAction
+  | DeleteSecondaryMuscleTargetAction
+  | AddSecondaryMuscleTargetAction
+  | SelectSecondaryTargetTypeAction;

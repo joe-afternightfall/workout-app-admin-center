@@ -208,6 +208,64 @@ export const selectPrimaryMuscle = (
   };
 };
 
+export interface SelectSecondaryMuscleAction {
+  type: ActionTypes.SELECT_SECONDARY_MUSCLE;
+  secondaryId: string;
+  value: string;
+}
+
+export const selectSecondaryMuscle = (
+  secondaryId: string,
+  value: string
+): SelectSecondaryMuscleAction => {
+  return {
+    type: ActionTypes.SELECT_SECONDARY_MUSCLE,
+    secondaryId: secondaryId,
+    value: value,
+  };
+};
+
+export interface AddSecondaryMuscleTargetAction {
+  type: ActionTypes.ADD_SECONDARY_MUSCLE_TARGET;
+}
+
+export const addSecondaryMuscleTarget = (): AddSecondaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.ADD_SECONDARY_MUSCLE_TARGET,
+  };
+};
+
+export interface DeleteSecondaryMuscleTargetAction {
+  type: ActionTypes.DELETE_SECONDARY_MUSCLE_TARGET;
+  secondaryMuscle: MuscleInfo;
+}
+
+export const deleteSecondaryMuscleTarget = (
+  secondaryMuscle: MuscleInfo
+): DeleteSecondaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.DELETE_SECONDARY_MUSCLE_TARGET,
+    secondaryMuscle: secondaryMuscle,
+  };
+};
+
+export interface SelectSecondaryTargetTypeAction {
+  type: ActionTypes.SELECT_SECONDARY_TARGET_TYPE;
+  secondaryId: string;
+  value: string;
+}
+
+export const selectSecondaryTargetType = (
+  secondaryId: string,
+  value: string
+): SelectSecondaryTargetTypeAction => {
+  return {
+    type: ActionTypes.SELECT_SECONDARY_TARGET_TYPE,
+    secondaryId: secondaryId,
+    value: value,
+  };
+};
+
 export interface SaveExerciseInfoAction {
   type: ActionTypes.SAVE_EXERCISE_INFO;
 }

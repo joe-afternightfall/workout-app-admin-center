@@ -16,36 +16,22 @@ import {
   MuscleVO,
 } from 'workout-app-common-core';
 import { Close } from '@material-ui/icons';
-
-function buildOptions(muscle: MuscleVO): {
-  firebaseId: string;
-  id: string;
-  name: string;
-  manikinMuscleGroupId: string;
-  active: boolean;
-  firstLetter: string;
-} {
-  const firstLetter = muscle.name[0].toUpperCase();
-  return {
-    firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-    ...muscle,
-  };
-}
+import buildOptions from '../../../../../../../utils/build-muscle-selector-options';
 
 const PrimaryTargetMuscleSelector = (
   props: PrimaryTargetMuscleSelectorProps
 ) => {
-  const { primaryMuscles, muscles } = props;
+  const { primaryMuscles, muscles, muscleTargetTypes } = props;
 
   const options = muscles.map((muscle: MuscleVO) => {
     return buildOptions(muscle);
   });
 
-  const primaryMusclesLength = props.primaryMuscles.length + 1;
+  const primaryMusclesLength = primaryMuscles.length + 1;
   return (
     <Grid container spacing={3}>
       {primaryMuscles.map((primary, index) => {
-        const foundTargetType = props.muscleTargetTypes.find(
+        const foundTargetType = muscleTargetTypes.find(
           (targetType) => targetType.id === primary.muscleTargetTypeId
         );
 
@@ -71,7 +57,7 @@ const PrimaryTargetMuscleSelector = (
                 <Autocomplete
                   fullWidth
                   value={defaultValue}
-                  id={'grouped-muscles'}
+                  id={`primary-muscles-selector-${index}`}
                   options={options.sort(
                     (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
                   )}

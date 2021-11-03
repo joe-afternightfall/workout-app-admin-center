@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import PrimaryTargetMuscleSelector from './components/PrimaryTargetMuscleSelector';
 import ManikinMuscleGroupSelectMenu from './components/ManikinMuscleGroupSelectMenu';
+import SecondaryTargetMuscleSelector from './components/SecondaryTargetMuscleSelector';
 
 export default function MusclesWorked(): JSX.Element {
   return (
@@ -29,6 +30,9 @@ export default function MusclesWorked(): JSX.Element {
           <Typography color={'textSecondary'} variant={'body1'}>
             {'Secondary Muscles'}
           </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <SecondaryTargetMuscleSelector />
         </Grid>
       </Grid>
     </Grid>
