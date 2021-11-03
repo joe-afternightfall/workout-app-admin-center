@@ -149,6 +149,20 @@ export const updateExerciseEquipmentListIds = (
   };
 };
 
+export interface UpdateExerciseManikinMuscleGroupAction {
+  type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP;
+  value: string;
+}
+
+export const updateExerciseManikinMuscleGroup = (
+  value: string
+): UpdateExerciseManikinMuscleGroupAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP,
+    value: value,
+  };
+};
+
 export interface SaveExerciseInfoAction {
   type: ActionTypes.SAVE_EXERCISE_INFO;
 }

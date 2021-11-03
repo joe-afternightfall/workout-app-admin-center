@@ -102,6 +102,12 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.manikinMuscleGroupIds = [action.value];
+        newState.exerciseForm = clonedForm;
+        break;
+      }
       default:
         newState = state;
     }
