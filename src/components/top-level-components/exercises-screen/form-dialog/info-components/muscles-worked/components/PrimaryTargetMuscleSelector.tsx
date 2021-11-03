@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import React, { ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Grid, Link, Typography } from '@material-ui/core';
+import { Grid, IconButton, Link, Typography } from '@material-ui/core';
 import { State } from '../../../../../../../configs/redux/store';
 import {
   selectPrimaryMuscle,
   addPrimaryMuscleTarget,
+  deletePrimaryMuscleTarget,
 } from '../../../../../../../creators/exercise-form/exercise-form';
-import { MuscleTargetTypeVO, MuscleVO } from 'workout-app-common-core';
+import {
+  MuscleInfo,
+  MuscleTargetTypeVO,
+  MuscleVO,
+} from 'workout-app-common-core';
+import { Close } from '@material-ui/icons';
 
 function buildOptions(muscle: MuscleVO): {
   firebaseId: string;
@@ -51,12 +57,16 @@ const PrimaryTargetMuscleSelector = (
           }
         });
 
+        const title =
+          foundTargetType &&
+          `${primary.order}. ${foundTargetType.name} Muscle:`;
         return (
           foundTargetType && (
-            <Grid key={index} item xs={12} container>
-              <Grid item xs={5}>
-                <Typography>{`${foundTargetType.name} Muscle:`}</Typography>
+            <Grid key={index} item xs={12} container alignItems={'center'}>
+              <Grid item xs={4}>
+                <Typography>{title}</Typography>
               </Grid>
+
               <Grid item xs={7}>
                 <Autocomplete
                   fullWidth
@@ -82,6 +92,14 @@ const PrimaryTargetMuscleSelector = (
                   getOptionSelected={(option, value) => option.id === value.id}
                 />
               </Grid>
+
+              <Grid item xs={1}>
+                <IconButton
+                  onClick={() => props.deletePrimaryTargetHandler(primary)}
+                >
+                  <Close />
+                </IconButton>
+              </Grid>
             </Grid>
           )
         );
@@ -89,7 +107,7 @@ const PrimaryTargetMuscleSelector = (
       <Grid item xs={12}>
         <Link
           component={'button'}
-          variant={'body2'}
+          variant={'body1'}
           onClick={props.addPrimaryTargetHandler}
         >
           {`${primaryMusclesLength}. Click to add`}
@@ -101,14 +119,11 @@ const PrimaryTargetMuscleSelector = (
 
 interface PrimaryTargetMuscleSelectorProps {
   muscles: MuscleVO[];
-  primaryMuscles: {
-    id: string;
-    muscleTargetTypeId: string;
-    muscleId: string;
-  }[];
+  primaryMuscles: MuscleInfo[];
   addPrimaryTargetHandler: () => void;
   muscleTargetTypes: MuscleTargetTypeVO[];
   changeHandler: (primaryId: string, value: string) => void;
+  deletePrimaryTargetHandler: (primaryMuscle: MuscleInfo) => void;
 }
 
 const mapStateToProps = (state: State): PrimaryTargetMuscleSelectorProps => {
@@ -129,6 +144,9 @@ const mapDispatchToProps = (
     },
     addPrimaryTargetHandler: () => {
       dispatch(addPrimaryMuscleTarget());
+    },
+    deletePrimaryTargetHandler: (primaryMuscle: MuscleInfo) => {
+      dispatch(deletePrimaryMuscleTarget(primaryMuscle));
     },
   } as unknown as PrimaryTargetMuscleSelectorProps);
 

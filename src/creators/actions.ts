@@ -50,6 +50,7 @@ import { HideAppBarAction, LogoutUserAction } from './application';
 import {
   AddPrimaryMuscleTargetAction,
   CloseExerciseFormDialogAction,
+  DeletePrimaryMuscleTargetAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   SaveExerciseInfoAction,
@@ -127,6 +128,7 @@ export enum ActionTypes {
   UPDATE_EXERCISE_EQUIPMENT_LIST_IDS = 'UPDATE_EXERCISE_EQUIPMENT_LIST_IDS',
   UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP',
   ADD_PRIMARY_MUSCLE_TARGET = 'ADD_PRIMARY_MUSCLE_TARGET',
+  DELETE_PRIMARY_MUSCLE_TARGET = 'DELETE_PRIMARY_MUSCLE_TARGET',
   SELECT_PRIMARY_MUSCLE = 'SELECT_PRIMARY_MUSCLE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
@@ -196,4 +198,5 @@ export type ApplicationActions =
   | UpdateExerciseEquipmentListIdsAction
   | UpdateExerciseManikinMuscleGroupAction
   | AddPrimaryMuscleTargetAction
-  | SelectPrimaryMuscleAction;
+  | SelectPrimaryMuscleAction
+  | DeletePrimaryMuscleTargetAction;

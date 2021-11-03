@@ -1,5 +1,9 @@
 import { ActionTypes } from '../actions';
-import { ExerciseVO, ParameterTypeVO } from 'workout-app-common-core';
+import {
+  ExerciseVO,
+  MuscleInfo,
+  ParameterTypeVO,
+} from 'workout-app-common-core';
 
 export interface OpenNewExerciseFormDialogAction {
   type: ActionTypes.OPEN_NEW_EXERCISE_FORM_DIALOG;
@@ -170,6 +174,20 @@ export interface AddPrimaryMuscleTargetAction {
 export const addPrimaryMuscleTarget = (): AddPrimaryMuscleTargetAction => {
   return {
     type: ActionTypes.ADD_PRIMARY_MUSCLE_TARGET,
+  };
+};
+
+export interface DeletePrimaryMuscleTargetAction {
+  type: ActionTypes.DELETE_PRIMARY_MUSCLE_TARGET;
+  primaryMuscle: MuscleInfo;
+}
+
+export const deletePrimaryMuscleTarget = (
+  primaryMuscle: MuscleInfo
+): DeletePrimaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.DELETE_PRIMARY_MUSCLE_TARGET,
+    primaryMuscle: primaryMuscle,
   };
 };
 
