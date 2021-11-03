@@ -15,7 +15,7 @@ const ParamTypeButtonGroup = ({
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography color={'textPrimary'}>
+        <Typography color={'textPrimary'} variant={'h6'}>
           {'Parameters / Exercise type'}
         </Typography>
       </Grid>
