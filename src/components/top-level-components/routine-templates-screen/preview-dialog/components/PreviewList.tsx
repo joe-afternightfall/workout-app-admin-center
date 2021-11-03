@@ -2,13 +2,16 @@ import React from 'react';
 import {
   Phase,
   Segment,
-  getPhaseName,
   sortPhaseSegments,
   RoutineTemplateVO,
+  PhaseVO,
 } from 'workout-app-common-core';
 import PreviewListItem from './PreviewListItem';
 import { Grid, List, ListSubheader } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { State } from '../../../../../configs/redux/store';
+import { connect } from 'react-redux';
+import { getPhaseName } from '../../../../../utils/get-name';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -27,8 +30,8 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function PreviewList(props: PreviewListProps): JSX.Element {
-  const { routineTemplate } = props;
+const PreviewList = (props: PreviewListProps & PassedInProps): JSX.Element => {
+  const { routineTemplate, phases } = props;
   const classes = useStyles();
 
   return (
@@ -48,7 +51,10 @@ export default function PreviewList(props: PreviewListProps): JSX.Element {
                 className={classes.listWrapper}
                 subheader={
                   <ListSubheader component={'div'} disableSticky>
-                    {`Phase #${phase.order} ${getPhaseName(phase.phaseId)}`}
+                    {`Phase #${phase.order} ${getPhaseName(
+                      phases,
+                      phase.phaseId
+                    )}`}
                   </ListSubheader>
                 }
               >
@@ -65,8 +71,20 @@ export default function PreviewList(props: PreviewListProps): JSX.Element {
         })}
     </Grid>
   );
+};
+
+interface PassedInProps {
+  routineTemplate: RoutineTemplateVO | undefined;
 }
 
 interface PreviewListProps {
-  routineTemplate: RoutineTemplateVO | undefined;
+  phases: PhaseVO[];
 }
+
+const mapStateToProps = (state: State): PreviewListProps => {
+  return {
+    phases: state.applicationState.workoutConfigurations.phases,
+  } as unknown as PreviewListProps;
+};
+
+export default connect(mapStateToProps)(PreviewList);

@@ -10,23 +10,23 @@ import { routerActions } from 'connected-react-router';
 import { ROUTINE_TEMPLATES_SCREEN_PATH } from '../../configs/constants/app';
 import { clearRoutineBuilder } from '../../creators/routine-builder/builder';
 import {
-  mapRoutineSnapshotToVO,
   RoutineTemplateDAO,
+  mapRoutineTemplateSnapshotToVO,
+  FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE,
 } from 'workout-app-common-core';
-import { ROUTINE_TEMPLATES_DB_ROUTE } from '../../configs/constants/firebase-routes';
-import { loadRoutineTemplates } from '../../creators/workout-configurations';
+import { loadRoutineTemplates } from '../../creators/load-workout-configs';
 
 export const fetchAllRoutineTemplates =
   (): ThunkAction<void, State, void, AnyAction> =>
   async (dispatch: Dispatch): Promise<void> => {
     return await firebase
       .database()
-      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
       .once('value')
       .then((snapshot) => {
         if (snapshot.val()) {
           dispatch(
-            loadRoutineTemplates(mapRoutineSnapshotToVO(snapshot.val()))
+            loadRoutineTemplates(mapRoutineTemplateSnapshotToVO(snapshot.val()))
           );
         } else {
           dispatch(loadRoutineTemplates([]));
@@ -43,10 +43,11 @@ export const saveNewRoutineTemplate =
       template.id,
       template.name,
       template.workoutCategoryId,
-      template.phases
+      template.phases,
+      true
     );
 
-    const ref = firebase.database().ref(ROUTINE_TEMPLATES_DB_ROUTE);
+    const ref = firebase.database().ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE);
     const newRef = ref.push();
 
     return await newRef.set(templateDAO, (error: Error | null) => {
@@ -75,7 +76,7 @@ export const updateRoutineTemplate =
 
     return await firebase
       .database()
-      .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+      .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
       .child(template.firebaseId)
       .update(
         {
@@ -110,7 +111,7 @@ export const deleteRoutineTemplate =
       template.firebaseId !== '' &&
       (await firebase
         .database()
-        .ref(ROUTINE_TEMPLATES_DB_ROUTE)
+        .ref(FIREBASE_DB_ROUTINE_TEMPLATES_ROUTE)
         .child(template.firebaseId)
         .remove((error) => {
           if (error) {

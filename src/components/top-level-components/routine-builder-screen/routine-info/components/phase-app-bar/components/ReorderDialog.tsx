@@ -15,11 +15,12 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
 import { State } from '../../../../../../../configs/redux/store';
-import { getPhaseName, NightfallTooltip, Phase } from 'workout-app-common-core';
+import { Phase, PhaseVO, NightfallTooltip } from 'workout-app-common-core';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { reorderRoutinePhases } from '../../../../../../../creators/routine-builder/builder';
+import { getPhaseName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -34,7 +35,11 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
+const ReorderDialog = ({
+  phases,
+  reorderPhases,
+  configPhases,
+}: ReorderDialogProps) => {
   const classes = useStyles();
 
   const [hoveringOverCard, setHoveringOverCard] = React.useState('');
@@ -117,6 +122,7 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
                             {phase.phaseId && (
                               <CardContent>
                                 {`${phase.order}. ${getPhaseName(
+                                  configPhases,
                                   phase.phaseId
                                 )}`}
                               </CardContent>
@@ -141,6 +147,7 @@ const ReorderDialog = ({ phases, reorderPhases }: ReorderDialogProps) => {
 
 interface ReorderDialogProps {
   phases: Phase[];
+  configPhases: PhaseVO[];
   reorderPhases: (phases: Phase[]) => void;
 }
 
@@ -149,6 +156,7 @@ const mapStateToProps = (state: State): ReorderDialogProps => {
     phases: state.routineBuilderState.selectedRoutine.phases
       ? state.routineBuilderState.selectedRoutine.phases
       : [],
+    configPhases: state.applicationState.workoutConfigurations.phases,
   } as unknown as ReorderDialogProps;
 };
 

@@ -3,8 +3,18 @@ import { ValidatedUserAction } from './user-info';
 import {
   LoadExercisesAction,
   LoadExerciseTypesAction,
+  LoadGripTypesAction,
+  LoadGripWidthsAction,
+  LoadManikinMuscleGroupsAction,
+  LoadMusclesAction,
+  LoadMuscleTargetTypesAction,
+  LoadParameterTypesAction,
+  LoadPhasesAction,
   LoadRoutineTemplatesAction,
-} from './workout-configurations';
+  LoadTrainingSetTypesAction,
+  LoadWorkoutCategoriesAction,
+  LoadWorkoutEquipmentAction,
+} from './load-workout-configs';
 import {
   ApplyHoverStylesToMuscleGroupAction,
   ClearHoverStylesForMuscleGroupAction,
@@ -38,7 +48,11 @@ import {
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
+  AddPrimaryMuscleTargetAction,
+  AddSecondaryMuscleTargetAction,
   CloseExerciseFormDialogAction,
+  DeletePrimaryMuscleTargetAction,
+  DeleteSecondaryMuscleTargetAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   SaveExerciseInfoAction,
@@ -46,6 +60,13 @@ import {
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
   SelectOptionalExerciseParamAction,
+  SelectPrimaryMuscleAction,
+  SelectSecondaryMuscleAction,
+  SelectSecondaryTargetTypeAction,
+  UpdateExerciseDescriptionAction,
+  UpdateExerciseEquipmentListIdsAction,
+  UpdateExerciseIconIdAction,
+  UpdateExerciseManikinMuscleGroupAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
 
@@ -63,6 +84,16 @@ export enum ActionTypes {
   // New Workout Configs
   LOAD_EXERCISES = 'LOAD_EXERCISES',
   LOAD_ROUTINE_TEMPLATES = 'LOAD_ROUTINE_TEMPLATES',
+  LOAD_GRIP_TYPES = 'LOAD_GRIP_TYPES',
+  LOAD_GRIP_WIDTHS = 'LOAD_GRIP_WIDTHS',
+  LOAD_MANIKIN_MUSCLE_GROUP = 'LOAD_MANIKIN_MUSCLE_GROUP',
+  LOAD_MUSCLES = 'LOAD_MUSCLES',
+  LOAD_MUSCLE_TARGET_TYPES = 'LOAD_MUSCLE_TARGET_TYPES',
+  LOAD_PARAMETER_TYPES = 'LOAD_PARAMETER_TYPES',
+  LOAD_PHASES = 'LOAD_PHASES',
+  LOAD_TRAINING_SET_TYPES = 'LOAD_TRAINING_SET_TYPES',
+  LOAD_WORKOUT_CATEGORIES = 'LOAD_WORKOUT_CATEGORIES',
+  LOAD_WORKOUT_EQUIPMENT = 'LOAD_WORKOUT_EQUIPMENT',
 
   // Routine Builder Actions
   BUILD_NEW_ROUTINE = 'BUILD_NEW_ROUTINE',
@@ -96,6 +127,17 @@ export enum ActionTypes {
   SELECT_EXERCISE_MUSCLE_ID = 'SELECT_EXERCISE_MUSCLE_ID',
   SELECT_OPTIONAL_EXERCISE_PARAM = 'SELECT_OPTIONAL_EXERCISE_PARAM',
   UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
+  UPDATE_EXERCISE_DESCRIPTION = 'UPDATE_EXERCISE_DESCRIPTION',
+  UPDATE_EXERCISE_ICON_ID = 'UPDATE_EXERCISE_ICON_ID',
+  UPDATE_EXERCISE_EQUIPMENT_LIST_IDS = 'UPDATE_EXERCISE_EQUIPMENT_LIST_IDS',
+  UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP',
+  ADD_PRIMARY_MUSCLE_TARGET = 'ADD_PRIMARY_MUSCLE_TARGET',
+  DELETE_PRIMARY_MUSCLE_TARGET = 'DELETE_PRIMARY_MUSCLE_TARGET',
+  SELECT_PRIMARY_MUSCLE = 'SELECT_PRIMARY_MUSCLE',
+  SELECT_SECONDARY_MUSCLE = 'SELECT_SECONDARY_MUSCLE',
+  ADD_SECONDARY_MUSCLE_TARGET = 'ADD_SECONDARY_MUSCLE_TARGET',
+  DELETE_SECONDARY_MUSCLE_TARGET = 'DELETE_SECONDARY_MUSCLE_TARGET',
+  SELECT_SECONDARY_TARGET_TYPE = 'SELECT_SECONDARY_TARGET_TYPE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
   // Side drawer actions
@@ -148,4 +190,25 @@ export type ApplicationActions =
   | SaveExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
-  | CloseExerciseFormDialogAction;
+  | CloseExerciseFormDialogAction
+  | LoadGripTypesAction
+  | LoadGripWidthsAction
+  | LoadManikinMuscleGroupsAction
+  | LoadMusclesAction
+  | LoadMuscleTargetTypesAction
+  | LoadParameterTypesAction
+  | LoadPhasesAction
+  | LoadTrainingSetTypesAction
+  | LoadWorkoutCategoriesAction
+  | LoadWorkoutEquipmentAction
+  | UpdateExerciseDescriptionAction
+  | UpdateExerciseIconIdAction
+  | UpdateExerciseEquipmentListIdsAction
+  | UpdateExerciseManikinMuscleGroupAction
+  | AddPrimaryMuscleTargetAction
+  | SelectPrimaryMuscleAction
+  | DeletePrimaryMuscleTargetAction
+  | SelectSecondaryMuscleAction
+  | DeleteSecondaryMuscleTargetAction
+  | AddSecondaryMuscleTargetAction
+  | SelectSecondaryTargetTypeAction;

@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link as LinkIcon } from '@material-ui/icons';
 import { Grid, Typography, Divider } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { ExerciseVO, Segment } from 'workout-app-common-core';
 import { State } from '../../../../../../../../configs/redux/store';
-import { ExerciseVO, getExerciseName, Segment } from 'workout-app-common-core';
+import { getExerciseName } from '../../../../../../../../utils/get-name';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,15 +30,15 @@ function buildLineItem(title: string, index: number): JSX.Element {
 
 const CompletedExercises = ({
   linkIconSize,
-  exercises,
   segment,
   setType,
   hideNumbers,
+  exercises,
 }: CompletedExercisesProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
-  let firstElementTitle = '';
-  let secondElementTitle = '';
+  let firstElementTitle;
+  let secondElementTitle;
 
   if (setType === 'superset') {
     firstElementTitle =
@@ -100,7 +101,7 @@ const CompletedExercises = ({
             const title = hideNumbers
               ? exerciseName
               : `${index + 1}. ${exerciseName}`;
-            return buildLineItem(title, index);
+            return title && buildLineItem(title, index);
           })}
         </Grid>
       )}

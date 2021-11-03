@@ -11,8 +11,8 @@ import PreviewList from './components/PreviewList';
 import DialogAppBar from './components/DialogAppBar';
 import { deepOrange } from '@material-ui/core/colors';
 import { routerActions } from 'connected-react-router';
-import { RoutineTemplateVO, workoutCategories } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { RoutineTemplateVO, WorkoutCategoryVO } from 'workout-app-common-core';
 import { ROUTINE_BUILDER_SCREEN_PATH } from '../../../../configs/constants/app';
 import { viewSelectedRoutine } from '../../../../creators/routine-builder/builder';
 
@@ -30,14 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
 const PreviewRoutineDialog = (
   props: PreviewRoutineDialogProps & PassedInProps
 ) => {
-  const { open, routineTemplate } = props;
+  const { open, routineTemplate, workoutCategories } = props;
   const classes = useStyles();
   let subtitle = '';
-  workoutCategories.find((category) => {
-    if (category.id === routineTemplate?.workoutCategoryId) {
-      subtitle = `category: ${category.name}`;
-    }
-  });
+  workoutCategories &&
+    workoutCategories.find((category) => {
+      if (category.id === routineTemplate?.workoutCategoryId) {
+        subtitle = `category: ${category.name}`;
+      }
+    });
 
   return (
     <Dialog open={open} onClose={props.closeHandler} maxWidth={'sm'} fullWidth>
@@ -75,6 +76,7 @@ interface PassedInProps {
 
 interface PreviewRoutineDialogProps {
   editHandler: () => void;
+  workoutCategories: WorkoutCategoryVO[];
 }
 
 const mapDispatchToProps = (

@@ -1,14 +1,20 @@
 import React from 'react';
-import Radio from '@material-ui/core/Radio';
-import FormLabel from '@material-ui/core/FormLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {
+  Radio,
+  FormLabel,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+} from '@material-ui/core';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { State } from '../../../../../configs/redux/store';
+import { selectAlternateSidesOption } from '../../../../../creators/exercise-form/exercise-form';
 
-export default function AlternateRadioGroup({
+const AlternateRadioGroup = ({
   changeHandler,
   selectedOption,
-}: AlternateRadioGroupProps): JSX.Element {
+}: AlternateRadioGroupProps): JSX.Element => {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = (event.target as HTMLInputElement).value;
     if (value === 'yes') {
@@ -37,9 +43,27 @@ export default function AlternateRadioGroup({
       </RadioGroup>
     </FormControl>
   );
-}
+};
 
 interface AlternateRadioGroupProps {
   selectedOption: boolean | null;
   changeHandler: (value: boolean) => void;
 }
+
+const mapStateToProps = (state: State): AlternateRadioGroupProps => {
+  return {
+    selectedOption: state.exerciseFormState.exerciseForm.alternateSides,
+  } as unknown as AlternateRadioGroupProps;
+};
+
+const mapDispatchToProps = (dispatch: Dispatch): AlternateRadioGroupProps =>
+  ({
+    changeHandler: (value: boolean) => {
+      dispatch(selectAlternateSidesOption(value));
+    },
+  } as unknown as AlternateRadioGroupProps);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AlternateRadioGroup);

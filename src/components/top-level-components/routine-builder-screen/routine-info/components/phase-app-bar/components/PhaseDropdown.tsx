@@ -2,7 +2,6 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import {
   Phase,
-  phases,
   PhaseVO,
   NightfallSelectDropdown,
 } from 'workout-app-common-core';
@@ -12,6 +11,7 @@ import { selectPhase } from '../../../../../../../creators/routine-builder/build
 
 const PhaseDropdown = ({
   phase,
+  phases,
   changeHandler,
   selectedPhases,
 }: PhaseDropdownProps & PassedInProps): JSX.Element => {
@@ -45,12 +45,14 @@ interface PassedInProps {
 }
 
 interface PhaseDropdownProps {
+  phases: PhaseVO[];
   selectedPhases: Phase[];
   changeHandler: (workoutPhaseId: string, phaseId: string) => void;
 }
 
 const mapStateToProps = (state: State): PhaseDropdownProps => {
   return {
+    phases: state.applicationState.workoutConfigurations.phases,
     selectedPhases: state.routineBuilderState.selectedRoutine.phases,
   } as unknown as PhaseDropdownProps;
 };

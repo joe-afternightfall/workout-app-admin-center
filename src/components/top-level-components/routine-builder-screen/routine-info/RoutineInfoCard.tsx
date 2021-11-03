@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { scroller } from 'react-scroll';
 import BuilderAppBar from '../BuilderAppBar';
 import RoutineTitle from './components/RoutineTitle';
-import { Phase, Segment } from 'workout-app-common-core';
+import { Phase, PhaseVO, Segment } from 'workout-app-common-core';
 import ClickToAddCard from './components/ClickToAddCard';
 import { State } from '../../../../configs/redux/store';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
@@ -47,7 +47,7 @@ function buildActiveId(segmentId: string) {
 }
 
 const RoutineInfoCard = (props: RoutineInfoCardProps): JSX.Element => {
-  const { phases, newRoutine } = props;
+  const { phases, newRoutine, configPhases } = props;
   const classes = useStyles();
 
   const [editingCardId, setEditingCardId] = React.useState('');
@@ -102,10 +102,18 @@ const RoutineInfoCard = (props: RoutineInfoCardProps): JSX.Element => {
       <CardContent>
         <RoutineTitle isEditing={isEditingRoutineTitle} />
         {phases.map((phase, index) => {
+          const foundConfigPhase = configPhases.find(
+            (configPhase) => configPhase.id === phase.phaseId
+          );
           return (
             <List
               key={index}
-              subheader={<PhaseAppBar phase={phase} />}
+              subheader={
+                <PhaseAppBar
+                  subheader={foundConfigPhase && foundConfigPhase.name}
+                  phase={phase}
+                />
+              }
               className={clsx(classes.listBackground, {
                 [classes.topMargin]: phase.order > 1,
               })}
@@ -170,12 +178,14 @@ const RoutineInfoCard = (props: RoutineInfoCardProps): JSX.Element => {
 interface RoutineInfoCardProps {
   newRoutine: boolean;
   phases: Phase[];
+  configPhases: PhaseVO[];
   reorderSegmentsHandler: (phaseId: string, segments: Segment[]) => void;
 }
 
 const mapStateToProps = (state: State): RoutineInfoCardProps => {
   return {
     phases: state.routineBuilderState.selectedRoutine.phases,
+    configPhases: state.applicationState.workoutConfigurations.phases,
     newRoutine: state.routineBuilderState.newRoutine,
   } as unknown as RoutineInfoCardProps;
 };

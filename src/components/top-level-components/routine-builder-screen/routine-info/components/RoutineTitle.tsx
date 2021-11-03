@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import {
-  workoutCategories,
   WorkoutCategoryVO,
   NightfallSelectDropdown,
 } from 'workout-app-common-core';
@@ -43,6 +42,7 @@ function titleRow(
 
 const RoutineTitle = ({
   isEditing,
+  workoutCategories,
   routineTitle,
   titleChangeHandler,
   categoryChangeHandler,
@@ -102,6 +102,7 @@ interface PassedInProps {
 interface RoutineTitleProps {
   routineTitle: string;
   selectedWorkoutCategoryId: string;
+  workoutCategories: WorkoutCategoryVO[];
   titleChangeHandler: (value: string) => void;
   categoryChangeHandler: (id: string) => void;
 }
@@ -109,6 +110,8 @@ interface RoutineTitleProps {
 const mapStateToProps = (state: State): RoutineTitleProps => {
   const builderState = state.routineBuilderState;
   return {
+    workoutCategories:
+      state.applicationState.workoutConfigurations.workoutCategories,
     routineTitle: builderState.selectedRoutine.name,
     selectedWorkoutCategoryId: builderState.selectedRoutine.workoutCategoryId,
   } as unknown as RoutineTitleProps;

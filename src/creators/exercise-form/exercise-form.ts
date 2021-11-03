@@ -1,5 +1,9 @@
-import { ExerciseVO, ParameterType } from 'workout-app-common-core';
 import { ActionTypes } from '../actions';
+import {
+  ExerciseVO,
+  MuscleInfo,
+  ParameterTypeVO,
+} from 'workout-app-common-core';
 
 export interface OpenNewExerciseFormDialogAction {
   type: ActionTypes.OPEN_NEW_EXERCISE_FORM_DIALOG;
@@ -38,11 +42,11 @@ export const closeExerciseFormDialog = (): CloseExerciseFormDialogAction => {
 
 export interface SelectExerciseParamTypeAction {
   type: ActionTypes.SELECT_EXERCISE_PARAM_TYPE;
-  paramType: ParameterType;
+  paramType: ParameterTypeVO;
 }
 
 export const selectExerciseParamType = (
-  paramType: ParameterType
+  paramType: ParameterTypeVO
 ): SelectExerciseParamTypeAction => {
   return {
     type: ActionTypes.SELECT_EXERCISE_PARAM_TYPE,
@@ -103,6 +107,161 @@ export interface UpdateExerciseNameAction {
 export const updateExerciseName = (value: string): UpdateExerciseNameAction => {
   return {
     type: ActionTypes.UPDATE_EXERCISE_NAME,
+    value: value,
+  };
+};
+
+export interface UpdateExerciseDescriptionAction {
+  type: ActionTypes.UPDATE_EXERCISE_DESCRIPTION;
+  value: string;
+}
+
+export const updateExerciseDescription = (
+  value: string
+): UpdateExerciseDescriptionAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_DESCRIPTION,
+    value: value,
+  };
+};
+
+export interface UpdateExerciseIconIdAction {
+  type: ActionTypes.UPDATE_EXERCISE_ICON_ID;
+  value: string;
+}
+
+export const updateExerciseIconId = (
+  value: string
+): UpdateExerciseIconIdAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_ICON_ID,
+    value: value,
+  };
+};
+
+export interface UpdateExerciseEquipmentListIdsAction {
+  type: ActionTypes.UPDATE_EXERCISE_EQUIPMENT_LIST_IDS;
+  value: string[];
+}
+
+export const updateExerciseEquipmentListIds = (
+  value: string[]
+): UpdateExerciseEquipmentListIdsAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_EQUIPMENT_LIST_IDS,
+    value: value,
+  };
+};
+
+export interface UpdateExerciseManikinMuscleGroupAction {
+  type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP;
+  value: string;
+}
+
+export const updateExerciseManikinMuscleGroup = (
+  value: string
+): UpdateExerciseManikinMuscleGroupAction => {
+  return {
+    type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP,
+    value: value,
+  };
+};
+
+export interface AddPrimaryMuscleTargetAction {
+  type: ActionTypes.ADD_PRIMARY_MUSCLE_TARGET;
+}
+
+export const addPrimaryMuscleTarget = (): AddPrimaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.ADD_PRIMARY_MUSCLE_TARGET,
+  };
+};
+
+export interface DeletePrimaryMuscleTargetAction {
+  type: ActionTypes.DELETE_PRIMARY_MUSCLE_TARGET;
+  primaryMuscle: MuscleInfo;
+}
+
+export const deletePrimaryMuscleTarget = (
+  primaryMuscle: MuscleInfo
+): DeletePrimaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.DELETE_PRIMARY_MUSCLE_TARGET,
+    primaryMuscle: primaryMuscle,
+  };
+};
+
+export interface SelectPrimaryMuscleAction {
+  type: ActionTypes.SELECT_PRIMARY_MUSCLE;
+  primaryId: string;
+  value: string;
+}
+
+export const selectPrimaryMuscle = (
+  primaryId: string,
+  value: string
+): SelectPrimaryMuscleAction => {
+  return {
+    type: ActionTypes.SELECT_PRIMARY_MUSCLE,
+    primaryId: primaryId,
+    value: value,
+  };
+};
+
+export interface SelectSecondaryMuscleAction {
+  type: ActionTypes.SELECT_SECONDARY_MUSCLE;
+  secondaryId: string;
+  value: string;
+}
+
+export const selectSecondaryMuscle = (
+  secondaryId: string,
+  value: string
+): SelectSecondaryMuscleAction => {
+  return {
+    type: ActionTypes.SELECT_SECONDARY_MUSCLE,
+    secondaryId: secondaryId,
+    value: value,
+  };
+};
+
+export interface AddSecondaryMuscleTargetAction {
+  type: ActionTypes.ADD_SECONDARY_MUSCLE_TARGET;
+}
+
+export const addSecondaryMuscleTarget = (): AddSecondaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.ADD_SECONDARY_MUSCLE_TARGET,
+  };
+};
+
+export interface DeleteSecondaryMuscleTargetAction {
+  type: ActionTypes.DELETE_SECONDARY_MUSCLE_TARGET;
+  secondaryMuscle: MuscleInfo;
+}
+
+export const deleteSecondaryMuscleTarget = (
+  secondaryMuscle: MuscleInfo
+): DeleteSecondaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.DELETE_SECONDARY_MUSCLE_TARGET,
+    secondaryMuscle: secondaryMuscle,
+  };
+};
+
+export interface SelectSecondaryTargetTypeAction {
+  type: ActionTypes.SELECT_SECONDARY_TARGET_TYPE;
+  secondaryId: string;
+  value: string;
+}
+
+export const selectSecondaryTargetType = (
+  secondaryId: string,
+  value: string
+): SelectSecondaryTargetTypeAction => {
+  return {
+    type: ActionTypes.SELECT_SECONDARY_TARGET_TYPE,
+    secondaryId: secondaryId,
     value: value,
   };
 };
