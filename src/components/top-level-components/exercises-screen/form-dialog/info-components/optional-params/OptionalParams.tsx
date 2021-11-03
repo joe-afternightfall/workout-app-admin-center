@@ -8,7 +8,9 @@ export default function OptionalParams(): JSX.Element {
   return (
     <Grid container alignItems={'center'}>
       <Grid item xs={12}>
-        <Typography color={'textPrimary'}>{'Optional Parameters'}</Typography>
+        <Typography color={'textPrimary'} variant={'h6'}>
+          {'Optional Parameters'}
+        </Typography>
       </Grid>
       <Grid item xs={7} container>
         <Grid item xs={12}>
