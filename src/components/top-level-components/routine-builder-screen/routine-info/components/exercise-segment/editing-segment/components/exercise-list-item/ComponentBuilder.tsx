@@ -4,7 +4,6 @@ import {
   Segment,
   ExerciseVO,
   isDuration,
-  getExerciseName,
   WorkoutExercise,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
@@ -13,9 +12,10 @@ import BlinkerListItem from './components/BlinkerListItem';
 import StandardListItem from './components/StandardListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
+import { getExerciseName } from '../../../../../../../../../utils/get-name';
 
 const ComponentBuilder = ({
-  allExercises,
+  exercises,
   shouldBlink,
   exerciseOrder,
   segment,
@@ -32,7 +32,7 @@ const ComponentBuilder = ({
       );
 
     if (foundWorkoutExercise && foundWorkoutExercise.exerciseId) {
-      const foundExercise = allExercises.find(
+      const foundExercise = exercises.find(
         (exercise) => exercise.id === foundWorkoutExercise.exerciseId
       );
 
@@ -41,8 +41,8 @@ const ComponentBuilder = ({
 
       let title = '';
       const exerciseName = getExerciseName(
-        foundWorkoutExercise.exerciseId,
-        true
+        exercises,
+        foundWorkoutExercise.exerciseId
       );
       if (exerciseName) {
         title = exerciseName;
@@ -77,13 +77,13 @@ interface PassedInProps {
 }
 
 interface ComponentBuilderProps {
-  allExercises: ExerciseVO[];
+  exercises: ExerciseVO[];
   selectExerciseHandler: (order: number) => void;
 }
 
 const mapStateToProps = (state: State): ComponentBuilderProps => {
   return {
-    allExercises: state.applicationState.workoutConfigurations.exercises,
+    exercises: state.applicationState.workoutConfigurations.exercises,
   } as unknown as ComponentBuilderProps;
 };
 

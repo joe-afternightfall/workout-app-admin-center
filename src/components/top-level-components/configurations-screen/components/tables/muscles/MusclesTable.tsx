@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { getManikinMuscleGroupName, MuscleVO } from 'workout-app-common-core';
+import { ManikinMuscleGroupVO, MuscleVO } from 'workout-app-common-core';
 import TableActionButtons from '../TableActionButtons';
 import PageTitle from '../../../../../shared/PageTitle';
 import { State } from '../../../../../../configs/redux/store';
@@ -11,7 +11,7 @@ import { deActivateMuscle } from '../../../../../../services/workout-configurati
 import MusclesDialog from './MusclesDialog';
 
 const MusclesTable = (props: MusclesTableProps): JSX.Element => {
-  const { muscles } = props;
+  const { muscles, manikinMuscleGroups } = props;
   const [open, setOpen] = useState(false);
   const [newMuscle, setNewMuscle] = useState(false);
   const [selectedMuscle, setSelectedMuscle] = useState<MuscleVO | null>(null);
@@ -30,13 +30,13 @@ const MusclesTable = (props: MusclesTableProps): JSX.Element => {
 
   const data = muscles.map((muscle, index) => {
     index += 1;
+    const foundMuscleGroup = manikinMuscleGroups.find(
+      (group) => group.id === muscle.manikinMuscleGroupId
+    );
     return {
       number: index,
       name: muscle.name,
-      manikinMuscleGroupName: getManikinMuscleGroupName(
-        muscle.manikinMuscleGroupId,
-        true
-      ),
+      manikinMuscleGroupName: foundMuscleGroup && foundMuscleGroup.name,
       actions: (
         <TableActionButtons
           deActivateHighlight={muscle.name}
@@ -125,12 +125,15 @@ const MusclesTable = (props: MusclesTableProps): JSX.Element => {
 
 interface MusclesTableProps {
   muscles: MuscleVO[];
+  manikinMuscleGroups: ManikinMuscleGroupVO[];
   deActivateClickHandler: (firebaseId: string) => void;
 }
 
 const mapStateToProps = (state: State): MusclesTableProps => {
   return {
     muscles: state.applicationState.workoutConfigurations.muscles,
+    manikinMuscleGroups:
+      state.applicationState.workoutConfigurations.manikinMuscleGroups,
   } as unknown as MusclesTableProps;
 };
 

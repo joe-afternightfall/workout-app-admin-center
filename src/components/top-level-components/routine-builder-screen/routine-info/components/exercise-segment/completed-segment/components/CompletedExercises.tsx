@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link as LinkIcon } from '@material-ui/icons';
 import { Grid, Typography, Divider } from '@material-ui/core';
-import { getExerciseName, Segment } from 'workout-app-common-core';
+import { ExerciseVO, Segment } from 'workout-app-common-core';
+import { State } from '../../../../../../../../configs/redux/store';
+import { getExerciseName } from '../../../../../../../../utils/get-name';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,12 +28,13 @@ function buildLineItem(title: string, index: number): JSX.Element {
   );
 }
 
-export default function CompletedExercises({
+const CompletedExercises = ({
   linkIconSize,
   segment,
   setType,
   hideNumbers,
-}: CompletedExercisesProps): JSX.Element {
+  exercises,
+}: CompletedExercisesProps & PassedInProps): JSX.Element => {
   const classes = useStyles();
 
   let firstElementTitle;
@@ -39,14 +43,14 @@ export default function CompletedExercises({
   if (setType === 'superset') {
     firstElementTitle =
       segment.exercises[0] &&
-      getExerciseName(segment.exercises[0].exerciseId, true);
+      getExerciseName(exercises, segment.exercises[0].exerciseId);
     secondElementTitle =
       segment.exercises[1] &&
-      getExerciseName(segment.exercises[1].exerciseId, true);
+      getExerciseName(exercises, segment.exercises[1].exerciseId);
   } else if (setType === 'straight-set') {
     firstElementTitle =
       segment.exercises[0] &&
-      getExerciseName(segment.exercises[0].exerciseId, true);
+      getExerciseName(exercises, segment.exercises[0].exerciseId);
   }
 
   return (
@@ -91,8 +95,8 @@ export default function CompletedExercises({
         <Grid container spacing={2}>
           {segment.exercises.map((workoutExercise, index) => {
             const exerciseName = getExerciseName(
-              workoutExercise.exerciseId,
-              true
+              exercises,
+              workoutExercise.exerciseId
             );
             const title = hideNumbers
               ? exerciseName
@@ -103,11 +107,23 @@ export default function CompletedExercises({
       )}
     </>
   );
-}
+};
 
-interface CompletedExercisesProps {
+interface PassedInProps {
   hideNumbers?: boolean;
   segment: Segment;
   linkIconSize: 'inherit' | 'default' | 'small' | 'large';
   setType: 'superset' | 'straight-set' | 'circuit-set' | null;
 }
+
+interface CompletedExercisesProps {
+  exercises: ExerciseVO[];
+}
+
+const mapStateToProps = (state: State): CompletedExercisesProps => {
+  return {
+    exercises: state.applicationState.workoutConfigurations.exercises,
+  } as unknown as CompletedExercisesProps;
+};
+
+export default connect(mapStateToProps)(CompletedExercises);

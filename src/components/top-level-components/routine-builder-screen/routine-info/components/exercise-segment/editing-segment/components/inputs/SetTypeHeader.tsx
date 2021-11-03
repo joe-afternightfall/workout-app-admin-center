@@ -2,14 +2,14 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import {
   Segment,
-  getTrainingSetTypeName,
   TrainingSetTypeVO,
   NightfallSelectDropdown,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import { selectSetType } from '../../../../../../../../../creators/routine-builder/builder';
 import { State } from '../../../../../../../../../configs/redux/store';
+import { getTrainingSetTypeName } from '../../../../../../../../../utils/get-name';
+import { selectSetType } from '../../../../../../../../../creators/routine-builder/builder';
 
 const SetTypeHeader = ({
   segment,
@@ -23,7 +23,10 @@ const SetTypeHeader = ({
   return (
     <Grid container alignItems={'center'} justify={'space-between'}>
       {segment.trainingSetTypeId ? (
-        `Set type: ${getTrainingSetTypeName(segment.trainingSetTypeId, true)}`
+        `Set type: ${getTrainingSetTypeName(
+          trainingSetTypes,
+          segment.trainingSetTypeId
+        )}`
       ) : (
         <>
           <Grid item>

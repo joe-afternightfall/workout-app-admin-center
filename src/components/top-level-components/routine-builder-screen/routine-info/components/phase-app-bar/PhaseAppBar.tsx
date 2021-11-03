@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import PhaseDropdown from './components/PhaseDropdown';
 import ReorderDialog from './components/ReorderDialog';
-import { getPhaseName, Phase } from 'workout-app-common-core';
+import { Phase } from 'workout-app-common-core';
 import DeletePhaseDialog from './components/DeletePhaseDialog';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -16,10 +16,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
+export default function PhaseAppBar({
+  phase,
+  subheader,
+}: PhaseAppBarProps): JSX.Element {
   const classes = useStyles();
 
-  const phaseName = getPhaseName(phase.phaseId, true);
   return (
     <Toolbar className={classes.root}>
       <Grid container>
@@ -30,7 +32,7 @@ export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
           <Grid item>
             <DeletePhaseDialog
               phaseId={phase.id}
-              phaseName={phaseName ? phaseName : ''}
+              phaseName={subheader ? subheader : ''}
             />
           </Grid>
           <Grid item>
@@ -44,4 +46,5 @@ export default function PhaseAppBar({ phase }: PhaseAppBarProps): JSX.Element {
 
 interface PhaseAppBarProps {
   phase: Phase;
+  subheader: string | undefined;
 }

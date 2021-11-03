@@ -11,11 +11,10 @@ import PreviewList from './components/PreviewList';
 import DialogAppBar from './components/DialogAppBar';
 import { deepOrange } from '@material-ui/core/colors';
 import { routerActions } from 'connected-react-router';
-import { RoutineTemplateVO, WorkoutCategoryVO } from 'workout-app-common-core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { RoutineTemplateVO, WorkoutCategoryVO } from 'workout-app-common-core';
 import { ROUTINE_BUILDER_SCREEN_PATH } from '../../../../configs/constants/app';
 import { viewSelectedRoutine } from '../../../../creators/routine-builder/builder';
-import { State } from '../../../../configs/redux/store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,13 +78,6 @@ interface PreviewRoutineDialogProps {
   editHandler: () => void;
   workoutCategories: WorkoutCategoryVO[];
 }
-
-const mapStateToProps = (state: State): PreviewRoutineDialogProps => {
-  return {
-    workoutCategories:
-      state.applicationState.workoutConfigurations.workoutCategories,
-  } as unknown as PreviewRoutineDialogProps;
-};
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
