@@ -30,9 +30,6 @@ export default function MusclesWorked(): JSX.Element {
             {'Secondary Muscles'}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <PrimaryTargetMuscleSelector />
-        </Grid>
       </Grid>
     </Grid>
   );
