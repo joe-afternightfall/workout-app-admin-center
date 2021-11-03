@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import MuscleSelector from './info-components/MuscleSelector';
 import AlternateRadioGroup from './info-components/AlternateRadioGroup';
 import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
 import MusclesWorked from './info-components/muscles-worked/MusclesWorked';
@@ -38,9 +37,6 @@ export default function ExerciseInfoContent(): JSX.Element {
       <Grid item xs={12} container style={{ marginTop: 24 }}>
         <Grid item xs={12}>
           <OptionalParams />
-        </Grid>
-        <Grid item xs={6}>
-          <MuscleSelector />
         </Grid>
       </Grid>
     </Grid>
