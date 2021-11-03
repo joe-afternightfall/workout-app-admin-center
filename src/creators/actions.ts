@@ -48,6 +48,7 @@ import {
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
+  AddPrimaryMuscleTargetAction,
   CloseExerciseFormDialogAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
@@ -56,6 +57,7 @@ import {
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
   SelectOptionalExerciseParamAction,
+  SelectPrimaryMuscleAction,
   UpdateExerciseDescriptionAction,
   UpdateExerciseEquipmentListIdsAction,
   UpdateExerciseIconIdAction,
@@ -124,6 +126,8 @@ export enum ActionTypes {
   UPDATE_EXERCISE_ICON_ID = 'UPDATE_EXERCISE_ICON_ID',
   UPDATE_EXERCISE_EQUIPMENT_LIST_IDS = 'UPDATE_EXERCISE_EQUIPMENT_LIST_IDS',
   UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP',
+  ADD_PRIMARY_MUSCLE_TARGET = 'ADD_PRIMARY_MUSCLE_TARGET',
+  SELECT_PRIMARY_MUSCLE = 'SELECT_PRIMARY_MUSCLE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
 
   // Side drawer actions
@@ -190,4 +194,6 @@ export type ApplicationActions =
   | UpdateExerciseDescriptionAction
   | UpdateExerciseIconIdAction
   | UpdateExerciseEquipmentListIdsAction
-  | UpdateExerciseManikinMuscleGroupAction;
+  | UpdateExerciseManikinMuscleGroupAction
+  | AddPrimaryMuscleTargetAction
+  | SelectPrimaryMuscleAction;

@@ -108,6 +108,26 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.ADD_PRIMARY_MUSCLE_TARGET: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.musclesWorked.primary.push({
+          id: uuidv4(),
+          muscleTargetTypeId: '9bc50538-1976-4b18-aace-489f0c5f2c73',
+          muscleId: '',
+        });
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.SELECT_PRIMARY_MUSCLE: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.musclesWorked.primary.find((primary) => {
+          if (primary.id === action.primaryId) {
+            primary.muscleId = action.value;
+          }
+        });
+        newState.exerciseForm = clonedForm;
+        break;
+      }
       default:
         newState = state;
     }

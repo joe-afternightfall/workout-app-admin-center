@@ -23,7 +23,7 @@ const ExerciseFormDialog = (props: ExerciseFormDialogProps) => {
   const { open, isNewExercise, closeHandler } = props;
   const classes = useStyles();
   return (
-    <Dialog open={open} onClose={closeHandler}>
+    <Dialog open={open} onClose={closeHandler} maxWidth={'md'} fullWidth>
       <NightfallDialogContent
         title={isNewExercise ? 'New Exercise' : 'Edit Exercise'}
         closeClickHandler={closeHandler}

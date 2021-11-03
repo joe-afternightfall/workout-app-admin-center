@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import MuscleSelector from './info-components/MuscleSelector';
 import AlternateRadioGroup from './info-components/AlternateRadioGroup';
 import ParamTypeButtonGroup from './info-components/ParamTypeButtonGroup';
+import MusclesWorked from './info-components/muscles-worked/MusclesWorked';
 import ExerciseNameTextField from './info-components/ExerciseNameTextField';
 import OptionalParams from './info-components/optional-params/OptionalParams';
 import ExerciseIconIdTextField from './info-components/ExerciseIconIdTextField';
@@ -28,6 +29,10 @@ export default function ExerciseInfoContent(): JSX.Element {
 
       <Grid item xs={12}>
         <ParamTypeButtonGroup />
+      </Grid>
+
+      <Grid item xs={12}>
+        <MusclesWorked />
       </Grid>
 
       <Grid item xs={12} container style={{ marginTop: 24 }}>

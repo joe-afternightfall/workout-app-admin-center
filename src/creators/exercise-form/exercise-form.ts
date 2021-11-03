@@ -163,6 +163,33 @@ export const updateExerciseManikinMuscleGroup = (
   };
 };
 
+export interface AddPrimaryMuscleTargetAction {
+  type: ActionTypes.ADD_PRIMARY_MUSCLE_TARGET;
+}
+
+export const addPrimaryMuscleTarget = (): AddPrimaryMuscleTargetAction => {
+  return {
+    type: ActionTypes.ADD_PRIMARY_MUSCLE_TARGET,
+  };
+};
+
+export interface SelectPrimaryMuscleAction {
+  type: ActionTypes.SELECT_PRIMARY_MUSCLE;
+  primaryId: string;
+  value: string;
+}
+
+export const selectPrimaryMuscle = (
+  primaryId: string,
+  value: string
+): SelectPrimaryMuscleAction => {
+  return {
+    type: ActionTypes.SELECT_PRIMARY_MUSCLE,
+    primaryId: primaryId,
+    value: value,
+  };
+};
+
 export interface SaveExerciseInfoAction {
   type: ActionTypes.SAVE_EXERCISE_INFO;
 }
