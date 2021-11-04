@@ -2,6 +2,7 @@ import {
   ExerciseVO,
   PhaseVO,
   TrainingSetTypeVO,
+  WorkoutEquipmentVO,
 } from 'workout-app-common-core';
 
 export const getExerciseName = (
@@ -26,4 +27,12 @@ export const getPhaseName = (
 ): string | undefined => {
   const foundPhase = phases.find((phase) => phase.id === id);
   return foundPhase && foundPhase.name;
+};
+
+export const getWorkoutEquipmentName = (
+  equipmentList: WorkoutEquipmentVO[],
+  id: string
+): string | undefined => {
+  const foundEquipment = equipmentList.find((equipment) => equipment.id === id);
+  return foundEquipment && foundEquipment.name;
 };

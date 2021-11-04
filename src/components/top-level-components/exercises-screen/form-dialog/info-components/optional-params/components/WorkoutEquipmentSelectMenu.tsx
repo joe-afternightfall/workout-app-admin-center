@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import { WorkoutEquipmentVO } from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
 import { updateExerciseEquipmentListIds } from '../../../../../../../creators/exercise-form/exercise-form';
+import { getWorkoutEquipmentName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,9 +70,14 @@ const WorkoutEquipmentSelectMenu = (
         input={<Input id={'workout-equipment-chip'} />}
         renderValue={(selected) => (
           <div className={classes.chips}>
-            {(selected as string[]).map((value: string) => (
-              <Chip key={value} label={value} className={classes.chip} />
-            ))}
+            {(selected as string[]).map((value: string) => {
+              const name = getWorkoutEquipmentName(workoutEquipmentList, value);
+              return (
+                name && (
+                  <Chip key={value} label={name} className={classes.chip} />
+                )
+              );
+            })}
           </div>
         )}
       >
@@ -90,7 +96,7 @@ const WorkoutEquipmentSelectMenu = (
             }}
           >
             <Checkbox
-              checked={selectedEquipmentIds.indexOf(equipment.name) > -1}
+              checked={selectedEquipmentIds.indexOf(equipment.id) > -1}
             />
             <ListItemText primary={equipment.name} />
           </MenuItem>
