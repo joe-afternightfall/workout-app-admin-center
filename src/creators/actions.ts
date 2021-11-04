@@ -66,7 +66,7 @@ import {
   UpdateExerciseDescriptionAction,
   UpdateExerciseEquipmentListIdsAction,
   UpdateExerciseIconIdAction,
-  UpdateExerciseManikinMuscleGroupAction,
+  UpdateExerciseManikinMuscleGroupIdsAction,
   UpdateExerciseNameAction,
 } from './exercise-form/exercise-form';
 
@@ -130,7 +130,7 @@ export enum ActionTypes {
   UPDATE_EXERCISE_DESCRIPTION = 'UPDATE_EXERCISE_DESCRIPTION',
   UPDATE_EXERCISE_ICON_ID = 'UPDATE_EXERCISE_ICON_ID',
   UPDATE_EXERCISE_EQUIPMENT_LIST_IDS = 'UPDATE_EXERCISE_EQUIPMENT_LIST_IDS',
-  UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP',
+  UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS',
   ADD_PRIMARY_MUSCLE_TARGET = 'ADD_PRIMARY_MUSCLE_TARGET',
   DELETE_PRIMARY_MUSCLE_TARGET = 'DELETE_PRIMARY_MUSCLE_TARGET',
   SELECT_PRIMARY_MUSCLE = 'SELECT_PRIMARY_MUSCLE',
@@ -204,7 +204,7 @@ export type ApplicationActions =
   | UpdateExerciseDescriptionAction
   | UpdateExerciseIconIdAction
   | UpdateExerciseEquipmentListIdsAction
-  | UpdateExerciseManikinMuscleGroupAction
+  | UpdateExerciseManikinMuscleGroupIdsAction
   | AddPrimaryMuscleTargetAction
   | SelectPrimaryMuscleAction
   | DeletePrimaryMuscleTargetAction

@@ -90,7 +90,7 @@ const WorkoutEquipmentSelectMenu = (
             value={equipment.id}
             style={{
               fontWeight:
-                selectedEquipmentIds.indexOf(equipment.name) === -1
+                selectedEquipmentIds.indexOf(equipment.id) === -1
                   ? theme.typography.fontWeightRegular
                   : theme.typography.fontWeightMedium,
             }}

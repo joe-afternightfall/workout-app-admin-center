@@ -1,5 +1,6 @@
 import {
   ExerciseVO,
+  ManikinMuscleGroupVO,
   PhaseVO,
   TrainingSetTypeVO,
   WorkoutEquipmentVO,
@@ -35,4 +36,12 @@ export const getWorkoutEquipmentName = (
 ): string | undefined => {
   const foundEquipment = equipmentList.find((equipment) => equipment.id === id);
   return foundEquipment && foundEquipment.name;
+};
+
+export const getManikinMuscleName = (
+  manikinMuscles: ManikinMuscleGroupVO[],
+  id: string
+): string | undefined => {
+  const foundMuscle = manikinMuscles.find((muscle) => muscle.id === id);
+  return foundMuscle && foundMuscle.name;
 };

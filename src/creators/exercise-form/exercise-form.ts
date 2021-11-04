@@ -153,16 +153,16 @@ export const updateExerciseEquipmentListIds = (
   };
 };
 
-export interface UpdateExerciseManikinMuscleGroupAction {
-  type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP;
-  value: string;
+export interface UpdateExerciseManikinMuscleGroupIdsAction {
+  type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS;
+  value: string[];
 }
 
-export const updateExerciseManikinMuscleGroup = (
-  value: string
-): UpdateExerciseManikinMuscleGroupAction => {
+export const updateExerciseManikinMuscleGroupIds = (
+  value: string[]
+): UpdateExerciseManikinMuscleGroupIdsAction => {
   return {
-    type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP,
+    type: ActionTypes.UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS,
     value: value,
   };
 };
