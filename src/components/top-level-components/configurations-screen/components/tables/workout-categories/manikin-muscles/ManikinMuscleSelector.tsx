@@ -18,6 +18,7 @@ import {
 import { connect } from 'react-redux';
 import { ManikinMuscleGroupVO } from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
+import { getManikinMuscleName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,7 @@ const ITEM_PADDING_TOP = 8;
 const ManikinMuscleSelector = (
   props: ManikinMuscleSelectorProps & PassedInProps
 ): JSX.Element => {
-  const { selectedMuscles, manikinMuscleGroups, selectMuscleHandler } = props;
+  const { selectedMuscleIds, manikinMuscleGroups, selectMuscleHandler } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -52,7 +53,7 @@ const ManikinMuscleSelector = (
         multiple
         labelId={'manikin-muscle-label'}
         id={'manikin-muscle-select'}
-        value={selectedMuscles}
+        value={selectedMuscleIds}
         MenuProps={{
           PaperProps: {
             style: {
@@ -65,9 +66,14 @@ const ManikinMuscleSelector = (
         input={<Input id={'manikin-muscle-chip'} />}
         renderValue={(selected) => (
           <div className={classes.chips}>
-            {(selected as string[]).map((value: string) => (
-              <Chip key={value} label={value} className={classes.chip} />
-            ))}
+            {(selected as string[]).map((value: string) => {
+              const name = getManikinMuscleName(manikinMuscleGroups, value);
+              return (
+                name && (
+                  <Chip key={value} label={name} className={classes.chip} />
+                )
+              );
+            })}
           </div>
         )}
       >
@@ -76,16 +82,16 @@ const ManikinMuscleSelector = (
         </MenuItem>
         {manikinMuscleGroups.map((group) => (
           <MenuItem
-            key={group.name}
-            value={group.name}
+            key={group.id}
+            value={group.id}
             style={{
               fontWeight:
-                selectedMuscles.indexOf(group.name) === -1
+                selectedMuscleIds.indexOf(group.id) === -1
                   ? theme.typography.fontWeightRegular
                   : theme.typography.fontWeightMedium,
             }}
           >
-            <Checkbox checked={selectedMuscles.indexOf(group.name) > -1} />
+            <Checkbox checked={selectedMuscleIds.indexOf(group.id) > -1} />
             <ListItemText primary={group.name} />
           </MenuItem>
         ))}
@@ -95,7 +101,7 @@ const ManikinMuscleSelector = (
 };
 
 interface PassedInProps {
-  selectedMuscles: string[];
+  selectedMuscleIds: string[];
   selectMuscleHandler: (event: React.ChangeEvent<{ value: unknown }>) => void;
 }
 
