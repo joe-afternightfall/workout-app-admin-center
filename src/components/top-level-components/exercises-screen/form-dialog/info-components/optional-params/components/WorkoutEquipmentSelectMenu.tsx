@@ -80,8 +80,8 @@ const WorkoutEquipmentSelectMenu = (
         </MenuItem>
         {workoutEquipmentList.map((equipment) => (
           <MenuItem
-            key={equipment.name}
-            value={equipment.name}
+            key={equipment.id}
+            value={equipment.id}
             style={{
               fontWeight:
                 selectedEquipmentIds.indexOf(equipment.name) === -1
