@@ -4,6 +4,8 @@ import {
   ExerciseVO,
   ParameterTypeVO,
   ManikinMuscleGroupVO,
+  GripTypeVO,
+  GripWidthVO,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
@@ -17,13 +19,24 @@ import {
 import DeleteExerciseDialog from './DeleteExerciseDialog';
 
 const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
-  const { exercises, parameterTypes, manikinMuscleGroups } = props;
+  const {
+    exercises,
+    parameterTypes,
+    gripTypes,
+    gripWidths,
+    manikinMuscleGroups,
+  } = props;
 
   const data = exercises.map((exercise: ExerciseVO, index: number) => {
     index += 1;
     const foundParameterType = parameterTypes.find(
       (parameterType) => parameterType.id === exercise.parameterTypeId
     );
+    const foundType = gripTypes.find((type) => type.id === exercise.gripTypeId);
+    const foundWidth = gripWidths.find(
+      (width) => width.id === exercise.gripWidthId
+    );
+
     const primaryManikinMuscles: string[] = [];
     exercise.manikinMuscleGroupIds &&
       exercise.manikinMuscleGroupIds.map((groupId) => {
@@ -39,6 +52,9 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
       firebaseId: exercise.firebaseId,
       primaryMuscle: primaryManikinMuscles,
       paramName: foundParameterType && foundParameterType.name,
+      alternateSides: exercise.alternateSides,
+      gripWidth: foundWidth && foundWidth.name,
+      gripType: foundType && foundType.name,
       actions: (
         <Grid container>
           <Grid item xs={6}>
@@ -88,16 +104,50 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
         {
           title: 'Primary Muscle',
           field: 'primaryMuscle',
-          cellStyle: {
-            width: '20%',
+          headerStyle: {
+            textAlign: 'center',
           },
+          cellStyle: {
+            width: '10%',
+            textAlign: 'center',
+          },
+          sorting: false,
         },
         {
           title: 'Param Type',
           field: 'paramName',
-          cellStyle: {
-            width: '20%',
+          headerStyle: {
+            textAlign: 'center',
           },
+          cellStyle: {
+            width: '10%',
+            textAlign: 'center',
+          },
+          sorting: false,
+        },
+        {
+          title: 'Grip Width',
+          field: 'gripWidth',
+          headerStyle: {
+            textAlign: 'center',
+          },
+          cellStyle: {
+            width: '10%',
+            textAlign: 'center',
+          },
+          sorting: false,
+        },
+        {
+          title: 'Grip Type',
+          field: 'gripType',
+          headerStyle: {
+            textAlign: 'center',
+          },
+          cellStyle: {
+            width: '10%',
+            textAlign: 'center',
+          },
+          sorting: false,
         },
         {
           title: 'Actions',
@@ -126,6 +176,8 @@ const ExerciseListTable = (props: ExerciseListTableProps): JSX.Element => {
 
 interface ExerciseListTableProps {
   exercises: ExerciseVO[];
+  gripTypes: GripTypeVO[];
+  gripWidths: GripWidthVO[];
   parameterTypes: ParameterTypeVO[];
   manikinMuscleGroups: ManikinMuscleGroupVO[];
   openNewDialogHandler: () => void;
@@ -136,6 +188,8 @@ const mapStateToProps = (state: State): ExerciseListTableProps => {
   return {
     exercises: state.applicationState.workoutConfigurations.exercises,
     parameterTypes: state.applicationState.workoutConfigurations.parameterTypes,
+    gripTypes: state.applicationState.workoutConfigurations.gripTypes,
+    gripWidths: state.applicationState.workoutConfigurations.gripWidths,
     manikinMuscleGroups:
       state.applicationState.workoutConfigurations.manikinMuscleGroups,
   } as unknown as ExerciseListTableProps;
