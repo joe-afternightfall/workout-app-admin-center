@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import PrimaryTargetMuscleSelector from './components/PrimaryTargetMuscleSelector';
-import ManikinMuscleGroupSelectMenu from './components/ManikinMuscleGroupSelectMenu';
+import ManikinMuscleGroupSelectMenu from './components/NewManikinMuscleGroupSelectMenu';
 import SecondaryTargetMuscleSelector from './components/SecondaryTargetMuscleSelector';
 
 export default function MusclesWorked(): JSX.Element {

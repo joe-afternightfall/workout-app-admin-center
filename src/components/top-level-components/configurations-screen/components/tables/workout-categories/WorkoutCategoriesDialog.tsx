@@ -83,7 +83,7 @@ const WorkoutCategoriesDialog = (
               <Grid item xs={6}>
                 <ManikinMuscleSelector
                   selectMuscleHandler={selectMuscle}
-                  selectedMuscles={manikinMuscleGroupIds}
+                  selectedMuscleIds={manikinMuscleGroupIds}
                 />
               </Grid>
             </Grid>
