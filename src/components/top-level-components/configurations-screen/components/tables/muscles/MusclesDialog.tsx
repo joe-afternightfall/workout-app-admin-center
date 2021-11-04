@@ -81,7 +81,7 @@ const MusclesDialog = (
                     <em>{'Muscle List'}</em>
                   </MenuItem>
                   {manikinMuscleGroups.map((group) => (
-                    <MenuItem key={group.name} value={group.name}>
+                    <MenuItem key={group.id} value={group.id}>
                       {group.name}
                     </MenuItem>
                   ))}
