@@ -1,7 +1,8 @@
 import { ThunkAction } from 'redux-thunk';
 import { State } from '../../configs/redux/store';
 import { AnyAction, Dispatch } from 'redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import { FIREBASE_DB_MUSCLES_ROUTE, MuscleDAO } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import {
