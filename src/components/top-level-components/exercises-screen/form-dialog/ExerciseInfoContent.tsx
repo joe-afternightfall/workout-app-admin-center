@@ -20,6 +20,9 @@ export default function ExerciseInfoContent(): JSX.Element {
           <ExerciseIconIdTextField />
         </Grid>
         <Grid item xs={8}>
+          <ExerciseDescriptionTextField />
+        </Grid>
+        <Grid item xs={8}>
           <ExtraInfoContainer />
         </Grid>
         <Grid item xs={4}>
