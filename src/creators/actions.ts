@@ -48,6 +48,7 @@ import {
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
+  AddInfoParagraphAction,
   AddPrimaryMuscleTargetAction,
   AddSecondaryMuscleTargetAction,
   CloseExerciseFormDialogAction,
@@ -55,6 +56,7 @@ import {
   DeleteSecondaryMuscleTargetAction,
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
+  RemoveInfoAction,
   SaveExerciseInfoAction,
   SelectAlternateSidesOptionAction,
   SelectExerciseMuscleIdAction,
@@ -68,6 +70,7 @@ import {
   UpdateExerciseIconIdAction,
   UpdateExerciseManikinMuscleGroupIdsAction,
   UpdateExerciseNameAction,
+  UpdateInfoAction,
 } from './exercise-form/exercise-form';
 
 export enum ActionTypes {
@@ -128,6 +131,9 @@ export enum ActionTypes {
   SELECT_OPTIONAL_EXERCISE_PARAM = 'SELECT_OPTIONAL_EXERCISE_PARAM',
   UPDATE_EXERCISE_NAME = 'UPDATE_EXERCISE_NAME',
   UPDATE_EXERCISE_DESCRIPTION = 'UPDATE_EXERCISE_DESCRIPTION',
+  ADD_INFO_PARAGRAPH = 'ADD_INFO_PARAGRAPH',
+  UPDATE_INFO = 'UPDATE_INFO',
+  REMOVE_INFO = 'REMOVE_INFO',
   UPDATE_EXERCISE_ICON_ID = 'UPDATE_EXERCISE_ICON_ID',
   UPDATE_EXERCISE_EQUIPMENT_LIST_IDS = 'UPDATE_EXERCISE_EQUIPMENT_LIST_IDS',
   UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS = 'UPDATE_EXERCISE_MANIKIN_MUSCLE_GROUP_IDS',
@@ -211,4 +217,7 @@ export type ApplicationActions =
   | SelectSecondaryMuscleAction
   | DeleteSecondaryMuscleTargetAction
   | AddSecondaryMuscleTargetAction
-  | SelectSecondaryTargetTypeAction;
+  | SelectSecondaryTargetTypeAction
+  | UpdateInfoAction
+  | AddInfoParagraphAction
+  | RemoveInfoAction;

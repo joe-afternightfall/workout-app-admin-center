@@ -27,6 +27,7 @@ export const saveExercise =
         exerciseForm.id,
         exerciseForm.name,
         exerciseForm.description,
+        exerciseForm.extraInfo,
         exerciseForm.workoutEquipmentIds,
         exerciseForm.manikinMuscleGroupIds,
         exerciseForm.musclesWorked,
@@ -61,6 +62,7 @@ export const saveExercise =
           {
             name: exerciseForm.name,
             description: exerciseForm.description,
+            extraInfo: exerciseForm.extraInfo,
             workoutEquipmentIds: exerciseForm.workoutEquipmentIds,
             manikinMuscleGroupIds: exerciseForm.manikinMuscleGroupIds,
             musclesWorked: exerciseForm.musclesWorked,
