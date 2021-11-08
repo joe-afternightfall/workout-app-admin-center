@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import {
   ParameterTypeDAO,
   FIREBASE_DB_PARAMETER_TYPES_ROUTE,

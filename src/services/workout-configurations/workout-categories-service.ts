@@ -1,7 +1,8 @@
 import { ThunkAction } from 'redux-thunk';
 import { State } from '../../configs/redux/store';
 import { AnyAction, Dispatch } from 'redux';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import {
   WorkoutCategoryDAO,
   FIREBASE_DB_WORKOUT_CATEGORIES_ROUTE,
