@@ -19,6 +19,7 @@ export default {
           id: uuidv4(),
           name: '',
           description: '',
+          extraInfo: [],
           manikinMuscleGroupIds: [],
           workoutEquipmentIds: [],
           musclesWorked: {
@@ -87,6 +88,41 @@ export default {
       case ActionTypes.UPDATE_EXERCISE_DESCRIPTION: {
         const clonedForm = ramda.clone(newState.exerciseForm);
         clonedForm.description = action.value;
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.UPDATE_INFO: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        newState.exerciseForm = clonedForm;
+        const foundInfo = clonedForm.extraInfo.find(
+          (info) => info.id === action.infoId
+        );
+        if (foundInfo) {
+          foundInfo[action.field] = action.value;
+        }
+        break;
+      }
+      case ActionTypes.ADD_INFO_PARAGRAPH: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        clonedForm.extraInfo.push({
+          id: uuidv4(),
+          title: '',
+          paragraph: '',
+        });
+        newState.exerciseForm = clonedForm;
+        break;
+      }
+      case ActionTypes.REMOVE_INFO: {
+        const clonedForm = ramda.clone(newState.exerciseForm);
+        const foundInfo = clonedForm.extraInfo.find(
+          (info) => info.id === action.id
+        );
+        if (foundInfo) {
+          const foundIndex = clonedForm.extraInfo.indexOf(foundInfo);
+          if (foundIndex !== -1) {
+            clonedForm.extraInfo.splice(foundIndex, 1);
+          }
+        }
         newState.exerciseForm = clonedForm;
         break;
       }

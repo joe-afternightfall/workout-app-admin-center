@@ -111,6 +111,48 @@ export const updateExerciseName = (value: string): UpdateExerciseNameAction => {
   };
 };
 
+export interface AddInfoParagraphAction {
+  type: ActionTypes.ADD_INFO_PARAGRAPH;
+}
+
+export const addInfoParagraph = (): AddInfoParagraphAction => {
+  return {
+    type: ActionTypes.ADD_INFO_PARAGRAPH,
+  };
+};
+
+export interface RemoveInfoAction {
+  type: ActionTypes.REMOVE_INFO;
+  id: string;
+}
+
+export const removeInfo = (id: string): RemoveInfoAction => {
+  return {
+    type: ActionTypes.REMOVE_INFO,
+    id: id,
+  };
+};
+
+export interface UpdateInfoAction {
+  type: ActionTypes.UPDATE_INFO;
+  infoId: string;
+  field: 'title' | 'paragraph';
+  value: string;
+}
+
+export const updateInfoParagraph = (
+  infoId: string,
+  field: 'title' | 'paragraph',
+  value: string
+): UpdateInfoAction => {
+  return {
+    type: ActionTypes.UPDATE_INFO,
+    infoId: infoId,
+    field: field,
+    value: value,
+  };
+};
+
 export interface UpdateExerciseDescriptionAction {
   type: ActionTypes.UPDATE_EXERCISE_DESCRIPTION;
   value: string;
