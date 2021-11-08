@@ -17,7 +17,6 @@ import { getPageInfo } from '../utils/get-current-page-info';
 import { SnackbarCreatorProps } from '../creators/app-snackbar';
 import { ActionTypes, ApplicationActions } from '../creators/actions';
 import { RouteProp } from '../configs/constants/app-navigation-routes';
-import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 import { ROUTINE_BUILDER_SCREEN_PATH } from '../configs/constants/app';
 
 export default {
@@ -87,9 +86,6 @@ export default {
       case ActionTypes.LOGOUT_USER:
         newState.userIsValidated = false;
         break;
-      case ActionTypes.LOAD_EXERCISE_TYPES:
-        newState.workoutConfigurations.exerciseTypes = action.exerciseTypes;
-        break;
       case ActionTypes.LOAD_EXERCISES:
         newState.workoutConfigurations.exercises = action.exercises;
         break;
@@ -140,7 +136,6 @@ export interface ApplicationState {
   displayAppBar: boolean;
   sideDrawerIsClosed: boolean;
   workoutConfigurations: {
-    exerciseTypes: ExerciseTypeVO[];
     exercises: ExerciseVO[];
     routineTemplates: RoutineTemplateVO[];
     gripTypes: GripTypeVO[];

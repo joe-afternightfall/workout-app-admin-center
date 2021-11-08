@@ -8,6 +8,8 @@ import { routerActions } from 'react-router-redux';
 import { validatedUser } from '../../../creators/user-info';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { DASHBOARD_SCREEN_PATH } from '../../../configs/constants/app';
+import { getWorkoutsForUser } from '../../../services/zzz-old-stuff/old-workout-service';
+import { loadUsersWorkouts } from '../../../creators/zzz-old-stuff/old-creators';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -79,6 +81,8 @@ const mapDispatchToProps = (dispatch: Dispatch): SignInScreenProps =>
     logInHandler: async (email: string) => {
       dispatch(routerActions.push(DASHBOARD_SCREEN_PATH));
       dispatch(validatedUser(email));
+      const workouts = await getWorkoutsForUser(email);
+      dispatch(loadUsersWorkouts(workouts));
     },
   } as unknown as SignInScreenProps);
 

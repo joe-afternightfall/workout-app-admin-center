@@ -8,7 +8,7 @@ import {
   ListSubheader,
 } from '@material-ui/core';
 import { capitalizeSetType } from '../../../../../utils/formatter';
-import { SetType } from '../../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeDAO';
+import { SetType } from '../../../../../configs/zzz-old-stuff/old-models/ExerciseTypeDAO';
 
 export default function SetTypes(props: SetTypesProps): JSX.Element {
   return (

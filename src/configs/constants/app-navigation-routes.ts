@@ -5,6 +5,7 @@ import {
   ROUTINE_TEMPLATES_SCREEN_PATH,
   ROUTINE_BUILDER_SCREEN_PATH,
   APP_CONFIGS_SCREEN_PATH,
+  OLD_WORKOUT_SCREEN_PATH,
 } from './app';
 import {
   ListAlt,
@@ -23,6 +24,9 @@ import RoutinesScreen from '../../components/top-level-components/routine-templa
 import ExerciseTypesTable from '../../components/top-level-components/workout-configs/exercise-types-screen/ExerciseTypesTable';
 import RoutineBuilderScreen from '../../components/top-level-components/routine-builder-screen/RoutineBuilderScreen';
 import ConfigurationsScreen from '../../components/top-level-components/configurations-screen/ConfigurationsScreen';
+import OldWorkoutScreen from '../../components/zzz-old-stuff/widgets/old-workout-screen/WorkoutScreenConnector';
+import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
+import AccessibleIcon from '@material-ui/icons/Accessible';
 
 export interface PageProps {
   path: string;
@@ -113,22 +117,6 @@ export const appNavigationRoutes: RoutesMap = {
       },
     ],
   },
-  CONFIGURATIONS_SCREEN: {
-    nested: true,
-    mainTitle: 'Configurations',
-    mainIcon: Settings,
-    shouldDisplayInNav: true,
-    pageProps: [
-      {
-        path: EXERCISE_TYPES_SCREEN_PATH,
-        drawerTitle: 'Exercise Types',
-        headerTitle: 'Exercise Types',
-        icon: Settings,
-        testId: 'exercise-types-nav',
-        routerComponent: ExerciseTypesTable,
-      },
-    ],
-  },
   ALL_CONFIGURATIONS_SCREEN: {
     nested: true,
     mainTitle: 'App Configs',
@@ -142,6 +130,38 @@ export const appNavigationRoutes: RoutesMap = {
         icon: Settings,
         testId: 'app-configs-nav',
         routerComponent: ConfigurationsScreen,
+      },
+    ],
+  },
+  OLD_EXERCISES_SCREEN: {
+    nested: true,
+    mainTitle: 'Old Exercises',
+    mainIcon: AccessibleIcon,
+    shouldDisplayInNav: true,
+    pageProps: [
+      {
+        path: EXERCISE_TYPES_SCREEN_PATH,
+        drawerTitle: 'Old Exercise Types',
+        headerTitle: 'Old Exercise Types',
+        icon: AccessibleIcon,
+        testId: 'old-exercise-types-nav',
+        routerComponent: ExerciseTypesTable,
+      },
+    ],
+  },
+  OLD_WORKOUT_SCREEN: {
+    nested: false,
+    mainTitle: 'Old Workout',
+    mainIcon: FolderSpecialIcon,
+    shouldDisplayInNav: true,
+    pageProps: [
+      {
+        path: OLD_WORKOUT_SCREEN_PATH,
+        drawerTitle: 'Old Workout Screen',
+        headerTitle: 'Old Workout Screen',
+        icon: FolderSpecialIcon,
+        testId: 'old-workout-screen-nav',
+        routerComponent: OldWorkoutScreen,
       },
     ],
   },
