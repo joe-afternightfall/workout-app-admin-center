@@ -13,7 +13,6 @@ import {
   EXERCISE_TYPES_ROUTE,
   WORKOUTS_ROUTE,
 } from '../../services/zzz-old-stuff/old-workout-service';
-import { firebaseConfig } from '../Initializer';
 
 export class OldInitializer {
   store: Store;
@@ -23,8 +22,6 @@ export class OldInitializer {
   }
 
   initializeOldFirebaseMethods(): void {
-    // firebase.initializeApp(firebaseConfig);
-
     const oldRefArray = [
       {
         ref: firebase.database().ref(EXERCISE_TYPES_ROUTE),
