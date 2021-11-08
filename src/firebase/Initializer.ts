@@ -1,9 +1,8 @@
 import { Store } from 'redux';
-import firebase from 'firebase';
-import { EXERCISE_TYPES_ROUTE } from '../configs/constants/firebase-routes';
+import firebase from 'firebase/app';
+import 'firebase/analytics';
 import {
   updateExercises,
-  updateExerciseTypes,
   updateGripTypes,
   updateGripWidths,
   updateManikinMuscleGroups,
@@ -31,7 +30,7 @@ import {
   FIREBASE_DB_WORKOUT_EQUIPMENT_ROUTE,
 } from 'workout-app-common-core';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyCxpOEet-ONYFVLUNdagd7o0McN3F2fFRc',
   authDomain: 'workout-app-d4f5d.firebaseapp.com',
   databaseURL: 'https://workout-app-d4f5d-default-rtdb.firebaseio.com',
@@ -54,10 +53,6 @@ export class Initializer {
     firebase.analytics();
 
     const refArray = [
-      {
-        ref: firebase.database().ref(EXERCISE_TYPES_ROUTE),
-        updateMethod: () => updateExerciseTypes(this.store),
-      },
       {
         ref: firebase.database().ref(FIREBASE_DB_EXERCISES_ROUTE),
         updateMethod: () => updateExercises(this.store),

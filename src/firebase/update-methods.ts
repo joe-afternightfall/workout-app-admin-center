@@ -1,21 +1,18 @@
 import { Store } from 'redux';
 import {
+  loadPhases,
+  loadMuscles,
   loadExercises,
-  loadExerciseTypes,
-  loadRoutineTemplates,
   loadGripTypes,
   loadGripWidths,
-  loadManikinMuscleGroups,
-  loadMuscles,
-  loadMuscleTargetTypes,
   loadParameterTypes,
-  loadPhases,
-  loadTrainingSetTypes,
-  loadWorkoutCategories,
+  loadRoutineTemplates,
   loadWorkoutEquipment,
+  loadTrainingSetTypes,
+  loadMuscleTargetTypes,
+  loadWorkoutCategories,
+  loadManikinMuscleGroups,
 } from '../creators/load-workout-configs';
-import { getAllExerciseTypes } from '../services/workout-configurations/exercise-types-service';
-import { ExerciseTypeVO } from '../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
 import {
   getAllActiveGripTypes,
   getAllActiveGripWidths,
@@ -30,14 +27,6 @@ import {
   getAllExercises,
   getAllRoutineTemplates,
 } from 'workout-app-common-core';
-
-export const updateExerciseTypes = async (store: Store): Promise<void> => {
-  const exercises: ExerciseTypeVO[] = await getAllExerciseTypes();
-  exercises.sort((a: ExerciseTypeVO, b: ExerciseTypeVO) =>
-    a.name.localeCompare(b.name)
-  );
-  store.dispatch(loadExerciseTypes(exercises));
-};
 
 export const updateExercises = async (store: Store): Promise<void> => {
   const exercises = await getAllExercises();

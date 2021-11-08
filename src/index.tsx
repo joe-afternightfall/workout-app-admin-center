@@ -7,12 +7,15 @@ import { createStore } from './configs/redux/store';
 import { Initializer } from './firebase/Initializer';
 import { ConnectedRouter } from 'connected-react-router';
 import reportWebVitals from './configs/test-utils/report-web-vitals';
+import { OldInitializer } from './firebase/zzz-old-stuff/OldInitializer';
 
 const history = createHashHistory(),
   store = createStore(history);
 
+const oldInitializer = new OldInitializer(store);
 const initializer = new Initializer(store);
 initializer.initializeFirebase();
+oldInitializer.initializeOldFirebaseMethods();
 
 ReactDOM.render(
   <React.StrictMode>

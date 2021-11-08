@@ -6,8 +6,8 @@ import PageTitle from '../../../shared/PageTitle';
 import NewExerciseDialog from './NewExerciseDialog';
 import { State } from '../../../../configs/redux/store';
 import { muscleGroups, MuscleGroup } from 'workout-app-common-core';
-import { deleteExerciseType } from '../../../../services/workout-configurations/exercise-types-service';
-import { ExerciseTypeVO } from '../../../../configs/models/workout-configurations/exercise-type/ExerciseTypeVO';
+import { ExerciseTypeVO } from '../../../../configs/zzz-old-stuff/old-models/ExerciseTypeVO';
+import { deleteExerciseType } from '../../../../services/zzz-old-stuff/old-workout-service';
 
 const editField = (props: {
   value: string;
@@ -184,7 +184,7 @@ interface ExerciseTableProps {
 const mapStateToProps = (state: State): ExerciseTableProps => {
   return {
     selectedMuscleGroupIds: state.applicationState.selectedMuscleGroupIds,
-    exerciseTypes: state.applicationState.workoutConfigurations.exerciseTypes,
+    exerciseTypes: state.oldApplicationState.exerciseTypes,
   } as unknown as ExerciseTableProps;
 };
 

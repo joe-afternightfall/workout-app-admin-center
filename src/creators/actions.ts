@@ -2,7 +2,7 @@ import { LocationChangeAction } from 'connected-react-router';
 import { ValidatedUserAction } from './user-info';
 import {
   LoadExercisesAction,
-  LoadExerciseTypesAction,
+  // LoadExerciseTypesAction,
   LoadGripTypesAction,
   LoadGripWidthsAction,
   LoadManikinMuscleGroupsAction,
@@ -153,7 +153,7 @@ export type ApplicationActions =
   | LocationChangeAction
   | ValidatedUserAction
   | LogoutUserAction
-  | LoadExerciseTypesAction
+  // | LoadExerciseTypesAction
   | ToggleMuscleGroupAction
   | ApplyHoverStylesToMuscleGroupAction
   | ClearHoverStylesForMuscleGroupAction
