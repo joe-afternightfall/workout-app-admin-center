@@ -5,6 +5,7 @@ import {
 } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
+import { primaryMuscle, secondaryMuscle } from '../utils/muscle-target-builder';
 
 export default {
   reducer: (
@@ -152,24 +153,16 @@ export default {
       }
       case ActionTypes.ADD_PRIMARY_MUSCLE_TARGET: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        if (clonedForm.musclesWorked && clonedForm.musclesWorked.primary) {
-          const order = clonedForm.musclesWorked.primary.length + 1;
-          const newPrimaryItem = {
-            id: uuidv4(),
-            order: order,
-            muscleTargetTypeId: PRIMARY_MUSCLE_TARGET_TYPE_ID,
-            muscleId: '',
-          };
-          clonedForm.musclesWorked.primary.push(newPrimaryItem);
+        if (clonedForm.musclesWorked) {
+          if (clonedForm.musclesWorked.primary) {
+            const order = clonedForm.musclesWorked.primary.length + 1;
+            clonedForm.musclesWorked.primary.push(primaryMuscle(order));
+          } else {
+            clonedForm.musclesWorked.primary = [primaryMuscle(1)];
+          }
         } else {
-          const newPrimaryItem = {
-            id: uuidv4(),
-            order: 1,
-            muscleTargetTypeId: PRIMARY_MUSCLE_TARGET_TYPE_ID,
-            muscleId: '',
-          };
           clonedForm.musclesWorked = {
-            primary: [newPrimaryItem],
+            primary: [primaryMuscle(1)],
             secondary: [],
           };
         }
@@ -181,32 +174,14 @@ export default {
         if (clonedForm.musclesWorked) {
           if (clonedForm.musclesWorked.secondary) {
             const order = clonedForm.musclesWorked.secondary.length + 1;
-            const newSecondaryItem = {
-              id: uuidv4(),
-              order: order,
-              muscleTargetTypeId: '',
-              muscleId: '',
-            };
-            clonedForm.musclesWorked.secondary.push(newSecondaryItem);
+            clonedForm.musclesWorked.secondary.push(secondaryMuscle(order));
           } else {
-            const newSecondaryItem = {
-              id: uuidv4(),
-              order: 1,
-              muscleTargetTypeId: '',
-              muscleId: '',
-            };
-            clonedForm.musclesWorked.secondary = [newSecondaryItem];
+            clonedForm.musclesWorked.secondary = [secondaryMuscle(1)];
           }
         } else {
-          const newSecondaryItem = {
-            id: uuidv4(),
-            order: 1,
-            muscleTargetTypeId: '',
-            muscleId: '',
-          };
           clonedForm.musclesWorked = {
             primary: [],
-            secondary: [newSecondaryItem],
+            secondary: [secondaryMuscle(1)],
           };
         }
 
