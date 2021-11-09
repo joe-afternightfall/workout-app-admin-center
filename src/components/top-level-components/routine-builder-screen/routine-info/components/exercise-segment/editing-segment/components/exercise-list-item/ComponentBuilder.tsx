@@ -4,6 +4,7 @@ import {
   Segment,
   ExerciseVO,
   isDuration,
+  getExerciseName,
   WorkoutExercise,
 } from 'workout-app-common-core';
 import { connect } from 'react-redux';
@@ -12,7 +13,6 @@ import BlinkerListItem from './components/BlinkerListItem';
 import StandardListItem from './components/StandardListItem';
 import { State } from '../../../../../../../../../configs/redux/store';
 import { selectedExerciseSlotToFill } from '../../../../../../../../../creators/routine-builder/builder';
-import { getExerciseName } from '../../../../../../../../../utils/get-name';
 
 const ComponentBuilder = ({
   exercises,

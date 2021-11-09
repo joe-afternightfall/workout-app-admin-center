@@ -17,10 +17,12 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { WorkoutEquipmentVO } from 'workout-app-common-core';
+import {
+  WorkoutEquipmentVO,
+  getWorkoutEquipmentName,
+} from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
 import { updateExerciseEquipmentListIds } from '../../../../../../../creators/exercise-form/exercise-form';
-import { getWorkoutEquipmentName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

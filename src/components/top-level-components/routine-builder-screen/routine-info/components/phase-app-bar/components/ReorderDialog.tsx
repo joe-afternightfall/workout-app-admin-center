@@ -15,12 +15,16 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { arrayMoveImmutable as arrayMove } from 'array-move';
 import { State } from '../../../../../../../configs/redux/store';
-import { Phase, PhaseVO, NightfallTooltip } from 'workout-app-common-core';
+import {
+  Phase,
+  PhaseVO,
+  NightfallTooltip,
+  getPhaseName,
+} from 'workout-app-common-core';
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import { Container, Draggable, DropResult } from 'react-smooth-dnd';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { reorderRoutinePhases } from '../../../../../../../creators/routine-builder/builder';
-import { getPhaseName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles(() =>
   createStyles({
