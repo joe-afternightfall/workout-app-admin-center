@@ -1,8 +1,5 @@
 import { ActionTypes, ApplicationActions } from '../creators/actions';
-import {
-  ExerciseVO,
-  PRIMARY_MUSCLE_TARGET_TYPE_ID,
-} from 'workout-app-common-core';
+import { ExerciseVO } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
 import { primaryMuscle, secondaryMuscle } from '../utils/muscle-target-builder';
