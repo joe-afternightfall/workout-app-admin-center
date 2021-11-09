@@ -23,7 +23,9 @@ interface AddInfoLinkProps {
   message: string;
 }
 const mapStateToProps = (state: State): AddInfoLinkProps => {
-  const infoLength = state.exerciseFormState.exerciseForm.extraInfo.length + 1;
+  const infoLength = state.exerciseFormState.exerciseForm.extraInfo
+    ? state.exerciseFormState.exerciseForm.extraInfo.length + 1
+    : 1;
 
   return {
     message: `${infoLength}. Click to add`,

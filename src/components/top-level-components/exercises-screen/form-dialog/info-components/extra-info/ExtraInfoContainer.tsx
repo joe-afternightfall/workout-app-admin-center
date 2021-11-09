@@ -18,7 +18,7 @@ const ExtraInfoContainer = (props: ExtraInfoContainerProps): JSX.Element => {
 
   return (
     <Grid container spacing={2}>
-      {extraInfo.map((info, index) => {
+      {extraInfo?.map((info, index) => {
         return (
           <Grid key={index} item xs={12} container>
             <Grid item xs={12} container>

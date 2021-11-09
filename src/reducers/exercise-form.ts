@@ -2,6 +2,7 @@ import { ActionTypes, ApplicationActions } from '../creators/actions';
 import { ExerciseVO } from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
+import { primaryMuscle, secondaryMuscle } from '../utils/muscle-target-builder';
 
 export default {
   reducer: (
@@ -104,11 +105,14 @@ export default {
       }
       case ActionTypes.ADD_INFO_PARAGRAPH: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        clonedForm.extraInfo.push({
+        const newInfo = {
           id: uuidv4(),
           title: '',
           paragraph: '',
-        });
+        };
+        clonedForm.extraInfo
+          ? clonedForm.extraInfo.push(newInfo)
+          : (clonedForm.extraInfo = [newInfo]);
         newState.exerciseForm = clonedForm;
         break;
       }
@@ -146,25 +150,38 @@ export default {
       }
       case ActionTypes.ADD_PRIMARY_MUSCLE_TARGET: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        const order = clonedForm.musclesWorked.primary.length + 1;
-        clonedForm.musclesWorked.primary.push({
-          id: uuidv4(),
-          order: order,
-          muscleTargetTypeId: '9bc50538-1976-4b18-aace-489f0c5f2c73',
-          muscleId: '',
-        });
+        if (clonedForm.musclesWorked) {
+          if (clonedForm.musclesWorked.primary) {
+            const order = clonedForm.musclesWorked.primary.length + 1;
+            clonedForm.musclesWorked.primary.push(primaryMuscle(order));
+          } else {
+            clonedForm.musclesWorked.primary = [primaryMuscle(1)];
+          }
+        } else {
+          clonedForm.musclesWorked = {
+            primary: [primaryMuscle(1)],
+            secondary: [],
+          };
+        }
         newState.exerciseForm = clonedForm;
         break;
       }
       case ActionTypes.ADD_SECONDARY_MUSCLE_TARGET: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        const order = clonedForm.musclesWorked.secondary.length + 1;
-        clonedForm.musclesWorked.secondary.push({
-          id: uuidv4(),
-          order: order,
-          muscleTargetTypeId: '',
-          muscleId: '',
-        });
+        if (clonedForm.musclesWorked) {
+          if (clonedForm.musclesWorked.secondary) {
+            const order = clonedForm.musclesWorked.secondary.length + 1;
+            clonedForm.musclesWorked.secondary.push(secondaryMuscle(order));
+          } else {
+            clonedForm.musclesWorked.secondary = [secondaryMuscle(1)];
+          }
+        } else {
+          clonedForm.musclesWorked = {
+            primary: [],
+            secondary: [secondaryMuscle(1)],
+          };
+        }
+
         newState.exerciseForm = clonedForm;
         break;
       }
@@ -228,6 +245,9 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.UPDATE_FILES_TO_UPLOAD:
+        newState.filesToUpload = action.files;
+        break;
       default:
         newState = state;
     }
@@ -240,4 +260,5 @@ export interface ExerciseFormState {
   openExerciseFormDialog: boolean;
   newExerciseForm: boolean;
   exerciseForm: ExerciseVO;
+  filesToUpload: File[];
 }

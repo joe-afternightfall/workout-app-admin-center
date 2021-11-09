@@ -8,6 +8,7 @@ import OptionalParams from './info-components/optional-params/OptionalParams';
 import ExerciseIconIdTextField from './info-components/ExerciseIconIdTextField';
 import ExerciseDescriptionTextField from './info-components/ExerciseDescriptionTextField';
 import ExtraInfoContainer from './info-components/extra-info/ExtraInfoContainer';
+import PaperDropzone from './info-components/DropZone';
 
 export default function ExerciseInfoContent(): JSX.Element {
   return (
@@ -27,6 +28,9 @@ export default function ExerciseInfoContent(): JSX.Element {
         </Grid>
         <Grid item xs={4}>
           <AlternateRadioGroup />
+        </Grid>
+        <Grid item xs={12}>
+          <PaperDropzone />
         </Grid>
       </Grid>
 

@@ -142,8 +142,10 @@ const mapStateToProps = (state: State): SecondaryTargetMuscleSelectorProps => {
     muscles: state.applicationState.workoutConfigurations.muscles,
     muscleTargetTypes:
       state.applicationState.workoutConfigurations.muscleTargetTypes,
-    secondaryMuscles:
-      state.exerciseFormState.exerciseForm.musclesWorked.secondary,
+    secondaryMuscles: state.exerciseFormState.exerciseForm.musclesWorked
+      ?.secondary
+      ? state.exerciseFormState.exerciseForm.musclesWorked?.secondary
+      : [],
   } as unknown as SecondaryTargetMuscleSelectorProps;
 };
 

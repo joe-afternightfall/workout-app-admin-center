@@ -5,13 +5,13 @@ import {
   sortPhaseSegments,
   RoutineTemplateVO,
   PhaseVO,
+  getPhaseName,
 } from 'workout-app-common-core';
 import PreviewListItem from './PreviewListItem';
 import { Grid, List, ListSubheader } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { State } from '../../../../../configs/redux/store';
 import { connect } from 'react-redux';
-import { getPhaseName } from '../../../../../utils/get-name';
 
 const useStyles = makeStyles(() =>
   createStyles({

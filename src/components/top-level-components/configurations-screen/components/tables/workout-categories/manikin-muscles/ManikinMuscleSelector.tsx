@@ -16,9 +16,11 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { ManikinMuscleGroupVO } from 'workout-app-common-core';
+import {
+  ManikinMuscleGroupVO,
+  getManikinMuscleName,
+} from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
-import { getManikinMuscleName } from '../../../../../../../utils/get-name';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -62,10 +62,12 @@ export const saveExercise =
           {
             name: exerciseForm.name,
             description: exerciseForm.description,
-            extraInfo: exerciseForm.extraInfo,
+            extraInfo: exerciseForm.extraInfo ? exerciseForm.extraInfo : [],
             workoutEquipmentIds: exerciseForm.workoutEquipmentIds,
             manikinMuscleGroupIds: exerciseForm.manikinMuscleGroupIds,
-            musclesWorked: exerciseForm.musclesWorked,
+            musclesWorked: exerciseForm.musclesWorked
+              ? exerciseForm.musclesWorked
+              : {},
             iconId: exerciseForm.iconId,
             gripTypeId: exerciseForm.gripTypeId,
             gripWidthId: exerciseForm.gripWidthId,

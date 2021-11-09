@@ -1,7 +1,10 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { ManikinMuscleGroupVO } from 'workout-app-common-core';
+import {
+  ManikinMuscleGroupVO,
+  getManikinMuscleName,
+} from 'workout-app-common-core';
 import { State } from '../../../../../../../configs/redux/store';
 import {
   Select,
@@ -14,7 +17,6 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { updateExerciseManikinMuscleGroupIds } from '../../../../../../../creators/exercise-form/exercise-form';
-import { getManikinMuscleName } from '../../../../../../../utils/get-name';
 import {
   createStyles,
   makeStyles,

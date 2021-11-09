@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import {
+  getTrainingSetTypeName,
   Segment,
   TrainingSetTypeVO,
   NightfallSelectDropdown,
@@ -8,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import { State } from '../../../../../../../../../configs/redux/store';
-import { getTrainingSetTypeName } from '../../../../../../../../../utils/get-name';
 import { selectSetType } from '../../../../../../../../../creators/routine-builder/builder';
 
 const SetTypeHeader = ({

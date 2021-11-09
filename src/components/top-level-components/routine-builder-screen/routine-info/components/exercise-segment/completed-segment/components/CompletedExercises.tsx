@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link as LinkIcon } from '@material-ui/icons';
 import { Grid, Typography, Divider } from '@material-ui/core';
-import { ExerciseVO, Segment } from 'workout-app-common-core';
+import { ExerciseVO, Segment, getExerciseName } from 'workout-app-common-core';
 import { State } from '../../../../../../../../configs/redux/store';
-import { getExerciseName } from '../../../../../../../../utils/get-name';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
