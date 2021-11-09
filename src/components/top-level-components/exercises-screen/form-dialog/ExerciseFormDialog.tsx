@@ -10,6 +10,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { saveExercise } from '../../../../services/workout-configurations/exercises';
 import { closeExerciseFormDialog } from '../../../../creators/exercise-form/exercise-form';
 import { NightfallDialogContent } from 'workout-app-common-core';
+import { uploadExerciseFiles } from '../../../../services/workout-configurations/upload-exercise-files';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -73,6 +74,9 @@ const mapStateToProps = (state: State): ExerciseFormDialogProps => {
 const mapDispatchToProps = (dispatch: Dispatch): ExerciseFormDialogProps =>
   ({
     saveExerciseClickHandler: (successCallback: () => void) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        uploadExerciseFiles()
+      );
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
         saveExercise(successCallback)
       );

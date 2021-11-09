@@ -70,6 +70,7 @@ import {
   UpdateExerciseIconIdAction,
   UpdateExerciseManikinMuscleGroupIdsAction,
   UpdateExerciseNameAction,
+  UpdateFilesToUploadAction,
   UpdateInfoAction,
 } from './exercise-form/exercise-form';
 
@@ -145,6 +146,7 @@ export enum ActionTypes {
   DELETE_SECONDARY_MUSCLE_TARGET = 'DELETE_SECONDARY_MUSCLE_TARGET',
   SELECT_SECONDARY_TARGET_TYPE = 'SELECT_SECONDARY_TARGET_TYPE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
+  UPDATE_FILES_TO_UPLOAD = 'UPDATE_FILES_TO_UPLOAD',
 
   // Side drawer actions
   LOGOUT_USER = 'LOGOUT_USER',
@@ -220,4 +222,5 @@ export type ApplicationActions =
   | SelectSecondaryTargetTypeAction
   | UpdateInfoAction
   | AddInfoParagraphAction
-  | RemoveInfoAction;
+  | RemoveInfoAction
+  | UpdateFilesToUploadAction;

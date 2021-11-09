@@ -228,6 +228,9 @@ export default {
         newState.exerciseForm = clonedForm;
         break;
       }
+      case ActionTypes.UPDATE_FILES_TO_UPLOAD:
+        newState.filesToUpload = action.files;
+        break;
       default:
         newState = state;
     }
@@ -240,4 +243,5 @@ export interface ExerciseFormState {
   openExerciseFormDialog: boolean;
   newExerciseForm: boolean;
   exerciseForm: ExerciseVO;
+  filesToUpload: File[];
 }
