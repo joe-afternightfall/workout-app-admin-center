@@ -1,5 +1,8 @@
 import { ActionTypes, ApplicationActions } from '../creators/actions';
-import { ExerciseVO } from 'workout-app-common-core';
+import {
+  ExerciseVO,
+  PRIMARY_MUSCLE_TARGET_TYPE_ID,
+} from 'workout-app-common-core';
 import { v4 as uuidv4 } from 'uuid';
 import * as ramda from 'ramda';
 
@@ -154,7 +157,7 @@ export default {
           const newPrimaryItem = {
             id: uuidv4(),
             order: order,
-            muscleTargetTypeId: '9bc50538-1976-4b18-aace-489f0c5f2c73',
+            muscleTargetTypeId: PRIMARY_MUSCLE_TARGET_TYPE_ID,
             muscleId: '',
           };
           clonedForm.musclesWorked.primary.push(newPrimaryItem);
@@ -162,7 +165,7 @@ export default {
           const newPrimaryItem = {
             id: uuidv4(),
             order: 1,
-            muscleTargetTypeId: '9bc50538-1976-4b18-aace-489f0c5f2c73',
+            muscleTargetTypeId: PRIMARY_MUSCLE_TARGET_TYPE_ID,
             muscleId: '',
           };
           clonedForm.musclesWorked = {
