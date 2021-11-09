@@ -178,15 +178,25 @@ export default {
       }
       case ActionTypes.ADD_SECONDARY_MUSCLE_TARGET: {
         const clonedForm = ramda.clone(newState.exerciseForm);
-        if (clonedForm.musclesWorked && clonedForm.musclesWorked.secondary) {
-          const order = clonedForm.musclesWorked.secondary.length + 1;
-          const newSecondaryItem = {
-            id: uuidv4(),
-            order: order,
-            muscleTargetTypeId: '',
-            muscleId: '',
-          };
-          clonedForm.musclesWorked.secondary.push(newSecondaryItem);
+        if (clonedForm.musclesWorked) {
+          if (clonedForm.musclesWorked.secondary) {
+            const order = clonedForm.musclesWorked.secondary.length + 1;
+            const newSecondaryItem = {
+              id: uuidv4(),
+              order: order,
+              muscleTargetTypeId: '',
+              muscleId: '',
+            };
+            clonedForm.musclesWorked.secondary.push(newSecondaryItem);
+          } else {
+            const newSecondaryItem = {
+              id: uuidv4(),
+              order: 1,
+              muscleTargetTypeId: '',
+              muscleId: '',
+            };
+            clonedForm.musclesWorked.secondary = [newSecondaryItem];
+          }
         } else {
           const newSecondaryItem = {
             id: uuidv4(),
