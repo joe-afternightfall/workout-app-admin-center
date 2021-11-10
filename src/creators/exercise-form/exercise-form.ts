@@ -308,16 +308,6 @@ export const selectSecondaryTargetType = (
   };
 };
 
-export interface SaveExerciseInfoAction {
-  type: ActionTypes.SAVE_EXERCISE_INFO;
-}
-
-export const saveExerciseInfo = (): SaveExerciseInfoAction => {
-  return {
-    type: ActionTypes.SAVE_EXERCISE_INFO,
-  };
-};
-
 export interface UpdateFilesToUploadAction {
   type: ActionTypes.UPDATE_FILES_TO_UPLOAD;
   files: File[];
