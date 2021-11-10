@@ -34,7 +34,7 @@
     "redux-thunk": "2.3.0",
     "safe-regex": "^2.1.1",
     "web-vitals": "^1.1.2",
-    "workout-app-common-core": "0.0.66"
+    "workout-app-common-core": "0.0.67"
   },
   "devDependencies": {
     "@firebase/auth-types": "0.10.3",
