@@ -45,6 +45,7 @@ import {
   FilterExercisesForSearchValueAction,
   ViewSelectedRoutineAction,
   ClearRoutineBuilderAction,
+  UpdateExerciseTimersAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
@@ -57,7 +58,6 @@ import {
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   RemoveInfoAction,
-  SaveExerciseInfoAction,
   SelectAlternateSidesOptionAction,
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
@@ -147,6 +147,7 @@ export enum ActionTypes {
   SELECT_SECONDARY_TARGET_TYPE = 'SELECT_SECONDARY_TARGET_TYPE',
   SAVE_EXERCISE_INFO = 'SAVE_EXERCISE_INFO',
   UPDATE_FILES_TO_UPLOAD = 'UPDATE_FILES_TO_UPLOAD',
+  UPDATE_EXERCISE_TIMERS = 'UPDATE_EXERCISE_TIMERS',
 
   // Side drawer actions
   LOGOUT_USER = 'LOGOUT_USER',
@@ -195,7 +196,6 @@ export type ApplicationActions =
   | SelectExerciseMuscleIdAction
   | SelectOptionalExerciseParamAction
   | UpdateExerciseNameAction
-  | SaveExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
   | CloseExerciseFormDialogAction
@@ -223,4 +223,5 @@ export type ApplicationActions =
   | UpdateInfoAction
   | AddInfoParagraphAction
   | RemoveInfoAction
-  | UpdateFilesToUploadAction;
+  | UpdateFilesToUploadAction
+  | UpdateExerciseTimersAction;

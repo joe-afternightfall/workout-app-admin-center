@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ActionTypes } from '../actions';
-import { Phase, RoutineTemplateVO, Segment } from 'workout-app-common-core';
+import {
+  Phase,
+  RoutineTemplateVO,
+  Segment,
+  WorkoutTimer,
+} from 'workout-app-common-core';
 
 export interface ViewSelectedRoutineAction {
   type: ActionTypes.VIEW_SELECTED_ROUTINE;
@@ -295,16 +300,19 @@ export const filterExercisesForSearchValue = (
   };
 };
 
-export interface AddTimerToWorkoutExerciseAction {
-  type: ActionTypes.ADD_TIMER_TO_WORKOUT_EXERCISE;
+export interface UpdateExerciseTimersAction {
+  type: ActionTypes.UPDATE_EXERCISE_TIMERS;
   workoutExerciseId: string;
+  timers: WorkoutTimer[];
 }
 
-export const addTimerToWorkoutExercise = (
-  id: string
-): AddTimerToWorkoutExerciseAction => {
+export const updateExerciseTimers = (
+  workoutExerciseId: string,
+  timers: WorkoutTimer[]
+): UpdateExerciseTimersAction => {
   return {
-    type: ActionTypes.ADD_TIMER_TO_WORKOUT_EXERCISE,
-    workoutExerciseId: id,
+    type: ActionTypes.UPDATE_EXERCISE_TIMERS,
+    workoutExerciseId: workoutExerciseId,
+    timers: timers,
   };
 };

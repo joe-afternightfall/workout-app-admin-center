@@ -56,7 +56,7 @@ export default function BaseListItem({
           <ListItemText primary={title} />
           {isDuration && workoutExerciseId && (
             <ListItemSecondaryAction>
-              <TimerDialog timers={[]} workoutExerciseId={workoutExerciseId} />
+              <TimerDialog workoutExerciseId={workoutExerciseId} />
             </ListItemSecondaryAction>
           )}
         </ListItem>
