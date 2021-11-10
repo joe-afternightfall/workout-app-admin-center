@@ -22,6 +22,15 @@ const useStyles = makeStyles(() =>
       marginTop: 12,
       marginBottom: 12,
     },
+    list: {
+      backgroundColor: '#ececec',
+      borderRadius: 6,
+      paddingLeft: 12,
+      paddingRight: 12,
+      minHeight: '50vh',
+      maxHeight: '65vh',
+      overflowY: 'scroll',
+    },
   })
 );
 
@@ -45,17 +54,7 @@ export default function InputSettings({
         <Divider orientation={'horizontal'} variant={'middle'} />
       </Grid>
       <Grid item xs={12}>
-        <List
-          style={{
-            backgroundColor: '#ececec',
-            borderRadius: 6,
-            paddingLeft: 12,
-            paddingRight: 12,
-            minHeight: '50vh',
-            maxHeight: '65vh',
-            overflowY: 'scroll',
-          }}
-        >
+        <List className={classes.list}>
           {timers
             .sort((a, b) => a.order - b.order)
             .map((timer, index) => {

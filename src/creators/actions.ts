@@ -45,7 +45,7 @@ import {
   FilterExercisesForSearchValueAction,
   ViewSelectedRoutineAction,
   ClearRoutineBuilderAction,
-  AddTimerToWorkoutExerciseAction,
+  UpdateExerciseTimersAction,
 } from './routine-builder/builder';
 import { HideAppBarAction, LogoutUserAction } from './application';
 import {
@@ -58,7 +58,6 @@ import {
   OpenEditingExerciseFormDialogAction,
   OpenNewExerciseFormDialogAction,
   RemoveInfoAction,
-  SaveExerciseInfoAction,
   SelectAlternateSidesOptionAction,
   SelectExerciseMuscleIdAction,
   SelectExerciseParamTypeAction,
@@ -71,7 +70,6 @@ import {
   UpdateExerciseIconIdAction,
   UpdateExerciseManikinMuscleGroupIdsAction,
   UpdateExerciseNameAction,
-  UpdateExerciseTimersAction,
   UpdateFilesToUploadAction,
   UpdateInfoAction,
 } from './exercise-form/exercise-form';
@@ -198,7 +196,6 @@ export type ApplicationActions =
   | SelectExerciseMuscleIdAction
   | SelectOptionalExerciseParamAction
   | UpdateExerciseNameAction
-  | SaveExerciseInfoAction
   | OpenEditingExerciseFormDialogAction
   | OpenNewExerciseFormDialogAction
   | CloseExerciseFormDialogAction
@@ -227,5 +224,4 @@ export type ApplicationActions =
   | AddInfoParagraphAction
   | RemoveInfoAction
   | UpdateFilesToUploadAction
-  | AddTimerToWorkoutExerciseAction
   | UpdateExerciseTimersAction;

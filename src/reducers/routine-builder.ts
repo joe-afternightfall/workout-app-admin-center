@@ -232,6 +232,20 @@ export default {
         newState.exerciseSearchValue = action.searchValue;
         break;
       }
+      case ActionTypes.UPDATE_EXERCISE_TIMERS: {
+        const clonedPhases = ramda.clone(newState.selectedRoutine.phases);
+        clonedPhases.map((phase) => {
+          phase.segments.map((segment) => {
+            segment.exercises.map((exercise) => {
+              if (exercise.id === action.workoutExerciseId) {
+                exercise.timers = action.timers;
+              }
+            });
+          });
+        });
+        newState.selectedRoutine.phases = sortEntireRoutine(clonedPhases);
+        break;
+      }
       default:
         newState = state;
     }
