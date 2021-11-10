@@ -118,8 +118,10 @@ interface WorkoutEquipmentSelectMenuProps {
 
 const mapStateToProps = (state: State): WorkoutEquipmentSelectMenuProps => {
   return {
-    selectedEquipmentIds:
-      state.exerciseFormState.exerciseForm.workoutEquipmentIds,
+    selectedEquipmentIds: state.exerciseFormState.exerciseForm
+      .workoutEquipmentIds
+      ? state.exerciseFormState.exerciseForm.workoutEquipmentIds
+      : [],
     workoutEquipmentList:
       state.applicationState.workoutConfigurations.workoutEquipment,
   } as unknown as WorkoutEquipmentSelectMenuProps;
