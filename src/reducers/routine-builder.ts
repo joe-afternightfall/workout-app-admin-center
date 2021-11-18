@@ -169,6 +169,13 @@ export default {
                   setNumber: setNumber,
                   weight: 0,
                   reps: 0,
+                  distance: {
+                    unit: 'miles',
+                    value: 0,
+                  },
+                  duration: {
+                    seconds: 0,
+                  },
                 });
               });
             }
